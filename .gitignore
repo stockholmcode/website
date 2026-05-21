@@ -1,43 +1,17 @@
-# Build output
-build/
-out/
-target/
-
-# Gradle
-.gradle/
-gradle-app.setting
-!gradle/wrapper/gradle-wrapper.jar
-
-# JDK (local copy)
-jdk-*/
-
-# IDE
-.idea/
-*.iml
-.vscode/
-
-# OS
+# OS / editors
 .DS_Store
 Thumbs.db
+*.swp
+.idea/
+.vscode/
 
-# Logs
-*.log
-backend.log
+# Local state
+.design-canvas.state.json
 
-# Node / frontend
-frontend/node_modules/
-frontend/.next/
-frontend/dist/
+# Source / drafts (not part of the published site)
+uploads/
+
+# Node (if anyone adds tooling later)
 node_modules/
-npm-debug.log*
-
-# Claude Code settings (local only)
-.claude/settings.local.json
-
-# Secrets / env
-.env
-.env.local
-.env*.local
-
-# Compiled class files
-*.class
+dist/
+.cache/

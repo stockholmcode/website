@@ -1,0 +1,482 @@
+<!doctype html>
+<html lang="sv">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>SCG — Case</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Amatic+SC:wght@400;700&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --bg: #0A0C0F;
+    --panel: #11141A;
+    --panel-hi: #171B22;
+    --ink: #E6EAF0;
+    --ink-dim: rgba(230,234,240,.58);
+    --ink-faint: rgba(230,234,240,.35);
+    --line: rgba(255,255,255,.09);
+    --accent: #FF914D;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; background: var(--bg); color: var(--ink);
+    font-family: 'DM Sans', ui-sans-serif, system-ui, sans-serif; font-size: 16px; line-height: 1.55;
+    -webkit-font-smoothing: antialiased; scroll-behavior: smooth; }
+  a { color: inherit; }
+  .container { max-width: 1280px; margin: 0 auto; padding: 0 56px; }
+  .mono { font-family: 'JetBrains Mono', ui-monospace, monospace; }
+  .display { font-family: 'Amatic SC', cursive; font-weight: 700; }
+
+  /* Nav */
+  nav.top { position: sticky; top: 0; z-index: 10; background: rgba(10,12,15,.85);
+    backdrop-filter: blur(12px); border-bottom: 1px solid var(--line); }
+  nav.top .bar { display: flex; align-items: center; justify-content: space-between; height: 76px; }
+  nav.top .brand { font-family: 'Amatic SC', cursive; font-weight: 700; font-size: 28px; line-height: 1; color: var(--ink); text-decoration: none; white-space: nowrap; }
+  nav.top .links { display: flex; align-items: center; gap: 28px; font-size: 15px; }
+  nav.top .links a { text-decoration: none; color: var(--ink); }
+  nav.top .links a.active { color: var(--accent); font-weight: 500; }
+  nav.top .cta { background: var(--accent); color: var(--bg); padding: 10px 18px; border-radius: 999px;
+    text-decoration: none; font-size: 14px; font-weight: 600; }
+
+  /* Hero */
+  header.hero { padding: 144px 0 96px; border-bottom: 1px solid var(--line); position: relative; overflow: hidden; }
+  header.hero .kicker { font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--accent);
+    letter-spacing: .1em; text-transform: uppercase; margin-bottom: 20px; }
+  header.hero h1 { font-family: 'Amatic SC', cursive; font-weight: 700;
+    font-size: clamp(96px, 13vw, 220px); line-height: .88; margin: 0;
+    letter-spacing: -.005em; color: var(--ink); }
+  header.hero h1 .accent { color: var(--accent); }
+  header.hero p.lead { font-size: 22px; line-height: 1.45; max-width: 720px; margin: 48px 0 0; color: var(--ink); }
+
+  /* Filter bar */
+  .filters { border-bottom: 1px solid var(--line); background: var(--panel); position: sticky; top: 76px; z-index: 9; }
+  .filters .row { display: flex; align-items: center; gap: 24px; padding: 18px 0; flex-wrap: wrap; }
+  .filters .chips { display: flex; gap: 8px; flex-wrap: wrap; }
+  .filters .chip { font-family: 'JetBrains Mono', monospace; font-size: 12px;
+    padding: 8px 14px; border-radius: 999px; border: 1px solid var(--line);
+    background: var(--bg); color: var(--ink-dim); cursor: pointer;
+    transition: all .15s; user-select: none; }
+  .filters .chip:hover { color: var(--ink); border-color: var(--ink-dim); }
+  .filters .chip.active { background: var(--accent); color: var(--bg); border-color: var(--accent); font-weight: 600; }
+  .filters .count { font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--ink-dim); margin-left: auto; }
+
+  /* All cases share the same rich "case card" layout */
+  section.cases { padding: 80px 0 112px; }
+  .case { padding-bottom: 80px; margin-bottom: 80px; border-bottom: 1px solid var(--line); transition: opacity .2s; }
+  .case:last-of-type { border-bottom: none; margin-bottom: 0; }
+  .case.hidden { display: none; }
+  .case .head { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--accent); letter-spacing: .1em; margin-bottom: 16px; text-transform: uppercase; }
+  .case .grid { display: grid; grid-template-columns: 1.2fr 1fr; gap: 64px; align-items: start; }
+  .case h2 { font-family: 'Amatic SC', cursive; font-weight: 700;
+    font-size: clamp(56px, 8vw, 120px); line-height: .9; margin: 0; color: var(--ink); }
+  .case .meta { font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--ink-dim); letter-spacing: .06em; margin-top: 14px; }
+  .case .outcome { font-size: 22px; font-weight: 500; color: var(--ink); margin: 28px 0 16px; line-height: 1.35; }
+  .case p.body { font-size: 15px; line-height: 1.65; color: var(--ink-dim); margin: 0; max-width: 540px; }
+  .case .stack { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 20px; }
+  .case .stack .pill { font-family: 'JetBrains Mono', monospace; font-size: 10px; padding: 4px 10px; border-radius: 999px; border: 1px solid var(--line); color: var(--ink-dim); }
+  .case .stats { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .case .stats .big { grid-column: 1 / span 2; padding: 32px;
+    border: 1px solid var(--line); border-radius: 16px; background: var(--panel); }
+  .case .stats .big .num-big { font-family: 'Amatic SC', cursive; font-weight: 700; font-size: clamp(96px, 11vw, 144px); line-height: .9; color: var(--accent); }
+  .case .stats .big .label-big { font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--ink-dim); letter-spacing: .06em; margin-top: 8px; }
+  .case .stats .small { padding: 22px; border: 1px solid var(--line); border-radius: 14px; background: var(--panel); }
+  .case .stats .small .num { font-family: 'Amatic SC', cursive; font-weight: 700; font-size: 56px; line-height: .9; color: var(--ink); }
+  .case .stats .small .label { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--ink-dim); margin-top: 6px; }
+  .case .stats .span2 { grid-column: 1 / span 2; }
+
+  .case .testimonial { margin-top: 36px; padding: 24px 28px; background: var(--panel); border-left: 3px solid var(--accent); border-radius: 0 12px 12px 0; }
+  .case .testimonial blockquote { margin: 0; font-size: 16px; line-height: 1.5; color: var(--ink); font-style: italic; }
+  .case .testimonial figcaption { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--ink-dim); margin-top: 12px; letter-spacing: .04em; }
+
+  /* Expandable read-more — same look as warm startsida cases */
+  .case .read-more { margin-top: 28px; background: transparent; border: 1px solid var(--line); color: var(--ink); font-family: 'JetBrains Mono', monospace; font-size: 12px; letter-spacing: .04em; padding: 12px 22px; border-radius: 999px; cursor: pointer; transition: all .15s; display: inline-flex; align-items: center; gap: 10px; }
+  .case .read-more:hover { border-color: var(--accent); color: var(--accent); }
+  .case .read-more .plus { transition: transform .25s; display: inline-block; }
+  .case[data-open="true"] .read-more .plus { transform: rotate(45deg); }
+  .case .deep { display: none; margin-top: 40px; padding-top: 40px; border-top: 1px solid var(--line); grid-template-columns: 1fr 320px; gap: 48px; align-items: start; }
+  .case[data-open="true"] .deep { display: grid; }
+  .case .deep .summary { font-family: 'Amatic SC', cursive; font-weight: 700; font-size: 32px; line-height: 1.1; color: var(--ink); margin: 0 0 32px; padding-left: 18px; border-left: 2px solid var(--accent); text-wrap: balance; }
+  .case .deep h4 { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--accent); letter-spacing: .12em; text-transform: uppercase; margin: 0 0 10px; font-weight: 600; }
+  .case .deep .section { margin-bottom: 24px; }
+  .case .deep .section p { font-size: 15px; line-height: 1.65; color: var(--ink); margin: 0; max-width: 640px; }
+  .case .deep .tagline { margin-top: 24px; padding-top: 20px; border-top: 1px solid var(--line); font-size: 14px; line-height: 1.65; color: var(--ink-dim); font-style: italic; max-width: 640px; }
+  .case .deep aside { display: flex; flex-direction: column; gap: 20px; }
+  .case .deep .stackbox { padding: 20px 22px; border: 1px solid var(--line); border-radius: 12px; }
+  .case .deep .stackbox ul { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 8px; }
+  .case .deep .stackbox li { font-size: 13px; color: var(--ink); line-height: 1.45; display: flex; gap: 10px; }
+  .case .deep .stackbox li .arrow { color: var(--accent); }
+
+  /* Empty state */
+  .empty { display: none; padding: 80px 0; text-align: center; }
+  .empty.show { display: block; }
+  .empty .display { font-size: 56px; color: var(--ink-dim); }
+  .empty p { font-size: 14px; color: var(--ink-faint); font-family: 'JetBrains Mono', monospace; margin-top: 12px; }
+
+  /* CTA */
+  section.cta { background: var(--accent); padding: 120px 0; text-align: center; }
+  section.cta img.logo { height: 120px; width: auto; margin-bottom: 24px; }
+  section.cta h2 { font-family: 'Amatic SC', cursive; font-weight: 700;
+    font-size: clamp(72px, 10vw, 160px); line-height: .92; margin: 0 0 20px; color: var(--bg); }
+  section.cta p { font-size: 20px; line-height: 1.5; margin: 0 auto 40px; max-width: 640px; color: var(--bg); }
+  section.cta .btn { display: inline-flex; align-items: center; gap: 10px;
+    background: var(--bg); color: var(--ink); padding: 16px 26px; border-radius: 999px;
+    text-decoration: none; font-size: 16px; font-weight: 600; }
+
+  /* Footer */
+  footer { padding: 104px 0 40px; border-top: 1px solid var(--line); }
+  footer .cols { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 40px; margin-bottom: 80px; }
+  footer .brandcol img { height: 70px; margin-bottom: 12px; filter: invert(1); mix-blend-mode: screen; }
+  footer .brandcol p { font-size: 14px; color: var(--ink-dim); line-height: 1.6; margin: 16px 0 0; max-width: 340px; }
+  footer h4 { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--accent); letter-spacing: .1em; text-transform: uppercase; margin: 0 0 16px; font-weight: 600; }
+  footer ul { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 10px; }
+  footer li { font-size: 14px; color: var(--ink); white-space: pre-line; }
+  footer a { text-decoration: none; color: var(--ink); border-bottom: 1px solid transparent; transition: border-color .15s; }
+  footer a:hover { border-color: var(--accent); }
+  footer .bottom { padding-top: 24px; border-top: 1px solid var(--line);
+    font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--ink-dim);
+    display: flex; justify-content: space-between; letter-spacing: .06em; }
+</style>
+</head>
+<body>
+
+<nav class="top">
+  <div class="container bar">
+    <a href="SCG Startsida.html" class="brand">Stockholm Code Group</a>
+    <div class="links">
+      <a href="SCG Erbjudanden.html">Erbjudanden</a>
+      <a href="SCG Case.html" class="active">Case</a>
+      <a href="SCG Team.html">Team</a>
+      <a href="SCG Careers.html">Karriär</a>
+      <a href="mailto:contactus@stockholmcode.se" class="cta">Säg hej ♥</a>
+    </div>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="container">
+    <div class="kicker">№ 03 · Case</div>
+    <h1>Historier vi<br /><span class="accent">gärna</span> berättar.</h1>
+    <p class="lead">Plattformar, biljettsystem, marketplaces. Det vi gör syns inte alltid — men det syns alltid när det går fel. Här är några där det gick rätt.</p>
+  </div>
+</header>
+
+<!-- Filters -->
+<div class="filters">
+  <div class="container">
+    <div class="row">
+      <div class="chips" id="filter-chips">
+        <button class="chip active" data-filter="all">Alla</button>
+        <button class="chip" data-filter="streaming">Media &amp; streaming</button>
+        <button class="chip" data-filter="public">Kollektivtrafik</button>
+        <button class="chip" data-filter="marketplace">Marketplace</button>
+        <button class="chip" data-filter="ecom">E-handel</button>
+      </div>
+      <div class="count" id="case-count">4 case</div>
+    </div>
+  </div>
+</div>
+
+<!-- All cases — same rich layout, all expandable -->
+<section class="cases">
+  <div class="container" id="case-list">
+
+    <!-- 01 — Warner Bros. Discovery -->
+    <article class="case" data-sector="streaming" data-open="false">
+      <div class="head">Case · 01 · Media &amp; streaming</div>
+      <div class="grid">
+        <div>
+          <h2>Warner Bros.<br />Discovery</h2>
+          <div class="meta">2019 – 2023 · Chief architects · Lead developers · 1000+ devs</div>
+          <div class="outcome">Ny global streamingplattform — Discovery+ och HBO Max/MAX, byggd från grunden.</div>
+          <p class="body">POC på tre veckor, sedan huvudarkitekter och lead-utvecklare när teamet skalade. Event-driven microservices, icke-blockerande och utan externa runtime-beroenden — så att plattformen klarar globala peaks utan att tappa kontroll över kostnader eller latens.</p>
+          <div class="stack">
+            <span class="pill">Event-driven</span>
+            <span class="pill">Microservices</span>
+            <span class="pill">Lead-arkitekter</span>
+            <span class="pill">Global skala</span>
+          </div>
+          <button class="read-more" data-toggle><span>Läs hela caset</span><span class="plus">+</span></button>
+        </div>
+        <div class="stats">
+          <div class="big">
+            <div class="num-big">13ms</div>
+            <div class="label-big">snitt API-svarstid</div>
+          </div>
+          <div class="small"><div class="num">80M</div><div class="label">API-anrop / dag</div></div>
+          <div class="small"><div class="num">99.9999%</div><div class="label">API-uptime</div></div>
+          <div class="small span2"><div class="num">3 200</div><div class="label">peak requests / sekund</div></div>
+        </div>
+      </div>
+      <div class="deep">
+        <div>
+          <p class="summary">Från POC till global streamingplattform för Warner Bros. Discovery — byggd från grunden för att klara globala peaks utan att tappa kontroll över kostnader eller latens.</p>
+          <div class="section"><h4>Bakgrund</h4><p>WBD behövde en ny global streamingplattform som kunde leverera Discovery+ och senare HBO Max/MAX till en publik som mäts i hundratals miljoner. Den befintliga arkitekturen klarade inte den skalan, och tidsplanen var kompromisslös.</p></div>
+          <div class="section"><h4>Vad vi gjorde</h4><p>Tre veckors POC bekräftade riktningen. Därifrån klev SCG in som huvudarkitekter och lead-utvecklare när teamet skalade från ett tiotal till över 1000 utvecklare. Event-driven microservices, icke-blockerande IO, inga externa runtime-beroenden — så att varje tjänst kunde driftas, skalas och felsökas isolerat.</p></div>
+          <div class="section"><h4>Resultat</h4><p>13ms snitt API-svarstid, 80 miljoner API-anrop per dag, 99.9999% uptime och 3 200 peak requests per sekund. Plattformen klarar globala peaks utan att tappa kontroll över kostnader eller latens, och utvecklingsteamet kan iterera tjänst för tjänst utan koordinationsmardrömmar.</p></div>
+        </div>
+        <aside>
+          <div class="stackbox">
+            <h4>Val &amp; verktyg</h4>
+            <ul>
+              <li><span class="arrow">→</span><span>Event-driven microservices</span></li>
+              <li><span class="arrow">→</span><span>Icke-blockerande IO</span></li>
+              <li><span class="arrow">→</span><span>Global skalning</span></li>
+              <li><span class="arrow">→</span><span>Lead-arkitekter från SCG</span></li>
+            </ul>
+          </div>
+        </aside>
+      </div>
+    </article>
+
+    <!-- 02 — SL -->
+    <article class="case" data-sector="public" data-open="false">
+      <div class="head">Case · 02 · Kollektivtrafik</div>
+      <div class="grid">
+        <div>
+          <h2>SL</h2>
+          <div class="meta">2020 – 2023 · Chief Software Architect (David Looberger)</div>
+          <div class="outcome">Nytt biljettsystem med contactless — byggt från grunden på AWS.</div>
+          <p class="body">David Looberger från SCG som chief software architect. Res med bankkort, automatiska rabatter för studenter och seniorer, tillgänglighetsfunktioner inbakade från start. AWS skrev en blogpost om projektet som referensimplementation.</p>
+          <div class="stack">
+            <span class="pill">EMV contactless</span>
+            <span class="pill">AWS</span>
+            <span class="pill">PCI-compliant</span>
+            <span class="pill">Tillgänglighet</span>
+          </div>
+          <button class="read-more" data-toggle><span>Läs hela caset</span><span class="plus">+</span></button>
+        </div>
+        <div class="stats">
+          <div class="big">
+            <div class="num-big">800k</div>
+            <div class="label-big">resor per dag</div>
+          </div>
+          <div class="small"><div class="num">EMV</div><div class="label">contactless-betalning</div></div>
+          <div class="small"><div class="num">PCI</div><div class="label">compliant</div></div>
+          <div class="small span2"><div class="num">AWS</div><div class="label">EC2 · RDS · KMS</div></div>
+        </div>
+      </div>
+      <div class="deep">
+        <div>
+          <p class="summary">SLs nya biljettsystem — contactless-betalning med bankkort, automatiska rabatter, byggt från grunden på AWS. SCGs David Looberger som chefsarkitekt hela vägen.</p>
+          <div class="section"><h4>Bakgrund</h4><p>Stockholms lokaltrafik behövde ersätta sitt åldrande biljettsystem med en lösning som tål 800 000 resor per dygn — och som ger resenärerna en betydligt smidigare upplevelse. Kraven på drift, säkerhet och tillgänglighet i en kritisk samhällstjänst är hårda och oförhandlingsbara.</p></div>
+          <div class="section"><h4>Vad vi gjorde</h4><p>David Looberger från SCG ledde arkitekturen som chief software architect. Systemet byggdes från grunden på AWS med EMV contactless som primär betalmetod — res med ditt bankkort, automatiska rabatter för studenter och seniorer, tillgänglighetsfunktioner inbakade från start. PCI-compliant och designat för att hantera peak hours utan att tappa prestanda.</p></div>
+          <div class="section"><h4>Resultat</h4><p>800 000 resor per dag, EMV-baserad contactless som standard, fullständig PCI-compliance. AWS skrev en egen blogpost om projektet som referensimplementation för publika sektorns övergång till modern molninfrastruktur.</p></div>
+        </div>
+        <aside>
+          <div class="stackbox">
+            <h4>Val &amp; verktyg</h4>
+            <ul>
+              <li><span class="arrow">→</span><span>AWS (EC2, RDS, KMS)</span></li>
+              <li><span class="arrow">→</span><span>EMV contactless</span></li>
+              <li><span class="arrow">→</span><span>PCI-compliant</span></li>
+              <li><span class="arrow">→</span><span>Tillgänglighetsfunktioner</span></li>
+            </ul>
+          </div>
+        </aside>
+      </div>
+    </article>
+
+    <!-- 03 — Blocket -->
+    <article class="case" data-sector="marketplace" data-open="false">
+      <div class="head">Case · 03 · Marketplace</div>
+      <div class="grid">
+        <div>
+          <h2>Blocket</h2>
+          <div class="meta">2022 – 2024 · Arkitekter, utvecklare, product manager</div>
+          <div class="outcome">Monolit → microservices utan driftstopp.</div>
+          <p class="body">SCG drev Blockets transformation från en stor legacy-monolit till väldefinierade microservices med tydliga gränser. Arkitekter, utvecklare och en product manager — hela vägen från planering till leverans. Event-driven på Kafka, event sourcing via DynamoDB-streams.</p>
+          <div class="stack">
+            <span class="pill">Kotlin · Spring Boot</span>
+            <span class="pill">Kafka</span>
+            <span class="pill">Aurora · DynamoDB</span>
+            <span class="pill">Onion / Hexagonal</span>
+          </div>
+          <button class="read-more" data-toggle><span>Läs hela caset</span><span class="plus">+</span></button>
+        </div>
+        <div class="stats">
+          <div class="big">
+            <div class="num-big">Kafka</div>
+            <div class="label-big">event-driven backbone</div>
+          </div>
+          <div class="small"><div class="num">Kotlin</div><div class="label">Spring Boot · K8s</div></div>
+          <div class="small"><div class="num">Aurora</div><div class="label">PostgreSQL + DynamoDB</div></div>
+          <div class="small span2"><div class="num">Onion</div><div class="label">hexagonal arkitektur</div></div>
+        </div>
+      </div>
+      <figure class="testimonial">
+        <blockquote>"Konsulterna från Stockholm Code Group sticker verkligen ut. De bidrar med anmärkningsvärd teknisk expertis och seniority, och är dedikerade till att leverera effektiva och moderna lösningar."</blockquote>
+        <figcaption>— Niklas Lager, CTO, Blocket</figcaption>
+      </figure>
+      <div class="deep">
+        <div>
+          <p class="summary">Transformation av Blockets stora legacy-monolit till väldefinierade microservices — event-driven, utan driftstopp, med ett team som täckte hela vägen från planering till leverans.</p>
+          <div class="section"><h4>Bakgrund</h4><p>Blocket körde en omfattande legacy-monolit som hade vuxit över flera decennier. Den var stabil men hade blivit en bromskloss för utvecklingstakten — varje förändring krävde koordination, deploys var sällsynta händelser, och nya idéer hamnade i kö.</p></div>
+          <div class="section"><h4>Vad vi gjorde</h4><p>SCG drev transformationen från monolit till väldefinierade microservices med tydliga gränser, utan att Blocket behövde stå stilla. Vi bemannade arkitekter, utvecklare och en product manager — hela vägen från planering till leverans. Event-driven på Kafka, event sourcing via DynamoDB-streams, onion- och hexagonal arkitektur så att domänlogik och infrastruktur kan utvecklas oberoende av varandra.</p></div>
+          <div class="section"><h4>Resultat</h4><p>Tydligt avgränsade tjänster i Kotlin på Spring Boot och Kubernetes, Aurora PostgreSQL och DynamoDB som datalager, Kafka som backbone för all asynkron kommunikation. Teamet kan nu släppa förändringar oftare och med mindre koordination — och nästa generations Blocket är inte längre en omöjlig refaktor.</p></div>
+        </div>
+        <aside>
+          <div class="stackbox">
+            <h4>Val &amp; verktyg</h4>
+            <ul>
+              <li><span class="arrow">→</span><span>Kotlin · Spring Boot · Kubernetes</span></li>
+              <li><span class="arrow">→</span><span>Aurora PostgreSQL · DynamoDB</span></li>
+              <li><span class="arrow">→</span><span>Kafka · event sourcing</span></li>
+              <li><span class="arrow">→</span><span>Onion / Hexagonal arkitektur</span></li>
+            </ul>
+          </div>
+        </aside>
+      </div>
+    </article>
+
+    <!-- 04 — Matsmart / Motatos -->
+    <article class="case" data-sector="ecom" data-open="false">
+      <div class="head">Case · 04 · E-handel</div>
+      <div class="grid">
+        <div>
+          <h2>Matsmart /<br />Motatos</h2>
+          <div class="meta">2025 – 2026 · Architect and Developer (Robert Krogh)</div>
+          <div class="outcome">Modernisering av kärnplattform med agentic AI.</div>
+          <p class="body">Hjälpte Matsmart/Motatos modernisera sin legacy-plattform och möjliggöra för ett litet team att leverera över sin viktklass med ett agentic AI-baserat arbetssätt. Service-arkitektur omdesignad, hand-underhållna komponenter ersatta med managed alternativ, parallella POC-tjänster bredvid existerande flöden.</p>
+          <div class="stack">
+            <span class="pill">Azure Service Bus</span>
+            <span class="pill">GitHub Actions</span>
+            <span class="pill">Infrastructure as Code</span>
+            <span class="pill">.NET / C#</span>
+            <span class="pill">Agentic AI</span>
+          </div>
+          <button class="read-more" data-toggle><span>Läs hela caset</span><span class="plus">+</span></button>
+        </div>
+        <div class="stats">
+          <div class="big">
+            <div class="num-big">5–8k</div>
+            <div class="label-big">ordrar / dag (SE)</div>
+          </div>
+          <div class="small"><div class="num">6</div><div class="label">europeiska marknader</div></div>
+          <div class="small"><div class="num">Azure</div><div class="label">Service Bus · IaC</div></div>
+          <div class="small span2"><div class="num">Agentic</div><div class="label">AI-workflows i monorepot</div></div>
+        </div>
+      </div>
+      <div class="deep">
+        <div>
+          <p class="summary">Vi hjälpte Matsmart/Motatos modernisera sin legacy-plattform — service-arkitekturen omdesignad och migrationen körd parallellt med drift utan ett enda cutover-datum.</p>
+          <div class="section"><h4>Bakgrund</h4><p>Matsmart/Motatos har ett uppdrag att minska matsvinn genom att köpa in och sälja vidare överlager, säsongsvaror, produkter med tryckfel och annan överbliven mat. E-handeln körde i sex europeiska länder, med Sverige på 5 000–8 000 ordrar per dag. Plattformen sitter mitt i operationen: ERP-sync, inköp och leverantörsdata, orderhantering, lagersaldon, realtidsintegration mot lager, frakt och produktdata för varje SKU.</p></div>
+          <div class="section"><h4>Utmaningen</h4><p>Driften kunde inte pausas, en big-bang-rewrite var omöjlig för ett team av den här storleken, och fortsätta lappa det egna ramverket hade compoundat skulden. Det som ersatte måste komma bit för bit, utan en enda cutover-dag, samtidigt som teamet fortsatte leverera mot intern efterfrågan.</p></div>
+          <div class="section"><h4>Vad vi gjorde</h4><p>Robert Krogh från SCG kom in som arkitekt och utvecklare för att leda omställningen. En lättviktig arkitektur visade hur enskilda tjänster kunde leva utanför det egna ramverket, fortfarande vara en del av helheten, och kräva minimal setup. Vi flyttade från code-first till infrastructure-first så tjänsterna blev fullt frikopplade. Meddelandeflöden gick från riktade RabbitMQ-flöden till managed Azure Service Bus. Parallellt migrerade teamet från Azure DevOps till GitHub, vilket öppnade för att göra om CI/CD och IaC i samma anda.</p></div>
+          <div class="section"><h4>Agentic AI för ett litet team</h4><p>Vi lade grunden för team-skalad AI-användning där vinsterna sprider sig bortom individen. Genom att göra kontexten explicit i monorepot kunde agenter jobba med en bredare bild än tidigare arbetssätt tillät. En custom skill drar pipeline-data via GitHub CLI och visar i en prompt vad som är deployat var, per tjänst. Skills som denna ligger i repot, versionerade tillsammans med koden — en utvecklares förbättrade arbetssätt blir teamets.</p></div>
+          <div class="section"><h4>Resultat</h4><p>Den nya arkitekturen lät teamet bygga slankare tjänster, underhålla mindre kod, och deploya med färre steg. Dataflöden migrerades parallellt med den gamla lösningen, i teamets takt. Dokumentationen blev bred och aktuell — för både människor och AI. Teamet gick in i ett mer agentic arbetssätt, och kunde göra meningsfullt mer med mindre.</p></div>
+          <p class="tagline">Matsmart/Motatos bekämpar svinn för en levande. Stockholm Code Group hjälpte dem skära det från deras plattform också: mindre kod, mindre infra-drift, mindre föråldrad dokumentation, mindre friktion mellan en idé och en deploy.</p>
+        </div>
+        <aside>
+          <div class="stackbox">
+            <h4>Val &amp; verktyg</h4>
+            <ul>
+              <li><span class="arrow">→</span><span>Azure Service Bus — managed event-driven messaging</span></li>
+              <li><span class="arrow">→</span><span>GitHub Actions — CI/CD och samarbete</span></li>
+              <li><span class="arrow">→</span><span>Infrastructure as Code — fullt frikopplade tjänster</span></li>
+              <li><span class="arrow">→</span><span>Lättviktig service-arkitektur</span></li>
+              <li><span class="arrow">→</span><span>Agentic AI workflows — team-skalad, inte solo</span></li>
+              <li><span class="arrow">→</span><span>AI-underhållen dokumentation</span></li>
+            </ul>
+          </div>
+        </aside>
+      </div>
+    </article>
+
+  </div>
+
+  <div class="empty container" id="empty">
+    <div class="display">Inga case matchar.</div>
+    <p>// prova en annan sektor</p>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta">
+  <div class="container">
+    <img src="assets/logo.jpg" alt="" class="logo" />
+    <h2>Vill ni ha er egen?</h2>
+    <p>De bästa casen börjar med ett samtal — inte en RFP. Hör av er, så ses vi över en kaffe.</p>
+    <a class="btn" href="mailto:contactus@stockholmcode.se">contactus@stockholmcode.se →</a>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer>
+  <div class="container">
+    <div class="cols">
+      <div class="brandcol">
+        <img src="assets/logo.jpg" alt="Stockholm Code Group" />
+        <div class="display" style="font-size:22px">Stockholm Code Group</div>
+        <p>Seniora ingenjörer i Stockholm. We bring love to software, sedan 2007.</p>
+      </div>
+      <div>
+        <h4>Sidor</h4>
+        <ul>
+          <li><a href="SCG Startsida.html">Startsida</a></li>
+          <li><a href="SCG Erbjudanden.html">Erbjudanden</a></li>
+          <li><a href="SCG Case.html">Case</a></li>
+          <li><a href="SCG Team.html">Team</a></li>
+          <li><a href="SCG Careers.html">Karriär</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Utvalda case</h4>
+        <ul>
+          <li>Warner Bros. Discovery</li>
+          <li>SL</li>
+          <li>Blocket</li>
+          <li>Matsmart</li>
+        </ul>
+      </div>
+      <div>
+        <h4>Hitta oss</h4>
+        <ul>
+          <li><a href="mailto:contactus@stockholmcode.se">contactus@stockholmcode.se</a></li>
+          <li>Regeringsgatan 74
+111 39 Stockholm</li>
+        </ul>
+      </div>
+    </div>
+    <div class="bottom">
+      <div>© 2026 Stockholm Code Group AB</div>
+      <div>WE BRING LOVE</div>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Filter chips
+  const chips = document.querySelectorAll('#filter-chips .chip');
+  const cases = document.querySelectorAll('.case');
+  const countEl = document.getElementById('case-count');
+  const emptyEl = document.getElementById('empty');
+
+  chips.forEach(chip => {
+    chip.addEventListener('click', () => {
+      chips.forEach(c => c.classList.remove('active'));
+      chip.classList.add('active');
+      const f = chip.dataset.filter;
+      let visible = 0;
+      cases.forEach(c => {
+        const match = f === 'all' || c.dataset.sector === f;
+        c.classList.toggle('hidden', !match);
+        if (match) visible++;
+      });
+      countEl.textContent = visible + (visible === 1 ? ' case' : ' case');
+      emptyEl.classList.toggle('show', visible === 0);
+    });
+  });
+
+  // Expand / collapse per case
+  document.querySelectorAll('.case [data-toggle]').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const article = btn.closest('.case');
+      const open = article.dataset.open === 'true';
+      article.dataset.open = open ? 'false' : 'true';
+      btn.querySelector('span:first-child').textContent = open ? 'Läs hela caset' : 'Stäng';
+    });
+  });
+</script>
+
+</body>
+</html>

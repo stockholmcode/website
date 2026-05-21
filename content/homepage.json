@@ -1,0 +1,101 @@
+{
+  "hero": {
+    "kicker": "STOCKHOLM CODE GROUP · SEDAN 2007",
+    "headlinePre": "We bring",
+    "headlineAccent": "love",
+    "headlineMid": "to",
+    "typedWords": ["software.", "customers.", "teams.", "code.", "product.", "Stockholm."],
+    "ctaPrimary": "Börja ett samtal →",
+    "ctaSecondary": "Eller boka en AI-scan",
+    "ctaMeta": "Halvdag · fast pris · kvittas",
+    "foundationKicker": "Grunden",
+    "foundationHeadline": "Seniora arkitekter & ingenjörer.",
+    "foundationHeadlineDim": "AI är accelerator — inte identitet.",
+    "foundationBody": "Cirka 20 seniora utvecklare och arkitekter. Vi har byggt plattformar, moderniserat arkitektur och tagit komplexa leveranser i mål långt innan AI blev ett samtalsämne. Det är därför AI faktiskt compound:ar hos oss — vi applicerar den på ett hantverk vi redan behärskar.",
+    "foundationTags": [
+      "Arkitektur & plattform",
+      "Leveransteam",
+      "Fractional CTO",
+      "Teknisk due diligence",
+      "Data & infrastruktur",
+      "AI-enablement"
+    ]
+  },
+  "offerings": {
+    "eyebrow": "№ 02 — Så jobbar vi",
+    "headlineLine1": "Senior kompetens.",
+    "headlineLine2": "Skarpa leveranser.",
+    "lead": "Vi bygger system, team och ledarskap — oavsett om det handlar om arkitektur, teknisk due diligence eller fractional CTO. AI-readiness är en av vägarna in, inte allt vi gör.",
+    "corePracticeLabel": "CORE PRACTICE",
+    "corePractice": [
+      {
+        "num": "A",
+        "title": "Stora initiativ",
+        "body": "Dedikerade team inbäddade hos kunden med fullt ansvar för mjukvaru­utvecklingen — från arkitektur till leverans. Outcome-baserat, egen lead, seniora ingenjörer hela vägen.",
+        "tags": ["Dedikerat team", "Outcome", "Arkitektur → leverans"]
+      },
+      {
+        "num": "B",
+        "title": "Timkonsulting",
+        "body": "Vi förstärker befintliga kundteam med seniora konsulter — anpassat efter erat behov och tech-stack. Enskilda profiler där ni behöver tyngd.",
+        "tags": ["Förstärkning", "Senior nivå", "Er stack"]
+      },
+      {
+        "num": "C",
+        "title": "Rådgivning",
+        "body": "Teknisk rådgivning inom arkitektur, kodkvalitet och strategisk planering — ibland som del av M&A due diligence. Vi har suttit på andra sidan bordet.",
+        "tags": ["Arkitektur", "Kodkvalitet", "M&A DD"]
+      }
+    ],
+    "trackKicker": "Specialism",
+    "trackHeadlinePre": "AI-readiness",
+    "trackHeadlineAccent": "track",
+    "trackBody": "När AI behöver struktur — inte bara verktyg — plockar vi in fyra fokuserade steg ovanpå grunden ovan. Samma seniora ingenjörer, ett annat objektiv. Varje steg står på egna ben; börja där ni är.",
+    "ladderSteps": ["Klarhet", "Diagnos", "Exekvering", "Löpande"],
+    "readMore": "Läs mer →",
+    "allOfferingsCta": "Alla erbjudanden & ramverk i detalj →"
+  },
+  "framework": {
+    "kicker": "Ramverket · Interaktivt",
+    "headlineLine1": "5 dimensioner.",
+    "headlineLine2": "Samma karta.",
+    "lead": "Klicka på en dimension för att se signaler, åtgärder och vad ett scorecard faktiskt innebär. Samma språk hela vägen — från första halvdagen till löpande leverans.",
+    "whyLabel": "VARFÖR DET SPELAR ROLL",
+    "redFlagsLabel": "RÖDA FLAGGOR",
+    "winsLabel": "VAD VI GÖR ÅT DET",
+    "scoreLabel": "DENNA DIMENSION SCORAR:",
+    "scores": {
+      "red": { "label": "RÖD", "text": "Grundproblem — blockerar nästa steg. Måste adresseras först." },
+      "yellow": { "label": "GUL", "text": "Funkar, men lämnar värde på bordet. AI kan hjälpa, men inte förstärka." },
+      "green": { "label": "GRÖN", "text": "Solid grund. AI kan compound:a här över tid — expandera scope." }
+    }
+  },
+  "cases": {
+    "eyebrow": "№ 03 — Utvalda case",
+    "headlineLine1": "Historier vi",
+    "headlineLine2": "gärna berättar.",
+    "allCasesCta": "Alla case →"
+  },
+  "approach": {
+    "eyebrow": "№ 04 — Så jobbar vi",
+    "headlineLine1": "Lyssna. Analysera.",
+    "headlineLine2Pre": "",
+    "headlineLine2Accent": "Leverera.",
+    "headlineLine2Post": " Lämna över."
+  },
+  "testimonials": {
+    "eyebrow": "№ 05 — Från kunder"
+  },
+  "team": {
+    "eyebrow": "№ 06 — Teamet",
+    "headline": "Snälla proffs.",
+    "lead": "Handplockade seniora ingenjörer och arkitekter. Alla har 13+ år bakom sig, och alla tycker att man kan vara skicklig utan att vara jobbig.",
+    "fullTeamCta": "Hela teamet & bios →"
+  },
+  "careers": {
+    "headline": "Jobba med oss?",
+    "body": "Vi växer långsamt och medvetet. Om du har 10+ år bakom dig och vill jobba med människor som bryr sig — hör av dig.",
+    "featuredRoles": ["Senior Software Engineer", "Senior Architect"],
+    "allRolesCta": "Alla roller & kultur →"
+  }
+}

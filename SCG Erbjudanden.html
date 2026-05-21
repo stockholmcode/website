@@ -1,0 +1,609 @@
+<!doctype html>
+<html lang="sv">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>SCG — Erbjudanden</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Amatic+SC:wght@400;700&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --bg: #0A0C0F;
+    --panel: #11141A;
+    --panel-hi: #171B22;
+    --ink: #E6EAF0;
+    --ink-dim: rgba(230,234,240,.58);
+    --ink-faint: rgba(230,234,240,.35);
+    --line: rgba(255,255,255,.09);
+    --accent: #FF914D;
+    --red: #E85C5C;
+    --green: #4CE87E;
+    --yellow: #E8B84C;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; background: var(--bg); color: var(--ink);
+    font-family: 'DM Sans', ui-sans-serif, system-ui, sans-serif; font-size: 16px; line-height: 1.55;
+    -webkit-font-smoothing: antialiased; }
+  a { color: inherit; }
+  .container { max-width: 1280px; margin: 0 auto; padding: 0 56px; }
+  .mono { font-family: 'JetBrains Mono', ui-monospace, monospace; }
+  .display { font-family: 'Amatic SC', cursive; font-weight: 700; }
+
+  /* Nav */
+  nav.top { position: sticky; top: 0; z-index: 10; background: rgba(10,12,15,.85);
+    backdrop-filter: blur(12px); border-bottom: 1px solid var(--line); }
+  nav.top .bar { display: flex; align-items: center; justify-content: space-between; height: 76px; }
+  nav.top .brand { font-family: 'Amatic SC', cursive; font-weight: 700; font-size: 28px; line-height: 1; color: var(--ink); text-decoration: none; white-space: nowrap; }
+  nav.top .links { display: flex; align-items: center; gap: 28px; font-size: 15px; }
+  nav.top .links a { text-decoration: none; color: var(--ink); }
+  nav.top .links a.active { color: var(--accent); font-weight: 500; }
+  nav.top .cta { background: var(--accent); color: var(--bg); padding: 10px 18px; border-radius: 999px;
+    text-decoration: none; font-size: 14px; font-weight: 600; }
+
+  /* Hero */
+  header.hero { padding: 144px 0 96px; border-bottom: 1px solid var(--line); position: relative; overflow: hidden; }
+  header.hero .kicker { font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--accent);
+    letter-spacing: .1em; text-transform: uppercase; margin-bottom: 20px; }
+  header.hero h1 { font-family: 'Amatic SC', cursive; font-weight: 700;
+    font-size: clamp(96px, 13vw, 220px); line-height: .88; margin: 0;
+    letter-spacing: -.005em; color: var(--ink); }
+  header.hero h1 .accent { color: var(--accent); }
+  header.hero p.lead { font-size: 22px; line-height: 1.45; max-width: 720px; margin: 48px 0 0; color: var(--ink); }
+  header.hero p.lead .dim { color: var(--ink-dim); }
+
+  /* Core practice */
+  section.core { padding: 112px 0; border-bottom: 1px solid var(--line); }
+  section.core .head { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: end; margin-bottom: 56px; }
+  section.core h2 { font-family: 'Amatic SC', cursive; font-weight: 700;
+    font-size: clamp(64px, 8vw, 128px); line-height: .92; margin: 0; color: var(--ink); }
+  section.core h2 .accent { color: var(--accent); }
+  section.core .lead { font-size: 18px; line-height: 1.55; color: var(--ink-dim); margin: 0; max-width: 520px; }
+  .core-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+  .core-card { background: var(--panel); padding: 32px; border-radius: 18px; border: 1px solid var(--line);
+    display: flex; flex-direction: column; gap: 14px; min-height: 380px; }
+  .core-card .top { display: flex; justify-content: space-between; align-items: baseline; }
+  .core-card .num { font-family: 'Amatic SC', cursive; font-weight: 700; font-size: 56px; line-height: .9; color: var(--accent); }
+  .core-card .label { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--ink-dim); letter-spacing: .08em; }
+  .core-card h3 { font-family: 'Amatic SC', cursive; font-weight: 700; font-size: 36px; line-height: 1; margin: 0; color: var(--ink); }
+  .core-card p { font-size: 14px; line-height: 1.6; color: var(--ink-dim); margin: 0; flex: 1; }
+  .core-card ul { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 6px;
+    border-top: 1px solid var(--line); padding-top: 16px; }
+  .core-card ul li { font-size: 13px; color: var(--ink); display: flex; gap: 10px; }
+  .core-card ul li::before { content: '→'; color: var(--accent); font-family: 'JetBrains Mono', monospace; }
+
+  /* AI track intro */
+  section.track-intro { padding: 96px 0 32px; background: var(--bg); }
+  .track-intro .head { display: grid; grid-template-columns: 1fr 1.6fr; gap: 48px; align-items: end; margin-bottom: 32px; }
+  .track-intro .kicker { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--accent); letter-spacing: .1em; text-transform: uppercase; margin-bottom: 12px; }
+  .track-intro h2 { font-family: 'Amatic SC', cursive; font-weight: 700;
+    font-size: clamp(48px, 6vw, 88px); line-height: .95; margin: 0; color: var(--ink); }
+  .track-intro h2 .accent { color: var(--accent); }
+  .track-intro p { font-size: 16px; line-height: 1.6; color: var(--ink-dim); margin: 0; max-width: 620px; }
+
+  /* Ladder timeline */
+  .ladder-strip { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--ink-dim);
+    letter-spacing: .12em; text-transform: uppercase;
+    display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; margin-bottom: 12px; }
+  .ladder-strip > div { display: flex; align-items: center; gap: 10px; }
+  .ladder-strip span.dot { width: 8px; height: 8px; border-radius: 999px; background: var(--accent); }
+  .ladder-line { height: 2px; background: linear-gradient(to right, var(--accent), rgba(255,145,77,.25)); margin-bottom: 24px; }
+
+  /* Offerings detailed */
+  section.offerings { padding: 0 0 112px; background: var(--bg); }
+  .off-grid { display: grid; grid-template-columns: 1fr; gap: 24px; }
+  .off-card { background: var(--panel); border: 1px solid var(--line); border-radius: 22px;
+    padding: 48px; display: grid; grid-template-columns: 200px 1fr 360px; gap: 56px; align-items: start; }
+  .off-card.accent { background: var(--accent); border: none; color: var(--bg); }
+  .off-card.accent .num, .off-card.accent h3, .off-card.accent .body, .off-card.accent .deliverables h4 { color: var(--bg); }
+  .off-card.accent .when, .off-card.accent .body p, .off-card.accent .deliverables li { color: rgba(10,12,15,.78); }
+  .off-card.accent .pill { border-color: rgba(10,12,15,.25); color: rgba(10,12,15,.78); }
+  .off-card .left .num { font-family: 'Amatic SC', cursive; font-weight: 700; font-size: 88px; line-height: .9; color: var(--accent); }
+  .off-card .left .when { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--ink-dim); letter-spacing: .06em; margin-top: 8px; }
+  .off-card .mid .kicker { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--accent); letter-spacing: .08em; text-transform: uppercase; margin-bottom: 10px; }
+  .off-card.accent .mid .kicker { color: var(--bg); opacity: .85; }
+  .off-card .mid h3 { font-family: 'Amatic SC', cursive; font-weight: 700; font-size: 56px; line-height: .95; margin: 0 0 18px; color: var(--ink); }
+  .off-card .mid .body p { font-size: 16px; line-height: 1.6; color: var(--ink-dim); margin: 0 0 16px; }
+  .off-card .mid .pills { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 16px; }
+  .off-card .mid .pill { font-family: 'JetBrains Mono', monospace; font-size: 11px; padding: 6px 10px; border-radius: 999px; border: 1px solid var(--line); color: var(--ink-dim); }
+  .off-card .right .deliverables h4 { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--accent); letter-spacing: .1em; text-transform: uppercase; margin: 0 0 14px; }
+  .off-card.accent .right .deliverables h4 { color: var(--bg); opacity: .85; }
+  .off-card .right .deliverables ul { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 10px; }
+  .off-card .right .deliverables li { font-size: 14px; color: var(--ink); display: flex; gap: 10px; line-height: 1.5; }
+  .off-card .right .deliverables li::before { content: '✓'; color: var(--accent); font-weight: 700; }
+  .off-card.accent .right .deliverables li::before { color: var(--bg); }
+
+  /* 5D framework */
+  section.framework { padding: 112px 0; background: var(--panel); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+  section.framework .head { display: grid; grid-template-columns: 1fr 1.4fr; gap: 48px; align-items: end; margin-bottom: 56px; }
+  section.framework h2 { font-family: 'Amatic SC', cursive; font-weight: 700;
+    font-size: clamp(56px, 7vw, 96px); line-height: .92; margin: 0; color: var(--ink); }
+  section.framework h2 .accent { color: var(--accent); }
+  section.framework .lead { font-size: 16px; line-height: 1.6; color: var(--ink-dim); margin: 0; max-width: 580px; }
+
+  .dim-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 24px; margin-bottom: 64px; }
+  .dim { padding-top: 18px; border-top: 3px solid var(--line); transition: border-color .2s; }
+  .dim.first { border-top-color: var(--accent); }
+  .dim .num { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--accent); letter-spacing: .06em; margin-bottom: 8px; }
+  .dim h4 { font-family: 'Amatic SC', cursive; font-weight: 700; font-size: 30px; line-height: .95; margin: 0 0 10px; color: var(--ink); }
+  .dim .q { font-size: 13px; line-height: 1.5; color: var(--ink); margin: 0 0 8px; font-weight: 500; }
+  .dim p.body { font-size: 12px; line-height: 1.5; color: var(--ink-dim); margin: 0; }
+
+  .dim-detail { display: grid; grid-template-columns: repeat(5, 1fr); gap: 24px; }
+  .dim-detail .col { background: var(--bg); border: 1px solid var(--line); border-radius: 14px; padding: 24px; }
+  .dim-detail .col .head-row { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 16px; }
+  .dim-detail .col .num { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--accent); letter-spacing: .06em; }
+  .dim-detail .col h5 { font-family: 'Amatic SC', cursive; font-weight: 700; font-size: 26px; line-height: 1; margin: 0; color: var(--ink); }
+  .dim-detail .col .label { font-family: 'JetBrains Mono', monospace; font-size: 9px; letter-spacing: .12em; text-transform: uppercase; margin: 14px 0 8px; }
+  .dim-detail .col .label.red { color: var(--red); }
+  .dim-detail .col .label.green { color: var(--green); }
+  .dim-detail .col ul { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 6px; }
+  .dim-detail .col ul li { font-size: 12px; line-height: 1.45; color: var(--ink); display: flex; gap: 8px; }
+  .dim-detail .col ul.signals li::before { content: '×'; color: var(--red); font-weight: 700; }
+  .dim-detail .col ul.wins li::before { content: '→'; color: var(--green); font-weight: 700; }
+
+  /* FAQ-ish: how to engage */
+  section.engage { padding: 112px 0; }
+  section.engage h2 { font-family: 'Amatic SC', cursive; font-weight: 700;
+    font-size: clamp(56px, 7vw, 112px); line-height: .92; margin: 0 0 56px; color: var(--ink); }
+  section.engage h2 .accent { color: var(--accent); }
+  .engage-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; }
+  .engage-card { padding-top: 24px; border-top: 2px solid var(--line); }
+  .engage-card.first { border-top-color: var(--accent); }
+  .engage-card .step { font-family: 'Amatic SC', cursive; font-weight: 700; font-size: 64px; line-height: .9; color: var(--accent); }
+  .engage-card h3 { font-family: 'Amatic SC', cursive; font-weight: 700; font-size: 36px; line-height: .95; margin: 8px 0 12px; color: var(--ink); }
+  .engage-card p { font-size: 14px; line-height: 1.6; color: var(--ink-dim); margin: 0; }
+
+  /* CTA */
+  section.cta { background: var(--accent); padding: 120px 0; text-align: center; }
+  section.cta img.logo { height: 120px; width: auto; margin-bottom: 24px; filter: invert(0); }
+  section.cta h2 { font-family: 'Amatic SC', cursive; font-weight: 700;
+    font-size: clamp(72px, 10vw, 160px); line-height: .92; margin: 0 0 20px; color: var(--bg); }
+  section.cta p { font-size: 20px; line-height: 1.5; margin: 0 auto 40px; max-width: 640px; color: var(--bg); }
+  section.cta .btn { display: inline-flex; align-items: center; gap: 10px;
+    background: var(--bg); color: var(--ink); padding: 16px 26px; border-radius: 999px;
+    text-decoration: none; font-size: 16px; font-weight: 600; }
+
+  /* Footer */
+  footer { padding: 104px 0 40px; border-top: 1px solid var(--line); }
+  footer .cols { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 40px; margin-bottom: 80px; }
+  footer .brandcol img { height: 70px; margin-bottom: 12px; filter: invert(1); mix-blend-mode: screen; }
+  footer .brandcol p { font-size: 14px; color: var(--ink-dim); line-height: 1.6; margin: 16px 0 0; max-width: 340px; }
+  footer h4 { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--accent); letter-spacing: .1em; text-transform: uppercase; margin: 0 0 16px; font-weight: 600; }
+  footer ul { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 10px; }
+  footer li { font-size: 14px; color: var(--ink); white-space: pre-line; }
+  footer a { text-decoration: none; color: var(--ink); border-bottom: 1px solid transparent; transition: border-color .15s; }
+  footer a:hover { border-color: var(--accent); }
+  footer .bottom { padding-top: 24px; border-top: 1px solid var(--line);
+    font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--ink-dim);
+    display: flex; justify-content: space-between; letter-spacing: .06em; }
+</style>
+</head>
+<body>
+
+<nav class="top">
+  <div class="container bar">
+    <a href="SCG Startsida.html" class="brand">Stockholm Code Group</a>
+    <div class="links">
+      <a href="SCG Erbjudanden.html" class="active">Erbjudanden</a>
+      <a href="SCG Case.html">Case</a>
+      <a href="SCG Team.html">Team</a>
+      <a href="SCG Careers.html">Karriär</a>
+      <a href="mailto:contactus@stockholmcode.se" class="cta">Säg hej ♥</a>
+    </div>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="container">
+    <div class="kicker">№ 02 · Erbjudanden</div>
+    <h1>Senior kompetens.<br /><span class="accent">Skarpa</span> leveranser.</h1>
+    <p class="lead">
+      Vi bygger system, team och ledarskap.
+      <span class="dim">Tre sätt att engagera sig — plus en specialiserad track för organisationer som vill göra AI till mer än bara ett verktyg.</span>
+    </p>
+  </div>
+</header>
+
+<!-- Core practice -->
+<section class="core">
+  <div class="container">
+    <div class="head">
+      <h2>Tre sätt att<br />jobba <span class="accent">tillsammans.</span></h2>
+      <p class="lead">
+        Oavsett om ni behöver ett helt team, en enskild senior konsult, eller rådgivning på arkitekt- eller CTO-nivå — det här är grunden i vår praktik.
+      </p>
+    </div>
+    <div class="core-grid">
+      <article class="core-card">
+        <div class="top">
+          <div class="num">A</div>
+          <div class="label">CORE PRACTICE</div>
+        </div>
+        <h3>Stora initiativ</h3>
+        <p>Dedikerade team inbäddade hos er, med fullt ansvar för mjukvaruutvecklingen — från arkitektur till leverans. Outcome-baserat, egen lead, seniora ingenjörer hela vägen.</p>
+        <ul>
+          <li>Dedikerat team (3–8 personer)</li>
+          <li>Tech lead + arkitekt ingår</li>
+          <li>Outcome-baserade kontrakt</li>
+          <li>Fast eller löpande</li>
+        </ul>
+      </article>
+      <article class="core-card">
+        <div class="top">
+          <div class="num">B</div>
+          <div class="label">CORE PRACTICE</div>
+        </div>
+        <h3>Timkonsulting</h3>
+        <p>Vi förstärker befintliga kundteam med seniora konsulter — anpassat efter erat behov och tech-stack. Enskilda profiler där ni behöver tyngd.</p>
+        <ul>
+          <li>1–3 seniora profiler</li>
+          <li>Anpassat efter er stack</li>
+          <li>Veckovis fakturering</li>
+          <li>Smidigt att skala upp/ner</li>
+        </ul>
+      </article>
+      <article class="core-card">
+        <div class="top">
+          <div class="num">C</div>
+          <div class="label">CORE PRACTICE</div>
+        </div>
+        <h3>Rådgivning</h3>
+        <p>Teknisk rådgivning inom arkitektur, kodkvalitet och strategisk planering — ibland som del av M&amp;A due diligence. Vi har suttit på andra sidan bordet.</p>
+        <ul>
+          <li>Arkitekturreview</li>
+          <li>Teknisk DD för PE/VC</li>
+          <li>Fractional CTO</li>
+          <li>Strategisk roadmapping</li>
+        </ul>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- AI track intro -->
+<section class="track-intro">
+  <div class="container">
+    <div class="head">
+      <div>
+        <div class="kicker">Specialism</div>
+        <h2>AI-readiness<br /><span class="accent">track</span></h2>
+      </div>
+      <p>
+        När AI behöver struktur — inte bara verktyg — plockar vi in fyra fokuserade steg ovanpå grunden ovan. Samma seniora ingenjörer, ett annat objektiv. Varje steg står på egna ben; börja där ni är.
+      </p>
+    </div>
+
+    <div class="ladder-strip">
+      <div><span class="dot" style="opacity:1"></span>Steg 1 · Klarhet</div>
+      <div><span class="dot" style="opacity:.85"></span>Steg 2 · Diagnos</div>
+      <div><span class="dot" style="opacity:.7"></span>Steg 3 · Exekvering</div>
+      <div><span class="dot" style="opacity:.55"></span>Steg 4 · Löpande</div>
+    </div>
+    <div class="ladder-line"></div>
+  </div>
+</section>
+
+<!-- Offerings detailed -->
+<section class="offerings">
+  <div class="container">
+    <div class="off-grid">
+
+      <article class="off-card">
+        <div class="left">
+          <div class="num">01</div>
+          <div class="when">Halvdag</div>
+        </div>
+        <div class="mid">
+          <div class="kicker">Vill ha klarhet först?</div>
+          <h3>AI-scan</h3>
+          <div class="body">
+            <p>En halvdag tillsammans där vi går igenom var ni står på fem AI-mognadsdimensioner — kodbas, infrastruktur, data, team, leverans. Ni får en 1–2 sidors sammanfattning samma vecka.</p>
+            <p>Bra för team som vet att de vill göra något med AI men inte vet var de ska börja. Scan-avgiften kvittas om ni går vidare.</p>
+          </div>
+          <div class="pills">
+            <span class="pill">Halvdag</span>
+            <span class="pill">Fast pris</span>
+            <span class="pill">Ingen bindning</span>
+            <span class="pill">Kvittas</span>
+          </div>
+        </div>
+        <div class="right">
+          <div class="deliverables">
+            <h4>Ni får</h4>
+            <ul>
+              <li>Halvdagsworkshop med 2 seniora arkitekter</li>
+              <li>Snabb-scoring på 5 dimensioner</li>
+              <li>1–2 sidors PDF-sammanfattning</li>
+              <li>Konkret rekommendation om nästa steg</li>
+            </ul>
+          </div>
+        </div>
+      </article>
+
+      <article class="off-card">
+        <div class="left">
+          <div class="num">02</div>
+          <div class="when">3–4 v</div>
+        </div>
+        <div class="mid">
+          <div class="kicker">Redo att diagnostisera?</div>
+          <h3>AI-readiness Assessment</h3>
+          <div class="body">
+            <p>En full 5-dimensionell diagnos. Vi går in i kodbasen, sitter med teamet, läser arkitekturdokument och deploypipelines. Resultatet är en rött / gult / grönt-bedömning per dimension, med konkreta åtgärder.</p>
+            <p>Avslutas med en stakeholder-presentation och en roadmap som kan användas direkt eller bli underlag för nästa steg.</p>
+          </div>
+          <div class="pills">
+            <span class="pill">3–4 veckor</span>
+            <span class="pill">Fast pris</span>
+            <span class="pill">Skriftlig rapport</span>
+            <span class="pill">Stakeholder-presentation</span>
+          </div>
+        </div>
+        <div class="right">
+          <div class="deliverables">
+            <h4>Ni får</h4>
+            <ul>
+              <li>Full 5-dimensionell scorecard</li>
+              <li>Konkreta åtgärder per dimension</li>
+              <li>Skriftlig rapport (15–25 sidor)</li>
+              <li>Stakeholder-presentation live</li>
+              <li>Prioriterad roadmap för 6–12 månader</li>
+            </ul>
+          </div>
+        </div>
+      </article>
+
+      <article class="off-card">
+        <div class="left">
+          <div class="num">03</div>
+          <div class="when">5 moduler</div>
+        </div>
+        <div class="mid">
+          <div class="kicker">Har en roadmap?</div>
+          <h3>AI-implementation</h3>
+          <div class="body">
+            <p>Fem moduler som mappar direkt mot assessmentens dimensioner. Ta en modul, kombinera flera, eller kör hela paletten.</p>
+            <p>Varje modul har tydligt scope, definierat utfall och tas av samma seniora ingenjörer som gjorde diagnosen — ingen handover till ett annat team.</p>
+          </div>
+          <div class="pills">
+            <span class="pill">Kodbas</span>
+            <span class="pill">Infrastruktur</span>
+            <span class="pill">Data</span>
+            <span class="pill">Team-enablement</span>
+            <span class="pill">Affärsprocess</span>
+            <span class="pill">T&amp;M eller fast scope</span>
+          </div>
+        </div>
+        <div class="right">
+          <div class="deliverables">
+            <h4>Ni får</h4>
+            <ul>
+              <li>Modulärt — börja smått eller stort</li>
+              <li>Definierat scope per modul</li>
+              <li>Kontinuitet med assessment-teamet</li>
+              <li>Veckovis demo + uppföljning</li>
+            </ul>
+          </div>
+        </div>
+      </article>
+
+      <article class="off-card accent">
+        <div class="left">
+          <div class="num">04</div>
+          <div class="when">Löpande</div>
+        </div>
+        <div class="mid">
+          <div class="kicker">Behöver bygga nu?</div>
+          <h3>AI-native utveckling</h3>
+          <div class="body">
+            <p>Er löpande teknikpartner — seniora ingenjörer som har AI som förvald arbetssätt. 3–5× snabbare leverans utan att tumma på kvalitet.</p>
+            <p>Tre format: timkonsult, dedikerat team, eller fraktionell CTO. Samma seniora kärna, olika engagement-shape.</p>
+          </div>
+          <div class="pills">
+            <span class="pill">Timkonsult</span>
+            <span class="pill">Dedikerat team</span>
+            <span class="pill">Fractional CTO</span>
+            <span class="pill">3–5× snabbare</span>
+          </div>
+        </div>
+        <div class="right">
+          <div class="deliverables">
+            <h4>Ni får</h4>
+            <ul>
+              <li>AI-native arbetssätt från dag ett</li>
+              <li>Seniora ingenjörer (10+ år)</li>
+              <li>Skala upp/ner månadsvis</li>
+              <li>Mätbar leveranshastighet</li>
+            </ul>
+          </div>
+        </div>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<!-- 5D framework -->
+<section class="framework">
+  <div class="container">
+    <div class="head">
+      <h2>5 dimensioner.<br /><span class="accent">Samma karta.</span></h2>
+      <p class="lead">
+        Det här är ramverket vi använder från första halvdagen till löpande leverans. Samma språk, samma scorecard, samma åtgärdslista — bara olika djup beroende på var ni är.
+      </p>
+    </div>
+
+    <div class="dim-grid">
+      <div class="dim first">
+        <div class="num">01</div>
+        <h4>Kodbas &amp; arkitektur</h4>
+        <p class="q">Kan AI jobba i er kodbas utan friktion?</p>
+        <p class="body">Arkitektur, testtäckning, koppling, modularitet.</p>
+      </div>
+      <div class="dim">
+        <div class="num">02</div>
+        <h4>Infrastruktur &amp; harness</h4>
+        <p class="q">Kan ni köra agenter säkert och se vad de gör?</p>
+        <p class="body">CI/CD, guardrails, sandboxing, observability.</p>
+      </div>
+      <div class="dim">
+        <div class="num">03</div>
+        <h4>Data-readiness</h4>
+        <p class="q">Har AI tillgång till pålitlig och styrd data?</p>
+        <p class="body">Datakvalitet, åtkomst, GDPR-kontroller.</p>
+      </div>
+      <div class="dim">
+        <div class="num">04</div>
+        <h4>Team &amp; governance</h4>
+        <p class="q">Jobbar teamet med AI tillsammans — inte bara solo?</p>
+        <p class="body">Gemensamma regler, verktyg, review-praxis.</p>
+      </div>
+      <div class="dim">
+        <div class="num">05</div>
+        <h4>End-to-end-leverans</h4>
+        <p class="q">Var i hela leveransflödet lämnar AI värde på bordet?</p>
+        <p class="body">Processkartläggning, cykeltid, flaskhalsar.</p>
+      </div>
+    </div>
+
+    <div class="dim-detail">
+      <div class="col">
+        <div class="head-row"><div class="num">01</div><h5>Kodbas</h5></div>
+        <div class="label red">RÖDA FLAGGOR</div>
+        <ul class="signals">
+          <li>Tight koppling</li><li>&lt; 40% testtäckning</li><li>Monolit utan moduler</li>
+        </ul>
+        <div class="label green">ÅTGÄRDER</div>
+        <ul class="wins">
+          <li>Decomposition</li><li>Kontrakt mellan moduler</li><li>AI-läsbar struktur</li>
+        </ul>
+      </div>
+      <div class="col">
+        <div class="head-row"><div class="num">02</div><h5>Harness</h5></div>
+        <div class="label red">RÖDA FLAGGOR</div>
+        <ul class="signals">
+          <li>Manuella deploys</li><li>Ingen sandbox</li><li>Svart låda i prod</li>
+        </ul>
+        <div class="label green">ÅTGÄRDER</div>
+        <ul class="wins">
+          <li>Agent-guardrails</li><li>Observability-stack</li><li>Policy-as-code</li>
+        </ul>
+      </div>
+      <div class="col">
+        <div class="head-row"><div class="num">03</div><h5>Data</h5></div>
+        <div class="label red">RÖDA FLAGGOR</div>
+        <ul class="signals">
+          <li>Data i silos</li><li>Okänd härkomst</li><li>Ingen PII-policy</li>
+        </ul>
+        <div class="label green">ÅTGÄRDER</div>
+        <ul class="wins">
+          <li>RAG-pipelines</li><li>Data contracts</li><li>GDPR-guardrails</li>
+        </ul>
+      </div>
+      <div class="col">
+        <div class="head-row"><div class="num">04</div><h5>Team</h5></div>
+        <div class="label red">RÖDA FLAGGOR</div>
+        <ul class="signals">
+          <li>Ingen gemensam policy</li><li>Skilda verktyg</li><li>Shadow AI</li>
+        </ul>
+        <div class="label green">ÅTGÄRDER</div>
+        <ul class="wins">
+          <li>Tooling-standard</li><li>AI review-praxis</li><li>Internal enablement</li>
+        </ul>
+      </div>
+      <div class="col">
+        <div class="head-row"><div class="num">05</div><h5>Leverans</h5></div>
+        <div class="label red">RÖDA FLAGGOR</div>
+        <ul class="signals">
+          <li>Långa review-loopar</li><li>Manuell QA</li><li>Oklart DoD</li>
+        </ul>
+        <div class="label green">ÅTGÄRDER</div>
+        <ul class="wins">
+          <li>Flow-mätning</li><li>AI i review</li><li>Automatiserad QA</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- How to engage -->
+<section class="engage">
+  <div class="container">
+    <h2>Så börjar vi.</h2>
+    <div class="engage-grid">
+      <div class="engage-card first">
+        <div class="step">01</div>
+        <h3>Säg hej</h3>
+        <p>Skicka ett mejl med ett par rader om var ni är och vad ni funderar på. Ingen mall, ingen brief — bara ett samtal.</p>
+      </div>
+      <div class="engage-card">
+        <div class="step">02</div>
+        <h3>30 minuter</h3>
+        <p>Vi bokar ett kort möte för att förstå om vi är rätt match. Är vi inte det säger vi det rakt — och hjälper till att peka åt rätt håll.</p>
+      </div>
+      <div class="engage-card">
+        <div class="step">03</div>
+        <h3>Ett tydligt nästa steg</h3>
+        <p>Antingen en halvdag, en assessment, eller direkt in i exekvering. Vi skriver ett kort förslag samma vecka.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta">
+  <div class="container">
+    <img src="assets/logo.jpg" alt="" class="logo" />
+    <h2>Låt oss prata.</h2>
+    <p>Mejla oss och berätta var ni står — kort, långt, eller mitt emellan. Vi svarar samma dag.</p>
+    <a class="btn" href="mailto:contactus@stockholmcode.se">contactus@stockholmcode.se →</a>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer>
+  <div class="container">
+    <div class="cols">
+      <div class="brandcol">
+        <img src="assets/logo.jpg" alt="Stockholm Code Group" />
+        <div class="display" style="font-size:22px">Stockholm Code Group</div>
+        <p>Seniora ingenjörer i Stockholm. We bring love to software, sedan 2007.</p>
+      </div>
+      <div>
+        <h4>Sidor</h4>
+        <ul>
+          <li><a href="SCG Startsida.html">Startsida</a></li>
+          <li><a href="SCG Erbjudanden.html">Erbjudanden</a></li>
+          <li><a href="SCG Case.html">Case</a></li>
+          <li><a href="SCG Team.html">Team</a></li>
+          <li><a href="SCG Careers.html">Karriär</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Erbjudanden</h4>
+        <ul>
+          <li>Stora initiativ</li>
+          <li>Timkonsulting</li>
+          <li>Rådgivning</li>
+          <li>AI-readiness track</li>
+        </ul>
+      </div>
+      <div>
+        <h4>Hitta oss</h4>
+        <ul>
+          <li><a href="mailto:contactus@stockholmcode.se">contactus@stockholmcode.se</a></li>
+          <li>Regeringsgatan 74
+111 39 Stockholm</li>
+        </ul>
+      </div>
+    </div>
+    <div class="bottom">
+      <div>© 2026 Stockholm Code Group AB</div>
+      <div>WE BRING LOVE</div>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

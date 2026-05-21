@@ -1,0 +1,53 @@
+{
+  "brand": {
+    "name": "Stockholm Code Group",
+    "shortName": "SCG",
+    "tagline": "We bring love to software",
+    "founded": "2007",
+    "city": "Stockholm",
+    "email": "contactus@stockholmcode.se",
+    "address": {
+      "street": "Regeringsgatan 74",
+      "zip": "111 39",
+      "city": "Stockholm"
+    },
+    "copyright": "© 2026 Stockholm Code Group AB"
+  },
+  "nav": [
+    { "label": "Erbjudanden", "href": "SCG Erbjudanden.html" },
+    { "label": "Case", "href": "SCG Case.html" },
+    { "label": "Team", "href": "SCG Team.html" },
+    { "label": "Karriär", "href": "SCG Careers.html" }
+  ],
+  "ctaLabel": "Säg hej ♥",
+  "footerColumns": [
+    {
+      "h": "Sidor",
+      "items": [
+        { "label": "Startsida", "href": "SCG Startsida.html" },
+        { "label": "Erbjudanden", "href": "SCG Erbjudanden.html" },
+        { "label": "Case", "href": "SCG Case.html" },
+        { "label": "Team", "href": "SCG Team.html" },
+        { "label": "Karriär", "href": "SCG Careers.html" }
+      ]
+    },
+    {
+      "h": "Erbjudanden",
+      "items": [
+        { "label": "Stora initiativ", "href": "SCG Erbjudanden.html" },
+        { "label": "Timkonsulting", "href": "SCG Erbjudanden.html" },
+        { "label": "Rådgivning", "href": "SCG Erbjudanden.html" },
+        { "label": "AI-readiness", "href": "SCG Erbjudanden.html" }
+      ]
+    },
+    {
+      "h": "Hitta oss",
+      "items": [
+        { "label": "contactus@stockholmcode.se", "href": "mailto:contactus@stockholmcode.se" },
+        { "label": "Regeringsgatan 74\n111 39 Stockholm", "href": null }
+      ]
+    }
+  ],
+  "footerTagline": "WE BRING LOVE",
+  "footerBlurb": "Seniora ingenjörer i Stockholm. We bring love to software, sedan 2007."
+}

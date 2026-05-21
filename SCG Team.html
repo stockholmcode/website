@@ -1,0 +1,320 @@
+<!doctype html>
+<html lang="sv">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>SCG — Teamet</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Amatic+SC:wght@400;700&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --bg: #0A0C0F;
+    --panel: #11141A;
+    --panel-hi: #171B22;
+    --ink: #E6EAF0;
+    --ink-dim: rgba(230,234,240,.58);
+    --ink-faint: rgba(230,234,240,.35);
+    --line: rgba(255,255,255,.09);
+    --accent: #FF914D;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; background: var(--bg); color: var(--ink);
+    font-family: 'DM Sans', ui-sans-serif, system-ui, sans-serif; font-size: 16px; line-height: 1.55;
+    -webkit-font-smoothing: antialiased; }
+  a { color: inherit; }
+  .container { max-width: 1280px; margin: 0 auto; padding: 0 56px; }
+  .mono { font-family: 'JetBrains Mono', ui-monospace, monospace; }
+  .display { font-family: 'Amatic SC', cursive; font-weight: 700; }
+
+  /* Nav */
+  nav.top { position: sticky; top: 0; z-index: 10; background: rgba(10,12,15,.85);
+    backdrop-filter: blur(12px); border-bottom: 1px solid var(--line); }
+  nav.top .bar { display: flex; align-items: center; justify-content: space-between; height: 76px; }
+  nav.top .brand { font-family: 'Amatic SC', cursive; font-weight: 700; font-size: 28px; line-height: 1; color: var(--ink); text-decoration: none; white-space: nowrap; }
+  nav.top .brand .heart { color: var(--accent); }
+  nav.top .links { display: flex; align-items: center; gap: 28px; font-size: 15px; }
+  nav.top .links a { text-decoration: none; color: var(--ink); }
+  nav.top .links a.active { color: var(--accent); font-weight: 500; }
+  nav.top .cta { background: var(--accent); color: var(--bg); padding: 10px 18px; border-radius: 999px;
+    text-decoration: none; font-size: 14px; font-weight: 600; }
+
+  /* Hero */
+  header.hero { padding: 144px 0 120px; border-bottom: 1px solid var(--line); position: relative; overflow: hidden; }
+  header.hero .kicker { font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--accent);
+    letter-spacing: .1em; text-transform: uppercase; margin-bottom: 20px; }
+  header.hero h1 { font-family: 'Amatic SC', cursive; font-weight: 700;
+    font-size: clamp(96px, 13vw, 220px); line-height: .88; margin: 0;
+    letter-spacing: -.005em; color: var(--ink); }
+  header.hero h1 .accent { color: var(--accent); }
+  header.hero p.lead { font-size: 22px; line-height: 1.45; max-width: 680px; margin: 48px 0 0; color: var(--ink); }
+  header.hero .logoart { position: absolute; right: 56px; top: 120px; opacity: .55; pointer-events: none; }
+  header.hero .logoart img { height: 220px; width: auto; filter: invert(1); mix-blend-mode: screen; }
+
+  /* Filter bar */
+  .filters { border-bottom: 1px solid var(--line); background: var(--panel); }
+  .filters .row { display: flex; align-items: center; gap: 24px; padding: 20px 0; flex-wrap: wrap; }
+  .filters .chips { display: flex; gap: 8px; flex-wrap: wrap; }
+  .filters .chip { font-family: 'JetBrains Mono', monospace; font-size: 12px;
+    padding: 8px 14px; border-radius: 999px; border: 1px solid var(--line);
+    background: var(--bg); color: var(--ink-dim); cursor: pointer;
+    transition: all .15s; }
+  .filters .chip:hover { color: var(--ink); border-color: var(--ink-dim); }
+  .filters .chip.active { background: var(--accent); color: var(--bg); border-color: var(--accent); font-weight: 600; }
+  .filters .count { font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--ink-dim); }
+
+  /* Team grid */
+  section.team-grid { padding: 96px 0; }
+  .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px 32px; }
+  .member { cursor: pointer; }
+  .member.hidden { display: none; }
+  .member .portrait { aspect-ratio: 4/5; width: 100%; border-radius: 14px;
+    background: repeating-linear-gradient(135deg, var(--panel), var(--panel) 8px, var(--panel-hi) 8px, var(--panel-hi) 9px);
+    border: 1px solid var(--line); display: flex; align-items: center; justify-content: center;
+    font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--ink-faint);
+    letter-spacing: .04em; transition: all .2s; position: relative; overflow: hidden; }
+  .member:hover .portrait { border-color: var(--accent); transform: translateY(-2px); }
+  .member .portrait .tag { position: absolute; top: 12px; left: 12px;
+    background: rgba(10,12,15,.7); backdrop-filter: blur(8px);
+    padding: 4px 10px; border-radius: 999px; font-size: 10px; color: var(--ink);
+    border: 1px solid var(--line); }
+  .member .meta { margin-top: 18px; display: flex; justify-content: space-between; align-items: baseline; }
+  .member .name { font-family: 'Amatic SC', cursive; font-weight: 700; font-size: 38px; line-height: 1; color: var(--ink); }
+  .member .role { font-size: 14px; color: var(--ink); margin-top: 4px; }
+  .member .num { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--ink-dim); }
+  .member .tag-line { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--ink-dim); margin-top: 6px; }
+  .member .bio { font-size: 13px; color: var(--ink-dim); margin-top: 10px; line-height: 1.55; }
+  .member .social { display: flex; gap: 10px; margin-top: 12px;
+    font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--accent); }
+  .member .social a { text-decoration: none; padding: 4px 10px; border-radius: 999px;
+    border: 1px solid var(--line); transition: all .15s; }
+  .member .social a:hover { border-color: var(--accent); }
+
+  /* Culture strip */
+  section.culture { background: var(--panel); padding: 120px 0; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+  .culture h2 { font-family: 'Amatic SC', cursive; font-weight: 700;
+    font-size: clamp(64px, 8vw, 128px); line-height: .92; margin: 0 0 56px; color: var(--ink); }
+  .culture h2 .accent { color: var(--accent); }
+  .values { display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; }
+  .value { border-top: 2px solid var(--line); padding-top: 24px; }
+  .value:first-child { border-top-color: var(--accent); }
+  .value .num { font-family: 'Amatic SC', cursive; font-weight: 700; font-size: 72px; line-height: .9; color: var(--accent); }
+  .value h3 { font-family: 'Amatic SC', cursive; font-weight: 700; font-size: 44px; line-height: .95; margin: 12px 0; color: var(--ink); }
+  .value p { font-size: 15px; line-height: 1.6; color: var(--ink-dim); margin: 0; }
+
+  /* Stats row */
+  section.stats { padding: 80px 0; border-bottom: 1px solid var(--line); }
+  .stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0; }
+  .stat { padding: 0 32px; border-left: 1px solid var(--line); }
+  .stat:first-child { border-left: none; padding-left: 0; }
+  .stat .num { font-family: 'Amatic SC', cursive; font-weight: 700; font-size: 88px; line-height: 1; color: var(--ink); }
+  .stat .unit { color: var(--accent); }
+  .stat .label { font-size: 13px; color: var(--ink-dim); margin-top: 8px; line-height: 1.5; }
+
+  /* CTA */
+  section.cta { background: var(--accent); padding: 120px 0; text-align: center; }
+  section.cta img.logo { height: 120px; width: auto; margin-bottom: 24px; }
+  section.cta h2 { font-family: 'Amatic SC', cursive; font-weight: 700;
+    font-size: clamp(72px, 10vw, 160px); line-height: .92; margin: 0 0 20px; color: var(--bg); }
+  section.cta p { font-size: 20px; line-height: 1.5; margin: 0 auto 40px; max-width: 640px; color: var(--bg); }
+  section.cta .btn { display: inline-flex; align-items: center; gap: 10px;
+    background: var(--bg); color: var(--ink); padding: 16px 26px; border-radius: 999px;
+    text-decoration: none; font-size: 16px; font-weight: 600; }
+
+  /* Footer */
+  footer { padding: 104px 0 40px; border-top: 1px solid var(--line); }
+  footer h2 { font-family: 'Amatic SC', cursive; font-weight: 700;
+    font-size: clamp(72px, 12vw, 200px); line-height: .9; margin: 0 0 40px; color: var(--ink); }
+  footer h2 .accent { color: var(--accent); }
+  footer .cols { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 40px; margin-bottom: 80px; }
+  footer .brandcol img { height: 70px; margin-bottom: 12px; filter: invert(1); mix-blend-mode: screen; }
+  footer .brandcol p { font-size: 14px; color: var(--ink-dim); line-height: 1.6; margin: 16px 0 0; max-width: 340px; }
+  footer h4 { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--accent);
+    letter-spacing: .1em; text-transform: uppercase; margin: 0 0 16px; font-weight: 600; }
+  footer ul { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 10px; }
+  footer li { font-size: 14px; color: var(--ink); white-space: pre-line; }
+  footer .bottom { padding-top: 24px; border-top: 1px solid var(--line);
+    font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--ink-dim);
+    display: flex; justify-content: space-between; letter-spacing: .06em; }
+</style>
+</head>
+<body>
+
+<nav class="top">
+  <div class="container bar">
+    <a href="SCG Startsida.html" class="brand">Stockholm Code Group</a>
+    <div class="links">
+      <a href="SCG Erbjudanden.html">Erbjudanden</a>
+      <a href="SCG Case.html">Case</a>
+      <a href="SCG Team.html" class="active">Team</a>
+      <a href="SCG Careers.html">Karriär</a>
+      <a href="mailto:contactus@stockholmcode.se" class="cta">Säg hej ♥</a>
+    </div>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="container">
+    <div class="kicker">№ 06 · Teamet</div>
+    <h1>Människor<br />bakom <span class="accent">koden.</span></h1>
+    <p class="lead">
+      Vi är ett handplockat team av seniora ingenjörer och arkitekter — ~20 personer, grundat 2007 i Stockholm av tre konsulter som fortfarande är kvar i bolaget. Låg omsättning, platt organisation, kunskaps­delning i vardagen. Del av Generate Group — tio nordiska techbolag med 300+ konsulter.
+    </p>
+    <div class="logoart"><img src="assets/logo.jpg" alt="" /></div>
+  </div>
+</header>
+
+<div class="filters">
+  <div class="container row">
+    <div class="mono" style="color: var(--ink-dim); font-size: 12px; letter-spacing: .08em; text-transform: uppercase;">Filtrera</div>
+    <div class="chips" id="chips">
+      <button class="chip active" data-f="all">Alla</button>
+      <button class="chip" data-f="arch">Arkitekter</button>
+      <button class="chip" data-f="eng">Ingenjörer</button>
+      <button class="chip" data-f="ai">AI / ML</button>
+      <button class="chip" data-f="cto">CTOs</button>
+      <button class="chip" data-f="data">Data</button>
+    </div>
+    <div class="count" id="count"></div>
+  </div>
+</div>
+
+<section class="team-grid">
+  <div class="container">
+    <div class="grid" id="grid"></div>
+  </div>
+</section>
+
+<section class="stats">
+  <div class="container">
+    <div class="stats-grid">
+      <div class="stat"><div class="num">2007</div><div class="label">grundat i Stockholm</div></div>
+      <div class="stat"><div class="num">~20</div><div class="label">seniora utvecklare & arkitekter</div></div>
+      <div class="stat"><div class="num">100<span class="unit">%</span></div><div class="label">senior nivå, inga juniora</div></div>
+      <div class="stat"><div class="num">19<span class="unit">år</span></div><div class="label">av hands-on leveranser</div></div>
+    </div>
+  </div>
+</section>
+
+<section class="culture">
+  <div class="container">
+    <div class="mono" style="color: var(--accent); font-size: 12px; letter-spacing: .1em; text-transform: uppercase; margin-bottom: 16px;">Så här är vi</div>
+    <h2>Hur vi <span class="accent">jobbar.</span></h2>
+    <div class="values">
+      <div class="value">
+        <div class="num">01</div>
+        <h3>Kod före konsultprat.</h3>
+        <p>Vi levererar kod i produktion. Inte slides, inte powerpoints, inte workshops som leder till fler workshops.</p>
+      </div>
+      <div class="value">
+        <div class="num">02</div>
+        <h3>Kunskaps­delning.</h3>
+        <p>Bok- och videoklubb, dedikerade AI-dagar, parkodning och lunchprat. Ingen vet allt — vi lär av varandra.</p>
+      </div>
+      <div class="value">
+        <div class="num">03</div>
+        <h3>Platt organisation.</h3>
+        <p>Korta beslutsvägar, förtroende för varandras expertis. Ingen onödig byråkrati eller politik.</p>
+      </div>
+      <div class="value">
+        <div class="num">04</div>
+        <h3>Enbart seniora.</h3>
+        <p>Kunder betalar för seniora ingenjörer och får seniora ingenjörer. Vi tar inte genvägar på någons bekostnad.</p>
+      </div>
+      <div class="value">
+        <div class="num">05</div>
+        <h3>Tillsammans i Stockholm.</h3>
+        <p>Vi sitter där vi behövs hos kund — men träffas alltid på kontoret på Regeringsgatan 74 när det passar.</p>
+      </div>
+      <div class="value">
+        <div class="num">06</div>
+        <h3>Påverkan & trivsel.</h3>
+        <p>Månadsvisa personalmöten, konferenser, after work. Den som vill vara med och påverka kunder och riktning — det går.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="cta">
+  <div class="container">
+    <img class="logo" src="assets/logo.jpg" alt="" />
+    <h2>Passa in?</h2>
+    <p>Låg omsättning är något vi är stolta över. Om det här låter som din typ av folk — kolla karriärsidan.</p>
+    <a href="SCG Careers.html" class="btn">Lediga roller →</a>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <div class="cols">
+      <div class="brandcol">
+        <img src="assets/logo.jpg" alt="" />
+        <p>Seniora ingenjörer i Stockholm. We bring love to software, sedan 2007.</p>
+      </div>
+      <div><h4>Erbjudanden</h4><ul><li><a href="SCG Erbjudanden.html">Stora initiativ</a></li><li><a href="SCG Erbjudanden.html">Timkonsulting</a></li><li><a href="SCG Erbjudanden.html">Rådgivning</a></li><li><a href="SCG Erbjudanden.html">AI-readiness</a></li></ul></div>
+      <div><h4>Bolaget</h4><ul><li><a href="SCG Case.html">Case</a></li><li><a href="SCG Team.html">Team</a></li><li><a href="SCG Careers.html">Karriär</a></li><li><a href="mailto:contactus@stockholmcode.se">Kontakt</a></li></ul></div>
+      <div><h4>Hitta oss</h4><ul><li><a href="mailto:contactus@stockholmcode.se">contactus@stockholmcode.se</a></li><li>Regeringsgatan 74
+111 39 Stockholm</li></ul></div>
+    </div>
+    <div class="bottom">
+      <div>© 2026 Stockholm Code Group AB</div>
+      <div>WE BRING LOVE</div>
+    </div>
+  </div>
+</footer>
+
+<script>
+  const members = [
+    { id: 1, name: 'David Looberger', role: 'Senior Advisor · ex-Chief Architect SL', tag: 'Cloud · AWS · Public sector', cat: ['arch'], bio: 'Chefs­arkitekt för SLs nya biljettsystem på AWS. Senior rådgivare hos SCG.', social: ['LinkedIn'] },
+    { id: 2, name: 'Senior Software Engineer', role: 'Senior Software Engineer', tag: 'Full-stack · Distributed · 15+ år', cat: ['eng'], bio: 'Bygger och levererar produktion hos kund. Seniora kollegor, inga juniora.', social: ['LinkedIn'] },
+    { id: 3, name: 'Senior Architect', role: 'Senior Architect', tag: 'Event-driven · DDD · 15+ år', cat: ['arch'], bio: 'Ritar system som håller — och kodar prototyperna själv.', social: ['LinkedIn'] },
+    { id: 4, name: 'Senior AI Engineer', role: 'Senior Software Engineer · AI', tag: 'LLM-system · RAG · 10+ år', cat: ['ai', 'eng'], bio: 'LLMs i produktion. Pragmatisk om AI-hype.', social: ['LinkedIn'] },
+    { id: 5, name: 'Senior Data Architect', role: 'Senior Architect · Data', tag: 'Streaming · Event-driven · 15+ år', cat: ['data', 'arch'], bio: 'Kafka, event sourcing, data contracts.', social: ['LinkedIn'] },
+    { id: 6, name: 'Senior Cloud Engineer', role: 'Senior Software Engineer · Cloud', tag: 'AWS · K8s · 15+ år', cat: ['eng', 'arch'], bio: 'AWS & Kubernetes sedan tidig dag. Security-mindset.', social: ['LinkedIn'] },
+    { id: 7, name: 'Senior Frontend Engineer', role: 'Senior Software Engineer · Frontend', tag: 'React · Design systems · 12+ år', cat: ['eng'], bio: 'Bygger interface som är snabba och snälla.', social: ['LinkedIn'] },
+    { id: 8, name: 'Senior Backend Engineer', role: 'Senior Software Engineer · Backend', tag: 'Go · Kotlin · 14+ år', cat: ['eng'], bio: 'Små, tydliga tjänster. Tester på riktigt.', social: ['LinkedIn'] },
+    { id: 9, name: 'Senior Platform Architect', role: 'Senior Architect · Platform', tag: 'Microservices · Kafka · 18+ år', cat: ['arch'], bio: 'Driver transformationer från monolit till väldefinierade tjänster.', social: ['LinkedIn'] },
+    { id: 10, name: 'Senior CTO Advisor', role: 'Senior Advisor', tag: 'Scale-ups · Board · 20+ år', cat: ['cto', 'arch'], bio: 'Stöttar CTO-team och styrelser i tekniska beslut.', social: ['LinkedIn'] },
+    { id: 11, name: 'Senior Data Engineer', role: 'Senior Software Engineer · Data', tag: 'Python · dbt · 12+ år', cat: ['data', 'eng'], bio: 'Dataplattformar som teamet faktiskt vill använda.', social: ['LinkedIn'] },
+    { id: 12, name: 'Senior Mobile Engineer', role: 'Senior Software Engineer · Mobile', tag: 'iOS · Android · 13+ år', cat: ['eng'], bio: 'Native mobil utan genvägar.', social: ['LinkedIn'] },
+  ];
+
+  const grid = document.getElementById('grid');
+  grid.innerHTML = members.map((m, i) => `
+    <article class="member" data-cat="${m.cat.join(' ')}">
+      <div class="portrait">
+        <span class="tag">${m.cat.includes('arch') ? 'Arkitekt' : m.cat.includes('cto') ? 'CTO' : m.cat.includes('ai') ? 'AI/ML' : m.cat.includes('data') ? 'Data' : 'Engineer'}</span>
+        // porträtt · ${m.name.split(' ')[0].toLowerCase()}
+      </div>
+      <div class="meta">
+        <div>
+          <div class="name">${m.name}</div>
+          <div class="role">${m.role}</div>
+        </div>
+        <div class="num">${String(i + 1).padStart(2, '0')}</div>
+      </div>
+      <div class="tag-line">${m.tag}</div>
+      <div class="bio">${m.bio}</div>
+      <div class="social">${m.social.map(s => `<a href="#">${s}</a>`).join('')}</div>
+    </article>
+  `).join('');
+
+  const chips = document.querySelectorAll('.chip');
+  const count = document.getElementById('count');
+  function setCount(n) { count.textContent = `${n} av ${members.length} visas`; }
+  setCount(members.length);
+  chips.forEach(c => c.addEventListener('click', () => {
+    chips.forEach(x => x.classList.remove('active'));
+    c.classList.add('active');
+    const f = c.dataset.f;
+    let shown = 0;
+    document.querySelectorAll('.member').forEach(m => {
+      const ok = f === 'all' || m.dataset.cat.split(' ').includes(f);
+      m.classList.toggle('hidden', !ok);
+      if (ok) shown++;
+    });
+    setCount(shown);
+  }));
+</script>
+</body>
+</html>
