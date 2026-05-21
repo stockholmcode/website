@@ -1,0 +1,24 @@
+spring:
+  datasource:
+    url: ${SPRING_DATASOURCE_URL:jdbc:postgresql://postgres:5432/sessionbooking}
+    username: ${SPRING_DATASOURCE_USERNAME:postgres}
+    password: ${SPRING_DATASOURCE_PASSWORD:password}
+    driver-class-name: org.postgresql.Driver
+  
+  jpa:
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    hibernate:
+      ddl-auto: create-drop
+    show-sql: false
+    properties:
+      hibernate:
+        format_sql: true
+  
+  h2:
+    console:
+      enabled: false
+
+logging:
+  level:
+    com.cle.sessionbooking: INFO
+    org.springframework.web: INFO

@@ -1,0 +1,43 @@
+# Build output
+build/
+out/
+target/
+
+# Gradle
+.gradle/
+gradle-app.setting
+!gradle/wrapper/gradle-wrapper.jar
+
+# JDK (local copy)
+jdk-*/
+
+# IDE
+.idea/
+*.iml
+.vscode/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+backend.log
+
+# Node / frontend
+frontend/node_modules/
+frontend/.next/
+frontend/dist/
+node_modules/
+npm-debug.log*
+
+# Claude Code settings (local only)
+.claude/settings.local.json
+
+# Secrets / env
+.env
+.env.local
+.env*.local
+
+# Compiled class files
+*.class

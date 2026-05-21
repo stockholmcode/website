@@ -1,0 +1,1291 @@
+openapi: 3.0.3
+info:
+  title: Community Learning Exchange (CLE) API
+  description: |
+    API specification for the Community Learning Exchange platform that connects learners with teachers.
+    
+    ## Features
+    - User authentication (email/password and Google OAuth)
+    - Course management for teachers
+    - Availability scheduling
+    - Session booking and management
+    - Teacher search and discovery
+    - Real-time messaging and communication
+    
+    ## Authentication
+    Most endpoints require authentication via JWT token in the Authorization header.
+    
+  version: 1.0.0
+  contact:
+    name: CLE Platform
+    email: support@cle-platform.com
+  license:
+    name: MIT
+    url: https://opensource.org/licenses/MIT
+
+servers:
+  - url: http://localhost:8080/api/v1
+    description: Local development server
+  - url: https://api.cle-platform.com/v1
+    description: Production server
+
+tags:
+  - name: Authentication
+    description: User authentication and registration
+  - name: Users
+    description: User profile management
+  - name: Courses
+    description: Course creation and management
+  - name: Availability
+    description: Teacher availability management
+  - name: Search
+    description: Teacher and course search
+  - name: Sessions
+    description: Session booking and management
+  - name: Messages
+    description: Communication between teachers and learners
+
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+
+  schemas:
+    User:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          example: "550e8400-e29b-41d4-a716-446655440000"
+        email:
+          type: string
+          format: email
+          example: "alex.johnson@email.com"
+        name:
+          type: string
+          example: "Alex Johnson"
+        userType:
+          type: string
+          enum: [teacher, learner]
+          example: "teacher"
+        authProvider:
+          type: string
+          enum: [email, google]
+          example: "email"
+        googleId:
+          type: string
+          nullable: true
+          example: "1234567890"
+        profilePicture:
+          type: string
+          format: uri
+          nullable: true
+          example: "https://example.com/profile.jpg"
+        isVerified:
+          type: boolean
+          example: true
+        createdAt:
+          type: string
+          format: date-time
+          example: "2024-01-01T00:00:00Z"
+        updatedAt:
+          type: string
+          format: date-time
+          example: "2024-01-01T00:00:00Z"
+      required:
+        - id
+        - email
+        - name
+        - userType
+        - authProvider
+        - isVerified
+        - createdAt
+        - updatedAt
+
+    Course:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          example: "course-123"
+        teacherId:
+          type: string
+          format: uuid
+          example: "teacher-1"
+        title:
+          type: string
+          example: "Beginner Guitar Fundamentals"
+        description:
+          type: string
+          example: "Learn the basics of guitar playing including chords, strumming patterns, and simple songs."
+        skillName:
+          type: string
+          example: "Guitar"
+        cost:
+          type: number
+          minimum: 0
+          example: 50
+        duration:
+          type: integer
+          minimum: 15
+          example: 60
+        format:
+          type: string
+          enum: [ONLINE, IN_PERSON, HYBRID]
+          example: "IN_PERSON"
+        images:
+          type: array
+          items:
+            type: string
+            format: uri
+          example: []
+        prerequisites:
+          type: string
+          example: "No experience required"
+        learningObjectives:
+          type: array
+          items:
+            type: string
+          example: ["Master basic chord shapes", "Learn proper strumming techniques"]
+        isActive:
+          type: boolean
+          example: true
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+        availabilities:
+          type: array
+          items:
+            $ref: '#/components/schemas/TeacherAvailability'
+      required:
+        - id
+        - teacherId
+        - title
+        - description
+        - skillName
+        - cost
+        - duration
+        - format
+        - isActive
+
+    TeacherAvailability:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          example: "avail-123"
+        teacherId:
+          type: string
+          format: uuid
+          example: "teacher-1"
+        courseId:
+          type: string
+          format: uuid
+          example: "course-123"
+        courseName:
+          type: string
+          example: "Beginner Guitar Fundamentals"
+        date:
+          type: string
+          format: date
+          example: "2024-02-15"
+        startTime:
+          type: string
+          format: time
+          example: "10:00"
+        endTime:
+          type: string
+          format: time
+          example: "11:00"
+        maxStudents:
+          type: integer
+          minimum: 1
+          example: 3
+        location:
+          type: string
+          nullable: true
+          example: "123 Music Studio, Room A"
+        virtualMeetingUrl:
+          type: string
+          format: uri
+          nullable: true
+          example: "https://meet.google.com/guitar-lesson"
+        isActive:
+          type: boolean
+          example: true
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+      required:
+        - id
+        - teacherId
+        - courseId
+        - courseName
+        - date
+        - startTime
+        - endTime
+        - maxStudents
+        - isActive
+
+    Session:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        teacherId:
+          type: string
+          format: uuid
+        learnerId:
+          type: string
+          format: uuid
+        skillName:
+          type: string
+        courseId:
+          type: string
+          format: uuid
+        courseName:
+          type: string
+        startTime:
+          type: string
+          format: date-time
+        endTime:
+          type: string
+          format: date-time
+        status:
+          type: string
+          enum: [PENDING, CONFIRMED, IN_PROGRESS, COMPLETED, CANCELLED, NO_SHOW]
+        format:
+          type: string
+          enum: [ONLINE, IN_PERSON, HYBRID]
+        price:
+          type: number
+        sessionNotes:
+          type: string
+          nullable: true
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+        cancelledAt:
+          type: string
+          format: date-time
+          nullable: true
+        cancellationReason:
+          type: string
+          nullable: true
+
+    TeacherSearchResult:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        name:
+          type: string
+        email:
+          type: string
+          format: email
+        skill:
+          type: string
+        price:
+          type: number
+        rating:
+          type: number
+          minimum: 0
+          maximum: 5
+        distance:
+          type: number
+          description: Distance in kilometers
+        format:
+          type: array
+          items:
+            type: string
+            enum: [ONLINE, IN_PERSON, HYBRID]
+        location:
+          type: string
+        experience:
+          type: string
+        course:
+          $ref: '#/components/schemas/Course'
+        availabilities:
+          type: array
+          items:
+            $ref: '#/components/schemas/TeacherAvailability'
+        user:
+          $ref: '#/components/schemas/User'
+
+    LoginRequest:
+      type: object
+      properties:
+        email:
+          type: string
+          format: email
+          example: "alex.johnson@email.com"
+        password:
+          type: string
+          format: password
+          example: "SecurePass123"
+        userType:
+          type: string
+          enum: [teacher, learner]
+          example: "teacher"
+      required:
+        - email
+        - password
+        - userType
+
+    SignUpRequest:
+      type: object
+      properties:
+        firstName:
+          type: string
+          example: "Alex"
+        lastName:
+          type: string
+          example: "Johnson"
+        email:
+          type: string
+          format: email
+          example: "alex.johnson@email.com"
+        password:
+          type: string
+          format: password
+          example: "SecurePass123"
+        confirmPassword:
+          type: string
+          format: password
+          example: "SecurePass123"
+        userType:
+          type: string
+          enum: [teacher, learner]
+          example: "teacher"
+      required:
+        - firstName
+        - lastName
+        - email
+        - password
+        - confirmPassword
+        - userType
+
+    AuthResponse:
+      type: object
+      properties:
+        token:
+          type: string
+          description: JWT access token
+          example: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
+        user:
+          $ref: '#/components/schemas/User'
+        expiresIn:
+          type: integer
+          description: Token expiration time in seconds
+          example: 3600
+
+    Error:
+      type: object
+      properties:
+        error:
+          type: string
+          example: "Invalid credentials"
+        message:
+          type: string
+          example: "The provided email or password is incorrect"
+        code:
+          type: string
+          example: "AUTH_INVALID_CREDENTIALS"
+        timestamp:
+          type: string
+          format: date-time
+
+    SearchFilters:
+      type: object
+      properties:
+        skill:
+          type: string
+          example: "Guitar"
+        location:
+          type: string
+          example: "New York"
+        maxDistance:
+          type: number
+          minimum: 0
+          example: 25
+        priceRange:
+          type: array
+          items:
+            type: number
+          minItems: 2
+          maxItems: 2
+          example: [0, 200]
+        format:
+          type: string
+          enum: [ONLINE, IN_PERSON, HYBRID, ALL]
+          example: "ALL"
+
+  responses:
+    Unauthorized:
+      description: Authentication required
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          example:
+            error: "Unauthorized"
+            message: "Authentication token required"
+            code: "AUTH_TOKEN_REQUIRED"
+
+    Forbidden:
+      description: Access denied
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          example:
+            error: "Forbidden"
+            message: "Access denied to this resource"
+            code: "ACCESS_DENIED"
+
+    NotFound:
+      description: Resource not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          example:
+            error: "Not Found"
+            message: "The requested resource was not found"
+            code: "RESOURCE_NOT_FOUND"
+
+paths:
+  # Authentication Endpoints
+  /auth/login:
+    post:
+      tags:
+        - Authentication
+      summary: Authenticate user
+      description: Login with email and password
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LoginRequest'
+      responses:
+        '200':
+          description: Login successful
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AuthResponse'
+        '400':
+          description: Invalid request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Invalid credentials
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+  /auth/signup:
+    post:
+      tags:
+        - Authentication
+      summary: Register new user
+      description: Create a new user account
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SignUpRequest'
+      responses:
+        '201':
+          description: User created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AuthResponse'
+        '400':
+          description: Invalid request or user already exists
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+  /auth/google:
+    post:
+      tags:
+        - Authentication
+      summary: Google OAuth authentication
+      description: Authenticate or create user with Google OAuth
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                googleToken:
+                  type: string
+                  description: Google OAuth token
+                userType:
+                  type: string
+                  enum: [teacher, learner]
+              required:
+                - googleToken
+                - userType
+      responses:
+        '200':
+          description: Authentication successful
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AuthResponse'
+        '400':
+          description: Invalid Google token
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+  # User Management
+  /users/me:
+    get:
+      tags:
+        - Users
+      summary: Get current user profile
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: User profile
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+
+    patch:
+      tags:
+        - Users
+      summary: Update user profile
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                profilePicture:
+                  type: string
+                  format: uri
+      responses:
+        '200':
+          description: Profile updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+
+  /users/{userId}:
+    get:
+      tags:
+        - Users
+      summary: Get user by ID
+      parameters:
+        - name: userId
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '200':
+          description: User profile
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+        '404':
+          $ref: '#/components/responses/NotFound'
+
+  # Course Management
+  /courses:
+    get:
+      tags:
+        - Courses
+      summary: Get all courses
+      parameters:
+        - name: teacherId
+          in: query
+          description: Filter by teacher ID
+          schema:
+            type: string
+            format: uuid
+        - name: skill
+          in: query
+          description: Filter by skill name
+          schema:
+            type: string
+        - name: isActive
+          in: query
+          description: Filter by active status
+          schema:
+            type: boolean
+      responses:
+        '200':
+          description: List of courses
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Course'
+
+    post:
+      tags:
+        - Courses
+      summary: Create new course
+      description: Create a new course (teachers only)
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                title:
+                  type: string
+                description:
+                  type: string
+                skillName:
+                  type: string
+                cost:
+                  type: number
+                duration:
+                  type: integer
+                format:
+                  type: string
+                  enum: [ONLINE, IN_PERSON, HYBRID]
+                prerequisites:
+                  type: string
+                learningObjectives:
+                  type: array
+                  items:
+                    type: string
+              required:
+                - title
+                - description
+                - skillName
+                - cost
+                - duration
+                - format
+      responses:
+        '201':
+          description: Course created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Course'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+
+  /courses/{courseId}:
+    get:
+      tags:
+        - Courses
+      summary: Get course by ID
+      parameters:
+        - name: courseId
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '200':
+          description: Course details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Course'
+        '404':
+          $ref: '#/components/responses/NotFound'
+
+    put:
+      tags:
+        - Courses
+      summary: Update course
+      description: Update course (course owner only)
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: courseId
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Course'
+      responses:
+        '200':
+          description: Course updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Course'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+
+    delete:
+      tags:
+        - Courses
+      summary: Delete course
+      description: Delete course (course owner only)
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: courseId
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '204':
+          description: Course deleted
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+
+  # Availability Management
+  /courses/{courseId}/availabilities:
+    get:
+      tags:
+        - Availability
+      summary: Get course availabilities
+      parameters:
+        - name: courseId
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+        - name: date
+          in: query
+          description: Filter by date
+          schema:
+            type: string
+            format: date
+        - name: isActive
+          in: query
+          description: Filter by active status
+          schema:
+            type: boolean
+            default: true
+      responses:
+        '200':
+          description: List of availabilities
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/TeacherAvailability'
+
+    post:
+      tags:
+        - Availability
+      summary: Add course availability
+      description: Add new availability slot (course owner only)
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: courseId
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                date:
+                  type: string
+                  format: date
+                startTime:
+                  type: string
+                  format: time
+                endTime:
+                  type: string
+                  format: time
+                maxStudents:
+                  type: integer
+                  minimum: 1
+                location:
+                  type: string
+                virtualMeetingUrl:
+                  type: string
+                  format: uri
+              required:
+                - date
+                - startTime
+                - endTime
+                - maxStudents
+      responses:
+        '201':
+          description: Availability created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TeacherAvailability'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+
+  /availabilities/{availabilityId}:
+    put:
+      tags:
+        - Availability
+      summary: Update availability
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: availabilityId
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TeacherAvailability'
+      responses:
+        '200':
+          description: Availability updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TeacherAvailability'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+
+    delete:
+      tags:
+        - Availability
+      summary: Delete availability
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: availabilityId
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '204':
+          description: Availability deleted
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+
+  # Search Endpoints
+  /search/teachers:
+    post:
+      tags:
+        - Search
+      summary: Search for teachers
+      description: Find teachers based on skills, location, and other criteria
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SearchFilters'
+      responses:
+        '200':
+          description: Search results
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  results:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/TeacherSearchResult'
+                  totalCount:
+                    type: integer
+                  page:
+                    type: integer
+                  limit:
+                    type: integer
+
+  /search/skills:
+    get:
+      tags:
+        - Search
+      summary: Get available skills
+      description: Get list of all available skills for search
+      responses:
+        '200':
+          description: List of skills
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: string
+                    name:
+                      type: string
+                    category:
+                      type: string
+                  example:
+                    - id: "skill-1"
+                      name: "Guitar"
+                      category: "Music"
+                    - id: "skill-2"
+                      name: "Python Programming"
+                      category: "Technology"
+
+  # Session Management
+  /sessions:
+    get:
+      tags:
+        - Sessions
+      summary: Get user sessions
+      description: Get sessions for the authenticated user
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: status
+          in: query
+          description: Filter by session status
+          schema:
+            type: string
+            enum: [PENDING, CONFIRMED, IN_PROGRESS, COMPLETED, CANCELLED, NO_SHOW]
+        - name: startDate
+          in: query
+          description: Filter sessions from this date
+          schema:
+            type: string
+            format: date
+        - name: endDate
+          in: query
+          description: Filter sessions until this date
+          schema:
+            type: string
+            format: date
+      responses:
+        '200':
+          description: List of sessions
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Session'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+
+    post:
+      tags:
+        - Sessions
+      summary: Book a session
+      description: Create a new session booking
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                teacherId:
+                  type: string
+                  format: uuid
+                courseId:
+                  type: string
+                  format: uuid
+                availabilityId:
+                  type: string
+                  format: uuid
+                startTime:
+                  type: string
+                  format: date-time
+                endTime:
+                  type: string
+                  format: date-time
+                learnerGoals:
+                  type: string
+                preparationNotes:
+                  type: string
+              required:
+                - teacherId
+                - courseId
+                - availabilityId
+                - startTime
+                - endTime
+      responses:
+        '201':
+          description: Session booked
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Session'
+        '400':
+          description: Invalid booking request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+
+  /sessions/{sessionId}:
+    get:
+      tags:
+        - Sessions
+      summary: Get session details
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: sessionId
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '200':
+          description: Session details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Session'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+
+    patch:
+      tags:
+        - Sessions
+      summary: Update session
+      description: Update session status or notes
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: sessionId
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                status:
+                  type: string
+                  enum: [PENDING, CONFIRMED, IN_PROGRESS, COMPLETED, CANCELLED, NO_SHOW]
+                sessionNotes:
+                  type: string
+                cancellationReason:
+                  type: string
+      responses:
+        '200':
+          description: Session updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Session'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+
+  # Messages
+  /sessions/{sessionId}/messages:
+    get:
+      tags:
+        - Messages
+      summary: Get session messages
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: sessionId
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+        - name: limit
+          in: query
+          description: Number of messages to return
+          schema:
+            type: integer
+            default: 50
+        - name: before
+          in: query
+          description: Get messages before this timestamp
+          schema:
+            type: string
+            format: date-time
+      responses:
+        '200':
+          description: List of messages
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: string
+                      format: uuid
+                    sessionId:
+                      type: string
+                      format: uuid
+                    senderId:
+                      type: string
+                      format: uuid
+                    senderName:
+                      type: string
+                    content:
+                      type: string
+                    type:
+                      type: string
+                      enum: [TEXT, FILE, SYSTEM]
+                    timestamp:
+                      type: string
+                      format: date-time
+                    isRead:
+                      type: boolean
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+
+    post:
+      tags:
+        - Messages
+      summary: Send message
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: sessionId
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                content:
+                  type: string
+                type:
+                  type: string
+                  enum: [TEXT, FILE]
+                  default: TEXT
+              required:
+                - content
+      responses:
+        '201':
+          description: Message sent
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: string
+                    format: uuid
+                  timestamp:
+                    type: string
+                    format: date-time
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+
+security:
+  - bearerAuth: []
