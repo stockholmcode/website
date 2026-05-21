@@ -49,15 +49,15 @@ function VariantWarmSlim({ density = 'regular', tone = 'confident', sections = {
       {/* Nav */}
       <nav style={{ position: 'sticky', top: 0, zIndex: 10, background: 'rgba(10,12,15,.85)', backdropFilter: 'blur(12px)', borderBottom: `1px solid ${line}` }}>
         <div style={{ ...wm.container, display: 'flex', alignItems: 'center', justifyContent: 'space-between', height: 76 }}>
-          <a href="SCG Startsida.html" style={{ ...wm.display, fontSize: 28, lineHeight: 1, color: ink, whiteSpace: 'nowrap', textDecoration: 'none' }}>
+          <a href="index.html" style={{ ...wm.display, fontSize: 28, lineHeight: 1, color: ink, whiteSpace: 'nowrap', textDecoration: 'none' }}>
             Stockholm Code Group
           </a>
           <div style={{ display: 'flex', alignItems: 'center', gap: 28, fontSize: 15 }}>
             {[
-              { label: 'Erbjudanden', href: 'SCG Erbjudanden.html' },
-              { label: 'Case', href: 'SCG Case.html' },
-              { label: 'Team', href: 'SCG Team.html' },
-              { label: 'Karriär', href: 'SCG Careers.html' }
+              { label: 'Erbjudanden', href: 'erbjudanden.html' },
+              { label: 'Case', href: 'case.html' },
+              { label: 'Team', href: 'team.html' },
+              { label: 'Karriär', href: 'careers.html' }
             ].map((x) =>
               <a key={x.label} href={x.href} style={{ color: ink, textDecoration: 'none' }}>{x.label}</a>
             )}
@@ -102,7 +102,7 @@ function VariantWarmSlim({ density = 'regular', tone = 'confident', sections = {
                 background: ink, color: bg, padding: '18px 26px', borderRadius: 999,
                 textDecoration: 'none', fontSize: 16, fontWeight: 600, display: 'inline-flex', alignItems: 'center', gap: 12
               }}>Börja ett samtal →</a>
-              <a href="SCG Erbjudanden.html" style={{
+              <a href="erbjudanden.html" style={{
                 background: 'transparent', color: ink, padding: '17px 24px', borderRadius: 999,
                 textDecoration: 'none', fontSize: 15, fontWeight: 500, display: 'inline-flex', alignItems: 'center', gap: 10,
                 border: `1px solid ${line}`
@@ -239,7 +239,7 @@ function VariantWarmSlim({ density = 'regular', tone = 'confident', sections = {
                   Fyra fokuserade steg när AI behöver struktur — inte bara verktyg. Varje steg står på egna ben; börja där ni är.
                 </p>
               </div>
-              <a href="SCG Erbjudanden.html" style={{
+              <a href="erbjudanden.html" style={{
                 ...wm.mono, fontSize: 13, padding: '14px 22px', borderRadius: 999,
                 border: `1px solid ${accent}`, color: accent, textDecoration: 'none',
                 whiteSpace: 'nowrap', letterSpacing: '.04em'
@@ -247,7 +247,7 @@ function VariantWarmSlim({ density = 'regular', tone = 'confident', sections = {
             </div>
 
             <div style={{ marginTop: 32, textAlign: 'center' }}>
-              <a href="SCG Erbjudanden.html" style={{
+              <a href="erbjudanden.html" style={{
                 ...wm.mono, fontSize: 13, padding: '14px 28px', borderRadius: 999,
                 border: `1px solid ${line}`, color: ink, textDecoration: 'none',
                 display: 'inline-flex', alignItems: 'center', gap: 10, letterSpacing: '.04em'
@@ -275,7 +275,7 @@ function VariantWarmSlim({ density = 'regular', tone = 'confident', sections = {
 
             <div style={{ display: 'flex', flexDirection: 'column' }}>
               {window.CASES.slice(0, 3).map((c, i) =>
-                <a key={i} href="SCG Case.html" style={{
+                <a key={i} href="case.html" style={{
                   display: 'grid', gridTemplateColumns: '100px 1.2fr 2fr 1fr 60px', gap: 40,
                   padding: '36px 0', alignItems: 'center',
                   borderTop: `1px solid ${line}`, textDecoration: 'none', color: 'inherit',
@@ -301,7 +301,7 @@ function VariantWarmSlim({ density = 'regular', tone = 'confident', sections = {
                 </a>
               )}
               <div style={{ borderTop: `1px solid ${line}`, paddingTop: 32, marginTop: 8, textAlign: 'center' }}>
-                <a href="SCG Case.html" style={{
+                <a href="case.html" style={{
                   ...wm.mono, fontSize: 13, padding: '14px 28px', borderRadius: 999,
                   border: `1px solid ${accent}`, color: accent, textDecoration: 'none',
                   display: 'inline-flex', alignItems: 'center', gap: 10, letterSpacing: '.04em'
@@ -390,7 +390,7 @@ function VariantWarmSlim({ density = 'regular', tone = 'confident', sections = {
               )}
             </div>
             <div style={{ marginTop: 56, paddingTop: 32, borderTop: `1px solid ${line}`, textAlign: 'center' }}>
-              <a href="SCG Team.html" style={{
+              <a href="team.html" style={{
                 ...wm.mono, fontSize: 13, padding: '14px 28px', borderRadius: 999,
                 border: `1px solid ${accent}`, color: accent, textDecoration: 'none',
                 display: 'inline-flex', alignItems: 'center', gap: 10, letterSpacing: '.04em'
@@ -415,12 +415,12 @@ function VariantWarmSlim({ density = 'regular', tone = 'confident', sections = {
             </p>
             <div style={{ display: 'inline-flex', flexWrap: 'wrap', gap: 10, justifyContent: 'center' }}>
               {['Senior Software Engineer', 'Senior Architect'].map((r) =>
-                <a key={r} href="SCG Careers.html" style={{
+                <a key={r} href="careers.html" style={{
                   background: bg, color: ink, padding: '14px 22px', borderRadius: 999,
                   textDecoration: 'none', fontSize: 14, fontWeight: 500
                 }}>{r} →</a>
               )}
-              <a href="SCG Careers.html" style={{
+              <a href="careers.html" style={{
                 background: 'transparent', color: bg, padding: '14px 22px', borderRadius: 999,
                 textDecoration: 'none', fontSize: 14, fontWeight: 600,
                 border: `1px solid ${bg}`
@@ -444,15 +444,15 @@ function VariantWarmSlim({ density = 'regular', tone = 'confident', sections = {
               </div>
               {[
                 { h: 'Sidor', items: [
-                  { label: 'Startsida', href: 'SCG Startsida.html' },
-                  { label: 'Erbjudanden', href: 'SCG Erbjudanden.html' },
-                  { label: 'Case', href: 'SCG Case.html' },
-                  { label: 'Team', href: 'SCG Team.html' },
-                  { label: 'Karriär', href: 'SCG Careers.html' }] },
+                  { label: 'Startsida', href: 'index.html' },
+                  { label: 'Erbjudanden', href: 'erbjudanden.html' },
+                  { label: 'Case', href: 'case.html' },
+                  { label: 'Team', href: 'team.html' },
+                  { label: 'Karriär', href: 'careers.html' }] },
                 { h: 'Utvalda case', items: [
-                  { label: 'Warner Bros. Discovery', href: 'SCG Case.html' },
-                  { label: 'SL', href: 'SCG Case.html' },
-                  { label: 'Blocket', href: 'SCG Case.html' }] },
+                  { label: 'Warner Bros. Discovery', href: 'case.html' },
+                  { label: 'SL', href: 'case.html' },
+                  { label: 'Blocket', href: 'case.html' }] },
                 { h: 'Hitta oss', items: [
                   { label: 'contactus@stockholmcode.se', href: 'mailto:contactus@stockholmcode.se' },
                   { label: 'Regeringsgatan 74\n111 39 Stockholm', href: null }] }
