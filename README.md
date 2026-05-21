@@ -1,20 +1,26 @@
 # SCG Website
 
+**Live:** https://stockholmcode.github.io/website/
+
 Stockholm Code Groups hemsida — statiska HTML-sidor med React/Babel via CDN och innehåll i `content/*.json`.
 
 ## Sidor
 
-- `SCG Startsida.html` — startsida (slimmad: hero, logos, core practices, case-teasers, approach, testimonial, team, careers)
-- `SCG Erbjudanden.html` — erbjudanden + 5D-ramverket (interaktivt)
-- `SCG Case.html` — case (alla med expanderbar djup-vy)
-- `SCG Team.html` — teamet + kultur
-- `SCG Careers.html` — öppna roller
+- `index.html` — startsida (slimmad: hero, logos, core practices, case-teasers, approach, testimonial, team, careers)
+- `erbjudanden.html` — erbjudanden + 5D-ramverket (interaktivt)
+- `case.html` — case (alla med expanderbar djup-vy)
+- `team.html` — teamet + kultur
+- `careers.html` — öppna roller
 
 ## Struktur
 
 ```
 .
-├── SCG *.html                # sidor
+├── index.html                # startsida
+├── erbjudanden.html          # erbjudanden
+├── case.html                 # case
+├── team.html                 # team
+├── careers.html              # karriär
 ├── assets/logo.jpg           # logotyp
 ├── content/*.json            # allt innehåll (case, team, offerings, testimonials, …)
 ├── content-loader.js         # läser content/*.json → window.SCG_CONTENT
@@ -34,7 +40,7 @@ Det är statiska filer — ingen build. Öppna i webbläsare via en lokal server
 ```bash
 # valfritt; vilken statisk server som helst fungerar
 python3 -m http.server 8000
-# → http://localhost:8000/SCG%20Startsida.html
+# → http://localhost:8000/
 ```
 
 ## Redigera innehåll
