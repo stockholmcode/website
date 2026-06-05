@@ -1,5 +1,4 @@
 // Single source of design tokens for the dark homepage palette.
-// Mirrors the values previously scattered across shared.jsx + variant-warm-slim.jsx.
 export const SCG = {
   accent: '#FF914D',
   bg: '#0A0C0F',
@@ -9,6 +8,8 @@ export const SCG = {
   inkDim: 'rgba(230,234,240,.58)',
   inkFaint: 'rgba(230,234,240,.35)',
   line: 'rgba(255,255,255,.09)',
+  red: '#E85C5C',
+  green: '#4CE87E',
 };
 
 export const FONTS = {
