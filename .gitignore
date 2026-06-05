@@ -11,7 +11,8 @@ Thumbs.db
 # Source / drafts (not part of the published site)
 uploads/
 
-# Node (if anyone adds tooling later)
+# Node / Astro build
 node_modules/
 dist/
 .cache/
+.astro/

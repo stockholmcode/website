@@ -1,0 +1,32 @@
+brand:
+  name: Stockholm Code Group
+  email: contactus@stockholmcode.se
+  copyright: © 2026 Stockholm Code Group AB
+cta:
+  label: Säg hej ♥
+  href: "mailto:contactus@stockholmcode.se"
+nav:
+  - { label: Erbjudanden, to: /erbjudanden }
+  - { label: Case, to: /case }
+  - { label: Team, to: /team }
+  - { label: Karriär, to: /careers }
+footer:
+  blurb: Seniora ingenjörer i Stockholm. We bring love to software, sedan 2007.
+  tagline: WE BRING LOVE
+  columns:
+    - h: Sidor
+      items:
+        - { label: Startsida, to: / }
+        - { label: Erbjudanden, to: /erbjudanden }
+        - { label: Case, to: /case }
+        - { label: Team, to: /team }
+        - { label: Karriär, to: /careers }
+    - h: Utvalda case
+      items:
+        - { label: Warner Bros. Discovery, to: /case }
+        - { label: SL, to: /case }
+        - { label: Blocket, to: /case }
+    - h: Hitta oss
+      items:
+        - { label: contactus@stockholmcode.se, href: "mailto:contactus@stockholmcode.se" }
+        - { label: "Regeringsgatan 74\n111 39 Stockholm" }
