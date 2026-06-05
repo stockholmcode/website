@@ -1,0 +1,42 @@
+# Hardcoded page copy for the Case page (everything NOT in cases.yaml).
+# The case list + expanded deep-view content live in cases.yaml (content.cases).
+
+title: "SCG — Case"
+
+hero:
+  kicker: "№ 03 · Case"
+  headlinePre: "Historier vi"
+  headlineAccent: "gärna"
+  headlinePost: " berättar."
+  lead: >-
+    Plattformar, biljettsystem, marketplaces. Det vi gör syns inte alltid — men det syns alltid när
+    det går fel. Här är några där det gick rätt.
+
+# Sector filter chips. `filter` matches each case's sectorKey ("all" shows everything).
+filters:
+  - filter: all
+    label: Alla
+  - filter: streaming
+    label: Media & streaming
+  - filter: public
+    label: Kollektivtrafik
+  - filter: marketplace
+    label: Marketplace
+  - filter: ecom
+    label: E-handel
+
+# Per-case labels reused across every card.
+caseLabel: Case
+headLabel: Val & verktyg          # heading inside the stackbox aside
+readMore: Läs hela caset          # collapsed read-more button label
+readLess: Stäng                   # expanded read-more button label
+countSuffix: " case"             # appended after the visible count
+empty:
+  title: "Inga case matchar."
+  hint: "// prova en annan sektor"
+
+cta:
+  headline: "Vill ni ha er egen?"
+  body: >-
+    De bästa casen börjar med ett samtal — inte en RFP. Hör av er, så ses vi över en kaffe.
+  email: contactus@stockholmcode.se

@@ -1,0 +1,44 @@
+# Hardcoded page copy for the Careers page (everything NOT in careers.yaml).
+# Structured lists (perks, roles, process, quote) live in careers.yaml (content.careers).
+
+title: "SCG — Karriär"
+
+hero:
+  kicker: "№ 07 · Karriär · Öppna roller"
+  headlinePre: "Jobba med"
+  headlineAccent: "snälla proffs."
+  lead: >-
+    Vi växer försiktigt och medvetet. Söker du ett ställe där seniora ingenjörer blir bra på att bli
+    ännu bättre, i en platt organisation utan byråkrati? Då ska vi prata.
+
+perks:
+  eyebrow: Förmåner
+  headlinePre: "Sånt som gör "
+  headlineAccent: vardagen
+  headlinePost: " bättre."
+
+roles:
+  eyebrow: Öppna roller
+  headlinePre: "Personer vi"
+  headlineMid: "letar efter just "
+  headlineAccent: "nu."
+  updated: "Senast uppdaterad · apr 2026"
+  # Labels reused when each role card is rendered (mirrors original inline <script> markup).
+  aboutLabel: Om rollen
+  reqLabel: Vi letar efter
+  weLabel: Vi erbjuder
+  stackLabel: Stack
+  applyLabel: "Ansök → contactus@stockholmcode.se"
+
+process:
+  eyebrow: Processen
+  headlinePre: "Kort, ärlig, "
+  headlineAccent: "utan prov-uppgifter."
+
+cta:
+  headline: "Ingen passar?"
+  body: >-
+    Vi rekryterar långsamt men läser allt. Skicka en spontanansökan — vi hör av oss när vi har rätt
+    roll för dig.
+  email: contactus@stockholmcode.se
+  label: "Spontanansök → contactus@stockholmcode.se"

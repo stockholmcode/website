@@ -1,0 +1,48 @@
+hero:
+  eyebrow: № 06 · Teamet
+  titlePre: Människor
+  titleMid: 'bakom '
+  titleAccent: koden.
+  intro: >-
+    Vi är ett handplockat team av seniora ingenjörer och arkitekter — ~20 personer, grundat 2007 i
+    Stockholm av tre konsulter som fortfarande är kvar i bolaget. Låg omsättning, platt organisation,
+    kunskaps­delning i vardagen. Del av Generate Group — tio nordiska techbolag med 300+ konsulter.
+
+filter:
+  label: Filtrera
+  countTemplate: '{shown} av {total} visas'
+  chips:
+    - { key: all, label: Alla }
+    - { key: arch, label: Arkitekter }
+    - { key: eng, label: Ingenjörer }
+    - { key: ai, label: AI / ML }
+    - { key: cto, label: CTOs }
+    - { key: data, label: Data }
+
+# Tag-badge labels shown on each member portrait, keyed by category (priority order in script).
+tagLabels:
+  arch: Arkitekt
+  cto: CTO
+  ai: AI/ML
+  data: Data
+  default: Engineer
+
+stats:
+  eyebrow: ''
+  items:
+    - { num: '2007', unit: '', label: grundat i Stockholm }
+    - { num: '~20', unit: '', label: seniora utvecklare & arkitekter }
+    - { num: '100', unit: '%', label: senior nivå, inga juniora }
+    - { num: '19', unit: år, label: av hands-on leveranser }
+
+culture:
+  eyebrow: Så här är vi
+  titlePre: 'Hur vi '
+  titleAccent: jobbar.
+
+callout:
+  title: Passa in?
+  body: >-
+    Låg omsättning är något vi är stolta över. Om det här låter som din typ av folk — kolla
+    karriärsidan.
+  cta: { label: 'Lediga roller →', to: /careers }

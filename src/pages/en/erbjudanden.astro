@@ -1,0 +1,13 @@
+---
+import Base from '../../layouts/Base.astro';
+import Erbjudanden from '../../components/Erbjudanden.astro';
+import { getContent } from '../../lib/content.js';
+
+// English locale. Content currently falls back to Swedish per-file (see src/lib/content.js)
+// until src/data/en/*.yaml is populated in Phase 3.
+const locale = 'en';
+const content = getContent(locale);
+---
+<Base locale={locale} site={content.site} title="Erbjudanden · Stockholm Code Group">
+  <Erbjudanden locale={locale} content={content} />
+</Base>
