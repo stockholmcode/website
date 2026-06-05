@@ -222,7 +222,7 @@ export default function HomeSections({
       <section style={{ background: accent }}>
         <div style={{ ...wm.container, padding: `${pad}px ${gutter}px`, textAlign: 'center' }}>
           <div style={{ display: 'inline-flex' }}>
-            <img src={`${assetBase}assets/logo.jpg`} alt="Stockholm Code Group" style={{ height: 120, width: 'auto', display: 'block', mixBlendMode: 'multiply' }} />
+            <img src={`${assetBase}assets/logo-dark.png`} alt="Stockholm Code Group" style={{ height: 120, width: 'auto', display: 'block' }} />
           </div>
           <h2 style={{ ...wm.display, fontSize: 'clamp(72px, 10vw, 160px)', lineHeight: .92, margin: '24px 0 20px', color: bg }}>{ca.headline}</h2>
           <p style={{ fontSize: 20, lineHeight: 1.5, margin: '0 auto 40px', maxWidth: 640, color: bg }}>{ca.body}</p>

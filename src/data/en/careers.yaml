@@ -1,26 +1,34 @@
 perks:
   - mark: ★
+    icon: sun.png
     title: 30 days of holiday
     body: Real time off. No phone, no Slack pings from us.
   - mark: ♥
+    icon: shield.png
     title: Senior from day 1
     body: You build straight away with colleagues as senior as you. No ghost work.
   - mark: ☉
+    icon: hospital.png
     title: Health insurance
     body: Specialist care within 7 days. Salary top-up during longer sick leave.
   - mark: ◎
+    icon: baby.png
     title: Parental leave
     body: Salary top-up throughout your entire parental leave.
   - mark: ✚
+    icon: pill.png
     title: Health & accident
     body: Around the clock — at work and privately. Life insurance (TGL) 6×PBB.
   - mark: ◇
+    icon: money.png
     title: Pension 8.33%
     body: Of base salary. Individual advice included.
   - mark: ⇺
+    icon: dumbbell.png
     title: Wellness allowance
     body: SEK 5,000/year for whatever keeps you in shape.
   - mark: ⌘
+    icon: laptop.png
     title: Equipment included
     body: Laptop, phone and subscriptions — we sort out whatever you need for the job.
 roles:

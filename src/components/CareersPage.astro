@@ -32,7 +32,7 @@ const pad = (i) => String(i + 1).padStart(2, '0');
       {page.hero.headlinePre}<br /><span class="scg-accent">{page.hero.headlineAccent}</span>
     </h1>
     <p class="scg-c-hero-lead">{page.hero.lead}</p>
-    <div class="scg-c-logoart"><img src={`${assetBase}assets/logo.jpg`} alt="" /></div>
+    <div class="scg-c-logoart"><img src={`${assetBase}assets/logo-light.png`} alt="" /></div>
   </div>
 </header>
 
@@ -45,7 +45,9 @@ const pad = (i) => String(i + 1).padStart(2, '0');
     <div class="scg-c-perks-grid">
       {perks.map((p) => (
         <div class="scg-c-perk">
-          <div class="scg-c-perk-mark">{p.mark}</div>
+          {p.icon
+            ? <img class="scg-c-perk-icon" src={`${assetBase}assets/icons/${p.icon}`} alt="" width="48" height="48" />
+            : <div class="scg-c-perk-mark">{p.mark}</div>}
           <h3 class="scg-c-perk-h3">{p.title}</h3>
           <p class="scg-c-perk-p">{p.body}</p>
         </div>
@@ -142,7 +144,7 @@ const pad = (i) => String(i + 1).padStart(2, '0');
 
 <section class="scg-c-cta">
   <div class="scg-c-container">
-    <img class="scg-c-cta-logo" src={`${assetBase}assets/logo.jpg`} alt="" />
+    <img class="scg-c-cta-logo" src={`${assetBase}assets/logo-dark.png`} alt="" />
     <h2 class="scg-c-cta-h2">{page.cta.headline}</h2>
     <p class="scg-c-cta-p">{page.cta.body}</p>
     <a class="scg-c-cta-btn" href={mailto()}>{page.cta.label}</a>
@@ -170,7 +172,7 @@ const pad = (i) => String(i + 1).padStart(2, '0');
   .scg-c-hero-h1 { font-family: 'Amatic SC', cursive; font-weight: 700; font-size: clamp(96px, 13vw, 220px); line-height: .88; margin: 0; color: var(--ink); }
   .scg-c-hero-lead { font-size: 22px; line-height: 1.45; max-width: 680px; margin: 48px 0 0; color: var(--ink); }
   .scg-c-logoart { position: absolute; right: 56px; top: 120px; opacity: .55; pointer-events: none; }
-  .scg-c-logoart img { height: 220px; filter: invert(1); mix-blend-mode: screen; }
+  .scg-c-logoart img { height: 220px; }
 
   /* Perks */
   .scg-c-perks { background: var(--panel); border-bottom: 1px solid var(--line); padding: 64px 0; }
@@ -178,6 +180,7 @@ const pad = (i) => String(i + 1).padStart(2, '0');
   .scg-c-perks-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; background: var(--line); border: 1px solid var(--line); border-radius: 14px; overflow: hidden; }
   .scg-c-perk { background: var(--bg); padding: 28px; min-height: 180px; display: flex; flex-direction: column; gap: 12px; }
   .scg-c-perk-mark { font-family: 'Amatic SC', cursive; font-size: 64px; line-height: .8; color: var(--accent); }
+  .scg-c-perk-icon { width: 48px; height: 48px; object-fit: contain; display: block; }
   .scg-c-perk-h3 { font-family: 'Amatic SC', cursive; font-weight: 700; font-size: 32px; line-height: .95; margin: 0; color: var(--ink); }
   .scg-c-perk-p { font-size: 13px; color: var(--inkDim); margin: 0; line-height: 1.5; }
 

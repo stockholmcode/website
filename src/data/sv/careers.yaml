@@ -1,26 +1,34 @@
 perks:
   - mark: ★
+    icon: sun.png
     title: 30 dagars semester
     body: Riktig ledighet. Ingen mobil, inga Slack-pings från oss.
   - mark: ♥
+    icon: shield.png
     title: Senior från dag 1
     body: Du bygger direkt med kollegor som är lika seniora som dig. Ingen ghost-work.
   - mark: ☉
+    icon: hospital.png
     title: Sjukvårdsförsäkring
     body: Specialistvård inom 7 dagar. Top-up på lönen vid längre sjukskrivning.
   - mark: ◎
+    icon: baby.png
     title: Föräldraledighet
     body: Top-up på lönen under hela föräldraledigheten.
   - mark: ✚
+    icon: pill.png
     title: Sjuk- & olycksfall
     body: Dygnet runt — i tjänsten och privat. Livförsäkring (TGL) 6×PBB.
   - mark: ◇
+    icon: money.png
     title: Pension 8,33%
     body: Av fast lön. Individuell rådgivning ingår.
   - mark: ⇺
+    icon: dumbbell.png
     title: Friskvård
     body: 5 000 kr/år till det som håller dig i form.
   - mark: ⌘
+    icon: laptop.png
     title: Utrustning ingår
     body: Dator, mobil och abonnemang — vi fixar det du behöver för jobbet.
 roles:
