@@ -1,0 +1,73 @@
+---
+import { getRelativeLocaleUrl } from 'astro:i18n';
+import { SCG } from '../lib/theme.js';
+import TypedWord from './islands/TypedWord.jsx';
+import HomeSections from './HomeSections.jsx';
+
+const { locale = 'sv', content } = Astro.props;
+const hero = content.homepage.hero;
+const stats = content.stats;
+
+const linkBase = getRelativeLocaleUrl(locale, '/');
+const assetBase = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL : import.meta.env.BASE_URL + '/';
+const heroPrimary = hero.ctaPrimary.href ?? getRelativeLocaleUrl(locale, hero.ctaPrimary.to ?? '/');
+const heroSecondary = hero.ctaSecondary.href ?? getRelativeLocaleUrl(locale, hero.ctaSecondary.to ?? '/');
+---
+<header class="scg-hero">
+  <div class="scg-hero-inner">
+    <div class="scg-hero-kicker">{hero.kicker}</div>
+    <h1 class="scg-hero-h1">
+      {hero.headlinePre}<br />
+      <span class="scg-accent">{hero.headlineAccent}</span> {hero.headlineMid}<br />
+      <TypedWord client:load words={hero.typedWords} ink={SCG.ink} />
+    </h1>
+    <p class="scg-hero-lead">{hero.lead}</p>
+    <div class="scg-hero-ctas">
+      <a class="scg-hero-cta-primary" href={heroPrimary}>{hero.ctaPrimary.label}</a>
+      <a class="scg-hero-cta-secondary" href={heroSecondary}>
+        <span class="scg-dot"></span>{hero.ctaSecondary.label}
+      </a>
+    </div>
+  </div>
+
+  <div class="scg-stats">
+    <div class="scg-stats-inner">
+      {stats.map((s, i) => (
+        <div class:list={['scg-stat', { first: i === 0 }]}>
+          <div class="scg-stat-num">{s.num}<span class="scg-accent">{s.unit}</span></div>
+          <div class="scg-stat-label">{s.label}</div>
+        </div>
+      ))}
+    </div>
+  </div>
+</header>
+
+<HomeSections
+  hp={content.homepage}
+  clients={content.clients}
+  cases={content.cases}
+  approach={content.approach}
+  testimonials={content.testimonials}
+  team={content.team}
+  linkBase={linkBase}
+  assetBase={assetBase}
+/>
+
+<style define:vars={{ accent: SCG.accent, bg: SCG.bg, panel: SCG.panel, ink: SCG.ink, inkDim: SCG.inkDim, line: SCG.line }}>
+  .scg-accent { color: var(--accent); }
+  .scg-hero { background: var(--bg); border-bottom: 1px solid var(--line); position: relative; overflow: hidden; }
+  .scg-hero-inner { max-width: 1280px; margin: 0 auto; padding: 92px 56px 56px; }
+  .scg-hero-kicker { font-family: 'JetBrains Mono', ui-monospace, monospace; font-size: 12px; color: var(--inkDim); letter-spacing: .06em; margin-bottom: 48px; }
+  .scg-hero-h1 { font-family: 'Amatic SC', cursive; font-weight: 700; font-size: clamp(96px, 15vw, 240px); line-height: .85; margin: 0; letter-spacing: -.005em; color: var(--ink); }
+  .scg-hero-lead { margin-top: 48px; max-width: 720px; font-size: 18px; line-height: 1.55; color: var(--inkDim); }
+  .scg-hero-ctas { display: flex; margin-top: 40px; align-items: center; gap: 20px; flex-wrap: wrap; }
+  .scg-hero-cta-primary { background: var(--ink); color: var(--bg); padding: 18px 26px; border-radius: 999px; text-decoration: none; font-size: 16px; font-weight: 600; display: inline-flex; align-items: center; gap: 12px; }
+  .scg-hero-cta-secondary { background: transparent; color: var(--ink); padding: 17px 24px; border-radius: 999px; text-decoration: none; font-size: 15px; font-weight: 500; display: inline-flex; align-items: center; gap: 10px; border: 1px solid var(--line); }
+  .scg-dot { width: 8px; height: 8px; border-radius: 999px; background: var(--accent); }
+  .scg-stats { background: var(--panel); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); overflow: hidden; }
+  .scg-stats-inner { max-width: 1280px; margin: 0 auto; padding: 22px 56px; display: grid; grid-template-columns: repeat(4, 1fr); gap: 32px; }
+  .scg-stat { display: flex; align-items: baseline; gap: 14px; border-left: 1px solid var(--line); padding-left: 24px; }
+  .scg-stat.first { border-left: none; padding-left: 0; }
+  .scg-stat-num { font-family: 'Amatic SC', cursive; font-weight: 700; font-size: 56px; line-height: 1; color: var(--accent); }
+  .scg-stat-label { font-size: 12px; color: var(--inkDim); max-width: 120px; line-height: 1.4; }
+</style>
