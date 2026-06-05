@@ -2,7 +2,12 @@
 import { getRelativeLocaleUrl } from 'astro:i18n';
 import { SCG } from '../lib/theme.js';
 
-const { locale = 'sv', site, title = 'Stockholm Code Group' } = Astro.props;
+const { locale = 'sv', site, title } = Astro.props;
+
+// Page title = "<page label> · <brand>", or just the brand on the homepage where
+// no label is passed. The brand suffix lives here so a translated page label
+// (from <route>_page.yaml) can never drift it.
+const fullTitle = title ? `${title} · ${site.brand.name}` : site.brand.name;
 
 // Resolve a content route (e.g. "/case") to a base+locale-aware URL.
 const link = (to) => getRelativeLocaleUrl(locale, to);
@@ -24,7 +29,7 @@ const { nav, cta, footer, brand } = site;
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
-    <title>{title}</title>
+    <title>{fullTitle}</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link

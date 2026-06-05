@@ -1,7 +1,8 @@
 # Hardcoded page copy for the Case page (everything NOT in cases.yaml).
 # The case list + expanded deep-view content live in cases.yaml (content.cases).
 
-title: "SCG — Cases"
+# Browser tab label; Base.astro renders it as "<title> · <brand>".
+title: Cases
 
 hero:
   kicker: "№ 03 · Cases"

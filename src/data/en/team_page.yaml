@@ -1,3 +1,6 @@
+# Browser tab label; Base.astro renders it as "<title> · <brand>".
+title: Team
+
 hero:
   eyebrow: № 06 · The team
   titlePre: People

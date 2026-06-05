@@ -6,6 +6,6 @@ import { getContent } from '../lib/content.js';
 const locale = 'sv';
 const content = getContent(locale);
 ---
-<Base locale={locale} site={content.site} title="Case · Stockholm Code Group">
+<Base locale={locale} site={content.site} title={content.case_page.title}>
   <CasePage locale={locale} content={content} />
 </Base>
