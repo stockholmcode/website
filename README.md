@@ -62,6 +62,10 @@ that is missing falls back to its Swedish counterpart, so a half-translated site
 renders in full. The mechanics of the loader and the rules for adding a page or a locale
 are written up in [`docs/architecture.md`](docs/architecture.md).
 
+For non-developers maintaining the copy (no coding background assumed), the day-to-day
+workflow, the YAML pitfalls to avoid, and how publishing works are in
+[`MAINTAINING.md`](MAINTAINING.md).
+
 ## Design tokens
 
 Defined once in `src/lib/theme.js` and pulled into components from there.
