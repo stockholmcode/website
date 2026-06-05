@@ -1,4 +1,4 @@
-// Variant 1: Editorial — light, calm, typographic, warm-human
+// Variant 1: Editorial, light, calm, typographic, warm-human
 // Amatic SC display + DM Sans body + JetBrains Mono chrome.
 
 function VariantEditorial({ density = 'regular', sections = {}, tone = 'warm' }) {
@@ -9,7 +9,7 @@ function VariantEditorial({ density = 'regular', sections = {}, tone = 'warm' })
   const heroKicker = {
     warm: 'Stockholm · sedan 2007',
     confident: 'Senior software engineering · Stockholm',
-    technical: 'scg.se — est. 2007',
+    technical: 'scg.se, est. 2007',
   }[tone] || 'Stockholm · sedan 2007';
 
   const heroLead = {
@@ -77,7 +77,7 @@ function VariantEditorial({ density = 'regular', sections = {}, tone = 'warm' })
               {heroKicker}
             </div>
             <div style={{ ...ed.mono, fontSize: 12, color: S.muted, textAlign: 'right' }}>
-              Nº 01 — Vem vi är
+              Nº 01, Vem vi är
             </div>
           </div>
           <h1 style={ed.h1}>
@@ -144,7 +144,7 @@ function VariantEditorial({ density = 'regular', sections = {}, tone = 'warm' })
         <section style={{ ...ed.container, padding: `${pad}px ${gutter}px` }}>
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 2fr', gap: 80, marginBottom: 64 }}>
             <div>
-              <div style={ed.sectNum}>Nº 02 — Erbjudanden</div>
+              <div style={ed.sectNum}>Nº 02, Erbjudanden</div>
               <h2 style={{ ...ed.h2, marginTop: 16 }}>Fyra sätt<br />att jobba med oss.</h2>
             </div>
             <p style={{ ...ed.body, alignSelf: 'end' }}>
@@ -161,7 +161,7 @@ function VariantEditorial({ density = 'regular', sections = {}, tone = 'warm' })
                 display: 'flex', flexDirection: 'column', gap: 20, minHeight: 320,
               }}>
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline' }}>
-                  <span style={{ ...ed.mono, fontSize: 11, color: S.accent, letterSpacing: '.1em' }}>{o.num} — {o.kicker}</span>
+                  <span style={{ ...ed.mono, fontSize: 11, color: S.accent, letterSpacing: '.1em' }}>{o.num}, {o.kicker}</span>
                   <span style={{ color: S.muted, fontSize: 20 }}>→</span>
                 </div>
                 <h3 style={{
@@ -190,11 +190,11 @@ function VariantEditorial({ density = 'regular', sections = {}, tone = 'warm' })
           <div style={{ ...ed.container, padding: `${pad}px ${gutter}px` }}>
             <div style={{ display: 'grid', gridTemplateColumns: '1fr 2fr', gap: 80, marginBottom: 64 }}>
               <div>
-                <div style={{ ...ed.sectNum, color: 'rgba(255,255,255,.6)' }}>Nº 03 — Utvalda case</div>
+                <div style={{ ...ed.sectNum, color: 'rgba(255,255,255,.6)' }}>Nº 03, Utvalda case</div>
                 <h2 style={{ ...ed.h2, marginTop: 16, color: '#fff' }}>Kod i produktion.<br />Inte slides.</h2>
               </div>
               <p style={{ ...ed.body, color: 'rgba(255,255,255,.8)', alignSelf: 'end' }}>
-                Fyra uppdrag vi gärna pratar om. Fler finns — fråga oss vid en kaffe.
+                Fyra uppdrag vi gärna pratar om. Fler finns, fråga oss vid en kaffe.
               </p>
             </div>
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: 1, background: 'rgba(255,255,255,.12)', border: '1px solid rgba(255,255,255,.12)' }}>
@@ -239,7 +239,7 @@ function VariantEditorial({ density = 'regular', sections = {}, tone = 'warm' })
       {sections.approach !== false && (
         <section style={{ ...ed.container, padding: `${pad}px ${gutter}px` }}>
           <div style={{ marginBottom: 56 }}>
-            <div style={ed.sectNum}>Nº 04 — Så jobbar vi</div>
+            <div style={ed.sectNum}>Nº 04, Så jobbar vi</div>
             <h2 style={{ ...ed.h2, marginTop: 16 }}>Små team. Stort ansvar.</h2>
           </div>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 32 }}>
@@ -258,7 +258,7 @@ function VariantEditorial({ density = 'regular', sections = {}, tone = 'warm' })
       {sections.testimonials !== false && (
         <section style={{ background: S.card, borderTop: `1px solid ${S.border}`, borderBottom: `1px solid ${S.border}` }}>
           <div style={{ ...ed.container, padding: `${pad}px ${gutter}px` }}>
-            <div style={ed.sectNum}>Nº 05 — Vad kunder säger</div>
+            <div style={ed.sectNum}>Nº 05, Vad kunder säger</div>
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 32, marginTop: 48 }}>
               {window.TESTIMONIALS.map((t, i) => (
                 <figure key={i} style={{ margin: 0, padding: 32, background: S.bg, border: `1px solid ${S.border}`, borderRadius: 14 }}>
@@ -285,7 +285,7 @@ function VariantEditorial({ density = 'regular', sections = {}, tone = 'warm' })
         <section style={{ ...ed.container, padding: `${pad}px ${gutter}px` }}>
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 2fr', gap: 80, marginBottom: 56 }}>
             <div>
-              <div style={ed.sectNum}>Nº 06 — Teamet</div>
+              <div style={ed.sectNum}>Nº 06, Teamet</div>
               <h2 style={{ ...ed.h2, marginTop: 16 }}>Människor<br />bakom koden.</h2>
             </div>
             <p style={{ ...ed.body, alignSelf: 'end' }}>
@@ -312,10 +312,10 @@ function VariantEditorial({ density = 'regular', sections = {}, tone = 'warm' })
         <section style={{ background: S.accent }}>
           <div style={{ ...ed.container, padding: `${pad}px ${gutter}px`, display: 'grid', gridTemplateColumns: '1.3fr 1fr', gap: 64, alignItems: 'center' }}>
             <div>
-              <div style={{ ...ed.mono, fontSize: 11, color: S.ink, letterSpacing: '.1em', textTransform: 'uppercase' }}>Nº 07 — Karriär</div>
+              <div style={{ ...ed.mono, fontSize: 11, color: S.ink, letterSpacing: '.1em', textTransform: 'uppercase' }}>Nº 07, Karriär</div>
               <h2 style={{ ...ed.h2, marginTop: 16, color: S.ink }}>Jobba med oss.</h2>
               <p style={{ ...ed.body, color: S.ink, marginTop: 20, maxWidth: 560 }}>
-                Vi växer försiktigt. Om du har 10+ år bakom dig, gillar att bygga riktiga saker tillsammans med snälla människor — hör av dig.
+                Vi växer försiktigt. Om du har 10+ år bakom dig, gillar att bygga riktiga saker tillsammans med snälla människor, hör av dig.
               </p>
             </div>
             <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>

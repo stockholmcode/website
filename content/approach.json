@@ -1,6 +1,6 @@
 [
   { "step": "01", "title": "Lyssna", "body": "Vi börjar med frågor, inte slides. Vad bygger ni, vad bryr ni er om, vad gör ont?" },
-  { "step": "02", "title": "Analysera", "body": "En vecka i kodbasen och med teamet. Rapport med det som verkligen spelar roll — inget konsultfluff." },
+  { "step": "02", "title": "Analysera", "body": "En vecka i kodbasen och med teamet. Rapport med det som verkligen spelar roll, inget konsultfluff." },
   { "step": "03", "title": "Leverera", "body": "Vi skriver kod. Seniora ingenjörer från dag ett, ingen junior-trappa på er bekostnad." },
   { "step": "04", "title": "Lämna över", "body": "När ni klarar er själva går vi. Målet är att göra oss överflödiga, inte oumbärliga." }
 ]

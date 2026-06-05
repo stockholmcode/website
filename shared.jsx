@@ -2,7 +2,7 @@
 //
 // Content lives in /content/*.json (loaded by content-loader.js).
 // This file pulls those into the legacy window.OFFERINGS / window.CASES /
-// window.STATS / etc. globals that all variant components already use —
+// window.STATS / etc. globals that all variant components already use, 
 // so refactoring data sources doesn't ripple into every component.
 //
 // IMPORTANT: this script must run AFTER content-loader.js has resolved
@@ -50,12 +50,10 @@ if (window.SCG_CONTENT) {
 function LogoImg({ height = 72, style = {}, dark = false }) {
   return (
     <img
-      src="assets/logo.jpg"
+      src={dark ? 'assets/logo-light.png' : 'assets/logo-dark.png'}
       alt="Stockholm Code Group"
       style={{
         height, width: 'auto', display: 'block',
-        filter: dark ? 'invert(1)' : 'none',
-        mixBlendMode: dark ? 'screen' : 'multiply',
         ...style,
       }}
     />

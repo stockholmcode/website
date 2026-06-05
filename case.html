@@ -3,7 +3,11 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>SCG — Case</title>
+<title>SCG, Case</title>
+<meta name="description" content="Utvalda case från Stockholm Code Group, Warner Bros. Discovery, SL, Blocket och Matsmart/Motatos. Plattformar, biljettsystem och marketplaces i skala." />
+<link rel="icon" href="assets/logo-dark.png" />
+<meta property="og:title" content="Case, Stockholm Code Group" />
+<meta property="og:type" content="website" />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Amatic+SC:wght@400;700&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet" />
@@ -88,7 +92,7 @@
   .case .testimonial blockquote { margin: 0; font-size: 16px; line-height: 1.5; color: var(--ink); font-style: italic; }
   .case .testimonial figcaption { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--ink-dim); margin-top: 12px; letter-spacing: .04em; }
 
-  /* Expandable read-more — same look as warm startsida cases */
+  /* Expandable read-more, same look as warm startsida cases */
   .case .read-more { margin-top: 28px; background: transparent; border: 1px solid var(--line); color: var(--ink); font-family: 'JetBrains Mono', monospace; font-size: 12px; letter-spacing: .04em; padding: 12px 22px; border-radius: 999px; cursor: pointer; transition: all .15s; display: inline-flex; align-items: center; gap: 10px; }
   .case .read-more:hover { border-color: var(--accent); color: var(--accent); }
   .case .read-more .plus { transition: transform .25s; display: inline-block; }
@@ -125,7 +129,7 @@
   /* Footer */
   footer { padding: 104px 0 40px; border-top: 1px solid var(--line); }
   footer .cols { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 40px; margin-bottom: 80px; }
-  footer .brandcol img { height: 70px; margin-bottom: 12px; filter: invert(1); mix-blend-mode: screen; }
+  footer .brandcol img { height: 70px; margin-bottom: 12px; }
   footer .brandcol p { font-size: 14px; color: var(--ink-dim); line-height: 1.6; margin: 16px 0 0; max-width: 340px; }
   footer h4 { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--accent); letter-spacing: .1em; text-transform: uppercase; margin: 0 0 16px; font-weight: 600; }
   footer ul { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 10px; }
@@ -135,6 +139,41 @@
   footer .bottom { padding-top: 24px; border-top: 1px solid var(--line);
     font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--ink-dim);
     display: flex; justify-content: space-between; letter-spacing: .06em; }
+  /* ───── Responsive / mobil ───── */
+  .navtoggle { display: none; background: transparent; border: 1px solid var(--line); color: var(--ink);
+    width: 44px; height: 44px; border-radius: 12px; font-size: 20px; cursor: pointer;
+    align-items: center; justify-content: center; }
+  @media (max-width: 960px) {
+    .container { padding: 0 24px; }
+    nav.top .bar { position: relative; }
+    .navtoggle { display: inline-flex; }
+    nav.top .links { position: absolute; top: 76px; left: 0; right: 0; flex-direction: column;
+      align-items: stretch; gap: 0; background: rgba(10,12,15,.98); border-bottom: 1px solid var(--line);
+      padding: 8px 0; display: none; }
+    nav.top .links.open { display: flex; }
+    nav.top .links a { padding: 14px 24px; font-size: 16px; }
+    nav.top .links a.cta { margin: 10px 24px 6px; text-align: center; }
+
+    header.hero { padding: 100px 0 64px; }
+    header.hero p.lead { font-size: 18px; }
+    .filters { position: static; }
+    .filters .row { padding: 14px 0; }
+    section.cases { padding: 56px 0 80px; }
+    .case { padding-bottom: 56px; margin-bottom: 56px; }
+    .case .grid { grid-template-columns: 1fr; gap: 32px; }
+    .case h2 { font-size: clamp(48px, 12vw, 72px); }
+    .case .deep { grid-template-columns: 1fr; gap: 28px; }
+    .case .stats .big .num-big { font-size: clamp(72px, 18vw, 120px); }
+    section.cta { padding: 80px 0; }
+    footer { padding: 72px 0 40px; }
+    footer .cols { grid-template-columns: 1fr 1fr; gap: 32px; margin-bottom: 48px; }
+    footer .bottom { flex-direction: column; gap: 8px; }
+  }
+  @media (max-width: 540px) {
+    .case .stats { grid-template-columns: 1fr; }
+    .case .stats .big, .case .stats .small.span2 { grid-column: auto; }
+    footer .cols { grid-template-columns: 1fr; }
+  }
 </style>
 </head>
 <body>
@@ -142,6 +181,7 @@
 <nav class="top">
   <div class="container bar">
     <a href="index.html" class="brand">Stockholm Code Group</a>
+    <button class="navtoggle" aria-label="Meny" onclick="document.querySelector('nav.top .links').classList.toggle('open')">☰</button>
     <div class="links">
       <a href="erbjudanden.html">Erbjudanden</a>
       <a href="case.html" class="active">Case</a>
@@ -156,7 +196,7 @@
   <div class="container">
     <div class="kicker">№ 03 · Case</div>
     <h1>Historier vi<br /><span class="accent">gärna</span> berättar.</h1>
-    <p class="lead">Plattformar, biljettsystem, marketplaces. Det vi gör syns inte alltid — men det syns alltid när det går fel. Här är några där det gick rätt.</p>
+    <p class="lead">Plattformar, biljettsystem, marketplaces. Det vi gör syns inte alltid, men det syns alltid när det går fel. Här är några där det gick rätt.</p>
   </div>
 </header>
 
@@ -176,19 +216,19 @@
   </div>
 </div>
 
-<!-- All cases — same rich layout, all expandable -->
+<!-- All cases, same rich layout, all expandable -->
 <section class="cases">
   <div class="container" id="case-list">
 
-    <!-- 01 — Warner Bros. Discovery -->
+    <!-- 01, Warner Bros. Discovery -->
     <article class="case" data-sector="streaming" data-open="false">
       <div class="head">Case · 01 · Media &amp; streaming</div>
       <div class="grid">
         <div>
           <h2>Warner Bros.<br />Discovery</h2>
           <div class="meta">2019 – 2023 · Chief architects · Lead developers · 1000+ devs</div>
-          <div class="outcome">Ny global streamingplattform — Discovery+ och HBO Max/MAX, byggd från grunden.</div>
-          <p class="body">POC på tre veckor, sedan huvudarkitekter och lead-utvecklare när teamet skalade. Event-driven microservices, icke-blockerande och utan externa runtime-beroenden — så att plattformen klarar globala peaks utan att tappa kontroll över kostnader eller latens.</p>
+          <div class="outcome">Ny global streamingplattform, Discovery+ och HBO Max/MAX, byggd från grunden.</div>
+          <p class="body">POC på tre veckor, sedan huvudarkitekter och lead-utvecklare när teamet skalade. Event-driven microservices, icke-blockerande och utan externa runtime-beroenden, så att plattformen klarar globala peaks utan att tappa kontroll över kostnader eller latens.</p>
           <div class="stack">
             <span class="pill">Event-driven</span>
             <span class="pill">Microservices</span>
@@ -209,9 +249,9 @@
       </div>
       <div class="deep">
         <div>
-          <p class="summary">Från POC till global streamingplattform för Warner Bros. Discovery — byggd från grunden för att klara globala peaks utan att tappa kontroll över kostnader eller latens.</p>
+          <p class="summary">Från POC till global streamingplattform för Warner Bros. Discovery, byggd från grunden för att klara globala peaks utan att tappa kontroll över kostnader eller latens.</p>
           <div class="section"><h4>Bakgrund</h4><p>WBD behövde en ny global streamingplattform som kunde leverera Discovery+ och senare HBO Max/MAX till en publik som mäts i hundratals miljoner. Den befintliga arkitekturen klarade inte den skalan, och tidsplanen var kompromisslös.</p></div>
-          <div class="section"><h4>Vad vi gjorde</h4><p>Tre veckors POC bekräftade riktningen. Därifrån klev SCG in som huvudarkitekter och lead-utvecklare när teamet skalade från ett tiotal till över 1000 utvecklare. Event-driven microservices, icke-blockerande IO, inga externa runtime-beroenden — så att varje tjänst kunde driftas, skalas och felsökas isolerat.</p></div>
+          <div class="section"><h4>Vad vi gjorde</h4><p>Tre veckors POC bekräftade riktningen. Därifrån klev SCG in som huvudarkitekter och lead-utvecklare när teamet skalade från ett tiotal till över 1000 utvecklare. Event-driven microservices, icke-blockerande IO, inga externa runtime-beroenden, så att varje tjänst kunde driftas, skalas och felsökas isolerat.</p></div>
           <div class="section"><h4>Resultat</h4><p>13ms snitt API-svarstid, 80 miljoner API-anrop per dag, 99.9999% uptime och 3 200 peak requests per sekund. Plattformen klarar globala peaks utan att tappa kontroll över kostnader eller latens, och utvecklingsteamet kan iterera tjänst för tjänst utan koordinationsmardrömmar.</p></div>
         </div>
         <aside>
@@ -228,14 +268,14 @@
       </div>
     </article>
 
-    <!-- 02 — SL -->
+    <!-- 02, SL -->
     <article class="case" data-sector="public" data-open="false">
       <div class="head">Case · 02 · Kollektivtrafik</div>
       <div class="grid">
         <div>
           <h2>SL</h2>
           <div class="meta">2020 – 2023 · Chief Software Architect (David Looberger)</div>
-          <div class="outcome">Nytt biljettsystem med contactless — byggt från grunden på AWS.</div>
+          <div class="outcome">Nytt biljettsystem med contactless, byggt från grunden på AWS.</div>
           <p class="body">David Looberger från SCG som chief software architect. Res med bankkort, automatiska rabatter för studenter och seniorer, tillgänglighetsfunktioner inbakade från start. AWS skrev en blogpost om projektet som referensimplementation.</p>
           <div class="stack">
             <span class="pill">EMV contactless</span>
@@ -257,9 +297,9 @@
       </div>
       <div class="deep">
         <div>
-          <p class="summary">SLs nya biljettsystem — contactless-betalning med bankkort, automatiska rabatter, byggt från grunden på AWS. SCGs David Looberger som chefsarkitekt hela vägen.</p>
-          <div class="section"><h4>Bakgrund</h4><p>Stockholms lokaltrafik behövde ersätta sitt åldrande biljettsystem med en lösning som tål 800 000 resor per dygn — och som ger resenärerna en betydligt smidigare upplevelse. Kraven på drift, säkerhet och tillgänglighet i en kritisk samhällstjänst är hårda och oförhandlingsbara.</p></div>
-          <div class="section"><h4>Vad vi gjorde</h4><p>David Looberger från SCG ledde arkitekturen som chief software architect. Systemet byggdes från grunden på AWS med EMV contactless som primär betalmetod — res med ditt bankkort, automatiska rabatter för studenter och seniorer, tillgänglighetsfunktioner inbakade från start. PCI-compliant och designat för att hantera peak hours utan att tappa prestanda.</p></div>
+          <p class="summary">SLs nya biljettsystem, contactless-betalning med bankkort, automatiska rabatter, byggt från grunden på AWS. SCGs David Looberger som chefsarkitekt hela vägen.</p>
+          <div class="section"><h4>Bakgrund</h4><p>Stockholms lokaltrafik behövde ersätta sitt åldrande biljettsystem med en lösning som tål 800 000 resor per dygn, och som ger resenärerna en betydligt smidigare upplevelse. Kraven på drift, säkerhet och tillgänglighet i en kritisk samhällstjänst är hårda och oförhandlingsbara.</p></div>
+          <div class="section"><h4>Vad vi gjorde</h4><p>David Looberger från SCG ledde arkitekturen som chief software architect. Systemet byggdes från grunden på AWS med EMV contactless som primär betalmetod, res med ditt bankkort, automatiska rabatter för studenter och seniorer, tillgänglighetsfunktioner inbakade från start. PCI-compliant och designat för att hantera peak hours utan att tappa prestanda.</p></div>
           <div class="section"><h4>Resultat</h4><p>800 000 resor per dag, EMV-baserad contactless som standard, fullständig PCI-compliance. AWS skrev en egen blogpost om projektet som referensimplementation för publika sektorns övergång till modern molninfrastruktur.</p></div>
         </div>
         <aside>
@@ -276,7 +316,7 @@
       </div>
     </article>
 
-    <!-- 03 — Blocket -->
+    <!-- 03, Blocket -->
     <article class="case" data-sector="marketplace" data-open="false">
       <div class="head">Case · 03 · Marketplace</div>
       <div class="grid">
@@ -284,7 +324,7 @@
           <h2>Blocket</h2>
           <div class="meta">2022 – 2024 · Arkitekter, utvecklare, product manager</div>
           <div class="outcome">Monolit → microservices utan driftstopp.</div>
-          <p class="body">SCG drev Blockets transformation från en stor legacy-monolit till väldefinierade microservices med tydliga gränser. Arkitekter, utvecklare och en product manager — hela vägen från planering till leverans. Event-driven på Kafka, event sourcing via DynamoDB-streams.</p>
+          <p class="body">SCG drev Blockets transformation från en stor legacy-monolit till väldefinierade microservices med tydliga gränser. Arkitekter, utvecklare och en product manager, hela vägen från planering till leverans. Event-driven på Kafka, event sourcing via DynamoDB-streams.</p>
           <div class="stack">
             <span class="pill">Kotlin · Spring Boot</span>
             <span class="pill">Kafka</span>
@@ -305,14 +345,14 @@
       </div>
       <figure class="testimonial">
         <blockquote>"Konsulterna från Stockholm Code Group sticker verkligen ut. De bidrar med anmärkningsvärd teknisk expertis och seniority, och är dedikerade till att leverera effektiva och moderna lösningar."</blockquote>
-        <figcaption>— Niklas Lager, CTO, Blocket</figcaption>
+        <figcaption>, Niklas Lager, CTO, Blocket</figcaption>
       </figure>
       <div class="deep">
         <div>
-          <p class="summary">Transformation av Blockets stora legacy-monolit till väldefinierade microservices — event-driven, utan driftstopp, med ett team som täckte hela vägen från planering till leverans.</p>
-          <div class="section"><h4>Bakgrund</h4><p>Blocket körde en omfattande legacy-monolit som hade vuxit över flera decennier. Den var stabil men hade blivit en bromskloss för utvecklingstakten — varje förändring krävde koordination, deploys var sällsynta händelser, och nya idéer hamnade i kö.</p></div>
-          <div class="section"><h4>Vad vi gjorde</h4><p>SCG drev transformationen från monolit till väldefinierade microservices med tydliga gränser, utan att Blocket behövde stå stilla. Vi bemannade arkitekter, utvecklare och en product manager — hela vägen från planering till leverans. Event-driven på Kafka, event sourcing via DynamoDB-streams, onion- och hexagonal arkitektur så att domänlogik och infrastruktur kan utvecklas oberoende av varandra.</p></div>
-          <div class="section"><h4>Resultat</h4><p>Tydligt avgränsade tjänster i Kotlin på Spring Boot och Kubernetes, Aurora PostgreSQL och DynamoDB som datalager, Kafka som backbone för all asynkron kommunikation. Teamet kan nu släppa förändringar oftare och med mindre koordination — och nästa generations Blocket är inte längre en omöjlig refaktor.</p></div>
+          <p class="summary">Transformation av Blockets stora legacy-monolit till väldefinierade microservices, event-driven, utan driftstopp, med ett team som täckte hela vägen från planering till leverans.</p>
+          <div class="section"><h4>Bakgrund</h4><p>Blocket körde en omfattande legacy-monolit som hade vuxit över flera decennier. Den var stabil men hade blivit en bromskloss för utvecklingstakten, varje förändring krävde koordination, deploys var sällsynta händelser, och nya idéer hamnade i kö.</p></div>
+          <div class="section"><h4>Vad vi gjorde</h4><p>SCG drev transformationen från monolit till väldefinierade microservices med tydliga gränser, utan att Blocket behövde stå stilla. Vi bemannade arkitekter, utvecklare och en product manager, hela vägen från planering till leverans. Event-driven på Kafka, event sourcing via DynamoDB-streams, onion- och hexagonal arkitektur så att domänlogik och infrastruktur kan utvecklas oberoende av varandra.</p></div>
+          <div class="section"><h4>Resultat</h4><p>Tydligt avgränsade tjänster i Kotlin på Spring Boot och Kubernetes, Aurora PostgreSQL och DynamoDB som datalager, Kafka som backbone för all asynkron kommunikation. Teamet kan nu släppa förändringar oftare och med mindre koordination, och nästa generations Blocket är inte längre en omöjlig refaktor.</p></div>
         </div>
         <aside>
           <div class="stackbox">
@@ -328,7 +368,7 @@
       </div>
     </article>
 
-    <!-- 04 — Matsmart / Motatos -->
+    <!-- 04, Matsmart / Motatos -->
     <article class="case" data-sector="ecom" data-open="false">
       <div class="head">Case · 04 · E-handel</div>
       <div class="grid">
@@ -358,23 +398,23 @@
       </div>
       <div class="deep">
         <div>
-          <p class="summary">Vi hjälpte Matsmart/Motatos modernisera sin legacy-plattform — service-arkitekturen omdesignad och migrationen körd parallellt med drift utan ett enda cutover-datum.</p>
+          <p class="summary">Vi hjälpte Matsmart/Motatos modernisera sin legacy-plattform, service-arkitekturen omdesignad och migrationen körd parallellt med drift utan ett enda cutover-datum.</p>
           <div class="section"><h4>Bakgrund</h4><p>Matsmart/Motatos har ett uppdrag att minska matsvinn genom att köpa in och sälja vidare överlager, säsongsvaror, produkter med tryckfel och annan överbliven mat. E-handeln körde i sex europeiska länder, med Sverige på 5 000–8 000 ordrar per dag. Plattformen sitter mitt i operationen: ERP-sync, inköp och leverantörsdata, orderhantering, lagersaldon, realtidsintegration mot lager, frakt och produktdata för varje SKU.</p></div>
           <div class="section"><h4>Utmaningen</h4><p>Driften kunde inte pausas, en big-bang-rewrite var omöjlig för ett team av den här storleken, och fortsätta lappa det egna ramverket hade compoundat skulden. Det som ersatte måste komma bit för bit, utan en enda cutover-dag, samtidigt som teamet fortsatte leverera mot intern efterfrågan.</p></div>
           <div class="section"><h4>Vad vi gjorde</h4><p>Robert Krogh från SCG kom in som arkitekt och utvecklare för att leda omställningen. En lättviktig arkitektur visade hur enskilda tjänster kunde leva utanför det egna ramverket, fortfarande vara en del av helheten, och kräva minimal setup. Vi flyttade från code-first till infrastructure-first så tjänsterna blev fullt frikopplade. Meddelandeflöden gick från riktade RabbitMQ-flöden till managed Azure Service Bus. Parallellt migrerade teamet från Azure DevOps till GitHub, vilket öppnade för att göra om CI/CD och IaC i samma anda.</p></div>
-          <div class="section"><h4>Agentic AI för ett litet team</h4><p>Vi lade grunden för team-skalad AI-användning där vinsterna sprider sig bortom individen. Genom att göra kontexten explicit i monorepot kunde agenter jobba med en bredare bild än tidigare arbetssätt tillät. En custom skill drar pipeline-data via GitHub CLI och visar i en prompt vad som är deployat var, per tjänst. Skills som denna ligger i repot, versionerade tillsammans med koden — en utvecklares förbättrade arbetssätt blir teamets.</p></div>
-          <div class="section"><h4>Resultat</h4><p>Den nya arkitekturen lät teamet bygga slankare tjänster, underhålla mindre kod, och deploya med färre steg. Dataflöden migrerades parallellt med den gamla lösningen, i teamets takt. Dokumentationen blev bred och aktuell — för både människor och AI. Teamet gick in i ett mer agentic arbetssätt, och kunde göra meningsfullt mer med mindre.</p></div>
+          <div class="section"><h4>Agentic AI för ett litet team</h4><p>Vi lade grunden för team-skalad AI-användning där vinsterna sprider sig bortom individen. Genom att göra kontexten explicit i monorepot kunde agenter jobba med en bredare bild än tidigare arbetssätt tillät. En custom skill drar pipeline-data via GitHub CLI och visar i en prompt vad som är deployat var, per tjänst. Skills som denna ligger i repot, versionerade tillsammans med koden, en utvecklares förbättrade arbetssätt blir teamets.</p></div>
+          <div class="section"><h4>Resultat</h4><p>Den nya arkitekturen lät teamet bygga slankare tjänster, underhålla mindre kod, och deploya med färre steg. Dataflöden migrerades parallellt med den gamla lösningen, i teamets takt. Dokumentationen blev bred och aktuell, för både människor och AI. Teamet gick in i ett mer agentic arbetssätt, och kunde göra meningsfullt mer med mindre.</p></div>
           <p class="tagline">Matsmart/Motatos bekämpar svinn för en levande. Stockholm Code Group hjälpte dem skära det från deras plattform också: mindre kod, mindre infra-drift, mindre föråldrad dokumentation, mindre friktion mellan en idé och en deploy.</p>
         </div>
         <aside>
           <div class="stackbox">
             <h4>Val &amp; verktyg</h4>
             <ul>
-              <li><span class="arrow">→</span><span>Azure Service Bus — managed event-driven messaging</span></li>
-              <li><span class="arrow">→</span><span>GitHub Actions — CI/CD och samarbete</span></li>
-              <li><span class="arrow">→</span><span>Infrastructure as Code — fullt frikopplade tjänster</span></li>
+              <li><span class="arrow">→</span><span>Azure Service Bus, managed event-driven messaging</span></li>
+              <li><span class="arrow">→</span><span>GitHub Actions, CI/CD och samarbete</span></li>
+              <li><span class="arrow">→</span><span>Infrastructure as Code, fullt frikopplade tjänster</span></li>
               <li><span class="arrow">→</span><span>Lättviktig service-arkitektur</span></li>
-              <li><span class="arrow">→</span><span>Agentic AI workflows — team-skalad, inte solo</span></li>
+              <li><span class="arrow">→</span><span>Agentic AI workflows, team-skalad, inte solo</span></li>
               <li><span class="arrow">→</span><span>AI-underhållen dokumentation</span></li>
             </ul>
           </div>
@@ -393,9 +433,9 @@
 <!-- CTA -->
 <section class="cta">
   <div class="container">
-    <img src="assets/logo.jpg" alt="" class="logo" />
+    <img src="assets/logo-dark.png" alt="" class="logo" />
     <h2>Vill ni ha er egen?</h2>
-    <p>De bästa casen börjar med ett samtal — inte en RFP. Hör av er, så ses vi över en kaffe.</p>
+    <p>De bästa casen börjar med ett samtal, inte en RFP. Hör av er, så ses vi över en kaffe.</p>
     <a class="btn" href="mailto:contactus@stockholmcode.se">contactus@stockholmcode.se →</a>
   </div>
 </section>
@@ -405,7 +445,7 @@
   <div class="container">
     <div class="cols">
       <div class="brandcol">
-        <img src="assets/logo.jpg" alt="Stockholm Code Group" />
+        <img src="assets/logo-light.png" alt="Stockholm Code Group" />
         <div class="display" style="font-size:22px">Stockholm Code Group</div>
         <p>Seniora ingenjörer i Stockholm. We bring love to software, sedan 2007.</p>
       </div>

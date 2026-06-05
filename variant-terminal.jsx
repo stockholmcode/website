@@ -1,4 +1,4 @@
-// Variant 2: Terminal — dark, monospace-forward, technical, for dev/architect audience.
+// Variant 2: Terminal, dark, monospace-forward, technical, for dev/architect audience.
 
 function VariantTerminal({ density = 'regular', sections = {}, tone = 'technical' }) {
   const S = window.SCG;
@@ -68,7 +68,7 @@ function VariantTerminal({ density = 'regular', sections = {}, tone = 'technical
             <div>
               <div style={{ ...tm.mono, fontSize: 12, color: S.accent, marginBottom: 20 }}>
                 <span style={{ color: dim }}>// </span>stockholm_code_group
-                <span style={{ color: dim }}> — est. 2019</span>
+                <span style={{ color: dim }}>, est. 2019</span>
               </div>
               <h1 style={tm.h1Mono}>
                 <span style={{ color: dim }}>const </span>
@@ -243,7 +243,7 @@ function VariantTerminal({ density = 'regular', sections = {}, tone = 'technical
                     "{t.quote}"
                   </blockquote>
                   <figcaption style={{ ...tm.mono, marginTop: 20, fontSize: 11, color: dim }}>
-                    — {t.name} · {t.role}
+                  , {t.name} · {t.role}
                   </figcaption>
                 </figure>
               ))}

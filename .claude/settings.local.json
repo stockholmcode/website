@@ -35,7 +35,12 @@
       "Bash(git -C /Users/nivinfakih/Documents/cle add .)",
       "Bash(git -C /Users/nivinfakih/Documents/cle commit -m 'Add SCG website files *)",
       "Bash(git -C /Users/nivinfakih/Documents/cle push origin main)",
-      "Bash(git commit -m 'Rename HTML files to URL-friendly names and update all internal links *)"
+      "Bash(git commit -m 'Rename HTML files to URL-friendly names and update all internal links *)",
+      "Bash(git -C /Users/nivinfakih/Documents/cle add README.md)",
+      "Bash(git -C /Users/nivinfakih/Documents/cle commit -m 'Update README with live URL and corrected filenames *)",
+      "Bash(unzip -o \"/Users/nivinfakih/Downloads/SCG hemsida \\(2\\).zip\" -d /tmp/scg_v2)",
+      "Bash(git -C /Users/nivinfakih/Documents/cle commit -m 'Uppdaterad hemsida v2 — nya logotyper och ikoner *)",
+      "Bash(git -C /Users/nivinfakih/Documents/cle push -u origin uppdatering-v2)"
     ],
     "deny": []
   }

@@ -1,7 +1,7 @@
 [
   { "id": 1, "name": "David Looberger", "role": "Senior Advisor · ex-Chief Architect SL", "tag": "Cloud · AWS · Public sector", "cat": ["arch"], "bio": "Chefs­arkitekt för SLs nya biljettsystem på AWS. Senior rådgivare hos SCG.", "social": ["LinkedIn"] },
   { "id": 2, "name": "Senior Software Engineer", "role": "Senior Software Engineer", "tag": "Full-stack · Distributed · 15+ år", "cat": ["eng"], "bio": "Bygger och levererar produktion hos kund. Seniora kollegor, inga juniora.", "social": ["LinkedIn"] },
-  { "id": 3, "name": "Senior Architect", "role": "Senior Architect", "tag": "Event-driven · DDD · 15+ år", "cat": ["arch"], "bio": "Ritar system som håller — och kodar prototyperna själv.", "social": ["LinkedIn"] },
+  { "id": 3, "name": "Senior Architect", "role": "Senior Architect", "tag": "Event-driven · DDD · 15+ år", "cat": ["arch"], "bio": "Ritar system som håller, och kodar prototyperna själv.", "social": ["LinkedIn"] },
   { "id": 4, "name": "Senior AI Engineer", "role": "Senior Software Engineer · AI", "tag": "LLM-system · RAG · 10+ år", "cat": ["ai", "eng"], "bio": "LLMs i produktion. Pragmatisk om AI-hype.", "social": ["LinkedIn"] },
   { "id": 5, "name": "Senior Data Architect", "role": "Senior Architect · Data", "tag": "Streaming · Event-driven · 15+ år", "cat": ["data", "arch"], "bio": "Kafka, event sourcing, data contracts.", "social": ["LinkedIn"] },
   { "id": 6, "name": "Senior Cloud Engineer", "role": "Senior Software Engineer · Cloud", "tag": "AWS · K8s · 15+ år", "cat": ["eng", "arch"], "bio": "AWS & Kubernetes sedan tidig dag. Security-mindset.", "social": ["LinkedIn"] },

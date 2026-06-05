@@ -5,7 +5,7 @@
     "body": "Arkitektur, test­täckning, koppling, modularitet.",
     "signals": ["Tight koppling", "< 40% testtäckning", "Monolit utan moduler", "Implicita beroenden"],
     "wins": ["Decomposition", "Kontrakt mellan moduler", "AI-läsbar struktur", "Smarta testsviter"],
-    "quote": "AI-verktyg amplifierar er kodbas — både dess styrkor och dess teknisk skuld."
+    "quote": "AI-verktyg amplifierar er kodbas, både dess styrkor och dess teknisk skuld."
   },
   {
     "num": "02", "title": "Infrastruktur & harness",
@@ -25,7 +25,7 @@
   },
   {
     "num": "04", "title": "Team & governance",
-    "q": "Jobbar teamet med AI tillsammans — inte bara solo?",
+    "q": "Jobbar teamet med AI tillsammans, inte bara solo?",
     "body": "Gemensamma regler, verktyg, review-praxis.",
     "signals": ["Ingen gemensam policy", "Skilda verktyg", "Shadow AI", "Ojämn adoption"],
     "wins": ["Tooling-standard", "AI review-praxis", "Internal enablement", "Tydliga principer"],

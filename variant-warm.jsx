@@ -1,16 +1,16 @@
-// Variant 3: Warm brief in DARK theme — magazine layout, #0A0C0F bg, orange accent.
+// Variant 3: Warm brief in DARK theme, magazine layout, #0A0C0F bg, orange accent.
 // Keeps the Amatic display + JetBrains mono chrome. Was beige; now inverted.
 
-// Interactive 5-dimension framework panel — active card gets orange rail +
+// Interactive 5-dimension framework panel, active card gets orange rail +
 // detail strip below shows signals, wins, and a quote for the selected dim.
 function WarmFrameworkPanel({ wm, ink, inkDim, bg, accent, panel, line }) {
   const [active, setActive] = React.useState(0);
   const [score, setScore] = React.useState('red'); // red | yellow | green
   const d = window.DIMENSIONS[active];
   const scoreMeta = {
-    red: { color: '#E85C5C', label: 'RÖD', text: 'Grundproblem — blockerar nästa steg. Måste adresseras först.' },
+    red: { color: '#E85C5C', label: 'RÖD', text: 'Grundproblem, blockerar nästa steg. Måste adresseras först.' },
     yellow: { color: '#E8B84C', label: 'GUL', text: 'Funkar, men lämnar värde på bordet. AI kan hjälpa, men inte förstärka.' },
-    green: { color: '#4CE87E', label: 'GRÖN', text: 'Solid grund. AI kan compound:a här över tid — expandera scope.' }
+    green: { color: '#4CE87E', label: 'GRÖN', text: 'Solid grund. AI kan compound:a här över tid, expandera scope.' }
   };
   return (
     <div style={{ marginTop: 80, padding: '48px 40px', borderRadius: 18, border: `1px solid ${line}`, background: panel }}>
@@ -22,7 +22,7 @@ function WarmFrameworkPanel({ wm, ink, inkDim, bg, accent, panel, line }) {
           </h3>
         </div>
         <p style={{ fontSize: 15, lineHeight: 1.6, color: inkDim, margin: 0 }}>
-          Klicka på en dimension för att se signaler, åtgärder och vad ett scorecard faktiskt innebär. Samma språk hela vägen — från första halvdagen till löpande leverans.
+          Klicka på en dimension för att se signaler, åtgärder och vad ett scorecard faktiskt innebär. Samma språk hela vägen, från första halvdagen till löpande leverans.
         </p>
       </div>
 
@@ -62,7 +62,7 @@ function WarmFrameworkPanel({ wm, ink, inkDim, bg, accent, panel, line }) {
             <p style={{ ...wm.display, fontSize: 28, lineHeight: 1.1, margin: 0, color: ink, textWrap: 'balance' }}>
               "{d.quote}"
             </p>
-            <div style={{ ...wm.mono, fontSize: 11, color: inkDim, letterSpacing: '.04em' }}>— {d.title}</div>
+            <div style={{ ...wm.mono, fontSize: 11, color: inkDim, letterSpacing: '.04em' }}>, {d.title}</div>
           </div>
           {/* Signals */}
           <div style={{ padding: '28px 24px', borderRight: `1px solid ${line}` }}>
@@ -249,7 +249,7 @@ function WarmCaseRow({ c, i, wm, ink, inkDim, accent, line, panelHi }) {
                   "{c.testimonial.quote}"
                 </blockquote>
                 <figcaption style={{ ...wm.mono, fontSize: 11, color: inkDim, marginTop: 14, letterSpacing: '.04em' }}>
-                  — {c.testimonial.name}, {c.testimonial.role}
+                , {c.testimonial.name}, {c.testimonial.role}
                 </figcaption>
               </figure>
             )}
@@ -372,18 +372,18 @@ function VariantWarm({ density = 'regular', sections = {}, tone = 'warm' }) {
               </div>
             </div>
 
-            {/* Foundation strip — what we are, before what we're good at now */}
+            {/* Foundation strip, what we are, before what we're good at now */}
             <div style={{ marginTop: 72, paddingTop: 32, borderTop: `1px solid ${line}`, display: 'grid', gridTemplateColumns: '1fr 2fr', gap: 64, alignItems: 'start' }}>
               <div>
                 <div style={{ ...wm.mono, fontSize: 11, color: accent, letterSpacing: '.1em', textTransform: 'uppercase', marginBottom: 12 }}>Grunden</div>
                 <p style={{ ...wm.display, fontSize: 36, lineHeight: 1.05, margin: 0, color: ink, textWrap: 'balance' }}>
                   Seniora arkitekter & ingenjörer.<br />
-                  <span style={{ color: inkDim }}>AI är accelerator — inte identitet.</span>
+                  <span style={{ color: inkDim }}>AI är accelerator, inte identitet.</span>
                 </p>
               </div>
               <div>
                 <p style={{ fontSize: 16, lineHeight: 1.55, color: inkDim, margin: '0 0 24px', maxWidth: 620 }}>
-                  Cirka 20 seniora utvecklare och arkitekter. Vi har byggt plattformar, moderniserat arkitektur och tagit komplexa leveranser i mål långt innan AI blev ett samtalsämne. Det är därför AI faktiskt compound:ar hos oss — vi applicerar den på ett hantverk vi redan behärskar.
+                  Cirka 20 seniora utvecklare och arkitekter. Vi har byggt plattformar, moderniserat arkitektur och tagit komplexa leveranser i mål långt innan AI blev ett samtalsämne. Det är därför AI faktiskt compound:ar hos oss, vi applicerar den på ett hantverk vi redan behärskar.
                 </p>
                 <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8 }}>
                   {[
@@ -419,7 +419,7 @@ function VariantWarm({ density = 'regular', sections = {}, tone = 'warm' }) {
         </header>
       }
 
-      {/* Logos — infinite marquee */}
+      {/* Logos, infinite marquee */}
       {sections.logos !== false &&
       <section style={{ background: bg, borderBottom: `1px solid ${line}`, overflow: 'hidden' }}>
           <style>{`
@@ -435,7 +435,7 @@ function VariantWarm({ density = 'regular', sections = {}, tone = 'warm' }) {
               content: ''; position: absolute; top: 0; bottom: 0; width: 140px; pointer-events: none; z-index: 1;
             }
             .scg-marquee-fade::before { left: 0;  background: linear-gradient(to right, ${bg}, transparent); }
-            .scg-marquee-fade::after  { right: 0; background: linear-gradient(to left,  ${bg}, transparent); }
+            .scg-marquee-fade::after  { right: 0; background: linear-gradient(to left, ${bg}, transparent); }
           `}</style>
           <div className="scg-marquee-fade" style={{ padding: '40px 0' }}>
             <div className="scg-marquee">
@@ -454,42 +454,42 @@ function VariantWarm({ density = 'regular', sections = {}, tone = 'warm' }) {
         </section>
       }
 
-      {/* Offerings — commitment ladder + 5D framework */}
+      {/* Offerings, commitment ladder + 5D framework */}
       {sections.offerings !== false &&
       <section id="erbjudanden" style={{ background: bg }}>
           <div style={{ ...wm.container, padding: `${pad}px ${gutter}px` }}>
             <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 64, marginBottom: 56, alignItems: 'end' }}>
               <div>
-                <div style={{ ...wm.mono, fontSize: 12, color: accent, letterSpacing: '.1em', textTransform: 'uppercase', marginBottom: 16 }}>№ 02 — Så jobbar vi</div>
+                <div style={{ ...wm.mono, fontSize: 12, color: accent, letterSpacing: '.1em', textTransform: 'uppercase', marginBottom: 16 }}>№ 02, Så jobbar vi</div>
                 <h2 style={{ ...wm.display, fontSize: 'clamp(64px, 8vw, 128px)', lineHeight: .92, margin: 0, color: ink }}>
                   Senior kompetens.<br />
                   <span style={{ color: accent }}>Skarpa leveranser.</span>
                 </h2>
               </div>
               <p style={{ fontSize: 18, lineHeight: 1.55, maxWidth: 520, margin: 0, color: inkDim }}>
-                Vi bygger system, team och ledarskap — oavsett om det handlar om arkitektur, teknisk due diligence eller fractional CTO. AI-readiness är en av vägarna in, inte allt vi gör.
+                Vi bygger system, team och ledarskap, oavsett om det handlar om arkitektur, teknisk due diligence eller fractional CTO. AI-readiness är en av vägarna in, inte allt vi gör.
               </p>
             </div>
 
-            {/* Core practice — what we do, broader than AI */}
+            {/* Core practice, what we do, broader than AI */}
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 18, marginBottom: 72 }}>
               {[
             {
               num: 'A',
               title: 'Stora initiativ',
-              body: 'Dedikerade team inbäddade hos kunden med fullt ansvar för mjukvaru­utvecklingen — från arkitektur till leverans. Outcome-baserat, egen lead, seniora ingenjörer hela vägen.',
+              body: 'Dedikerade team inbäddade hos kunden med fullt ansvar för mjukvaru­utvecklingen, från arkitektur till leverans. Outcome-baserat, egen lead, seniora ingenjörer hela vägen.',
               tags: ['Dedikerat team', 'Outcome', 'Arkitektur → leverans']
             },
             {
               num: 'B',
               title: 'Timkonsulting',
-              body: 'Vi förstärker befintliga kundteam med seniora konsulter — anpassat efter erat behov och tech-stack. Enskilda profiler där ni behöver tyngd.',
+              body: 'Vi förstärker befintliga kundteam med seniora konsulter, anpassat efter erat behov och tech-stack. Enskilda profiler där ni behöver tyngd.',
               tags: ['Förstärkning', 'Senior nivå', 'Er stack']
             },
             {
               num: 'C',
               title: 'Rådgivning',
-              body: 'Teknisk rådgivning inom arkitektur, kodkvalitet och strategisk planering — ibland som del av M&A due diligence. Vi har suttit på andra sidan bordet.',
+              body: 'Teknisk rådgivning inom arkitektur, kodkvalitet och strategisk planering, ibland som del av M&A due diligence. Vi har suttit på andra sidan bordet.',
               tags: ['Arkitektur', 'Kodkvalitet', 'M&A DD']
             }].
             map((c, i) =>
@@ -525,7 +525,7 @@ function VariantWarm({ density = 'regular', sections = {}, tone = 'warm' }) {
                 </h3>
               </div>
               <p style={{ fontSize: 15, lineHeight: 1.6, color: inkDim, margin: 0, maxWidth: 620 }}>
-                När AI behöver struktur — inte bara verktyg — plockar vi in fyra fokuserade steg ovanpå grunden ovan. Samma seniora ingenjörer, ett annat objektiv. Varje steg står på egna ben; börja där ni är.
+                När AI behöver struktur, inte bara verktyg, plockar vi in fyra fokuserade steg ovanpå grunden ovan. Samma seniora ingenjörer, ett annat objektiv. Varje steg står på egna ben; börja där ni är.
               </p>
             </div>
 
@@ -577,7 +577,7 @@ function VariantWarm({ density = 'regular', sections = {}, tone = 'warm' }) {
             })}
             </div>
 
-            {/* 5-dimension framework — interactive */}
+            {/* 5-dimension framework, interactive */}
             <WarmFrameworkPanel wm={wm} ink={ink} inkDim={inkDim} bg={bg} accent={accent} panel={panel} line={line} />
 
             {/* See all offerings */}
@@ -596,7 +596,7 @@ function VariantWarm({ density = 'regular', sections = {}, tone = 'warm' }) {
       {sections.cases !== false &&
       <section id="case" style={{ background: panel, borderTop: `1px solid ${line}`, borderBottom: `1px solid ${line}` }}>
           <div style={{ ...wm.container, padding: `${pad}px ${gutter}px` }}>
-            <div style={{ ...wm.mono, fontSize: 12, color: accent, letterSpacing: '.1em', textTransform: 'uppercase', marginBottom: 16 }}>№ 03 — Utvalda case</div>
+            <div style={{ ...wm.mono, fontSize: 12, color: accent, letterSpacing: '.1em', textTransform: 'uppercase', marginBottom: 16 }}>№ 03, Utvalda case</div>
             <h2 style={{ ...wm.display, fontSize: 'clamp(64px, 8vw, 128px)', lineHeight: .92, margin: 0, marginBottom: 56, color: ink }}>
               Historier vi<br />gärna berättar.
             </h2>
@@ -620,7 +620,7 @@ function VariantWarm({ density = 'regular', sections = {}, tone = 'warm' }) {
       {sections.approach !== false &&
       <section style={{ background: bg }}>
           <div style={{ ...wm.container, padding: `${pad}px ${gutter}px` }}>
-            <div style={{ ...wm.mono, fontSize: 12, color: accent, letterSpacing: '.1em', textTransform: 'uppercase', marginBottom: 16 }}>№ 04 — Så jobbar vi</div>
+            <div style={{ ...wm.mono, fontSize: 12, color: accent, letterSpacing: '.1em', textTransform: 'uppercase', marginBottom: 16 }}>№ 04, Så jobbar vi</div>
             <h2 style={{ ...wm.display, fontSize: 'clamp(64px, 8vw, 120px)', lineHeight: .92, margin: 0, marginBottom: 64, color: ink }}>
               Lyssna. Analysera.<br />
               <span style={{ color: accent }}>Leverera.</span> Lämna över.
@@ -642,7 +642,7 @@ function VariantWarm({ density = 'regular', sections = {}, tone = 'warm' }) {
       {sections.testimonials !== false &&
       <section style={{ background: panel, borderTop: `1px solid ${line}`, borderBottom: `1px solid ${line}` }}>
           <div style={{ ...wm.container, padding: `${pad}px ${gutter}px` }}>
-            <div style={{ ...wm.mono, fontSize: 12, color: accent, letterSpacing: '.1em', textTransform: 'uppercase', marginBottom: 16 }}>№ 05 — Från kunder</div>
+            <div style={{ ...wm.mono, fontSize: 12, color: accent, letterSpacing: '.1em', textTransform: 'uppercase', marginBottom: 16 }}>№ 05, Från kunder</div>
             <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 64, marginTop: 48 }}>
               <figure style={{ margin: 0, gridColumn: '1 / span 2' }}>
                 <div style={{ ...wm.display, fontSize: 240, lineHeight: .3, color: accent, marginBottom: 20 }}>
@@ -661,7 +661,7 @@ function VariantWarm({ density = 'regular', sections = {}, tone = 'warm' }) {
               </figure>
               {window.TESTIMONIALS.slice(1).map((t, i) => <figure key={i} style={{ margin: 0, paddingTop: 40, borderTop: `1px solid ${line}` }}>
                   <blockquote style={{ margin: 0, fontSize: 20, lineHeight: 1.4, color: ink }}>"{t.quote}"</blockquote>
-                  <figcaption style={{ ...wm.mono, fontSize: 12, color: inkDim, marginTop: 20 }}>— {t.name}, {t.role}</figcaption>
+                  <figcaption style={{ ...wm.mono, fontSize: 12, color: inkDim, marginTop: 20 }}>, {t.name}, {t.role}</figcaption>
                 </figure>)}
             </div>
           </div>
@@ -674,7 +674,7 @@ function VariantWarm({ density = 'regular', sections = {}, tone = 'warm' }) {
           <div style={{ ...wm.container, padding: `${pad}px ${gutter}px` }}>
             <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 64, marginBottom: 48, alignItems: 'end' }}>
               <div>
-                <div style={{ ...wm.mono, fontSize: 12, color: accent, letterSpacing: '.1em', textTransform: 'uppercase', marginBottom: 16 }}>№ 06 — Teamet</div>
+                <div style={{ ...wm.mono, fontSize: 12, color: accent, letterSpacing: '.1em', textTransform: 'uppercase', marginBottom: 16 }}>№ 06, Teamet</div>
                 <h2 style={{ ...wm.display, fontSize: 'clamp(64px, 8vw, 120px)', lineHeight: .92, margin: 0, color: ink }}>Snälla proffs.</h2>
               </div>
               <p style={{ fontSize: 18, lineHeight: 1.55, maxWidth: 440, margin: 0, color: inkDim }}>
@@ -724,7 +724,7 @@ function VariantWarm({ density = 'regular', sections = {}, tone = 'warm' }) {
               Jobba med oss?
             </h2>
             <p style={{ fontSize: 20, lineHeight: 1.5, margin: '0 auto 40px', maxWidth: 640, color: bg }}>
-              Vi växer långsamt och medvetet. Om du har 10+ år bakom dig och vill jobba med människor som bryr sig — hör av dig.
+              Vi växer långsamt och medvetet. Om du har 10+ år bakom dig och vill jobba med människor som bryr sig, hör av dig.
             </p>
             <div style={{ display: 'inline-flex', flexWrap: 'wrap', gap: 10, justifyContent: 'center' }}>
               {['Senior Software Engineer', 'Senior Architect'].map((r) =>

@@ -11,7 +11,7 @@
     "num": "02",
     "title": "AI-readiness Assessment",
     "kicker": "Redo att diagnostisera?",
-    "body": "Full 5-dimensionell diagnos — kodbas, infra, data, team, leverans. Rött / gult / grönt per dimension. Skriftlig rapport, stakeholder-presentation och konkret roadmap.",
+    "body": "Full 5-dimensionell diagnos, kodbas, infra, data, team, leverans. Rött / gult / grönt per dimension. Skriftlig rapport, stakeholder-presentation och konkret roadmap.",
     "bullets": ["3–4 veckor", "Fast pris", "Skriftlig rapport"],
     "when": "3–4 v"
   },
@@ -27,7 +27,7 @@
     "num": "04",
     "title": "AI-native utveckling",
     "kicker": "Behöver bygga nu?",
-    "body": "Er löpande teknikpartner — seniora ingenjörer som har AI som förvald arbetssätt. 3–5× snabbare leverans. Konsulter per timme, dedikerat team, eller fraktionell CTO.",
+    "body": "Er löpande teknikpartner, seniora ingenjörer som har AI som förvald arbetssätt. 3–5× snabbare leverans. Konsulter per timme, dedikerat team, eller fraktionell CTO.",
     "bullets": ["Timkonsult · Team · Fractional CTO", "3–5× snabbare", "Löpande"],
     "when": "Löpande"
   }
