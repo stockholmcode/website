@@ -1,0 +1,98 @@
+perks:
+  - mark: ★
+    title: 30 dagars semester
+    body: Riktig ledighet. Ingen mobil, inga Slack-pings från oss.
+  - mark: ♥
+    title: Senior från dag 1
+    body: Du bygger direkt med kollegor som är lika seniora som dig. Ingen ghost-work.
+  - mark: ☉
+    title: Sjukvårdsförsäkring
+    body: Specialistvård inom 7 dagar. Top-up på lönen vid längre sjukskrivning.
+  - mark: ◎
+    title: Föräldraledighet
+    body: Top-up på lönen under hela föräldraledigheten.
+  - mark: ✚
+    title: Sjuk- & olycksfall
+    body: Dygnet runt — i tjänsten och privat. Livförsäkring (TGL) 6×PBB.
+  - mark: ◇
+    title: Pension 8,33%
+    body: Av fast lön. Individuell rådgivning ingår.
+  - mark: ⇺
+    title: Friskvård
+    body: 5 000 kr/år till det som håller dig i form.
+  - mark: ⌘
+    title: Utrustning ingår
+    body: Dator, mobil och abonnemang — vi fixar det du behöver för jobbet.
+roles:
+  - title: Senior Software Engineer
+    loc: Stockholm / hybrid
+    type: Heltid
+    pay: Marknadsmässig
+    stack:
+      - TypeScript
+      - Go
+      - Kotlin
+      - Postgres
+      - Kubernetes
+      - AWS
+    about: >-
+      Du bygger AI-native produkter för våra kunder tillsammans med andra seniora ingenjörer.
+      Hands-on kod, hög ägandeskap, utan mellanchefer.
+    req:
+      - 10+ år produktionskod
+      - Trygg i åtminstone två språk
+      - Har lett leveranser med extern kund
+      - Pragmatisk om AI — använt LLMs i produktion
+    we:
+      - Teknikval som spelar roll
+      - Seniora kollegor som kodar själva
+      - Tid att tänka istället för att jaga timmar
+  - title: Senior Architect
+    loc: Stockholm
+    type: Heltid
+    pay: Marknadsmässig
+    stack:
+      - Distributed systems
+      - Event-driven
+      - DDD
+      - Cloud-native
+      - AWS
+    about: >-
+      Leder arkitektur­uppdrag hos våra kunder — från POC till storskalig leverans. Rollen är
+      hands-on: du ritar och kodar prototyper, inte bara diagram.
+    req:
+      - 15+ år erfarenhet, flera arkitekt-roller i produktion
+      - Vant vid att prata med CTO/CIO
+      - Har dragit minst en stor transformation i mål
+      - Kan säga nej på ett trevligt sätt
+    we:
+      - Uppdrag med tung teknisk tyngd
+      - Mentor-roll för yngre arkitekter
+      - Inflytande över vilka case vi tar
+process:
+  - 'n': '01'
+    title: Ansök
+    body: CV eller LinkedIn + ett stycke om dig. Inga personliga brev som ingen läser.
+    dur: ~10 min
+  - 'n': '02'
+    title: Fika
+    body: 30 minuter med två från teamet. Vi lär känna dig, du lär känna oss.
+    dur: 30 min
+  - 'n': '03'
+    title: Djupintervju
+    body: 90 minuter med en arkitekt. Ditt bästa & värsta projekt — på riktigt.
+    dur: 90 min
+  - 'n': '04'
+    title: Kod­samtal
+    body: Vi pratar om kod du har skrivit. Inga whiteboard-leetcode.
+    dur: 60 min
+  - 'n': '05'
+    title: Besked
+    body: Du får ett svar inom 5 dagar. Ja eller nej, alltid motiverat.
+    dur: ≤ 5 dagar
+quote:
+  text: >-
+    Första gången på 15 år jag jobbar på ett ställe där ingen behöver bevisa något. Man gör bara bra
+    saker tillsammans.
+  name: — teammedlem
+  role: Senior Software Engineer · SCG

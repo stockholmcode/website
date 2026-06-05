@@ -1,0 +1,212 @@
+---
+import { getRelativeLocaleUrl } from 'astro:i18n';
+import { SCG } from '../lib/theme.js';
+
+const { locale = 'sv', content } = Astro.props;
+
+const page = content.team_page;
+const members = content.team;
+const culture = content['team-culture'];
+
+const link = (to) => getRelativeLocaleUrl(locale, to);
+const assetBase = import.meta.env.BASE_URL.endsWith('/')
+  ? import.meta.env.BASE_URL
+  : import.meta.env.BASE_URL + '/';
+
+// Portrait tag badge: same priority order as the original script.
+const tagLabels = page.tagLabels;
+const badgeFor = (cat) => {
+  if (cat.includes('arch')) return tagLabels.arch;
+  if (cat.includes('cto')) return tagLabels.cto;
+  if (cat.includes('ai')) return tagLabels.ai;
+  if (cat.includes('data')) return tagLabels.data;
+  return tagLabels.default;
+};
+
+const calloutHref = page.callout.cta.href ?? link(page.callout.cta.to ?? '/');
+const initialCount = page.filter.countTemplate
+  .replace('{shown}', String(members.length))
+  .replace('{total}', String(members.length));
+---
+<header class="scg-team-hero">
+  <div class="scg-container">
+    <div class="scg-team-kicker mono">{page.hero.eyebrow}</div>
+    <h1 class="scg-team-h1 display">
+      {page.hero.titlePre}<br />{page.hero.titleMid}<span class="scg-accent">{page.hero.titleAccent}</span>
+    </h1>
+    <p class="scg-team-lead">{page.hero.intro}</p>
+    <div class="scg-team-logoart"><img src={`${assetBase}assets/logo.jpg`} alt="" /></div>
+  </div>
+</header>
+
+<div class="scg-filters">
+  <div class="scg-container scg-filter-row">
+    <div class="mono scg-filter-label">{page.filter.label}</div>
+    <div class="scg-chips" id="chips">
+      {page.filter.chips.map((c, i) => (
+        <button class:list={['scg-chip', { active: i === 0 }]} data-f={c.key}>{c.label}</button>
+      ))}
+    </div>
+    <div class="scg-count mono" id="count" data-template={page.filter.countTemplate}>{initialCount}</div>
+  </div>
+</div>
+
+<section class="scg-team-grid-section">
+  <div class="scg-container">
+    <div class="scg-grid" id="grid">
+      {members.map((m, i) => (
+        <article class="scg-member" data-cat={m.cat.join(' ')}>
+          <div class="scg-portrait">
+            <span class="scg-portrait-tag">{badgeFor(m.cat)}</span>
+            {`// porträtt · ${m.name.split(' ')[0].toLowerCase()}`}
+          </div>
+          <div class="scg-member-meta">
+            <div>
+              <div class="scg-member-name display">{m.name}</div>
+              <div class="scg-member-role">{m.role}</div>
+            </div>
+            <div class="scg-member-num mono">{String(i + 1).padStart(2, '0')}</div>
+          </div>
+          <div class="scg-member-tagline mono">{m.tag}</div>
+          <div class="scg-member-bio">{m.bio}</div>
+          <div class="scg-member-social mono">
+            {m.social.map((s) => <a href="#">{s}</a>)}
+          </div>
+        </article>
+      ))}
+    </div>
+  </div>
+</section>
+
+<section class="scg-team-stats">
+  <div class="scg-container">
+    <div class="scg-stats-grid">
+      {page.stats.items.map((s) => (
+        <div class="scg-stat">
+          <div class="scg-stat-num display">{s.num}<span class="scg-stat-unit">{s.unit}</span></div>
+          <div class="scg-stat-label">{s.label}</div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<section class="scg-culture">
+  <div class="scg-container">
+    <div class="mono scg-culture-eyebrow">{page.culture.eyebrow}</div>
+    <h2 class="scg-culture-h2 display">{page.culture.titlePre}<span class="scg-accent">{page.culture.titleAccent}</span></h2>
+    <div class="scg-values">
+      {culture.map((v) => (
+        <div class="scg-value">
+          <div class="scg-value-num display">{v.num}</div>
+          <h3 class="scg-value-h3 display">{v.title}</h3>
+          <p class="scg-value-body">{v.body}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<section class="scg-callout">
+  <div class="scg-container">
+    <img class="scg-callout-logo" src={`${assetBase}assets/logo.jpg`} alt="" />
+    <h2 class="scg-callout-h2 display">{page.callout.title}</h2>
+    <p class="scg-callout-body">{page.callout.body}</p>
+    <a href={calloutHref} class="scg-callout-btn">{page.callout.cta.label}</a>
+  </div>
+</section>
+
+<script>
+  const chips = document.querySelectorAll('.scg-chip');
+  const count = document.getElementById('count');
+  const members = document.querySelectorAll('.scg-member');
+  const total = members.length;
+  const template = count?.dataset.template ?? '{shown} av {total} visas';
+  const setCount = (n) => {
+    if (count) count.textContent = template.replace('{shown}', String(n)).replace('{total}', String(total));
+  };
+  chips.forEach((c) =>
+    c.addEventListener('click', () => {
+      chips.forEach((x) => x.classList.remove('active'));
+      c.classList.add('active');
+      const f = c.dataset.f;
+      let shown = 0;
+      members.forEach((m) => {
+        const ok = f === 'all' || m.dataset.cat.split(' ').includes(f);
+        m.classList.toggle('scg-hidden', !ok);
+        if (ok) shown++;
+      });
+      setCount(shown);
+    })
+  );
+</script>
+
+<style define:vars={{ accent: SCG.accent, bg: SCG.bg, panel: SCG.panel, panelHi: SCG.panelHi, ink: SCG.ink, inkDim: SCG.inkDim, inkFaint: SCG.inkFaint, line: SCG.line }}>
+  .scg-container { max-width: 1280px; margin: 0 auto; padding: 0 56px; }
+  .mono { font-family: 'JetBrains Mono', ui-monospace, monospace; }
+  .display { font-family: 'Amatic SC', cursive; font-weight: 700; }
+  .scg-accent { color: var(--accent); }
+
+  /* Hero */
+  .scg-team-hero { padding: 144px 0 120px; border-bottom: 1px solid var(--line); position: relative; overflow: hidden; }
+  .scg-team-kicker { font-size: 12px; color: var(--accent); letter-spacing: .1em; text-transform: uppercase; margin-bottom: 20px; }
+  .scg-team-h1 { font-size: clamp(96px, 13vw, 220px); line-height: .88; margin: 0; letter-spacing: -.005em; color: var(--ink); }
+  .scg-team-lead { font-size: 22px; line-height: 1.45; max-width: 680px; margin: 48px 0 0; color: var(--ink); }
+  .scg-team-logoart { position: absolute; right: 56px; top: 120px; opacity: .55; pointer-events: none; }
+  .scg-team-logoart img { height: 220px; width: auto; filter: invert(1); mix-blend-mode: screen; }
+
+  /* Filter bar */
+  .scg-filters { border-bottom: 1px solid var(--line); background: var(--panel); }
+  .scg-filter-row { display: flex; align-items: center; gap: 24px; padding: 20px 56px; flex-wrap: wrap; }
+  .scg-filter-label { color: var(--inkDim); font-size: 12px; letter-spacing: .08em; text-transform: uppercase; }
+  .scg-chips { display: flex; gap: 8px; flex-wrap: wrap; }
+  .scg-chip { font-family: 'JetBrains Mono', ui-monospace, monospace; font-size: 12px; padding: 8px 14px; border-radius: 999px; border: 1px solid var(--line); background: var(--bg); color: var(--inkDim); cursor: pointer; transition: all .15s; }
+  .scg-chip:hover { color: var(--ink); border-color: var(--inkDim); }
+  .scg-chip.active { background: var(--accent); color: var(--bg); border-color: var(--accent); font-weight: 600; }
+  .scg-count { font-size: 12px; color: var(--inkDim); }
+
+  /* Team grid */
+  .scg-team-grid-section { padding: 96px 0; }
+  .scg-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px 32px; }
+  .scg-member { cursor: pointer; }
+  .scg-member.scg-hidden { display: none; }
+  .scg-portrait { aspect-ratio: 4/5; width: 100%; border-radius: 14px; background: repeating-linear-gradient(135deg, var(--panel), var(--panel) 8px, var(--panelHi) 8px, var(--panelHi) 9px); border: 1px solid var(--line); display: flex; align-items: center; justify-content: center; font-family: 'JetBrains Mono', ui-monospace, monospace; font-size: 12px; color: var(--inkFaint); letter-spacing: .04em; transition: all .2s; position: relative; overflow: hidden; }
+  .scg-member:hover .scg-portrait { border-color: var(--accent); transform: translateY(-2px); }
+  .scg-portrait-tag { position: absolute; top: 12px; left: 12px; background: rgba(10,12,15,.7); backdrop-filter: blur(8px); padding: 4px 10px; border-radius: 999px; font-size: 10px; color: var(--ink); border: 1px solid var(--line); }
+  .scg-member-meta { margin-top: 18px; display: flex; justify-content: space-between; align-items: baseline; }
+  .scg-member-name { font-size: 38px; line-height: 1; color: var(--ink); }
+  .scg-member-role { font-size: 14px; color: var(--ink); margin-top: 4px; }
+  .scg-member-num { font-size: 11px; color: var(--inkDim); }
+  .scg-member-tagline { font-size: 11px; color: var(--inkDim); margin-top: 6px; }
+  .scg-member-bio { font-size: 13px; color: var(--inkDim); margin-top: 10px; line-height: 1.55; }
+  .scg-member-social { display: flex; gap: 10px; margin-top: 12px; font-size: 11px; color: var(--accent); }
+  .scg-member-social a { text-decoration: none; padding: 4px 10px; border-radius: 999px; border: 1px solid var(--line); transition: all .15s; }
+  .scg-member-social a:hover { border-color: var(--accent); }
+
+  /* Stats row */
+  .scg-team-stats { padding: 80px 0; border-bottom: 1px solid var(--line); }
+  .scg-stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0; }
+  .scg-stat { padding: 0 32px; border-left: 1px solid var(--line); }
+  .scg-stat:first-child { border-left: none; padding-left: 0; }
+  .scg-stat-num { font-size: 88px; line-height: 1; color: var(--ink); }
+  .scg-stat-unit { color: var(--accent); }
+  .scg-stat-label { font-size: 13px; color: var(--inkDim); margin-top: 8px; line-height: 1.5; }
+
+  /* Culture strip */
+  .scg-culture { background: var(--panel); padding: 120px 0; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+  .scg-culture-eyebrow { color: var(--accent); font-size: 12px; letter-spacing: .1em; text-transform: uppercase; margin-bottom: 16px; }
+  .scg-culture-h2 { font-size: clamp(64px, 8vw, 128px); line-height: .92; margin: 0 0 56px; color: var(--ink); }
+  .scg-values { display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; }
+  .scg-value { border-top: 2px solid var(--line); padding-top: 24px; }
+  .scg-value:first-child { border-top-color: var(--accent); }
+  .scg-value-num { font-size: 72px; line-height: .9; color: var(--accent); }
+  .scg-value-h3 { font-size: 44px; line-height: .95; margin: 12px 0; color: var(--ink); }
+  .scg-value-body { font-size: 15px; line-height: 1.6; color: var(--inkDim); margin: 0; }
+
+  /* Callout / CTA */
+  .scg-callout { background: var(--accent); padding: 120px 0; text-align: center; }
+  .scg-callout-logo { height: 120px; width: auto; margin-bottom: 24px; }
+  .scg-callout-h2 { font-size: clamp(72px, 10vw, 160px); line-height: .92; margin: 0 0 20px; color: var(--bg); }
+  .scg-callout-body { font-size: 20px; line-height: 1.5; margin: 0 auto 40px; max-width: 640px; color: var(--bg); }
+  .scg-callout-btn { display: inline-flex; align-items: center; gap: 10px; background: var(--bg); color: var(--ink); padding: 16px 26px; border-radius: 999px; text-decoration: none; font-size: 16px; font-weight: 600; }
+</style>
