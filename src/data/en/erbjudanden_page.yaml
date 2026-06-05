@@ -1,0 +1,142 @@
+# Page-specific copy for erbjudanden (offerings) page.
+# The offering tiers come from offerings.yaml and the 5D dimensions from
+# dimensions.yaml; everything here is page chrome: headings, intros, CTAs,
+# and the static "core practice" / "engage" / deliverables copy that is not
+# part of those data lists.
+
+hero:
+  kicker: "№ 02 · Offerings"
+  headlinePre: Senior expertise.
+  headlineAccent: Sharp
+  headlineMid: deliveries.
+  lead: We build systems, teams and leadership.
+  leadDim: >-
+    Three ways to engage — plus a specialised track for organisations
+    that want to make AI more than just a tool.
+
+# Core practice section: three static ways of working together.
+core:
+  headPre: Three ways to
+  headMid: work
+  headAccent: together.
+  lead: >-
+    Whether you need a whole team, a single senior consultant, or
+    advisory at architect or CTO level — this is the foundation of our practice.
+  cards:
+    - tag: A
+      label: CORE PRACTICE
+      title: Large initiatives
+      body: >-
+        Dedicated teams embedded with you, with full ownership of the
+        software development — from architecture to delivery. Outcome-based,
+        own lead, senior engineers all the way.
+      bullets:
+        - Dedicated team (3–8 people)
+        - Tech lead + architect included
+        - Outcome-based contracts
+        - Fixed or ongoing
+    - tag: B
+      label: CORE PRACTICE
+      title: Hourly consulting
+      body: >-
+        We reinforce existing client teams with senior consultants — tailored to
+        your needs and tech stack. Individual profiles where you need weight.
+      bullets:
+        - 1–3 senior profiles
+        - Tailored to your stack
+        - Weekly invoicing
+        - Easy to scale up/down
+    - tag: C
+      label: CORE PRACTICE
+      title: Advisory
+      body: >-
+        Technical advisory across architecture, code quality and strategic
+        planning — sometimes as part of M&A due diligence. We have sat on the other
+        side of the table.
+      bullets:
+        - Architecture review
+        - Technical DD for PE/VC
+        - Fractional CTO
+        - Strategic roadmapping
+
+# AI-readiness track intro + ladder strip.
+track:
+  kicker: Speciality
+  headPre: AI-readiness
+  headAccent: track
+  body: >-
+    When AI needs structure — not just tools — we bring in four focused
+    steps on top of the foundation above. The same senior engineers, a different lens.
+    Each step stands on its own; start where you are.
+  ladder:
+    - { label: "Step 1 · Clarity", opacity: "1" }
+    - { label: "Step 2 · Diagnosis", opacity: ".85" }
+    - { label: "Step 3 · Execution", opacity: ".7" }
+    - { label: "Step 4 · Ongoing", opacity: ".55" }
+
+# Deliverables ("Ni får") shown per offering, keyed by offering num.
+# Kept here because offerings.yaml does not carry deliverable lists.
+offeringDeliverables:
+  heading: You get
+  byNum:
+    '01':
+      - Half-day workshop with 2 senior architects
+      - Quick scoring across 5 dimensions
+      - 1–2 page PDF summary
+      - A concrete recommendation on the next step
+    '02':
+      - Full 5-dimensional scorecard
+      - Concrete actions per dimension
+      - Written report (15–25 pages)
+      - Live stakeholder presentation
+      - Prioritised roadmap for 6–12 months
+    '03':
+      - Modular — start small or large
+      - Defined scope per module
+      - Continuity with the assessment team
+      - Weekly demo + follow-up
+    '04':
+      - AI-native ways of working from day one
+      - Senior engineers (10+ years)
+      - Scale up/down monthly
+      - Measurable delivery speed
+
+# 5D framework section headings + the red-flags/wins detail labels.
+framework:
+  headPre: 5 dimensions.
+  headAccent: Same map.
+  lead: >-
+    This is the framework we use from the first half-day to ongoing
+    delivery. Same language, same scorecard, same action list — just different
+    depth depending on where you are.
+  signalsLabel: RED FLAGS
+  winsLabel: FIXES
+
+# How-to-engage section.
+engage:
+  heading: How we start.
+  steps:
+    - step: '01'
+      title: Say hello
+      body: >-
+        Send an email with a couple of lines about where you are and what you are
+        thinking about. No template, no brief — just a conversation.
+    - step: '02'
+      title: 30 minutes
+      body: >-
+        We book a short meeting to understand whether we are the right match. If we are
+        not, we say so straight — and help point you in the right direction.
+    - step: '03'
+      title: A clear next step
+      body: >-
+        Either a half-day, an assessment, or straight into execution. We
+        write up a short proposal the same week.
+
+# Closing CTA band.
+cta:
+  heading: Let's talk.
+  body: >-
+    Email us and tell us where you stand — short, long, or somewhere in between. We
+    reply the same day.
+  buttonLabel: "contactus@stockholmcode.se →"
+  buttonHref: "mailto:contactus@stockholmcode.se"

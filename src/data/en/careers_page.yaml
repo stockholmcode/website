@@ -1,0 +1,44 @@
+# Hardcoded page copy for the Careers page (everything NOT in careers.yaml).
+# Structured lists (perks, roles, process, quote) live in careers.yaml (content.careers).
+
+title: "SCG — Careers"
+
+hero:
+  kicker: "№ 07 · Careers · Open roles"
+  headlinePre: "Work with"
+  headlineAccent: "kind professionals."
+  lead: >-
+    We grow carefully and deliberately. Are you looking for a place where senior engineers get good at
+    getting even better, in a flat organisation without bureaucracy? Then we should talk.
+
+perks:
+  eyebrow: Benefits
+  headlinePre: "The kind of thing that makes "
+  headlineAccent: everyday life
+  headlinePost: " better."
+
+roles:
+  eyebrow: Open roles
+  headlinePre: "People we're"
+  headlineMid: "looking for right "
+  headlineAccent: "now."
+  updated: "Last updated · Apr 2026"
+  # Labels reused when each role card is rendered (mirrors original inline <script> markup).
+  aboutLabel: About the role
+  reqLabel: We're looking for
+  weLabel: We offer
+  stackLabel: Stack
+  applyLabel: "Apply → contactus@stockholmcode.se"
+
+process:
+  eyebrow: The process
+  headlinePre: "Short, honest, "
+  headlineAccent: "no take-home tasks."
+
+cta:
+  headline: "Nothing fits?"
+  body: >-
+    We recruit slowly but read everything. Send a speculative application — we'll get in touch when we
+    have the right role for you.
+  email: contactus@stockholmcode.se
+  label: "Apply speculatively → contactus@stockholmcode.se"

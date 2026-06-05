@@ -1,0 +1,48 @@
+hero:
+  eyebrow: № 06 · The team
+  titlePre: People
+  titleMid: 'behind '
+  titleAccent: the code.
+  intro: >-
+    We are a handpicked team of senior engineers and architects — ~20 people, founded in 2007 in
+    Stockholm by three consultants who are still with the company. Low turnover, flat organisation,
+    knowledge sharing as part of everyday work. Part of Generate Group — ten Nordic tech companies with 300+ consultants.
+
+filter:
+  label: Filter
+  countTemplate: '{shown} of {total} shown'
+  chips:
+    - { key: all, label: All }
+    - { key: arch, label: Architects }
+    - { key: eng, label: Engineers }
+    - { key: ai, label: AI / ML }
+    - { key: cto, label: CTOs }
+    - { key: data, label: Data }
+
+# Tag-badge labels shown on each member portrait, keyed by category (priority order in script).
+tagLabels:
+  arch: Architect
+  cto: CTO
+  ai: AI/ML
+  data: Data
+  default: Engineer
+
+stats:
+  eyebrow: ''
+  items:
+    - { num: '2007', unit: '', label: founded in Stockholm }
+    - { num: '~20', unit: '', label: senior developers & architects }
+    - { num: '100', unit: '%', label: senior level, no juniors }
+    - { num: '19', unit: yr, label: of hands-on delivery }
+
+culture:
+  eyebrow: This is who we are
+  titlePre: 'How we '
+  titleAccent: work.
+
+callout:
+  title: A fit?
+  body: >-
+    Low turnover is something we're proud of. If this sounds like your kind of people — check the
+    careers page.
+  cta: { label: 'Open roles →', to: /careers }

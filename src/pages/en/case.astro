@@ -3,11 +3,11 @@ import Base from '../../layouts/Base.astro';
 import CasePage from '../../components/CasePage.astro';
 import { getContent } from '../../lib/content.js';
 
-// English locale. Content falls back per-file to Swedish (see src/lib/content.js)
-// until src/data/en/*.yaml is populated.
+// English locale. Content comes from src/data/en/*.yaml, falling back per-file to Swedish
+// for any file not yet translated (see src/lib/content.js).
 const locale = 'en';
 const content = getContent(locale);
 ---
-<Base locale={locale} site={content.site} title="Case · Stockholm Code Group">
+<Base locale={locale} site={content.site} title="Cases · Stockholm Code Group">
   <CasePage locale={locale} content={content} />
 </Base>

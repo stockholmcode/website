@@ -1,0 +1,14 @@
+- step: '01'
+  title: Listen
+  body: We start with questions, not slides. What are you building, what do you care about, what hurts?
+- step: '02'
+  title: Analyse
+  body: >-
+    A week in the codebase and with the team. A report on what actually matters — no
+    consulting fluff.
+- step: '03'
+  title: Deliver
+  body: We write code. Senior engineers from day one, no junior ladder at your expense.
+- step: '04'
+  title: Hand over
+  body: When you can stand on your own, we leave. The goal is to make ourselves redundant, not indispensable.

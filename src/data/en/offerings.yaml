@@ -1,0 +1,44 @@
+- num: '01'
+  title: AI scan
+  kicker: Want clarity first?
+  body: >-
+    Half a day together. We map where you stand across five AI-maturity dimensions and give you a 1–2
+    page summary. The scan fee is credited if you continue.
+  bullets:
+    - Half-day
+    - Fixed price
+    - No commitment
+  when: Half-day
+- num: '02'
+  title: AI-readiness Assessment
+  kicker: Ready to diagnose?
+  body: >-
+    A full 5-dimensional diagnosis — codebase, infra, data, team, delivery. Red / amber / green per
+    dimension. Written report, stakeholder presentation and a concrete roadmap.
+  bullets:
+    - 3–4 weeks
+    - Fixed price
+    - Written report
+  when: 3–4 wk
+- num: '03'
+  title: AI implementation
+  kicker: Have a roadmap?
+  body: >-
+    Five modules that map directly to the assessment's dimensions. Codebase · infrastructure · data ·
+    team enablement · business process. Take one module or combine several.
+  bullets:
+    - 5 modules
+    - T&M or fixed scope
+    - Modular
+  when: 5 modules
+- num: '04'
+  title: AI-native development
+  kicker: Need to build now?
+  body: >-
+    Your ongoing tech partner — senior engineers who treat AI as the default way of working. 3–5×
+    faster delivery. Consultants by the hour, a dedicated team, or a fractional CTO.
+  bullets:
+    - Hourly · Team · Fractional CTO
+    - 3–5× faster
+    - Ongoing
+  when: Ongoing

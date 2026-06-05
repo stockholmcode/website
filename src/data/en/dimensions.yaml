@@ -1,0 +1,75 @@
+- num: '01'
+  title: Codebase & architecture
+  q: Can AI work in your codebase without friction?
+  body: Architecture, test coverage, coupling, modularity.
+  signals:
+    - Tight coupling
+    - < 40% test coverage
+    - Monolith without modules
+    - Implicit dependencies
+  wins:
+    - Decomposition
+    - Contracts between modules
+    - AI-readable structure
+    - Smart test suites
+  quote: AI tools amplify your codebase — both its strengths and its technical debt.
+- num: '02'
+  title: Infrastructure & harness
+  q: Can you run agents safely and see what they do?
+  body: CI/CD, guardrails, sandboxing, observability.
+  signals:
+    - Manual deploys
+    - No sandbox
+    - Black box in prod
+    - No audit
+  wins:
+    - Agent guardrails
+    - Observability stack
+    - Policy-as-code
+    - Rollback in seconds
+  quote: Without a harness, agents become a security risk. With one, they become a multiplier.
+- num: '03'
+  title: Data readiness
+  q: Does AI have access to reliable, governed data?
+  body: Data quality, access, GDPR controls.
+  signals:
+    - Data in silos
+    - Unknown provenance
+    - No PII policy
+    - Duplicates & junk
+  wins:
+    - RAG pipelines
+    - Data contracts
+    - Access patterns
+    - GDPR guardrails
+  quote: AI is only as good as the data it sees. Data readiness is usually the silent bottleneck.
+- num: '04'
+  title: Team & governance
+  q: Does the team work with AI together — not just solo?
+  body: Shared rules, tools, review practice.
+  signals:
+    - No shared policy
+    - Disparate tools
+    - Shadow AI
+    - Uneven adoption
+  wins:
+    - Tooling standard
+    - AI review practice
+    - Internal enablement
+    - Clear principles
+  quote: Individual productivity is the start. Team effect is where AI begins to compound.
+- num: '05'
+  title: End-to-end delivery
+  q: Where across the whole delivery flow is AI leaving value on the table?
+  body: Process mapping, cycle time, bottlenecks.
+  signals:
+    - Long review loops
+    - Manual QA
+    - Ticket debris
+    - Unclear DoD
+  wins:
+    - Flow measurement
+    - AI in review
+    - Automated QA
+    - Shorter cycle time
+  quote: Code written faster does not help if delivery gets stuck in review or QA.

@@ -1,0 +1,98 @@
+perks:
+  - mark: ★
+    title: 30 days of holiday
+    body: Real time off. No phone, no Slack pings from us.
+  - mark: ♥
+    title: Senior from day 1
+    body: You build straight away with colleagues as senior as you. No ghost work.
+  - mark: ☉
+    title: Health insurance
+    body: Specialist care within 7 days. Salary top-up during longer sick leave.
+  - mark: ◎
+    title: Parental leave
+    body: Salary top-up throughout your entire parental leave.
+  - mark: ✚
+    title: Health & accident
+    body: Around the clock — at work and privately. Life insurance (TGL) 6×PBB.
+  - mark: ◇
+    title: Pension 8.33%
+    body: Of base salary. Individual advice included.
+  - mark: ⇺
+    title: Wellness allowance
+    body: SEK 5,000/year for whatever keeps you in shape.
+  - mark: ⌘
+    title: Equipment included
+    body: Laptop, phone and subscriptions — we sort out whatever you need for the job.
+roles:
+  - title: Senior Software Engineer
+    loc: Stockholm / hybrid
+    type: Full-time
+    pay: Market rate
+    stack:
+      - TypeScript
+      - Go
+      - Kotlin
+      - Postgres
+      - Kubernetes
+      - AWS
+    about: >-
+      You build AI-native products for our clients alongside other senior engineers.
+      Hands-on code, high ownership, no middle managers.
+    req:
+      - 10+ years of production code
+      - Comfortable in at least two languages
+      - Have led deliveries with an external client
+      - Pragmatic about AI — have used LLMs in production
+    we:
+      - Tech choices that matter
+      - Senior colleagues who code themselves
+      - Time to think instead of chasing hours
+  - title: Senior Architect
+    loc: Stockholm
+    type: Full-time
+    pay: Market rate
+    stack:
+      - Distributed systems
+      - Event-driven
+      - DDD
+      - Cloud-native
+      - AWS
+    about: >-
+      Leads architecture engagements at our clients — from POC to large-scale delivery. The role is
+      hands-on: you draw and code prototypes, not just diagrams.
+    req:
+      - 15+ years of experience, several architect roles in production
+      - Used to talking with CTO/CIO
+      - Have carried at least one large transformation across the line
+      - Can say no in a pleasant way
+    we:
+      - Engagements with serious technical weight
+      - A mentor role for younger architects
+      - Influence over which cases we take
+process:
+  - 'n': '01'
+    title: Apply
+    body: CV or LinkedIn + a paragraph about you. No cover letters that nobody reads.
+    dur: ~10 min
+  - 'n': '02'
+    title: Coffee
+    body: 30 minutes with two from the team. We get to know you, you get to know us.
+    dur: 30 min
+  - 'n': '03'
+    title: Deep interview
+    body: 90 minutes with an architect. Your best & worst project — for real.
+    dur: 90 min
+  - 'n': '04'
+    title: Code chat
+    body: We talk about code you have written. No whiteboard leetcode.
+    dur: 60 min
+  - 'n': '05'
+    title: Decision
+    body: You get an answer within 5 days. Yes or no, always with a reason.
+    dur: ≤ 5 days
+quote:
+  text: >-
+    The first time in 15 years I work somewhere where nobody has to prove anything. You just do good
+    things together.
+  name: — team member
+  role: Senior Software Engineer · SCG
