@@ -1,0 +1,78 @@
+hero:
+  kicker: STOCKHOLM CODE GROUP · SEDAN 2007
+  headlinePre: We bring
+  headlineAccent: love
+  headlineMid: to
+  typedWords: ["software.", "customers.", "teams.", "code.", "product.", "Stockholm."]
+  lead: >-
+    Ett handplockat team av seniora ingenjörer och arkitekter. I Stockholm, sedan 2007.
+    Vi bygger plattformar, moderniserar arkitektur och tar komplexa leveranser i mål —
+    med AI som accelerator där det skapar värde.
+  ctaPrimary: { label: "Börja ett samtal →", href: "mailto:contactus@stockholmcode.se" }
+  ctaSecondary: { label: "Se erbjudanden", to: /erbjudanden }
+
+offerings:
+  eyebrow: № 02 — Vad vi gör
+  headline1: Senior kompetens.
+  headline2: Skarpa leveranser.
+  lead: >-
+    Vi bygger system, team och ledarskap — arkitektur, teknisk due diligence, fractional CTO.
+    AI-readiness är en specialism, inte allt vi gör.
+  corePracticeLabel: CORE PRACTICE
+  corePractice:
+    - num: A
+      title: Stora initiativ
+      body: >-
+        Dedikerade team inbäddade hos kunden med fullt ansvar för leveransen — från
+        arkitektur till produktion.
+      tags: [Dedikerat team, Outcome, Egen lead]
+    - num: B
+      title: Timkonsulting
+      body: >-
+        Seniora konsulter som förstärker befintliga team. Enskilda profiler där ni behöver
+        tyngd, i er stack.
+      tags: [Förstärkning, Senior nivå, Er stack]
+    - num: C
+      title: Rådgivning
+      body: >-
+        Teknisk rådgivning inom arkitektur, kodkvalitet och strategisk planering — ofta som
+        del av M&A due diligence.
+      tags: [Arkitektur, Kodkvalitet, M&A DD]
+  aiTrack:
+    eyebrow: Specialism · AI-readiness track
+    headline: Klarhet → Diagnos → Exekvering → Löpande
+    body: >-
+      Fyra fokuserade steg när AI behöver struktur — inte bara verktyg. Varje steg står på
+      egna ben; börja där ni är.
+    cta: { label: "Se ramverket →", to: /erbjudanden }
+  allCta: { label: "Alla erbjudanden i detalj →", to: /erbjudanden }
+
+cases:
+  eyebrow: № 03 — Utvalda case
+  headline1: Historier vi
+  headline2: gärna berättar.
+  lead: "Tre korta. Hela djupet — med arkitektur, stack och intervjuer — finns på Case-sidan."
+  cta: { label: "Alla case →", to: /case }
+
+approach:
+  eyebrow: № 04 — Så jobbar vi
+  headlinePre: "Lyssna · Analysera · "
+  headlineAccent: Leverera
+  headlinePost: " · Lämna över"
+
+testimonials:
+  eyebrow: № 05 — Från kunder
+
+team:
+  eyebrow: № 06 — Teamet
+  headline: Snälla proffs.
+  lead: "~20 seniora ingenjörer och arkitekter. Alla med 13+ år bakom sig. Tre av dem nedan — hela teamet på Team-sidan."
+  cta: { label: "Hela teamet & bios →", to: /team }
+
+careers:
+  headline: Jobba med oss?
+  body: >-
+    Vi växer långsamt och medvetet. Om du har 10+ år bakom dig och vill jobba med människor
+    som bryr sig — hör av dig.
+  roles: [Senior Software Engineer, Senior Architect]
+  cta: { label: "Alla roller & kultur →", to: /careers }

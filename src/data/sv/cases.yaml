@@ -1,0 +1,259 @@
+- client: Warner Bros. Discovery
+  sector: Media & streaming
+  sectorKey: streaming
+  outcome: Ny streamingplattform från grunden
+  body: >-
+    Byggde WBD:s nya globala streamingplattform — Discovery+ och HBO Max/MAX. POC på tre veckor,
+    sedan huvudarkitekter och lead-utvecklare när teamet skalade till 1000+ devs. Event-driven
+    microservices, icke-blockerande och utan externa runtime-beroenden.
+  metric: 13ms
+  metricLabel: snitt API-svarstid
+  secondary:
+    - num: 80M
+      label: API-anrop / dag
+    - num: 99.9999%
+      label: API-uptime
+    - num: 3 200
+      label: peak req/s
+  stack:
+    - Event-driven
+    - Microservices
+    - Lead-arkitekter
+    - Global skala
+  year: '2023'
+  role: Chief architects · Lead developers
+  period: 2019 – 2023
+  expanded:
+    summary: >-
+      Från POC till global streamingplattform för Warner Bros. Discovery — Discovery+ och HBO
+      Max/MAX, byggd från grunden för att klara globala peaks utan att tappa kontroll över kostnader
+      eller latens.
+    sections:
+      - h: Bakgrund
+        body: >-
+          WBD behövde en ny global streamingplattform som kunde leverera Discovery+ och senare HBO
+          Max/MAX till en publik som mäts i hundratals miljoner. Den befintliga arkitekturen klarade
+          inte den skalan, och tidsplanen var kompromisslös.
+      - h: Vad vi gjorde
+        body: >-
+          Tre veckors POC bekräftade riktningen. Därifrån klev SCG in som huvudarkitekter och
+          lead-utvecklare när teamet skalade från ett tiotal till över 1000 utvecklare. Event-driven
+          microservices, icke-blockerande IO, inga externa runtime-beroenden — så att varje tjänst
+          kunde driftas, skalas och felsökas isolerat.
+      - h: Resultat
+        body: >-
+          13ms snitt API-svarstid, 80 miljoner API-anrop per dag, 99.9999% uptime och 3 200 peak
+          requests per sekund. Plattformen klarar globala peaks utan att tappa kontroll över
+          kostnader eller latens, och utvecklingsteamet kan iterera tjänst för tjänst utan
+          koordinationsmardrömmar.
+    stackList:
+      - Event-driven microservices
+      - Icke-blockerande IO
+      - Global skalning
+      - Lead-arkitekter från SCG
+    quote: null
+- client: SL
+  sector: Kollektivtrafik
+  sectorKey: public
+  outcome: Nytt biljettsystem med contactless
+  body: >-
+    Arkitektur och leverans av SLs nya biljettsystem — byggt från grunden på AWS. David Looberger
+    från SCG som chief software architect. Res med bankkort, automatiska rabatter för
+    studenter/seniorer, tillgänglighetsfunktioner. AWS skrev en blogpost om projektet.
+  metric: 800k
+  metricLabel: resor / dag
+  secondary:
+    - num: EMV
+      label: contactless-betalning
+    - num: AWS
+      label: EC2, RDS, KMS
+    - num: PCI
+      label: compliant
+  stack:
+    - EMV contactless
+    - AWS
+    - PCI-compliant
+  year: '2023'
+  role: Chief Software Architect (David Looberger)
+  period: 2020 – 2023
+  expanded:
+    summary: >-
+      SLs nya biljettsystem — contactless-betalning med bankkort, automatiska rabatter, byggt från
+      grunden på AWS. SCGs David Looberger som chefsarkitekt hela vägen.
+    sections:
+      - h: Bakgrund
+        body: >-
+          Stockholms lokaltrafik behövde ersätta sitt åldrande biljettsystem med en lösning som tål
+          800 000 resor per dygn — och som ger resenärerna en betydligt smidigare upplevelse. Kraven
+          på drift, säkerhet och tillgänglighet i en kritisk samhällstjänst är hårda och
+          oförhandlingsbara.
+      - h: Vad vi gjorde
+        body: >-
+          David Looberger från SCG ledde arkitekturen som chief software architect. Systemet byggdes
+          från grunden på AWS med EMV contactless som primär betalmetod — res med ditt bankkort,
+          automatiska rabatter för studenter och seniorer, tillgänglighetsfunktioner inbakade från
+          start. PCI-compliant och designat för att hantera peak hours utan vänlighet på prestanda.
+      - h: Resultat
+        body: >-
+          800 000 resor per dag, EMV-baserad contactless som standard, fullständig PCI-compliance.
+          AWS skrev en egen blogpost om projektet som referensimplementation för publika sektorns
+          övergång till modern molninfrastruktur.
+    stackList:
+      - AWS (EC2, RDS, KMS)
+      - EMV contactless
+      - PCI-compliant
+      - Tillgänglighetsfunktioner
+    quote: null
+- client: Blocket
+  sector: Marketplace
+  sectorKey: marketplace
+  outcome: Monolit → microservices utan driftstopp
+  body: >-
+    SCG drev Blockets transformation från en stor legacy-monolit till väldefinierade microservices
+    med tydliga gränser. Arkitekter, utvecklare och en product manager — hela vägen från planering
+    till leverans. Event-driven på Kafka, event sourcing via DynamoDB-streams, onion-arkitektur.
+  metric: Kafka
+  metricLabel: event-driven
+  secondary:
+    - num: Kotlin
+      label: Spring Boot · K8s
+    - num: Aurora
+      label: PostgreSQL + DynamoDB
+    - num: Onion
+      label: Hexagonal arkitektur
+  stack:
+    - Kotlin · Spring Boot
+    - Kafka
+    - Aurora · DynamoDB
+    - Onion / Hexagonal
+  year: '2024'
+  role: Arkitekter, utvecklare, product manager
+  period: 2022 – 2024
+  testimonial:
+    quote: >-
+      Konsulterna från Stockholm Code Group sticker verkligen ut. De bidrar med anmärkningsvärd
+      teknisk expertis och seniority, och är dedikerade till att leverera effektiva och moderna
+      lösningar.
+    name: Niklas Lager
+    role: CTO, Blocket
+  expanded:
+    summary: >-
+      Transformation av Blockets stora legacy-monolit till väldefinierade microservices —
+      event-driven, utan driftstopp, med ett team som täckte hela vägen från planering till
+      leverans.
+    sections:
+      - h: Bakgrund
+        body: >-
+          Blocket körde en omfattande legacy-monolit som hade vuxit över flera decennier. Den var
+          stabil men hade blivit en bromskloss för utvecklingstakten — varje förändring krävde
+          koordination, deploys var sällsynta händelser, och nya idéer hamnade i kö.
+      - h: Vad vi gjorde
+        body: >-
+          SCG drev transformationen från monolit till väldefinierade microservices med tydliga
+          gränser, utan att Blocket behövde stå stilla. Vi bemannade arkitekter, utvecklare och en
+          product manager — hela vägen från planering till leverans. Event-driven på Kafka, event
+          sourcing via DynamoDB-streams, onion- och hexagonal arkitektur så att domänlogik och
+          infrastruktur kan utvecklas oberoende av varandra.
+      - h: Resultat
+        body: >-
+          Tydligt avgränsade tjänster i Kotlin på Spring Boot och Kubernetes, Aurora PostgreSQL och
+          DynamoDB som datalager, Kafka som backbone för all asynkron kommunikation. Teamet kan nu
+          släppa förändringar oftare och med mindre koordination — och nästa generations Blocket är
+          inte längre en omöjlig refaktor.
+    stackList:
+      - Kotlin · Spring Boot · Kubernetes
+      - Aurora PostgreSQL · DynamoDB
+      - Kafka · event sourcing
+      - Onion / Hexagonal arkitektur
+- client: Matsmart / Motatos
+  sector: E-handel
+  sectorKey: ecom
+  outcome: Modernisering av kärnplattform med agentic AI
+  body: >-
+    Hjälpte Matsmart/Motatos modernisera sin legacy-plattform och möjliggöra för ett litet team att
+    leverera över sin viktklass med ett agentic AI-baserat arbetssätt. Service-arkitektur
+    omdesignad, hand-underhållna komponenter ersatta med managed alternativ, parallella POC-tjänster
+    bredvid existerande flöden.
+  metric: 5–8k
+  metricLabel: ordrar/dag (SE)
+  secondary:
+    - num: '6'
+      label: europeiska marknader
+    - num: Azure
+      label: Service Bus · IaC
+    - num: Agentic
+      label: AI-workflows
+  stack:
+    - Azure Service Bus
+    - GitHub Actions
+    - Infrastructure as Code
+    - .NET / C#
+    - Agentic AI
+  year: '2026'
+  role: Architect and Developer
+  period: 2025 – 2026
+  expanded:
+    summary: >-
+      Vi hjälpte Matsmart/Motatos modernisera sin legacy-plattform och möjliggöra för ett litet team
+      att leverera över sin viktklass med ett agentic AI-baserat arbetssätt — service-arkitekturen
+      omdesignad och migrationen körd parallellt med drift utan ett enda cutover-datum.
+    sections:
+      - h: Bakgrund
+        body: >-
+          Matsmart/Motatos har ett uppdrag att minska matsvinn genom att köpa in och sälja vidare
+          överlager, säsongsvaror, produkter med tryckfel och annan överbliven mat. Under uppdraget
+          körde e-handeln i sex europeiska länder, med Sverige på 5 000–8 000 ordrar per dag och
+          betydande dygnet-runt-trafik på övriga marknader. Plattformen sitter mitt i operationen:
+          ERP-sync, inköp och leverantörsdata, orderhantering, lagersaldon, realtidsintegration mot
+          lager, frakt och produktdata för varje SKU. Tidigare beslut som en gång var rätt — ett
+          egenbyggt ramverk, hand-underhållna tjänster, felaktiga integrationer — hade börjat bromsa
+          teamet.
+      - h: Utmaningen
+        body: >-
+          Lösningen var smal: driften kunde inte pausas, en big-bang-rewrite var omöjlig för ett
+          team av den här storleken, och fortsätta lappa det egna ramverket hade compoundat skulden.
+          Det som ersatte måste komma bit för bit, utan en enda cutover-dag, samtidigt som teamet
+          fortsatte leverera mot intern efterfrågan.
+      - h: Vad vi gjorde
+        body: >-
+          Robert Krogh från SCG kom in som arkitekt och utvecklare för att leda omställningen. En
+          lättviktig arkitektur visade hur enskilda tjänster kunde leva utanför det egna ramverket,
+          fortfarande vara en del av helheten, och kräva minimal setup. Vi flyttade från code-first
+          till infrastructure-first så tjänsterna blev fullt frikopplade. Meddelandeflöden gick från
+          riktade RabbitMQ-flöden till managed Azure Service Bus. Parallellt migrerade teamet från
+          Azure DevOps till GitHub, vilket öppnade för att göra om CI/CD och IaC i samma anda.
+      - h: Agentic AI för ett litet team på ett stort system
+        body: >-
+          Vi lade grunden för team-skalad AI-användning där vinsterna sprider sig bortom individen.
+          Genom att göra kontexten explicit i monorepot kunde agenter jobba med en bredare bild än
+          tidigare arbetssätt tillät. En custom skill drar pipeline-data via GitHub CLI och visar i
+          en prompt vad som är deployat var, per tjänst. Skills som denna ligger i repot,
+          versionerade tillsammans med koden — en utvecklares förbättrade arbetssätt blir teamets.
+      - h: Resultat
+        body: >-
+          Den nya arkitekturen lät teamet bygga slankare tjänster, underhålla mindre kod, och
+          deploya med färre steg. Dataflöden kunde migreras parallellt med den gamla lösningen, i
+          teamets takt, enligt en säker plan. Dokumentationen blev bred och aktuell — för både
+          människor och AI. Genom AI-underhållen dokumentation, tooling och möjligheten att utforska
+          live-miljöer från IaC och pipelines (utan data eller känslig info) gick teamet in i ett
+          mer agentic arbetssätt, och kunde göra meningsfullt mer med mindre.
+      - h: Adaptive reuse
+        body: >-
+          I arkitektur är *adaptive reuse* hantverket att ge en befintlig byggnad ny funktion och
+          moderna system samtidigt som man bevarar strukturen och karaktären som är värd att
+          behålla. Matsmart/Motatos plattform fick samma behandling. Domänlogiken, integrationerna
+          verksamheten beror på, de pågående flödena: allt behållet. Vid sidan om dem byggdes
+          moderna motsvarigheter — managed messaging bredvid den self-hosted bussen, rena pipelines
+          bredvid de hand-underhållna, lättviktiga tjänster bredvid det egna ramverket. Nytt och
+          gammalt körde parallellt, varje ny del förtjänade sin plats innan den gamla klev åt sidan.
+    stackList:
+      - Azure Service Bus — managed event-driven messaging
+      - GitHub Actions — CI/CD och samarbete
+      - Infrastructure as Code — fullt frikopplade tjänster
+      - Lättviktig service-arkitektur — minimal setup per tjänst
+      - Agentic AI workflows — team-skalad, inte solo
+      - AI-underhållen dokumentation
+    tagline: >-
+      Matsmart/Motatos bekämpar svinn för en levande. Stockholm Code Group hjälpte dem skära det
+      från deras plattform också: mindre kod, mindre infra-drift, mindre föråldrad dokumentation,
+      mindre friktion mellan en idé och en deploy.

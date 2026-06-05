@@ -1,0 +1,236 @@
+---
+import { getRelativeLocaleUrl } from 'astro:i18n';
+import { SCG } from '../lib/theme.js';
+
+const { locale = 'sv', content } = Astro.props;
+
+// Structured lists from careers.yaml; hardcoded page copy from careers_page.yaml.
+const careers = content.careers;
+const page = content.careers_page;
+
+const perks = careers.perks ?? [];
+const roles = careers.roles ?? [];
+const process = careers.process ?? [];
+const quote = careers.quote ?? {};
+
+const link = (to) => getRelativeLocaleUrl(locale, to);
+const assetBase = import.meta.env.BASE_URL.endsWith('/')
+  ? import.meta.env.BASE_URL
+  : import.meta.env.BASE_URL + '/';
+
+const mailto = (subject) =>
+  subject
+    ? `mailto:${page.cta.email}?subject=${encodeURIComponent(subject)}`
+    : `mailto:${page.cta.email}`;
+
+const pad = (i) => String(i + 1).padStart(2, '0');
+---
+<header class="scg-c-hero">
+  <div class="scg-c-container">
+    <div class="scg-c-hero-kicker">{page.hero.kicker}</div>
+    <h1 class="scg-c-hero-h1">
+      {page.hero.headlinePre}<br /><span class="scg-accent">{page.hero.headlineAccent}</span>
+    </h1>
+    <p class="scg-c-hero-lead">{page.hero.lead}</p>
+    <div class="scg-c-logoart"><img src={`${assetBase}assets/logo.jpg`} alt="" /></div>
+  </div>
+</header>
+
+<section class="scg-c-perks">
+  <div class="scg-c-container">
+    <div class="scg-c-mono-kicker">{page.perks.eyebrow}</div>
+    <h2 class="scg-c-perks-h2">
+      {page.perks.headlinePre}<span class="scg-accent">{page.perks.headlineAccent}</span>{page.perks.headlinePost}
+    </h2>
+    <div class="scg-c-perks-grid">
+      {perks.map((p) => (
+        <div class="scg-c-perk">
+          <div class="scg-c-perk-mark">{p.mark}</div>
+          <h3 class="scg-c-perk-h3">{p.title}</h3>
+          <p class="scg-c-perk-p">{p.body}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<section class="scg-c-roles" id="apply">
+  <div class="scg-c-container">
+    <div class="scg-c-roles-head">
+      <div>
+        <div class="scg-c-mono-kicker">{page.roles.eyebrow}</div>
+        <h2 class="scg-c-roles-h2">
+          {page.roles.headlinePre}<br />{page.roles.headlineMid}<span class="scg-accent">{page.roles.headlineAccent}</span>
+        </h2>
+      </div>
+      <div class="scg-c-mono scg-c-roles-updated">{page.roles.updated}</div>
+    </div>
+
+    <div class="scg-c-role-list" id="roles">
+      {roles.map((r, i) => (
+        <article class="scg-c-role">
+          <div class="scg-c-role-headrow">
+            <div class="scg-c-role-num">{pad(i)}</div>
+            <div class="scg-c-role-title">{r.title}</div>
+            <div class="scg-c-role-meta">{r.loc} · {r.type}</div>
+            <div class="scg-c-role-pay">{r.pay}</div>
+            <div class="scg-c-role-toggle">+</div>
+          </div>
+          <div class="scg-c-role-body">
+            <div class="scg-c-role-two">
+              <div>
+                <h4 class="scg-c-role-h4">{page.roles.aboutLabel}</h4>
+                <p class="scg-c-role-p">{r.about}</p>
+                <h4 class="scg-c-role-h4">{page.roles.reqLabel}</h4>
+                <ul class="scg-c-role-ul">
+                  {(r.req ?? []).map((x) => <li>{x}</li>)}
+                </ul>
+                <a class="scg-c-role-apply" href={mailto(r.title)}>{page.roles.applyLabel}</a>
+              </div>
+              <div>
+                <h4 class="scg-c-role-h4">{page.roles.weLabel}</h4>
+                <ul class="scg-c-role-ul">
+                  {(r.we ?? []).map((x) => <li>{x}</li>)}
+                </ul>
+                <h4 class="scg-c-role-h4" style="margin-top: 24px;">{page.roles.stackLabel}</h4>
+                <div class="scg-c-role-stack">
+                  {(r.stack ?? []).map((s) => <span>{s}</span>)}
+                </div>
+              </div>
+            </div>
+          </div>
+        </article>
+      ))}
+    </div>
+  </div>
+</section>
+
+<section class="scg-c-process">
+  <div class="scg-c-container">
+    <div class="scg-c-mono-kicker">{page.process.eyebrow}</div>
+    <h2 class="scg-c-process-h2">
+      {page.process.headlinePre}<span class="scg-accent">{page.process.headlineAccent}</span>
+    </h2>
+    <div class="scg-c-steps">
+      {process.map((s) => (
+        <div class="scg-c-step">
+          <div class="scg-c-step-n">{s.n}</div>
+          <h4 class="scg-c-step-h4">{s.title}</h4>
+          <p class="scg-c-step-p">{s.body}</p>
+          <div class="scg-c-step-dur">{s.dur}</div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<section class="scg-c-quote">
+  <div class="scg-c-container">
+    <figure style="margin: 0;">
+      <div class="scg-c-q">“</div>
+      <blockquote class="scg-c-quote-bq">{quote.text}</blockquote>
+      <figcaption class="scg-c-quote-cap">
+        <div class="scg-c-quote-avatar"></div>
+        <div>
+          <div class="scg-c-quote-name">{quote.name}</div>
+          <div class="scg-c-quote-role">{quote.role}</div>
+        </div>
+      </figcaption>
+    </figure>
+  </div>
+</section>
+
+<section class="scg-c-cta">
+  <div class="scg-c-container">
+    <img class="scg-c-cta-logo" src={`${assetBase}assets/logo.jpg`} alt="" />
+    <h2 class="scg-c-cta-h2">{page.cta.headline}</h2>
+    <p class="scg-c-cta-p">{page.cta.body}</p>
+    <a class="scg-c-cta-btn" href={mailto()}>{page.cta.label}</a>
+  </div>
+</section>
+
+<script>
+  // Role expand/collapse: clicking a head-row toggles its card. First role open by default.
+  // Faithful to the original careers.html vanilla script (cards now rendered server-side).
+  document.querySelectorAll('.scg-c-role .scg-c-role-headrow').forEach((row) => {
+    row.addEventListener('click', () => row.parentElement.classList.toggle('open'));
+  });
+  document.querySelector('.scg-c-role')?.classList.add('open');
+</script>
+
+<style define:vars={{ accent: SCG.accent, bg: SCG.bg, panel: SCG.panel, panelHi: SCG.panelHi, ink: SCG.ink, inkDim: SCG.inkDim, inkFaint: SCG.inkFaint, line: SCG.line }}>
+  .scg-accent { color: var(--accent); }
+  .scg-c-container { max-width: 1280px; margin: 0 auto; padding: 0 56px; }
+  .scg-c-mono { font-family: 'JetBrains Mono', ui-monospace, monospace; }
+  .scg-c-mono-kicker { font-family: 'JetBrains Mono', ui-monospace, monospace; font-size: 12px; color: var(--accent); letter-spacing: .1em; text-transform: uppercase; margin-bottom: 16px; }
+
+  /* Hero */
+  .scg-c-hero { padding: 144px 0 120px; border-bottom: 1px solid var(--line); position: relative; overflow: hidden; }
+  .scg-c-hero-kicker { font-family: 'JetBrains Mono', ui-monospace, monospace; font-size: 12px; color: var(--accent); letter-spacing: .1em; text-transform: uppercase; margin-bottom: 20px; }
+  .scg-c-hero-h1 { font-family: 'Amatic SC', cursive; font-weight: 700; font-size: clamp(96px, 13vw, 220px); line-height: .88; margin: 0; color: var(--ink); }
+  .scg-c-hero-lead { font-size: 22px; line-height: 1.45; max-width: 680px; margin: 48px 0 0; color: var(--ink); }
+  .scg-c-logoart { position: absolute; right: 56px; top: 120px; opacity: .55; pointer-events: none; }
+  .scg-c-logoart img { height: 220px; filter: invert(1); mix-blend-mode: screen; }
+
+  /* Perks */
+  .scg-c-perks { background: var(--panel); border-bottom: 1px solid var(--line); padding: 64px 0; }
+  .scg-c-perks-h2 { font-family: 'Amatic SC', cursive; font-weight: 700; font-size: 72px; line-height: .95; margin: 0 0 32px; color: var(--ink); }
+  .scg-c-perks-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; background: var(--line); border: 1px solid var(--line); border-radius: 14px; overflow: hidden; }
+  .scg-c-perk { background: var(--bg); padding: 28px; min-height: 180px; display: flex; flex-direction: column; gap: 12px; }
+  .scg-c-perk-mark { font-family: 'Amatic SC', cursive; font-size: 64px; line-height: .8; color: var(--accent); }
+  .scg-c-perk-h3 { font-family: 'Amatic SC', cursive; font-weight: 700; font-size: 32px; line-height: .95; margin: 0; color: var(--ink); }
+  .scg-c-perk-p { font-size: 13px; color: var(--inkDim); margin: 0; line-height: 1.5; }
+
+  /* Roles */
+  .scg-c-roles { padding: 120px 0; }
+  .scg-c-roles-head { display: flex; justify-content: space-between; align-items: end; margin-bottom: 48px; gap: 24px; flex-wrap: wrap; }
+  .scg-c-roles-h2 { font-family: 'Amatic SC', cursive; font-weight: 700; font-size: clamp(64px, 8vw, 128px); line-height: .92; margin: 0; color: var(--ink); }
+  .scg-c-roles-updated { color: var(--inkDim); font-size: 12px; }
+
+  .scg-c-role { border: 1px solid var(--line); border-radius: 16px; margin-bottom: 12px; background: var(--panel); overflow: hidden; transition: border-color .15s; }
+  .scg-c-role:hover { border-color: var(--accent); }
+  .scg-c-role-headrow { display: grid; grid-template-columns: 80px 2fr 1.2fr 1fr 50px; align-items: center; padding: 24px 28px; gap: 20px; cursor: pointer; }
+  .scg-c-role-num { font-family: 'JetBrains Mono', ui-monospace, monospace; font-size: 12px; color: var(--inkDim); }
+  .scg-c-role-title { font-family: 'Amatic SC', cursive; font-weight: 700; font-size: 40px; line-height: 1; color: var(--ink); }
+  .scg-c-role-meta { font-family: 'JetBrains Mono', ui-monospace, monospace; font-size: 12px; color: var(--inkDim); }
+  .scg-c-role-pay { font-family: 'JetBrains Mono', ui-monospace, monospace; font-size: 13px; color: var(--accent); font-weight: 600; }
+  .scg-c-role-toggle { font-family: 'JetBrains Mono', ui-monospace, monospace; font-size: 18px; width: 40px; height: 40px; border-radius: 999px; background: var(--bg); border: 1px solid var(--line); display: flex; align-items: center; justify-content: center; color: var(--ink); transition: transform .2s; }
+  .scg-c-role.open .scg-c-role-toggle { transform: rotate(45deg); background: var(--accent); color: var(--bg); border-color: var(--accent); }
+  .scg-c-role-body { display: none; padding: 0 28px 32px; }
+  .scg-c-role.open .scg-c-role-body { display: block; }
+  .scg-c-role-two { display: grid; grid-template-columns: 1.4fr 1fr; gap: 48px; border-top: 1px solid var(--line); margin-top: 4px; padding-top: 32px; }
+  .scg-c-role-h4 { font-family: 'JetBrains Mono', ui-monospace, monospace; font-size: 11px; color: var(--accent); letter-spacing: .1em; text-transform: uppercase; margin: 0 0 14px; font-weight: 600; }
+  .scg-c-role-p { font-size: 15px; line-height: 1.6; color: var(--ink); margin: 0 0 16px; }
+  .scg-c-role-ul { margin: 0; padding-left: 18px; color: var(--ink); }
+  .scg-c-role-ul li { margin-bottom: 8px; font-size: 14px; line-height: 1.55; }
+  .scg-c-role-apply { display: inline-flex; align-items: center; gap: 10px; background: var(--accent); color: var(--bg); padding: 14px 22px; border-radius: 999px; text-decoration: none; font-weight: 600; font-size: 14px; margin-top: 16px; }
+  .scg-c-role-stack { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 12px; }
+  .scg-c-role-stack span { font-family: 'JetBrains Mono', ui-monospace, monospace; font-size: 11px; padding: 4px 10px; border-radius: 999px; border: 1px solid var(--line); color: var(--inkDim); background: var(--bg); }
+
+  /* Process */
+  .scg-c-process { background: var(--panel); padding: 120px 0; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+  .scg-c-process-h2 { font-family: 'Amatic SC', cursive; font-weight: 700; font-size: clamp(64px, 8vw, 120px); line-height: .92; margin: 0 0 56px; color: var(--ink); }
+  .scg-c-steps { display: grid; grid-template-columns: repeat(5, 1fr); gap: 16px; }
+  .scg-c-step { border-top: 2px solid var(--line); padding-top: 24px; }
+  .scg-c-step:first-child { border-top-color: var(--accent); }
+  .scg-c-step-n { font-family: 'Amatic SC', cursive; font-weight: 700; font-size: 72px; line-height: .9; color: var(--accent); }
+  .scg-c-step-h4 { font-family: 'Amatic SC', cursive; font-weight: 700; font-size: 32px; line-height: .95; margin: 8px 0 10px; color: var(--ink); }
+  .scg-c-step-p { font-size: 13px; color: var(--inkDim); line-height: 1.55; margin: 0; }
+  .scg-c-step-dur { font-family: 'JetBrains Mono', ui-monospace, monospace; font-size: 11px; color: var(--inkDim); margin-top: 10px; }
+
+  /* Quote */
+  .scg-c-quote { padding: 120px 0; border-bottom: 1px solid var(--line); }
+  .scg-c-quote-bq { font-family: 'Amatic SC', cursive; font-weight: 700; font-size: clamp(44px, 6vw, 96px); line-height: 1; margin: 0; color: var(--ink); max-width: 1100px; }
+  .scg-c-q { font-family: 'Amatic SC', cursive; font-size: 200px; line-height: .3; color: var(--accent); margin-bottom: 20px; }
+  .scg-c-quote-cap { margin-top: 32px; display: flex; align-items: center; gap: 12px; }
+  .scg-c-quote-avatar { width: 44px; height: 44px; border-radius: 999px; background: var(--panelHi); border: 1px solid var(--line); }
+  .scg-c-quote-name { font-size: 15px; font-weight: 500; color: var(--ink); }
+  .scg-c-quote-role { font-family: 'JetBrains Mono', ui-monospace, monospace; font-size: 12px; color: var(--inkDim); }
+
+  /* Spontaneous CTA */
+  .scg-c-cta { background: var(--accent); padding: 120px 0; text-align: center; }
+  .scg-c-cta-logo { height: 120px; margin-bottom: 24px; }
+  .scg-c-cta-h2 { font-family: 'Amatic SC', cursive; font-weight: 700; font-size: clamp(72px, 10vw, 160px); line-height: .92; margin: 0 0 20px; color: var(--bg); }
+  .scg-c-cta-p { font-size: 20px; line-height: 1.5; margin: 0 auto 40px; max-width: 640px; color: var(--bg); }
+  .scg-c-cta-btn { display: inline-flex; align-items: center; gap: 10px; background: var(--bg); color: var(--ink); padding: 16px 26px; border-radius: 999px; text-decoration: none; font-weight: 600; font-size: 16px; }
+</style>

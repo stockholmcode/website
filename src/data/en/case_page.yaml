@@ -1,0 +1,43 @@
+# Hardcoded page copy for the Case page (everything NOT in cases.yaml).
+# The case list + expanded deep-view content live in cases.yaml (content.cases).
+
+# Browser tab label; Base.astro renders it as "<title> · <brand>".
+title: Cases
+
+hero:
+  kicker: "№ 03 · Cases"
+  headlinePre: "Stories we"
+  headlineAccent: "love"
+  headlinePost: " to tell."
+  lead: >-
+    Platforms, ticketing systems, marketplaces. What we do is not always visible — but it always
+    shows when it goes wrong. Here are a few where it went right.
+
+# Sector filter chips. `filter` matches each case's sectorKey ("all" shows everything).
+filters:
+  - filter: all
+    label: All
+  - filter: streaming
+    label: Media & streaming
+  - filter: public
+    label: Public transport
+  - filter: marketplace
+    label: Marketplace
+  - filter: ecom
+    label: E-commerce
+
+# Per-case labels reused across every card.
+caseLabel: Case
+headLabel: Choices & tools         # heading inside the stackbox aside
+readMore: Read the full case       # collapsed read-more button label
+readLess: Close                    # expanded read-more button label
+countSuffix: " cases"             # appended after the visible count
+empty:
+  title: "No cases match."
+  hint: "// try another sector"
+
+cta:
+  headline: "Want one of your own?"
+  body: >-
+    The best cases start with a conversation — not an RFP. Get in touch, and we'll meet over a coffee.
+  email: contactus@stockholmcode.se

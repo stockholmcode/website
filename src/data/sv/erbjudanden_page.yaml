@@ -1,0 +1,145 @@
+# Page-specific copy for erbjudanden (offerings) page.
+# The offering tiers come from offerings.yaml and the 5D dimensions from
+# dimensions.yaml; everything here is page chrome: headings, intros, CTAs,
+# and the static "core practice" / "engage" / deliverables copy that is not
+# part of those data lists.
+
+# Browser tab label; Base.astro renders it as "<title> · <brand>".
+title: Erbjudanden
+
+hero:
+  kicker: "№ 02 · Erbjudanden"
+  headlinePre: Senior kompetens.
+  headlineAccent: Skarpa
+  headlineMid: leveranser.
+  lead: Vi bygger system, team och ledarskap.
+  leadDim: >-
+    Tre sätt att engagera sig — plus en specialiserad track för organisationer
+    som vill göra AI till mer än bara ett verktyg.
+
+# Core practice section: three static ways of working together.
+core:
+  headPre: Tre sätt att
+  headMid: jobba
+  headAccent: tillsammans.
+  lead: >-
+    Oavsett om ni behöver ett helt team, en enskild senior konsult, eller
+    rådgivning på arkitekt- eller CTO-nivå — det här är grunden i vår praktik.
+  cards:
+    - tag: A
+      label: CORE PRACTICE
+      title: Stora initiativ
+      body: >-
+        Dedikerade team inbäddade hos er, med fullt ansvar för
+        mjukvaruutvecklingen — från arkitektur till leverans. Outcome-baserat,
+        egen lead, seniora ingenjörer hela vägen.
+      bullets:
+        - Dedikerat team (3–8 personer)
+        - Tech lead + arkitekt ingår
+        - Outcome-baserade kontrakt
+        - Fast eller löpande
+    - tag: B
+      label: CORE PRACTICE
+      title: Timkonsulting
+      body: >-
+        Vi förstärker befintliga kundteam med seniora konsulter — anpassat efter
+        erat behov och tech-stack. Enskilda profiler där ni behöver tyngd.
+      bullets:
+        - 1–3 seniora profiler
+        - Anpassat efter er stack
+        - Veckovis fakturering
+        - Smidigt att skala upp/ner
+    - tag: C
+      label: CORE PRACTICE
+      title: Rådgivning
+      body: >-
+        Teknisk rådgivning inom arkitektur, kodkvalitet och strategisk
+        planering — ibland som del av M&A due diligence. Vi har suttit på andra
+        sidan bordet.
+      bullets:
+        - Arkitekturreview
+        - Teknisk DD för PE/VC
+        - Fractional CTO
+        - Strategisk roadmapping
+
+# AI-readiness track intro + ladder strip.
+track:
+  kicker: Specialism
+  headPre: AI-readiness
+  headAccent: track
+  body: >-
+    När AI behöver struktur — inte bara verktyg — plockar vi in fyra fokuserade
+    steg ovanpå grunden ovan. Samma seniora ingenjörer, ett annat objektiv.
+    Varje steg står på egna ben; börja där ni är.
+  ladder:
+    - { label: "Steg 1 · Klarhet", opacity: "1" }
+    - { label: "Steg 2 · Diagnos", opacity: ".85" }
+    - { label: "Steg 3 · Exekvering", opacity: ".7" }
+    - { label: "Steg 4 · Löpande", opacity: ".55" }
+
+# Deliverables ("Ni får") shown per offering, keyed by offering num.
+# Kept here because offerings.yaml does not carry deliverable lists.
+offeringDeliverables:
+  heading: Ni får
+  byNum:
+    '01':
+      - Halvdagsworkshop med 2 seniora arkitekter
+      - Snabb-scoring på 5 dimensioner
+      - 1–2 sidors PDF-sammanfattning
+      - Konkret rekommendation om nästa steg
+    '02':
+      - Full 5-dimensionell scorecard
+      - Konkreta åtgärder per dimension
+      - Skriftlig rapport (15–25 sidor)
+      - Stakeholder-presentation live
+      - Prioriterad roadmap för 6–12 månader
+    '03':
+      - Modulärt — börja smått eller stort
+      - Definierat scope per modul
+      - Kontinuitet med assessment-teamet
+      - Veckovis demo + uppföljning
+    '04':
+      - AI-native arbetssätt från dag ett
+      - Seniora ingenjörer (10+ år)
+      - Skala upp/ner månadsvis
+      - Mätbar leveranshastighet
+
+# 5D framework section headings + the red-flags/wins detail labels.
+framework:
+  headPre: 5 dimensioner.
+  headAccent: Samma karta.
+  lead: >-
+    Det här är ramverket vi använder från första halvdagen till löpande
+    leverans. Samma språk, samma scorecard, samma åtgärdslista — bara olika
+    djup beroende på var ni är.
+  signalsLabel: RÖDA FLAGGOR
+  winsLabel: ÅTGÄRDER
+
+# How-to-engage section.
+engage:
+  heading: Så börjar vi.
+  steps:
+    - step: '01'
+      title: Säg hej
+      body: >-
+        Skicka ett mejl med ett par rader om var ni är och vad ni funderar på.
+        Ingen mall, ingen brief — bara ett samtal.
+    - step: '02'
+      title: 30 minuter
+      body: >-
+        Vi bokar ett kort möte för att förstå om vi är rätt match. Är vi inte
+        det säger vi det rakt — och hjälper till att peka åt rätt håll.
+    - step: '03'
+      title: Ett tydligt nästa steg
+      body: >-
+        Antingen en halvdag, en assessment, eller direkt in i exekvering. Vi
+        skriver ett kort förslag samma vecka.
+
+# Closing CTA band.
+cta:
+  heading: Låt oss prata.
+  body: >-
+    Mejla oss och berätta var ni står — kort, långt, eller mitt emellan. Vi
+    svarar samma dag.
+  buttonLabel: "contactus@stockholmcode.se →"
+  buttonHref: "mailto:contactus@stockholmcode.se"

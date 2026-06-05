@@ -1,0 +1,235 @@
+---
+import { getRelativeLocaleUrl } from 'astro:i18n';
+import { SCG } from '../lib/theme.js';
+
+const { locale = 'sv', content } = Astro.props;
+
+const cases = content.cases ?? [];
+const cp = content.case_page;
+const hero = cp.hero;
+
+const link = (to) => getRelativeLocaleUrl(locale, to);
+const assetBase = import.meta.env.BASE_URL.endsWith('/')
+  ? import.meta.env.BASE_URL
+  : import.meta.env.BASE_URL + '/';
+const mailto = `mailto:${cp.cta.email}`;
+
+const pad2 = (n) => String(n).padStart(2, '0');
+---
+<header class="scg-case-hero">
+  <div class="scg-case-container">
+    <div class="scg-case-kicker">{hero.kicker}</div>
+    <h1>{hero.headlinePre}<br /><span class="scg-case-accent">{hero.headlineAccent}</span>{hero.headlinePost}</h1>
+    <p class="scg-case-lead">{hero.lead}</p>
+  </div>
+</header>
+
+<!-- Filters -->
+<div class="scg-case-filters">
+  <div class="scg-case-container">
+    <div class="row">
+      <div class="chips" id="filter-chips">
+        {cp.filters.map((f, i) => (
+          <button class:list={['chip', { active: i === 0 }]} data-filter={f.filter}>{f.label}</button>
+        ))}
+      </div>
+      <div class="count" id="case-count">{cases.length}{cp.countSuffix}</div>
+    </div>
+  </div>
+</div>
+
+<!-- All cases — same rich layout, all expandable -->
+<section class="scg-case-cases">
+  <div class="scg-case-container" id="case-list">
+    {cases.map((c, i) => (
+      <article class="case" data-sector={c.sectorKey} data-open="false">
+        <div class="head">{cp.caseLabel} · {pad2(i + 1)} · {c.sector}</div>
+        <div class="grid">
+          <div>
+            <h2>{c.client}</h2>
+            <div class="meta">{c.period} · {c.role}</div>
+            <div class="outcome">{c.outcome}</div>
+            <p class="body">{c.body}</p>
+            <div class="stack">
+              {c.stack.map((s) => <span class="pill">{s}</span>)}
+            </div>
+            <button class="read-more" data-toggle><span>{cp.readMore}</span><span class="plus">+</span></button>
+          </div>
+          <div class="stats">
+            <div class="big">
+              <div class="num-big">{c.metric}</div>
+              <div class="label-big">{c.metricLabel}</div>
+            </div>
+            {c.secondary.map((s, j) => (
+              <div class:list={['small', { span2: j === c.secondary.length - 1 }]}>
+                <div class="num">{s.num}</div>
+                <div class="label">{s.label}</div>
+              </div>
+            ))}
+          </div>
+        </div>
+        {c.testimonial && (
+          <figure class="testimonial">
+            <blockquote>"{c.testimonial.quote}"</blockquote>
+            <figcaption>— {c.testimonial.name}, {c.testimonial.role}</figcaption>
+          </figure>
+        )}
+        <div class="deep">
+          <div>
+            <p class="summary">{c.expanded.summary}</p>
+            {c.expanded.sections.map((sec) => (
+              <div class="section"><h4>{sec.h}</h4><p>{sec.body}</p></div>
+            ))}
+            {c.expanded.tagline && <p class="tagline">{c.expanded.tagline}</p>}
+          </div>
+          <aside>
+            <div class="stackbox">
+              <h4>{cp.headLabel}</h4>
+              <ul>
+                {c.expanded.stackList.map((item) => (
+                  <li><span class="arrow">→</span><span>{item}</span></li>
+                ))}
+              </ul>
+            </div>
+          </aside>
+        </div>
+      </article>
+    ))}
+  </div>
+
+  <div class="empty scg-case-container" id="empty">
+    <div class="display">{cp.empty.title}</div>
+    <p>{cp.empty.hint}</p>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="scg-case-cta">
+  <div class="scg-case-container">
+    <img src={`${assetBase}assets/logo.jpg`} alt="" class="logo" />
+    <h2>{cp.cta.headline}</h2>
+    <p>{cp.cta.body}</p>
+    <a class="btn" href={mailto}>{cp.cta.email} →</a>
+  </div>
+</section>
+
+<script is:inline define:vars={{ readMore: cp.readMore, readLess: cp.readLess, countSuffix: cp.countSuffix }}>
+  // Filter chips — filter cases by sectorKey (data-sector). "all" shows everything.
+  const chips = document.querySelectorAll('#filter-chips .chip');
+  const cases = document.querySelectorAll('.case');
+  const countEl = document.getElementById('case-count');
+  const emptyEl = document.getElementById('empty');
+
+  chips.forEach((chip) => {
+    chip.addEventListener('click', () => {
+      chips.forEach((c) => c.classList.remove('active'));
+      chip.classList.add('active');
+      const f = chip.dataset.filter;
+      let visible = 0;
+      cases.forEach((c) => {
+        const match = f === 'all' || c.dataset.sector === f;
+        c.classList.toggle('hidden', !match);
+        if (match) visible++;
+      });
+      countEl.textContent = visible + countSuffix;
+      emptyEl.classList.toggle('show', visible === 0);
+    });
+  });
+
+  // Expand / collapse per case.
+  document.querySelectorAll('.case [data-toggle]').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const article = btn.closest('.case');
+      const open = article.dataset.open === 'true';
+      article.dataset.open = open ? 'false' : 'true';
+      btn.querySelector('span:first-child').textContent = open ? readMore : readLess;
+    });
+  });
+</script>
+
+<style
+  define:vars={{
+    accent: SCG.accent,
+    bg: SCG.bg,
+    panel: SCG.panel,
+    ink: SCG.ink,
+    inkDim: SCG.inkDim,
+    inkFaint: SCG.inkFaint,
+    line: SCG.line,
+  }}
+>
+  .scg-case-container { max-width: 1280px; margin: 0 auto; padding: 0 56px; }
+
+  /* Hero */
+  .scg-case-hero { padding: 144px 0 96px; border-bottom: 1px solid var(--line); position: relative; overflow: hidden; }
+  .scg-case-kicker { font-family: 'JetBrains Mono', ui-monospace, monospace; font-size: 12px; color: var(--accent); letter-spacing: .1em; text-transform: uppercase; margin-bottom: 20px; }
+  .scg-case-hero h1 { font-family: 'Amatic SC', cursive; font-weight: 700; font-size: clamp(96px, 13vw, 220px); line-height: .88; margin: 0; letter-spacing: -.005em; color: var(--ink); }
+  .scg-case-accent { color: var(--accent); }
+  .scg-case-lead { font-size: 22px; line-height: 1.45; max-width: 720px; margin: 48px 0 0; color: var(--ink); }
+
+  /* Filter bar */
+  .scg-case-filters { border-bottom: 1px solid var(--line); background: var(--panel); position: sticky; top: 76px; z-index: 9; }
+  .scg-case-filters .row { display: flex; align-items: center; gap: 24px; padding: 18px 0; flex-wrap: wrap; }
+  .scg-case-filters .chips { display: flex; gap: 8px; flex-wrap: wrap; }
+  .scg-case-filters .chip { font-family: 'JetBrains Mono', ui-monospace, monospace; font-size: 12px; padding: 8px 14px; border-radius: 999px; border: 1px solid var(--line); background: var(--bg); color: var(--inkDim); cursor: pointer; transition: all .15s; user-select: none; }
+  .scg-case-filters .chip:hover { color: var(--ink); border-color: var(--inkDim); }
+  .scg-case-filters .chip.active { background: var(--accent); color: var(--bg); border-color: var(--accent); font-weight: 600; }
+  .scg-case-filters .count { font-family: 'JetBrains Mono', ui-monospace, monospace; font-size: 12px; color: var(--inkDim); margin-left: auto; }
+
+  /* All cases share the same rich "case card" layout */
+  .scg-case-cases { padding: 80px 0 112px; }
+  .scg-case-cases .case { padding-bottom: 80px; margin-bottom: 80px; border-bottom: 1px solid var(--line); transition: opacity .2s; }
+  .scg-case-cases .case:last-of-type { border-bottom: none; margin-bottom: 0; }
+  .scg-case-cases .case.hidden { display: none; }
+  .scg-case-cases .case .head { font-family: 'JetBrains Mono', ui-monospace, monospace; font-size: 11px; color: var(--accent); letter-spacing: .1em; margin-bottom: 16px; text-transform: uppercase; }
+  .scg-case-cases .case .grid { display: grid; grid-template-columns: 1.2fr 1fr; gap: 64px; align-items: start; }
+  .scg-case-cases .case h2 { font-family: 'Amatic SC', cursive; font-weight: 700; font-size: clamp(56px, 8vw, 120px); line-height: .9; margin: 0; color: var(--ink); }
+  .scg-case-cases .case .meta { font-family: 'JetBrains Mono', ui-monospace, monospace; font-size: 12px; color: var(--inkDim); letter-spacing: .06em; margin-top: 14px; }
+  .scg-case-cases .case .outcome { font-size: 22px; font-weight: 500; color: var(--ink); margin: 28px 0 16px; line-height: 1.35; }
+  .scg-case-cases .case p.body { font-size: 15px; line-height: 1.65; color: var(--inkDim); margin: 0; max-width: 540px; }
+  .scg-case-cases .case .stack { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 20px; }
+  .scg-case-cases .case .stack .pill { font-family: 'JetBrains Mono', ui-monospace, monospace; font-size: 10px; padding: 4px 10px; border-radius: 999px; border: 1px solid var(--line); color: var(--inkDim); }
+  .scg-case-cases .case .stats { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .scg-case-cases .case .stats .big { grid-column: 1 / span 2; padding: 32px; border: 1px solid var(--line); border-radius: 16px; background: var(--panel); }
+  .scg-case-cases .case .stats .big .num-big { font-family: 'Amatic SC', cursive; font-weight: 700; font-size: clamp(96px, 11vw, 144px); line-height: .9; color: var(--accent); }
+  .scg-case-cases .case .stats .big .label-big { font-family: 'JetBrains Mono', ui-monospace, monospace; font-size: 12px; color: var(--inkDim); letter-spacing: .06em; margin-top: 8px; }
+  .scg-case-cases .case .stats .small { padding: 22px; border: 1px solid var(--line); border-radius: 14px; background: var(--panel); }
+  .scg-case-cases .case .stats .small .num { font-family: 'Amatic SC', cursive; font-weight: 700; font-size: 56px; line-height: .9; color: var(--ink); }
+  .scg-case-cases .case .stats .small .label { font-family: 'JetBrains Mono', ui-monospace, monospace; font-size: 11px; color: var(--inkDim); margin-top: 6px; }
+  .scg-case-cases .case .stats .span2 { grid-column: 1 / span 2; }
+
+  .scg-case-cases .case .testimonial { margin-top: 36px; padding: 24px 28px; background: var(--panel); border-left: 3px solid var(--accent); border-radius: 0 12px 12px 0; }
+  .scg-case-cases .case .testimonial blockquote { margin: 0; font-size: 16px; line-height: 1.5; color: var(--ink); font-style: italic; }
+  .scg-case-cases .case .testimonial figcaption { font-family: 'JetBrains Mono', ui-monospace, monospace; font-size: 11px; color: var(--inkDim); margin-top: 12px; letter-spacing: .04em; }
+
+  /* Expandable read-more */
+  .scg-case-cases .case .read-more { margin-top: 28px; background: transparent; border: 1px solid var(--line); color: var(--ink); font-family: 'JetBrains Mono', ui-monospace, monospace; font-size: 12px; letter-spacing: .04em; padding: 12px 22px; border-radius: 999px; cursor: pointer; transition: all .15s; display: inline-flex; align-items: center; gap: 10px; }
+  .scg-case-cases .case .read-more:hover { border-color: var(--accent); color: var(--accent); }
+  .scg-case-cases .case .read-more .plus { transition: transform .25s; display: inline-block; }
+  .scg-case-cases .case[data-open="true"] .read-more .plus { transform: rotate(45deg); }
+  .scg-case-cases .case .deep { display: none; margin-top: 40px; padding-top: 40px; border-top: 1px solid var(--line); grid-template-columns: 1fr 320px; gap: 48px; align-items: start; }
+  .scg-case-cases .case[data-open="true"] .deep { display: grid; }
+  .scg-case-cases .case .deep .summary { font-family: 'Amatic SC', cursive; font-weight: 700; font-size: 32px; line-height: 1.1; color: var(--ink); margin: 0 0 32px; padding-left: 18px; border-left: 2px solid var(--accent); text-wrap: balance; }
+  .scg-case-cases .case .deep h4 { font-family: 'JetBrains Mono', ui-monospace, monospace; font-size: 10px; color: var(--accent); letter-spacing: .12em; text-transform: uppercase; margin: 0 0 10px; font-weight: 600; }
+  .scg-case-cases .case .deep .section { margin-bottom: 24px; }
+  .scg-case-cases .case .deep .section p { font-size: 15px; line-height: 1.65; color: var(--ink); margin: 0; max-width: 640px; }
+  .scg-case-cases .case .deep .tagline { margin-top: 24px; padding-top: 20px; border-top: 1px solid var(--line); font-size: 14px; line-height: 1.65; color: var(--inkDim); font-style: italic; max-width: 640px; }
+  .scg-case-cases .case .deep aside { display: flex; flex-direction: column; gap: 20px; }
+  .scg-case-cases .case .deep .stackbox { padding: 20px 22px; border: 1px solid var(--line); border-radius: 12px; }
+  .scg-case-cases .case .deep .stackbox ul { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 8px; }
+  .scg-case-cases .case .deep .stackbox li { font-size: 13px; color: var(--ink); line-height: 1.45; display: flex; gap: 10px; }
+  .scg-case-cases .case .deep .stackbox li .arrow { color: var(--accent); }
+
+  /* Empty state */
+  .scg-case-cases .empty { display: none; padding: 80px 0; text-align: center; }
+  .scg-case-cases .empty.show { display: block; }
+  .scg-case-cases .empty .display { font-family: 'Amatic SC', cursive; font-weight: 700; font-size: 56px; color: var(--inkDim); }
+  .scg-case-cases .empty p { font-size: 14px; color: var(--inkFaint); font-family: 'JetBrains Mono', ui-monospace, monospace; margin-top: 12px; }
+
+  /* CTA */
+  .scg-case-cta { background: var(--accent); padding: 120px 0; text-align: center; }
+  .scg-case-cta img.logo { height: 120px; width: auto; margin-bottom: 24px; }
+  .scg-case-cta h2 { font-family: 'Amatic SC', cursive; font-weight: 700; font-size: clamp(72px, 10vw, 160px); line-height: .92; margin: 0 0 20px; color: var(--bg); }
+  .scg-case-cta p { font-size: 20px; line-height: 1.5; margin: 0 auto 40px; max-width: 640px; color: var(--bg); }
+  .scg-case-cta .btn { display: inline-flex; align-items: center; gap: 10px; background: var(--bg); color: var(--ink); padding: 16px 26px; border-radius: 999px; text-decoration: none; font-size: 16px; font-weight: 600; }
+</style>
