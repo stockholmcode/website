@@ -62,13 +62,16 @@ nothing else:
 const locale = 'en';
 const content = getContent(locale);
 ---
-<Base locale={locale} site={content.site} title="Cases · Stockholm Code Group">
+<Base locale={locale} site={content.site} title={content.case_page.title}>
   <CasePage locale={locale} content={content} />
 </Base>
 ```
 
 The body lives in the component (`CasePage`), which is shared between both locales. The
-page is just the seam where a locale meets that component.
+page is just the seam where a locale meets that component. Even the browser title comes
+from the content (`<route>_page.yaml`), so the shim carries nothing translatable and the
+two locale files differ only by `locale`. `Base.astro` composes the title as
+`<label> · <brand>`; the homepage passes no label and renders the brand alone.
 
 URL slugs stay Swedish in both languages. The English cases page is `/en/case`, not
 `/en/cases`. Link targets in the YAML (`to: /case`) are written once as locale-neutral
@@ -82,7 +85,7 @@ are structural, not translatable.
 
 1. Add `src/data/sv/<route>_page.yaml` (and any domain data it needs).
 2. Add `src/pages/<route>.astro` and a `src/components/<Route>Page.astro` to render it.
-3. Add `src/pages/en/<route>.astro`, identical but for `locale = 'en'` and the title.
+3. Add `src/pages/en/<route>.astro`, identical to the Swedish shim but for `locale = 'en'`.
 4. Translate by adding `src/data/en/<route>_page.yaml`.
 
 ### Adding a locale

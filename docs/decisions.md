@@ -67,9 +67,10 @@ true.
 
 The real cost of duplication is not the file count, it is drift: someone updates one side
 and forgets the other. That already bit us once, the English page files shipped with
-hard-coded Swedish titles. The mitigation is to keep the duplicated part as thin as
-possible (locale plus component, nothing that carries meaning) and to move anything
-drift-prone, like the title, into the translated YAML.
+hard-coded Swedish titles. So we kept the duplicated part as thin as it goes: the page
+title, the one drift-prone value that was left, moved into the translated
+`<route>_page.yaml`, and the shim is now just `locale` plus a component reference, with
+nothing translatable in it to drift.
 
 **Holds until** roughly three or more locales, or fifteen-plus pages. Past that, the
 typing saved and the drift avoided by a single dynamic route outweigh the indirection,
