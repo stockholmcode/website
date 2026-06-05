@@ -1,13 +1,11 @@
 name: Deploy to GitHub Pages
 
 # Build runs on every push and PR (proves the site compiles).
-# Deploy happens on the deploy branches or a manual dispatch, and only takes
+# Deploy happens on a push to `main` or a manual dispatch, and only takes
 # effect once the repo's Pages source is set to "GitHub Actions".
-# During the migration we deploy from `feature/translation`; once the migration
-# lands, `main` becomes the production deploy source (drop feature/translation then).
 on:
   push:
-    branches: [main, feature/translation]
+    branches: [main]
   pull_request:
   workflow_dispatch:
 

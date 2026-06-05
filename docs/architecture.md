@@ -109,11 +109,10 @@ through component styles; if a colour needs to change, it changes in one file.
 
 `.github/workflows/deploy.yml` runs on every push and pull request. The build job runs
 `npm ci && npm run build` and uploads `dist/` as a Pages artifact, which doubles as a CI
-check: a build that does not compile cannot merge or ship. The deploy job runs only on
-the configured deploy branches (not on pull requests) and publishes the artifact to
-GitHub Pages.
+check: a build that does not compile cannot merge or ship. The deploy job runs only on a
+push to `main` (not on pull requests) and publishes the artifact to GitHub Pages.
 
-During the Astro migration the deploy branch is `feature/translation`, so the work can go
-live without disturbing `main`. Once the migration lands, `main` becomes the production
-deploy source and `feature/translation` is dropped. CI builds on Node 20; local
-development wants Node 20 or newer for the same reason.
+`main` is the production deploy source. (During the Astro migration `feature/translation`
+also deployed, so the work could go live without disturbing `main`; that branch was
+dropped once the migration landed.) CI builds on Node 20; local development wants Node 20
+or newer for the same reason.
