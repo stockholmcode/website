@@ -35,7 +35,7 @@ const initialCount = page.filter.countTemplate
       {page.hero.titlePre}<br />{page.hero.titleMid}<span class="scg-accent">{page.hero.titleAccent}</span>
     </h1>
     <p class="scg-team-lead">{page.hero.intro}</p>
-    <div class="scg-team-logoart"><img src={`${assetBase}assets/logo.jpg`} alt="" /></div>
+    <div class="scg-team-logoart"><img src={`${assetBase}assets/logo-light.png`} alt="" /></div>
   </div>
 </header>
 
@@ -109,7 +109,7 @@ const initialCount = page.filter.countTemplate
 
 <section class="scg-callout">
   <div class="scg-container">
-    <img class="scg-callout-logo" src={`${assetBase}assets/logo.jpg`} alt="" />
+    <img class="scg-callout-logo" src={`${assetBase}assets/logo-dark.png`} alt="" />
     <h2 class="scg-callout-h2 display">{page.callout.title}</h2>
     <p class="scg-callout-body">{page.callout.body}</p>
     <a href={calloutHref} class="scg-callout-btn">{page.callout.cta.label}</a>
@@ -153,7 +153,7 @@ const initialCount = page.filter.countTemplate
   .scg-team-h1 { font-size: clamp(96px, 13vw, 220px); line-height: .88; margin: 0; letter-spacing: -.005em; color: var(--ink); }
   .scg-team-lead { font-size: 22px; line-height: 1.45; max-width: 680px; margin: 48px 0 0; color: var(--ink); }
   .scg-team-logoart { position: absolute; right: 56px; top: 120px; opacity: .55; pointer-events: none; }
-  .scg-team-logoart img { height: 220px; width: auto; filter: invert(1); mix-blend-mode: screen; }
+  .scg-team-logoart img { height: 220px; width: auto; }
 
   /* Filter bar */
   .scg-filters { border-bottom: 1px solid var(--line); background: var(--panel); }

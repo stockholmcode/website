@@ -15,6 +15,10 @@ const href = (item) => (item?.href ? item.href : link(item?.to ?? '/'));
 
 // Language toggle: same page, other locale.
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+// Trailing-slash-safe asset base, matching the page components. BASE_URL is
+// "/website" (no trailing slash), so concatenating it raw with "assets/..."
+// yields "/websiteassets/..." which 404s. base + '/' normalises that.
+const assetBase = base + '/';
 let rel = Astro.url.pathname;
 if (base && rel.startsWith(base)) rel = rel.slice(base.length);
 rel = rel.replace(/^\/(sv|en)(?=\/|$)/, '') || '/';
@@ -29,6 +33,7 @@ const { nav, cta, footer, brand } = site;
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <link rel="icon" type="image/png" href={`${assetBase}assets/logo-dark.png`} />
     <title>{fullTitle}</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -68,7 +73,7 @@ const { nav, cta, footer, brand } = site;
       <div class="scg-foot-inner">
         <div class="scg-foot-grid">
           <div>
-            <img class="scg-foot-logo" src={`${import.meta.env.BASE_URL}assets/logo.jpg`} alt="Stockholm Code Group" />
+            <img class="scg-foot-logo" src={`${assetBase}assets/logo-light.png`} alt="Stockholm Code Group" />
             <div class="scg-foot-brand">{brand.name}</div>
             <p class="scg-foot-blurb">{footer.blurb}</p>
           </div>
@@ -107,7 +112,7 @@ const { nav, cta, footer, brand } = site;
       .scg-foot { background: var(--bg); color: var(--ink); padding: 72px 0 40px; border-top: 1px solid var(--line); }
       .scg-foot-inner { max-width: 1280px; margin: 0 auto; padding: 0 56px; }
       .scg-foot-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 40px; margin-bottom: 80px; }
-      .scg-foot-logo { height: 80px; width: auto; display: block; margin-bottom: 12px; filter: invert(1); mix-blend-mode: screen; }
+      .scg-foot-logo { height: 80px; width: auto; display: block; margin-bottom: 12px; }
       .scg-foot-brand { font-family: 'Amatic SC', cursive; font-weight: 700; font-size: 22px; color: var(--ink); }
       .scg-foot-blurb { font-size: 14px; color: var(--inkDim); line-height: 1.6; margin-top: 16px; max-width: 340px; }
       .scg-foot-h { font-family: 'JetBrains Mono', ui-monospace, monospace; font-size: 11px; color: var(--accent); letter-spacing: .1em; text-transform: uppercase; margin-bottom: 16px; }
