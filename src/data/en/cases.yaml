@@ -1,0 +1,259 @@
+- client: Warner Bros. Discovery
+  sector: Media & streaming
+  sectorKey: streaming
+  outcome: New streaming platform from scratch
+  body: >-
+    Built WBD's new global streaming platform — Discovery+ and HBO Max/MAX. POC in three weeks,
+    then chief architects and lead developers as the team scaled to 1000+ devs. Event-driven
+    microservices, non-blocking and with no external runtime dependencies.
+  metric: 13ms
+  metricLabel: avg API response time
+  secondary:
+    - num: 80M
+      label: API calls / day
+    - num: 99.9999%
+      label: API uptime
+    - num: 3 200
+      label: peak req/s
+  stack:
+    - Event-driven
+    - Microservices
+    - Lead architects
+    - Global scale
+  year: '2023'
+  role: Chief architects · Lead developers
+  period: 2019 – 2023
+  expanded:
+    summary: >-
+      From POC to global streaming platform for Warner Bros. Discovery — Discovery+ and HBO
+      Max/MAX, built from the ground up to handle global peaks without losing control of cost
+      or latency.
+    sections:
+      - h: Background
+        body: >-
+          WBD needed a new global streaming platform that could deliver Discovery+ and later HBO
+          Max/MAX to an audience measured in hundreds of millions. The existing architecture could
+          not handle that scale, and the timeline was uncompromising.
+      - h: What we did
+        body: >-
+          A three-week POC confirmed the direction. From there SCG stepped in as chief architects and
+          lead developers as the team scaled from a dozen to over 1000 developers. Event-driven
+          microservices, non-blocking IO, no external runtime dependencies — so that every service
+          could be operated, scaled and debugged in isolation.
+      - h: Result
+        body: >-
+          13ms average API response time, 80 million API calls per day, 99.9999% uptime and 3 200 peak
+          requests per second. The platform handles global peaks without losing control of cost or
+          latency, and the development team can iterate service by service without coordination
+          nightmares.
+    stackList:
+      - Event-driven microservices
+      - Non-blocking IO
+      - Global scaling
+      - Lead architects from SCG
+    quote: null
+- client: SL
+  sector: Public transport
+  sectorKey: public
+  outcome: New ticketing system with contactless
+  body: >-
+    Architecture and delivery of SL's new ticketing system — built from scratch on AWS. David Looberger
+    from SCG as chief software architect. Travel with a bank card, automatic discounts for
+    students/seniors, accessibility features. AWS wrote a blog post about the project.
+  metric: 800k
+  metricLabel: journeys / day
+  secondary:
+    - num: EMV
+      label: contactless payment
+    - num: AWS
+      label: EC2, RDS, KMS
+    - num: PCI
+      label: compliant
+  stack:
+    - EMV contactless
+    - AWS
+    - PCI-compliant
+  year: '2023'
+  role: Chief Software Architect (David Looberger)
+  period: 2020 – 2023
+  expanded:
+    summary: >-
+      SL's new ticketing system — contactless payment with bank cards, automatic discounts, built from
+      scratch on AWS. SCG's David Looberger as chief architect all the way.
+    sections:
+      - h: Background
+        body: >-
+          Stockholm's public transport needed to replace its ageing ticketing system with a solution
+          that handles 800,000 journeys a day — and gives travellers a far smoother experience. The
+          demands on operations, security and accessibility in a critical public service are hard and
+          non-negotiable.
+      - h: What we did
+        body: >-
+          David Looberger from SCG led the architecture as chief software architect. The system was built
+          from scratch on AWS with EMV contactless as the primary payment method — travel with your bank
+          card, automatic discounts for students and seniors, accessibility features baked in from the
+          start. PCI-compliant and designed to handle peak hours without compromising on performance.
+      - h: Result
+        body: >-
+          800,000 journeys per day, EMV-based contactless as standard, full PCI compliance.
+          AWS wrote its own blog post about the project as a reference implementation for the public
+          sector's transition to modern cloud infrastructure.
+    stackList:
+      - AWS (EC2, RDS, KMS)
+      - EMV contactless
+      - PCI-compliant
+      - Accessibility features
+    quote: null
+- client: Blocket
+  sector: Marketplace
+  sectorKey: marketplace
+  outcome: Monolith → microservices with no downtime
+  body: >-
+    SCG drove Blocket's transformation from a large legacy monolith into well-defined microservices
+    with clear boundaries. Architects, developers and a product manager — all the way from planning
+    to delivery. Event-driven on Kafka, event sourcing via DynamoDB streams, onion architecture.
+  metric: Kafka
+  metricLabel: event-driven
+  secondary:
+    - num: Kotlin
+      label: Spring Boot · K8s
+    - num: Aurora
+      label: PostgreSQL + DynamoDB
+    - num: Onion
+      label: Hexagonal architecture
+  stack:
+    - Kotlin · Spring Boot
+    - Kafka
+    - Aurora · DynamoDB
+    - Onion / Hexagonal
+  year: '2024'
+  role: Architects, developers, product manager
+  period: 2022 – 2024
+  testimonial:
+    quote: >-
+      The consultants from Stockholm Code Group truly stand out. They bring remarkable
+      technical expertise and seniority, and are dedicated to delivering effective and modern
+      solutions.
+    name: Niklas Lager
+    role: CTO, Blocket
+  expanded:
+    summary: >-
+      Transformation of Blocket's large legacy monolith into well-defined microservices —
+      event-driven, with no downtime, with a team that covered the whole path from planning to
+      delivery.
+    sections:
+      - h: Background
+        body: >-
+          Blocket ran an extensive legacy monolith that had grown over several decades. It was
+          stable but had become a brake on development pace — every change required coordination,
+          deploys were rare events, and new ideas ended up in a queue.
+      - h: What we did
+        body: >-
+          SCG drove the transformation from monolith to well-defined microservices with clear
+          boundaries, without Blocket having to stand still. We staffed architects, developers and a
+          product manager — all the way from planning to delivery. Event-driven on Kafka, event
+          sourcing via DynamoDB streams, onion and hexagonal architecture so that domain logic and
+          infrastructure can evolve independently of each other.
+      - h: Result
+        body: >-
+          Clearly bounded services in Kotlin on Spring Boot and Kubernetes, Aurora PostgreSQL and
+          DynamoDB as data stores, Kafka as the backbone for all asynchronous communication. The team
+          can now ship changes more often and with less coordination — and the next generation of
+          Blocket is no longer an impossible refactor.
+    stackList:
+      - Kotlin · Spring Boot · Kubernetes
+      - Aurora PostgreSQL · DynamoDB
+      - Kafka · event sourcing
+      - Onion / Hexagonal architecture
+- client: Matsmart / Motatos
+  sector: E-commerce
+  sectorKey: ecom
+  outcome: Core platform modernisation with agentic AI
+  body: >-
+    Helped Matsmart/Motatos modernise their legacy platform and enable a small team to
+    deliver above its weight class with an agentic AI way of working. Service architecture
+    redesigned, hand-maintained components replaced with managed alternatives, parallel POC services
+    alongside existing flows.
+  metric: 5–8k
+  metricLabel: orders/day (SE)
+  secondary:
+    - num: '6'
+      label: European markets
+    - num: Azure
+      label: Service Bus · IaC
+    - num: Agentic
+      label: AI workflows
+  stack:
+    - Azure Service Bus
+    - GitHub Actions
+    - Infrastructure as Code
+    - .NET / C#
+    - Agentic AI
+  year: '2026'
+  role: Architect and Developer
+  period: 2025 – 2026
+  expanded:
+    summary: >-
+      We helped Matsmart/Motatos modernise their legacy platform and enable a small team
+      to deliver above its weight class with an agentic AI way of working — the service architecture
+      redesigned and the migration run in parallel with operations, with no single cutover date.
+    sections:
+      - h: Background
+        body: >-
+          Matsmart/Motatos has a mission to reduce food waste by buying in and reselling
+          surplus stock, seasonal goods, products with print errors and other leftover food. During the
+          engagement the e-commerce ran in six European countries, with Sweden at 5,000–8,000 orders per
+          day and significant round-the-clock traffic on the other markets. The platform sits at the
+          centre of the operation: ERP sync, purchasing and supplier data, order handling, stock levels,
+          real-time integration with warehousing, shipping and product data for every SKU. Earlier
+          decisions that were once right — a custom-built framework, hand-maintained services, faulty
+          integrations — had started to slow the team down.
+      - h: The challenge
+        body: >-
+          The solution space was narrow: operations could not be paused, a big-bang rewrite was
+          impossible for a team of this size, and continuing to patch the in-house framework would have
+          compounded the debt. What replaced it had to come piece by piece, with no single cutover day,
+          while the team kept delivering against internal demand.
+      - h: What we did
+        body: >-
+          Robert Krogh from SCG came in as architect and developer to lead the shift. A
+          lightweight architecture showed how individual services could live outside the in-house
+          framework, still be part of the whole, and require minimal setup. We moved from code-first
+          to infrastructure-first so the services became fully decoupled. Messaging flows went from
+          targeted RabbitMQ flows to managed Azure Service Bus. In parallel the team migrated from
+          Azure DevOps to GitHub, which opened the door to redoing CI/CD and IaC in the same spirit.
+      - h: Agentic AI for a small team on a large system
+        body: >-
+          We laid the groundwork for team-scaled AI use where the gains spread beyond the individual.
+          By making context explicit in the monorepo, agents could work with a broader picture than
+          earlier ways of working allowed. A custom skill pulls pipeline data via the GitHub CLI and
+          shows, in a prompt, what is deployed where, per service. Skills like this live in the repo,
+          versioned together with the code — one developer's improved way of working becomes the team's.
+      - h: Result
+        body: >-
+          The new architecture let the team build leaner services, maintain less code, and
+          deploy with fewer steps. Data flows could be migrated in parallel with the old solution, at
+          the team's pace, following a safe plan. The documentation became broad and current — for both
+          humans and AI. Through AI-maintained documentation, tooling and the ability to explore
+          live environments from IaC and pipelines (without data or sensitive info), the team moved into
+          a more agentic way of working, and could do meaningfully more with less.
+      - h: Adaptive reuse
+        body: >-
+          In architecture, *adaptive reuse* is the craft of giving an existing building a new function and
+          modern systems while preserving the structure and character worth keeping. The
+          Matsmart/Motatos platform got the same treatment. The domain logic, the integrations the
+          business depends on, the flows in motion: all kept. Alongside them, modern counterparts were
+          built — managed messaging next to the self-hosted bus, clean pipelines next to the
+          hand-maintained ones, lightweight services next to the in-house framework. New and
+          old ran in parallel, each new part earning its place before the old one stepped aside.
+    stackList:
+      - Azure Service Bus — managed event-driven messaging
+      - GitHub Actions — CI/CD and collaboration
+      - Infrastructure as Code — fully decoupled services
+      - Lightweight service architecture — minimal setup per service
+      - Agentic AI workflows — team-scaled, not solo
+      - AI-maintained documentation
+    tagline: >-
+      Matsmart/Motatos fights waste for a living. Stockholm Code Group helped them cut it
+      from their platform too: less code, less infra to operate, less stale documentation,
+      less friction between an idea and a deploy.

@@ -1,3 +1,6 @@
+# Browser tab label; Base.astro renders it as "<title> · <brand>".
+title: Team
+
 hero:
   eyebrow: № 06 · Teamet
   titlePre: Människor
@@ -32,7 +35,7 @@ stats:
   items:
     - { num: '2007', unit: '', label: grundat i Stockholm }
     - { num: '~20', unit: '', label: seniora utvecklare & arkitekter }
-    - { num: '100', unit: '%', label: senior nivå, inga juniora }
+    - { num: '100', unit: '%', label: 'senior nivå, inga juniora' }
     - { num: '19', unit: år, label: av hands-on leveranser }
 
 culture:

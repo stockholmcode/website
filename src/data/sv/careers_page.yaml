@@ -1,7 +1,8 @@
 # Hardcoded page copy for the Careers page (everything NOT in careers.yaml).
 # Structured lists (perks, roles, process, quote) live in careers.yaml (content.careers).
 
-title: "SCG — Karriär"
+# Browser tab label; Base.astro renders it as "<title> · <brand>".
+title: Karriär
 
 hero:
   kicker: "№ 07 · Karriär · Öppna roller"

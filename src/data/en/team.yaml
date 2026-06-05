@@ -1,0 +1,113 @@
+- id: 1
+  name: David Looberger
+  role: Senior Advisor · ex-Chief Architect SL
+  tag: Cloud · AWS · Public sector
+  cat:
+    - arch
+  bio: Chief architect for SL's new ticketing system on AWS. Senior advisor at SCG.
+  social:
+    - LinkedIn
+- id: 2
+  name: Senior Software Engineer
+  role: Senior Software Engineer
+  tag: Full-stack · Distributed · 15+ yrs
+  cat:
+    - eng
+  bio: Builds and ships production at the client. Senior colleagues, no juniors.
+  social:
+    - LinkedIn
+- id: 3
+  name: Senior Architect
+  role: Senior Architect
+  tag: Event-driven · DDD · 15+ yrs
+  cat:
+    - arch
+  bio: Draws systems that hold up — and codes the prototypes himself.
+  social:
+    - LinkedIn
+- id: 4
+  name: Senior AI Engineer
+  role: Senior Software Engineer · AI
+  tag: LLM systems · RAG · 10+ yrs
+  cat:
+    - ai
+    - eng
+  bio: LLMs in production. Pragmatic about AI hype.
+  social:
+    - LinkedIn
+- id: 5
+  name: Senior Data Architect
+  role: Senior Architect · Data
+  tag: Streaming · Event-driven · 15+ yrs
+  cat:
+    - data
+    - arch
+  bio: Kafka, event sourcing, data contracts.
+  social:
+    - LinkedIn
+- id: 6
+  name: Senior Cloud Engineer
+  role: Senior Software Engineer · Cloud
+  tag: AWS · K8s · 15+ yrs
+  cat:
+    - eng
+    - arch
+  bio: AWS & Kubernetes since the early days. Security mindset.
+  social:
+    - LinkedIn
+- id: 7
+  name: Senior Frontend Engineer
+  role: Senior Software Engineer · Frontend
+  tag: React · Design systems · 12+ yrs
+  cat:
+    - eng
+  bio: Builds interfaces that are fast and kind.
+  social:
+    - LinkedIn
+- id: 8
+  name: Senior Backend Engineer
+  role: Senior Software Engineer · Backend
+  tag: Go · Kotlin · 14+ yrs
+  cat:
+    - eng
+  bio: Small, clear services. Tests for real.
+  social:
+    - LinkedIn
+- id: 9
+  name: Senior Platform Architect
+  role: Senior Architect · Platform
+  tag: Microservices · Kafka · 18+ yrs
+  cat:
+    - arch
+  bio: Drives transformations from monolith to well-defined services.
+  social:
+    - LinkedIn
+- id: 10
+  name: Senior CTO Advisor
+  role: Senior Advisor
+  tag: Scale-ups · Board · 20+ yrs
+  cat:
+    - cto
+    - arch
+  bio: Supports CTO teams and boards on technical decisions.
+  social:
+    - LinkedIn
+- id: 11
+  name: Senior Data Engineer
+  role: Senior Software Engineer · Data
+  tag: Python · dbt · 12+ yrs
+  cat:
+    - data
+    - eng
+  bio: Data platforms the team actually wants to use.
+  social:
+    - LinkedIn
+- id: 12
+  name: Senior Mobile Engineer
+  role: Senior Software Engineer · Mobile
+  tag: iOS · Android · 13+ yrs
+  cat:
+    - eng
+  bio: Native mobile with no shortcuts.
+  social:
+    - LinkedIn

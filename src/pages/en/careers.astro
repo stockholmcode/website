@@ -3,11 +3,11 @@ import Base from '../../layouts/Base.astro';
 import CareersPage from '../../components/CareersPage.astro';
 import { getContent } from '../../lib/content.js';
 
-// English locale. Content currently falls back to Swedish per-file (see src/lib/content.js)
-// until src/data/en/*.yaml is populated in Phase 3.
+// English locale. Content comes from src/data/en/*.yaml, falling back per-file to Swedish
+// for any file not yet translated (see src/lib/content.js).
 const locale = 'en';
 const content = getContent(locale);
 ---
-<Base locale={locale} site={content.site} title="Karriär · Stockholm Code Group">
+<Base locale={locale} site={content.site} title={content.careers_page.title}>
   <CareersPage locale={locale} content={content} />
 </Base>

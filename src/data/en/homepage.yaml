@@ -1,0 +1,78 @@
+hero:
+  kicker: STOCKHOLM CODE GROUP · SINCE 2007
+  headlinePre: We bring
+  headlineAccent: love
+  headlineMid: to
+  typedWords: ["software.", "customers.", "teams.", "code.", "product.", "Stockholm."]
+  lead: >-
+    A handpicked team of senior engineers and architects. In Stockholm, since 2007.
+    We build platforms, modernise architecture and carry complex deliveries across the
+    line — with AI as an accelerator where it creates value.
+  ctaPrimary: { label: "Start a conversation →", href: "mailto:contactus@stockholmcode.se" }
+  ctaSecondary: { label: "See offerings", to: /erbjudanden }
+
+offerings:
+  eyebrow: № 02 — What we do
+  headline1: Senior expertise.
+  headline2: Sharp deliveries.
+  lead: >-
+    We build systems, teams and leadership — architecture, technical due diligence, fractional CTO.
+    AI-readiness is a speciality, not everything we do.
+  corePracticeLabel: CORE PRACTICE
+  corePractice:
+    - num: A
+      title: Large initiatives
+      body: >-
+        Dedicated teams embedded with the client, with full ownership of the delivery — from
+        architecture to production.
+      tags: [Dedicated team, Outcome, Own lead]
+    - num: B
+      title: Hourly consulting
+      body: >-
+        Senior consultants who reinforce existing teams. Individual profiles where you need
+        weight, in your stack.
+      tags: [Augmentation, Senior level, Your stack]
+    - num: C
+      title: Advisory
+      body: >-
+        Technical advisory across architecture, code quality and strategic planning — often as
+        part of M&A due diligence.
+      tags: [Architecture, Code quality, M&A DD]
+  aiTrack:
+    eyebrow: Speciality · AI-readiness track
+    headline: Clarity → Diagnosis → Execution → Ongoing
+    body: >-
+      Four focused steps for when AI needs structure — not just tools. Each step stands on
+      its own; start where you are.
+    cta: { label: "See the framework →", to: /erbjudanden }
+  allCta: { label: "All offerings in detail →", to: /erbjudanden }
+
+cases:
+  eyebrow: № 03 — Featured cases
+  headline1: Stories we
+  headline2: love to tell.
+  lead: "Three short ones. The full depth — architecture, stack and interviews — is on the Cases page."
+  cta: { label: "All cases →", to: /case }
+
+approach:
+  eyebrow: № 04 — How we work
+  headlinePre: "Listen · Analyse · "
+  headlineAccent: Deliver
+  headlinePost: " · Hand over"
+
+testimonials:
+  eyebrow: № 05 — From clients
+
+team:
+  eyebrow: № 06 — The team
+  headline: Kind professionals.
+  lead: "~20 senior engineers and architects. All with 13+ years behind them. Three of them below — the whole team on the Team page."
+  cta: { label: "The whole team & bios →", to: /team }
+
+careers:
+  headline: Work with us?
+  body: >-
+    We grow slowly and deliberately. If you have 10+ years behind you and want to work with people
+    who care — get in touch.
+  roles: [Senior Software Engineer, Senior Architect]
+  cta: { label: "All roles & culture →", to: /careers }

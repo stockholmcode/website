@@ -4,6 +4,9 @@
 # and the static "core practice" / "engage" / deliverables copy that is not
 # part of those data lists.
 
+# Browser tab label; Base.astro renders it as "<title> · <brand>".
+title: Erbjudanden
+
 hero:
   kicker: "№ 02 · Erbjudanden"
   headlinePre: Senior kompetens.

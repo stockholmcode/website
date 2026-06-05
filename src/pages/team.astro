@@ -6,6 +6,6 @@ import { getContent } from '../lib/content.js';
 const locale = 'sv';
 const content = getContent(locale);
 ---
-<Base locale={locale} site={content.site} title="Team · Stockholm Code Group">
+<Base locale={locale} site={content.site} title={content.team_page.title}>
   <TeamPage locale={locale} content={content} />
 </Base>
