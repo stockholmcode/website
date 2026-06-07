@@ -59,13 +59,25 @@ const { nav, cta, footer, brand } = site;
     <nav class="scg-nav">
       <div class="scg-nav-inner">
         <a class="scg-brand" href={link('/')}>{brand.name}</a>
-        <div class="scg-nav-right">
+        <div class="scg-nav-right" id="scg-nav-right">
           {nav.map((x) => <a class="scg-nav-link" href={href(x)}>{x.label}</a>)}
           <a class="scg-lang" href={otherUrl} aria-label="Switch language">{other.toUpperCase()}</a>
           <a class="scg-cta" href={cta.href}>{cta.label}</a>
         </div>
+        <button class="scg-hamburger" id="scg-hamburger" aria-label="Öppna meny" aria-expanded="false">
+          <span></span><span></span><span></span>
+        </button>
       </div>
     </nav>
+    <script>
+      const btn = document.getElementById('scg-hamburger');
+      const nav = document.getElementById('scg-nav-right');
+      btn?.addEventListener('click', () => {
+        const open = nav?.classList.toggle('open');
+        btn.setAttribute('aria-expanded', String(open));
+        btn.classList.toggle('open', open);
+      });
+    </script>
 
     <slot />
 
@@ -100,14 +112,36 @@ const { nav, cta, footer, brand } = site;
     </footer>
 
     <style define:vars={{ accent: SCG.accent, bg: SCG.bg, panel: SCG.panel, ink: SCG.ink, inkDim: SCG.inkDim, line: SCG.line }}>
-      .scg-nav { position: sticky; top: 0; z-index: 10; background: rgba(10,12,15,.85); backdrop-filter: blur(12px); border-bottom: 1px solid var(--line); }
-      .scg-nav-inner { max-width: 1280px; margin: 0 auto; padding: 0 56px; display: flex; align-items: center; justify-content: space-between; height: 76px; }
+      .scg-nav { position: sticky; top: 0; z-index: 100; background: rgba(10,12,15,.85); backdrop-filter: blur(12px); border-bottom: 1px solid var(--line); }
+      .scg-nav-inner { max-width: 1280px; margin: 0 auto; padding: 0 56px; display: flex; align-items: center; justify-content: space-between; height: 76px; position: relative; }
       .scg-brand { font-family: 'Amatic SC', cursive; font-weight: 700; font-size: 28px; line-height: 1; color: var(--ink); white-space: nowrap; text-decoration: none; }
       .scg-nav-right { display: flex; align-items: center; gap: 28px; font-size: 15px; }
       .scg-nav-link { color: var(--ink); text-decoration: none; }
       .scg-lang { font-family: 'JetBrains Mono', ui-monospace, monospace; font-size: 12px; letter-spacing: .08em; color: var(--inkDim); text-decoration: none; border: 1px solid var(--line); border-radius: 999px; padding: 6px 12px; }
       .scg-lang:hover { color: var(--accent); border-color: var(--accent); }
       .scg-cta { background: var(--accent); color: var(--bg); padding: 10px 18px; border-radius: 999px; text-decoration: none; font-size: 14px; font-weight: 600; display: inline-flex; align-items: center; gap: 8px; }
+
+      /* Hamburger — hidden on desktop */
+      .scg-hamburger { display: none; flex-direction: column; justify-content: center; gap: 5px; background: none; border: none; cursor: pointer; padding: 8px; z-index: 10; }
+      .scg-hamburger span { display: block; width: 22px; height: 2px; background: var(--ink); border-radius: 2px; transition: transform .25s, opacity .25s; }
+      .scg-hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+      .scg-hamburger.open span:nth-child(2) { opacity: 0; }
+      .scg-hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+      @media (max-width: 960px) {
+        .scg-nav-inner { padding: 0 20px; }
+        .scg-hamburger { display: flex; }
+        .scg-nav-right {
+          display: none; flex-direction: column; align-items: stretch; gap: 0;
+          position: absolute; top: 76px; left: 0; right: 0;
+          background: rgba(10,12,15,.97); backdrop-filter: blur(16px);
+          border-bottom: 1px solid var(--line); padding: 8px 20px 16px;
+        }
+        .scg-nav-right.open { display: flex; }
+        .scg-nav-link { padding: 14px 0; border-bottom: 1px solid var(--line); font-size: 17px; }
+        .scg-lang { margin: 12px 0 4px; align-self: flex-start; }
+        .scg-cta { margin-top: 8px; justify-content: center; }
+      }
 
       .scg-foot { background: var(--bg); color: var(--ink); padding: 72px 0 40px; border-top: 1px solid var(--line); }
       .scg-foot-inner { max-width: 1280px; margin: 0 auto; padding: 0 56px; }
@@ -118,7 +152,16 @@ const { nav, cta, footer, brand } = site;
       .scg-foot-h { font-family: 'JetBrains Mono', ui-monospace, monospace; font-size: 11px; color: var(--accent); letter-spacing: .1em; text-transform: uppercase; margin-bottom: 16px; }
       .scg-foot-list { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 10px; }
       .scg-foot-item { font-size: 14px; color: var(--ink); white-space: pre-line; }
-      .scg-foot-bottom { padding-top: 24px; border-top: 1px solid var(--line); font-family: 'JetBrains Mono', ui-monospace, monospace; font-size: 11px; color: var(--inkDim); display: flex; justify-content: space-between; letter-spacing: .06em; }
+      .scg-foot-bottom { padding-top: 24px; border-top: 1px solid var(--line); font-family: 'JetBrains Mono', ui-monospace, monospace; font-size: 11px; color: var(--inkDim); display: flex; justify-content: space-between; letter-spacing: .06em; flex-wrap: wrap; gap: 8px; }
+
+      @media (max-width: 960px) {
+        .scg-foot-inner { padding: 0 20px; }
+        .scg-foot-grid { grid-template-columns: 1fr 1fr; gap: 32px; margin-bottom: 48px; }
+      }
+      @media (max-width: 640px) {
+        .scg-foot { padding: 48px 0 32px; }
+        .scg-foot-grid { grid-template-columns: 1fr; gap: 32px; margin-bottom: 40px; }
+      }
     </style>
   </body>
 </html>

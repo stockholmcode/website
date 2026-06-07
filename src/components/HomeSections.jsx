@@ -22,6 +22,23 @@ export default function HomeSections({
 
   return (
     <>
+      <style>{`
+        @media (max-width: 960px) {
+          .scg-r-pad { padding-left: 20px !important; padding-right: 20px !important; }
+          .scg-r-2col { grid-template-columns: 1fr !important; gap: 24px !important; }
+          .scg-r-3col { grid-template-columns: repeat(2, 1fr) !important; gap: 16px !important; }
+          .scg-r-4col { grid-template-columns: repeat(2, 1fr) !important; gap: 24px !important; }
+          .scg-r-aitrack { grid-template-columns: 1fr !important; gap: 16px !important; }
+          .scg-r-caserow { grid-template-columns: 1fr !important; gap: 8px !important; padding: 24px 0 !important; }
+          .scg-r-caserow-num { display: none !important; }
+          .scg-r-caserow-arrow { display: none !important; }
+          .scg-r-caserow-metric { text-align: left !important; }
+        }
+        @media (max-width: 640px) {
+          .scg-r-3col { grid-template-columns: 1fr !important; }
+          .scg-r-4col { grid-template-columns: 1fr !important; }
+        }
+      `}</style>
       {/* Logos — infinite marquee (pure CSS) */}
       <section style={{ background: bg, borderBottom: `1px solid ${line}`, overflow: 'hidden' }}>
         <style>{`
@@ -53,7 +70,7 @@ export default function HomeSections({
       {/* Offerings — core practices + AI-track teaser */}
       <section id="erbjudanden" style={{ background: bg }}>
         <div style={{ ...wm.container, padding: `${pad}px ${gutter}px` }}>
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 64, marginBottom: 56, alignItems: 'end' }}>
+          <div className="scg-r-2col" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 64, marginBottom: 56, alignItems: 'end' }}>
             <div>
               <div style={{ ...wm.mono, fontSize: 12, color: accent, letterSpacing: '.1em', textTransform: 'uppercase', marginBottom: 16 }}>{off.eyebrow}</div>
               <h2 style={{ ...wm.display, fontSize: 'clamp(64px, 8vw, 128px)', lineHeight: .92, margin: 0, color: ink }}>
@@ -64,7 +81,7 @@ export default function HomeSections({
             <p style={{ fontSize: 18, lineHeight: 1.55, maxWidth: 520, margin: 0, color: inkDim }}>{off.lead}</p>
           </div>
 
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 18, marginBottom: 56 }}>
+          <div className="scg-r-3col" style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 18, marginBottom: 56 }}>
             {off.corePractice.map((c, i) => (
               <article key={i} style={{
                 background: panel, color: ink, padding: 28, borderRadius: 18,
@@ -85,7 +102,7 @@ export default function HomeSections({
             ))}
           </div>
 
-          <div style={{ padding: '28px 32px', borderRadius: 18, border: `1px solid ${line}`, background: panel, display: 'grid', gridTemplateColumns: '1fr auto', gap: 32, alignItems: 'center' }}>
+          <div className="scg-r-aitrack" style={{ padding: '28px 32px', borderRadius: 18, border: `1px solid ${line}`, background: panel, display: 'grid', gridTemplateColumns: '1fr auto', gap: 32, alignItems: 'center' }}>
             <div>
               <div style={{ ...wm.mono, fontSize: 11, color: accent, letterSpacing: '.1em', textTransform: 'uppercase', marginBottom: 10 }}>{off.aiTrack.eyebrow}</div>
               <div style={{ ...wm.display, fontSize: 36, lineHeight: 1, color: ink, marginBottom: 14 }}>{off.aiTrack.headline}</div>
@@ -103,7 +120,7 @@ export default function HomeSections({
       {/* Cases — 3 teasers */}
       <section id="case" style={{ background: panel, borderTop: `1px solid ${line}`, borderBottom: `1px solid ${line}` }}>
         <div style={{ ...wm.container, padding: `${pad}px ${gutter}px` }}>
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 64, marginBottom: 56, alignItems: 'end' }}>
+          <div className="scg-r-2col" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 64, marginBottom: 56, alignItems: 'end' }}>
             <div>
               <div style={{ ...wm.mono, fontSize: 12, color: accent, letterSpacing: '.1em', textTransform: 'uppercase', marginBottom: 16 }}>{cs.eyebrow}</div>
               <h2 style={{ ...wm.display, fontSize: 'clamp(64px, 8vw, 128px)', lineHeight: .92, margin: 0, color: ink }}>
@@ -115,12 +132,12 @@ export default function HomeSections({
 
           <div style={{ display: 'flex', flexDirection: 'column' }}>
             {cases.slice(0, 3).map((c, i) => (
-              <a key={i} href={route(cs.cta.to)} className="scg-case-row" style={{
+              <a key={i} href={route(cs.cta.to)} className="scg-case-row scg-r-caserow" style={{
                 display: 'grid', gridTemplateColumns: '100px 1.2fr 2fr 1fr 60px', gap: 40,
                 padding: '36px 0', alignItems: 'center', borderTop: `1px solid ${line}`,
                 textDecoration: 'none', color: 'inherit',
               }}>
-                <div style={{ ...wm.display, fontSize: 64, color: accent, lineHeight: .9 }}>0{i + 1}</div>
+                <div className="scg-r-caserow-num" style={{ ...wm.display, fontSize: 64, color: accent, lineHeight: .9 }}>0{i + 1}</div>
                 <div>
                   <div style={{ ...wm.display, fontSize: 48, lineHeight: .95, color: ink }}>{c.client}</div>
                   <div style={{ ...wm.mono, fontSize: 11, color: inkDim, letterSpacing: '.06em', marginTop: 8 }}>{c.sector} · {c.year}</div>
@@ -129,11 +146,11 @@ export default function HomeSections({
                   <div style={{ fontSize: 18, fontWeight: 500, color: ink, marginBottom: 6 }}>{c.outcome}</div>
                   <p style={{ fontSize: 14, lineHeight: 1.55, color: inkDim, margin: 0, maxWidth: 480 }}>{c.body}</p>
                 </div>
-                <div style={{ textAlign: 'right' }}>
+                <div className="scg-r-caserow-metric" style={{ textAlign: 'right' }}>
                   <div style={{ ...wm.display, fontSize: 72, lineHeight: .9, color: ink }}>{c.metric}</div>
                   <div style={{ ...wm.mono, fontSize: 11, color: inkDim, letterSpacing: '.06em', marginTop: 6 }}>{c.metricLabel}</div>
                 </div>
-                <div style={{ textAlign: 'right', ...wm.mono, fontSize: 22, color: accent }}>→</div>
+                <div className="scg-r-caserow-arrow" style={{ textAlign: 'right', ...wm.mono, fontSize: 22, color: accent }}>→</div>
               </a>
             ))}
             <div style={{ borderTop: `1px solid ${line}`, paddingTop: 32, marginTop: 8, textAlign: 'center' }}>
@@ -150,7 +167,7 @@ export default function HomeSections({
           <h2 style={{ ...wm.display, fontSize: 'clamp(56px, 7vw, 96px)', lineHeight: .95, margin: '0 0 56px', color: ink, textAlign: 'center' }}>
             {ap.headlinePre}<span style={{ color: accent }}>{ap.headlineAccent}</span>{ap.headlinePost}
           </h2>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 32 }}>
+          <div className="scg-r-4col" style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 32 }}>
             {approach.map((a, i) => (
               <div key={i} style={{ borderTop: `2px solid ${i === 0 ? accent : line}`, paddingTop: 16 }}>
                 <div style={{ ...wm.mono, fontSize: 11, color: accent, letterSpacing: '.1em', marginBottom: 6 }}>{a.step}</div>
@@ -185,14 +202,14 @@ export default function HomeSections({
       {/* Team — 3 teasers */}
       <section style={{ background: bg }}>
         <div style={{ ...wm.container, padding: `${pad}px ${gutter}px` }}>
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 64, marginBottom: 48, alignItems: 'end' }}>
+          <div className="scg-r-2col" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 64, marginBottom: 48, alignItems: 'end' }}>
             <div>
               <div style={{ ...wm.mono, fontSize: 12, color: accent, letterSpacing: '.1em', textTransform: 'uppercase', marginBottom: 16 }}>{tm.eyebrow}</div>
               <h2 style={{ ...wm.display, fontSize: 'clamp(64px, 8vw, 120px)', lineHeight: .92, margin: 0, color: ink }}>{tm.headline}</h2>
             </div>
             <p style={{ fontSize: 18, lineHeight: 1.55, maxWidth: 440, margin: 0, color: inkDim }}>{tm.lead}</p>
           </div>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 28 }}>
+          <div className="scg-r-3col" style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 28 }}>
             {team.slice(0, 3).map((p, i) => (
               <div key={i}>
                 <div style={{

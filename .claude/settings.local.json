@@ -35,7 +35,10 @@
       "Bash(git -C /Users/nivinfakih/Documents/cle add .)",
       "Bash(git -C /Users/nivinfakih/Documents/cle commit -m 'Add SCG website files *)",
       "Bash(git -C /Users/nivinfakih/Documents/cle push origin main)",
-      "Bash(git commit -m 'Rename HTML files to URL-friendly names and update all internal links *)"
+      "Bash(git commit -m 'Rename HTML files to URL-friendly names and update all internal links *)",
+      "Bash(git -C /Users/nivinfakih/Documents/cle checkout main)",
+      "Bash(git -C /Users/nivinfakih/Documents/cle pull origin main)",
+      "Bash(npm install *)"
     ],
     "deny": []
   }

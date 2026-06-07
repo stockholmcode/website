@@ -163,6 +163,28 @@ const pad = (i) => String(i + 1).padStart(2, '0');
 <style define:vars={{ accent: SCG.accent, bg: SCG.bg, panel: SCG.panel, panelHi: SCG.panelHi, ink: SCG.ink, inkDim: SCG.inkDim, inkFaint: SCG.inkFaint, line: SCG.line }}>
   .scg-accent { color: var(--accent); }
   .scg-c-container { max-width: 1280px; margin: 0 auto; padding: 0 56px; }
+  @media (max-width: 960px) {
+    .scg-c-container { padding: 0 20px; }
+    .scg-c-hero { padding: 80px 0 56px; }
+    .scg-c-logoart { display: none; }
+    .scg-c-perks-grid { grid-template-columns: repeat(2, 1fr); }
+    .scg-c-role-headrow { grid-template-columns: 1fr auto; gap: 12px; }
+    .scg-c-role-num { display: none; }
+    .scg-c-role-meta { display: none; }
+    .scg-c-role-pay { grid-column: 1; }
+    .scg-c-role-toggle { grid-column: 2; grid-row: 1; }
+    .scg-c-role-two { grid-template-columns: 1fr; gap: 32px; }
+    .scg-c-steps { grid-template-columns: repeat(2, 1fr); gap: 24px; }
+    .scg-c-roles { padding: 72px 0; }
+    .scg-c-process { padding: 72px 0; }
+  }
+  @media (max-width: 640px) {
+    .scg-c-hero { padding: 56px 0 40px; }
+    .scg-c-perks-grid { grid-template-columns: 1fr; }
+    .scg-c-steps { grid-template-columns: 1fr; }
+    .scg-c-role-headrow { grid-template-columns: 1fr auto; }
+    .scg-c-cta { padding: 72px 0; }
+  }
   .scg-c-mono { font-family: 'JetBrains Mono', ui-monospace, monospace; }
   .scg-c-mono-kicker { font-family: 'JetBrains Mono', ui-monospace, monospace; font-size: 12px; color: var(--accent); letter-spacing: .1em; text-transform: uppercase; margin-bottom: 16px; }
 
