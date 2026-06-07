@@ -38,7 +38,15 @@
       "Bash(git commit -m 'Rename HTML files to URL-friendly names and update all internal links *)",
       "Bash(git -C /Users/nivinfakih/Documents/cle checkout main)",
       "Bash(git -C /Users/nivinfakih/Documents/cle pull origin main)",
-      "Bash(npm install *)"
+      "Bash(npm install *)",
+      "Bash(git -C /Users/nivinfakih/Documents/cle branch -m utveckling feature/mobilanpassning)",
+      "Bash(git -C /Users/nivinfakih/Documents/cle push origin -u feature/mobilanpassning)",
+      "Bash(git -C /Users/nivinfakih/Documents/cle push origin --delete utveckling)",
+      "Bash(git -C /Users/nivinfakih/Documents/cle branch -m feature/mobilanpassning feature/mobile-responsiveness)",
+      "Bash(git -C /Users/nivinfakih/Documents/cle push origin -u feature/mobile-responsiveness)",
+      "Bash(git -C /Users/nivinfakih/Documents/cle push origin --delete feature/mobilanpassning)",
+      "Bash(git -C /Users/nivinfakih/Documents/cle commit -m 'Fix mobile responsiveness — override inline styles with !important *)",
+      "Bash(git -C /Users/nivinfakih/Documents/cle push origin feature/mobile-responsiveness)"
     ],
     "deny": []
   }

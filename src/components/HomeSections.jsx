@@ -23,20 +23,46 @@ export default function HomeSections({
   return (
     <>
       <style>{`
+        /* ── Responsive overrides for HomeSections ──────────────────────────── */
+
+        /* Container: reduce horizontal padding on small screens.
+           !important is needed to beat the inline style="padding:72px 56px" */
         @media (max-width: 960px) {
-          .scg-r-pad { padding-left: 20px !important; padding-right: 20px !important; }
-          .scg-r-2col { grid-template-columns: 1fr !important; gap: 24px !important; }
-          .scg-r-3col { grid-template-columns: repeat(2, 1fr) !important; gap: 16px !important; }
-          .scg-r-4col { grid-template-columns: repeat(2, 1fr) !important; gap: 24px !important; }
-          .scg-r-aitrack { grid-template-columns: 1fr !important; gap: 16px !important; }
-          .scg-r-caserow { grid-template-columns: 1fr !important; gap: 8px !important; padding: 24px 0 !important; }
-          .scg-r-caserow-num { display: none !important; }
+          .scg-r-container {
+            padding-left:  20px !important;
+            padding-right: 20px !important;
+          }
+          .scg-r-2col   { grid-template-columns: 1fr !important;            gap: 24px !important; }
+          .scg-r-3col   { grid-template-columns: repeat(2,1fr) !important;  gap: 16px !important; }
+          .scg-r-4col   { grid-template-columns: repeat(2,1fr) !important;  gap: 24px !important; }
+          .scg-r-aitrack { grid-template-columns: 1fr !important;           gap: 20px !important; }
+
+          /* Case rows: stack vertically */
+          .scg-r-caserow {
+            grid-template-columns: 1fr !important;
+            gap: 8px !important;
+            padding: 24px 0 !important;
+          }
+          .scg-r-caserow-num   { display: none !important; }
           .scg-r-caserow-arrow { display: none !important; }
           .scg-r-caserow-metric { text-align: left !important; }
+
+          /* Testimonial: shrink oversized quote glyph */
+          .scg-r-quote-glyph { font-size: 120px !important; }
+
+          /* Careers CTA: stack role buttons */
+          .scg-r-roles-cta { flex-direction: column !important; align-items: stretch !important; }
+          .scg-r-roles-cta a { text-align: center; }
         }
+
         @media (max-width: 640px) {
-          .scg-r-3col { grid-template-columns: 1fr !important; }
-          .scg-r-4col { grid-template-columns: 1fr !important; }
+          .scg-r-container {
+            padding-left:  16px !important;
+            padding-right: 16px !important;
+          }
+          .scg-r-3col   { grid-template-columns: 1fr !important; }
+          .scg-r-4col   { grid-template-columns: 1fr !important; }
+          .scg-r-aitrack a { white-space: normal !important; }
         }
       `}</style>
       {/* Logos — infinite marquee (pure CSS) */}
@@ -69,7 +95,7 @@ export default function HomeSections({
 
       {/* Offerings — core practices + AI-track teaser */}
       <section id="erbjudanden" style={{ background: bg }}>
-        <div style={{ ...wm.container, padding: `${pad}px ${gutter}px` }}>
+        <div className="scg-r-container" style={{ ...wm.container, padding: `${pad}px ${gutter}px` }}>
           <div className="scg-r-2col" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 64, marginBottom: 56, alignItems: 'end' }}>
             <div>
               <div style={{ ...wm.mono, fontSize: 12, color: accent, letterSpacing: '.1em', textTransform: 'uppercase', marginBottom: 16 }}>{off.eyebrow}</div>
@@ -119,7 +145,7 @@ export default function HomeSections({
 
       {/* Cases — 3 teasers */}
       <section id="case" style={{ background: panel, borderTop: `1px solid ${line}`, borderBottom: `1px solid ${line}` }}>
-        <div style={{ ...wm.container, padding: `${pad}px ${gutter}px` }}>
+        <div className="scg-r-container" style={{ ...wm.container, padding: `${pad}px ${gutter}px` }}>
           <div className="scg-r-2col" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 64, marginBottom: 56, alignItems: 'end' }}>
             <div>
               <div style={{ ...wm.mono, fontSize: 12, color: accent, letterSpacing: '.1em', textTransform: 'uppercase', marginBottom: 16 }}>{cs.eyebrow}</div>
@@ -162,7 +188,7 @@ export default function HomeSections({
 
       {/* Approach — condensed row */}
       <section style={{ background: bg }}>
-        <div style={{ ...wm.container, padding: `${pad - 24}px ${gutter}px` }}>
+        <div className="scg-r-container" style={{ ...wm.container, padding: `${pad - 24}px ${gutter}px` }}>
           <div style={{ ...wm.mono, fontSize: 12, color: accent, letterSpacing: '.1em', textTransform: 'uppercase', marginBottom: 24, textAlign: 'center' }}>{ap.eyebrow}</div>
           <h2 style={{ ...wm.display, fontSize: 'clamp(56px, 7vw, 96px)', lineHeight: .95, margin: '0 0 56px', color: ink, textAlign: 'center' }}>
             {ap.headlinePre}<span style={{ color: accent }}>{ap.headlineAccent}</span>{ap.headlinePost}
@@ -181,10 +207,10 @@ export default function HomeSections({
 
       {/* Testimonials — one hero quote */}
       <section style={{ background: panel, borderTop: `1px solid ${line}`, borderBottom: `1px solid ${line}` }}>
-        <div style={{ ...wm.container, padding: `${pad}px ${gutter}px` }}>
+        <div className="scg-r-container" style={{ ...wm.container, padding: `${pad}px ${gutter}px` }}>
           <div style={{ ...wm.mono, fontSize: 12, color: accent, letterSpacing: '.1em', textTransform: 'uppercase', marginBottom: 16 }}>{hp.testimonials.eyebrow}</div>
           <figure style={{ margin: 0, marginTop: 24 }}>
-            <div style={{ ...wm.display, fontSize: 240, lineHeight: .3, color: accent, marginBottom: 20 }}>“</div>
+            <div className="scg-r-quote-glyph" style={{ ...wm.display, fontSize: 240, lineHeight: .3, color: accent, marginBottom: 20 }}>{'"'}</div>
             <blockquote style={{ ...wm.display, fontSize: 'clamp(44px, 5.5vw, 88px)', lineHeight: 1, margin: 0, color: ink, maxWidth: 1100 }}>
               {testimonials[0].quote}
             </blockquote>
@@ -201,7 +227,7 @@ export default function HomeSections({
 
       {/* Team — 3 teasers */}
       <section style={{ background: bg }}>
-        <div style={{ ...wm.container, padding: `${pad}px ${gutter}px` }}>
+        <div className="scg-r-container" style={{ ...wm.container, padding: `${pad}px ${gutter}px` }}>
           <div className="scg-r-2col" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 64, marginBottom: 48, alignItems: 'end' }}>
             <div>
               <div style={{ ...wm.mono, fontSize: 12, color: accent, letterSpacing: '.1em', textTransform: 'uppercase', marginBottom: 16 }}>{tm.eyebrow}</div>
@@ -237,13 +263,13 @@ export default function HomeSections({
 
       {/* Careers — closing CTA */}
       <section style={{ background: accent }}>
-        <div style={{ ...wm.container, padding: `${pad}px ${gutter}px`, textAlign: 'center' }}>
+        <div className="scg-r-container" style={{ ...wm.container, padding: `${pad}px ${gutter}px`, textAlign: 'center' }}>
           <div style={{ display: 'inline-flex' }}>
             <img src={`${assetBase}assets/logo-dark.png`} alt="Stockholm Code Group" style={{ height: 120, width: 'auto', display: 'block' }} />
           </div>
           <h2 style={{ ...wm.display, fontSize: 'clamp(72px, 10vw, 160px)', lineHeight: .92, margin: '24px 0 20px', color: bg }}>{ca.headline}</h2>
           <p style={{ fontSize: 20, lineHeight: 1.5, margin: '0 auto 40px', maxWidth: 640, color: bg }}>{ca.body}</p>
-          <div style={{ display: 'inline-flex', flexWrap: 'wrap', gap: 10, justifyContent: 'center' }}>
+          <div className="scg-r-roles-cta" style={{ display: 'inline-flex', flexWrap: 'wrap', gap: 10, justifyContent: 'center' }}>
             {ca.roles.map((r) => (
               <a key={r} href={route(ca.cta.to)} style={{ background: bg, color: ink, padding: '14px 22px', borderRadius: 999, textDecoration: 'none', fontSize: 14, fontWeight: 500 }}>{r} →</a>
             ))}
