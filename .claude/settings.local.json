@@ -46,7 +46,9 @@
       "Bash(git -C /Users/nivinfakih/Documents/cle push origin -u feature/mobile-responsiveness)",
       "Bash(git -C /Users/nivinfakih/Documents/cle push origin --delete feature/mobilanpassning)",
       "Bash(git -C /Users/nivinfakih/Documents/cle commit -m 'Fix mobile responsiveness — override inline styles with !important *)",
-      "Bash(git -C /Users/nivinfakih/Documents/cle push origin feature/mobile-responsiveness)"
+      "Bash(git -C /Users/nivinfakih/Documents/cle push origin feature/mobile-responsiveness)",
+      "Bash(npm -C /Users/nivinfakih/Documents/cle run build)",
+      "Bash(git -C /Users/nivinfakih/Documents/cle commit -m 'Fix responsive CSS cascade — move media queries to end of style blocks *)"
     ],
     "deny": []
   }
