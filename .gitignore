@@ -7,6 +7,7 @@ Thumbs.db
 
 # Local state
 .design-canvas.state.json
+.claude/
 
 # Source / drafts (not part of the published site)
 uploads/
