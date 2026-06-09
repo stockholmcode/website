@@ -232,4 +232,24 @@ const pad2 = (n) => String(n).padStart(2, '0');
   .scg-case-cta h2 { font-family: 'Amatic SC', cursive; font-weight: 700; font-size: clamp(72px, 10vw, 160px); line-height: .92; margin: 0 0 20px; color: var(--bg); }
   .scg-case-cta p { font-size: 20px; line-height: 1.5; margin: 0 auto 40px; max-width: 640px; color: var(--bg); }
   .scg-case-cta .btn { display: inline-flex; align-items: center; gap: 10px; background: var(--bg); color: var(--ink); padding: 16px 26px; border-radius: 999px; text-decoration: none; font-size: 16px; font-weight: 600; }
+
+  /* ── Responsive ── */
+  @media (max-width: 960px) {
+    .scg-case-container { padding: 0 20px; }
+    .scg-case-hero { padding: 80px 0 56px; }
+    .scg-case-filters { top: 60px; }
+    .scg-case-cases .case .grid { grid-template-columns: 1fr; gap: 32px; }
+    .scg-case-cases .case .deep { grid-template-columns: 1fr; }
+  }
+  @media (max-width: 640px) {
+    .scg-case-container { padding: 0 16px; }
+    .scg-case-hero { padding: 56px 0 40px; }
+    .scg-case-cases { padding: 40px 0 56px; }
+    .scg-case-cases .case { padding-bottom: 40px; margin-bottom: 40px; }
+    .scg-case-cases .case .stats { grid-template-columns: 1fr; }
+    .scg-case-cases .case .stats .big { grid-column: 1; }
+    .scg-case-cases .case .stats .span2 { grid-column: 1; }
+    .scg-case-cta { padding: 72px 0; }
+    .scg-case-cta img.logo { height: 80px; }
+  }
 </style>

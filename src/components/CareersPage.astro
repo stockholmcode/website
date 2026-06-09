@@ -236,4 +236,29 @@ const pad = (i) => String(i + 1).padStart(2, '0');
   .scg-c-cta-h2 { font-family: 'Amatic SC', cursive; font-weight: 700; font-size: clamp(72px, 10vw, 160px); line-height: .92; margin: 0 0 20px; color: var(--bg); }
   .scg-c-cta-p { font-size: 20px; line-height: 1.5; margin: 0 auto 40px; max-width: 640px; color: var(--bg); }
   .scg-c-cta-btn { display: inline-flex; align-items: center; gap: 10px; background: var(--bg); color: var(--ink); padding: 16px 26px; border-radius: 999px; text-decoration: none; font-weight: 600; font-size: 16px; }
+
+  /* ── Responsive ── */
+  @media (max-width: 960px) {
+    .scg-c-container { padding: 0 20px; }
+    .scg-c-hero { padding: 80px 0 56px; }
+    .scg-c-logoart { display: none; }
+    .scg-c-perks-grid { grid-template-columns: repeat(2, 1fr); }
+    .scg-c-role-headrow { grid-template-columns: 1fr auto; gap: 12px; }
+    .scg-c-role-num { display: none; }
+    .scg-c-role-meta { display: none; }
+    .scg-c-role-two { grid-template-columns: 1fr; gap: 32px; }
+    .scg-c-steps { grid-template-columns: repeat(2, 1fr); gap: 24px; }
+    .scg-c-roles { padding: 72px 0; }
+    .scg-c-process { padding: 72px 0; }
+    .scg-c-q { font-size: 120px; }
+    .scg-c-cta { padding: 80px 0; }
+  }
+  @media (max-width: 640px) {
+    .scg-c-container { padding: 0 16px; }
+    .scg-c-hero { padding: 56px 0 40px; }
+    .scg-c-perks-grid { grid-template-columns: 1fr; }
+    .scg-c-steps { grid-template-columns: 1fr; }
+    .scg-c-cta { padding: 64px 0; }
+    .scg-c-cta-logo { height: 80px; }
+  }
 </style>

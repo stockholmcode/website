@@ -304,4 +304,68 @@ const deliverables = page.offeringDeliverables;
   .cta .btn { display: inline-flex; align-items: center; gap: 10px;
     background: var(--bg); color: var(--ink); padding: 16px 26px; border-radius: 999px;
     text-decoration: none; font-size: 16px; font-weight: 600; }
+
+  /* ── Responsive ─────────────────────────────────────────────────────────── */
+  @media (max-width: 960px) {
+    .container { padding: 0 20px; }
+
+    /* Hero */
+    .hero { padding: 80px 0 56px; }
+
+    /* Core */
+    .core { padding: 72px 0; }
+    .core .head { grid-template-columns: 1fr; gap: 24px; }
+    .core-grid { grid-template-columns: repeat(2, 1fr); }
+
+    /* AI track */
+    .track-intro .head { grid-template-columns: 1fr; gap: 24px; }
+    .ladder-strip { grid-template-columns: repeat(2, 1fr); gap: 12px; }
+
+    /* Offerings — stack the 3-col card layout */
+    .off-card { grid-template-columns: 1fr; gap: 24px; padding: 32px; }
+    .off-card .left { display: flex; align-items: baseline; gap: 16px; }
+    .off-card .left .num { font-size: 64px; }
+
+    /* 5D framework */
+    .framework { padding: 72px 0; }
+    .framework .head { grid-template-columns: 1fr; gap: 24px; }
+    .dim-grid { grid-template-columns: repeat(3, 1fr); gap: 16px; }
+    .dim-detail { grid-template-columns: repeat(2, 1fr); gap: 16px; }
+
+    /* Engage */
+    .engage { padding: 72px 0; }
+    .engage-grid { grid-template-columns: repeat(2, 1fr); gap: 24px; }
+
+    /* CTA */
+    .cta { padding: 80px 0; }
+  }
+
+  @media (max-width: 640px) {
+    .container { padding: 0 16px; }
+
+    /* Hero */
+    .hero { padding: 56px 0 40px; }
+    .hero p.lead { font-size: 17px; margin-top: 24px; }
+
+    /* Core */
+    .core-grid { grid-template-columns: 1fr; }
+    .core-card { min-height: unset; }
+
+    /* AI track */
+    .ladder-strip { grid-template-columns: 1fr 1fr; }
+
+    /* Offerings */
+    .off-card { padding: 24px; }
+
+    /* 5D framework */
+    .dim-grid { grid-template-columns: repeat(2, 1fr); }
+    .dim-detail { grid-template-columns: 1fr; }
+
+    /* Engage */
+    .engage-grid { grid-template-columns: 1fr; }
+
+    /* CTA */
+    .cta { padding: 64px 0; }
+    .cta img.logo { height: 80px; }
+  }
 </style>
