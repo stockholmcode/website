@@ -210,7 +210,7 @@ export default function HomeSections({
         <div className="scg-r-container" style={{ ...wm.container, padding: `${pad}px ${gutter}px` }}>
           <div style={{ ...wm.mono, fontSize: 12, color: accent, letterSpacing: '.1em', textTransform: 'uppercase', marginBottom: 16 }}>{hp.testimonials.eyebrow}</div>
           <figure style={{ margin: 0, marginTop: 24 }}>
-            <div className="scg-r-quote-glyph" style={{ ...wm.display, fontSize: 240, lineHeight: .3, color: accent, marginBottom: 20 }}>{'"'}</div>
+            <div className="scg-r-quote-glyph" aria-hidden="true" style={{ ...wm.display, fontSize: 240, lineHeight: 1, height: '0.42em', overflow: 'visible', color: accent, marginLeft: '-0.06em', marginBottom: 4 }}>{'"'}</div>
             <blockquote style={{ ...wm.display, fontSize: 'clamp(44px, 5.5vw, 88px)', lineHeight: 1, margin: 0, color: ink, maxWidth: 1100 }}>
               {testimonials[0].quote}
             </blockquote>
