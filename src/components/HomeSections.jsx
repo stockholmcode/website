@@ -94,7 +94,7 @@ export default function HomeSections({
       </section>
 
       {/* Offerings — core practices + AI-track teaser */}
-      <section id="erbjudanden" style={{ background: bg }}>
+      <section id="offering" style={{ background: bg }}>
         <div className="scg-r-container" style={{ ...wm.container, padding: `${pad}px ${gutter}px` }}>
           <div className="scg-r-2col" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 64, marginBottom: 56, alignItems: 'end' }}>
             <div>

@@ -30,7 +30,7 @@ so links and assets resolve the same locally as they do on GitHub Pages.
 src/
 ├── pages/                 # one file per route; thin routing shims
 │   ├── index.astro        #   Swedish routes at /
-│   ├── erbjudanden.astro
+│   ├── offering.astro
 │   ├── case.astro
 │   ├── team.astro
 │   ├── careers.astro
