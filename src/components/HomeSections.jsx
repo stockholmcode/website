@@ -215,7 +215,10 @@ export default function HomeSections({
               {testimonials[0].quote}
             </blockquote>
             <figcaption style={{ marginTop: 32, display: 'flex', alignItems: 'center', gap: 12 }}>
-              <div style={{ width: 44, height: 44, borderRadius: 999, background: panelHi, border: `1px solid ${line}` }} />
+              {testimonials[0].avatar
+                ? <img src={`${assetBase}assets/testimonials/${testimonials[0].avatar}`} alt={testimonials[0].name}
+                       style={{ width: 44, height: 44, borderRadius: 999, objectFit: 'cover', border: `1px solid ${line}`, display: 'block' }} />
+                : <div style={{ width: 44, height: 44, borderRadius: 999, background: panelHi, border: `1px solid ${line}` }} />}
               <div>
                 <div style={{ fontSize: 15, fontWeight: 500, color: ink }}>{testimonials[0].name}</div>
                 <div style={{ ...wm.mono, fontSize: 12, color: inkDim }}>{testimonials[0].role}</div>
@@ -239,11 +242,16 @@ export default function HomeSections({
             {team.slice(0, 3).map((p, i) => (
               <div key={i}>
                 <div style={{
-                  aspectRatio: '4/5', width: '100%', borderRadius: 12,
+                  aspectRatio: '4/5', width: '100%', borderRadius: 12, position: 'relative', overflow: 'hidden',
                   background: `repeating-linear-gradient(135deg, ${panel}, ${panel} 8px, ${panelHi} 8px, ${panelHi} 9px)`,
                   border: `1px solid ${line}`, display: 'flex', alignItems: 'center', justifyContent: 'center',
                   ...wm.mono, fontSize: 11, color: inkFaint, letterSpacing: '.04em',
-                }}>{`// porträtt · ${p.name.split(' ')[0].toLowerCase()}`}</div>
+                }}>
+                  {p.photo
+                    ? <img src={`${assetBase}assets/team/${p.photo}`} alt={p.name} loading="lazy"
+                           style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover' }} />
+                    : `// porträtt · ${p.name.split(' ')[0].toLowerCase()}`}
+                </div>
                 <div style={{ marginTop: 16, display: 'flex', justifyContent: 'space-between', alignItems: 'baseline' }}>
                   <div>
                     <div style={{ ...wm.display, fontSize: 34, lineHeight: 1, color: ink }}>{p.name}</div>
