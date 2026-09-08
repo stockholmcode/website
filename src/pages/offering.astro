@@ -1,0 +1,11 @@
+---
+import Base from '../layouts/Base.astro';
+import OfferingPage from '../components/OfferingPage.astro';
+import { getContent } from '../lib/content.js';
+
+const locale = 'sv';
+const content = getContent(locale);
+---
+<Base locale={locale} site={content.site} title={content.offering_page.title}>
+  <OfferingPage locale={locale} content={content} />
+</Base>

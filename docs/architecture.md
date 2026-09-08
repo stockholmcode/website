@@ -100,10 +100,26 @@ it stops being worth it, is in [decisions.md](decisions.md#i18n-duplicated-page-
 
 ## Design tokens
 
-`src/lib/theme.js` exports the palette and font stacks as a single object. Components
-import it and feed the values into scoped styles, usually through Astro's `define:vars`
-so a token becomes a CSS custom property. There are no hard-coded hex values scattered
+`src/lib/theme.js` exports the palette and font stacks as a single object. `Base.astro`
+imports it once and emits every token through a single `define:vars` on its global
+`<style>`; Astro lands them as custom properties on `<html>`, so they cascade into every
+page component's scoped `<style>`. Components reference `var(--accent)` and friends
+directly and never re-declare `define:vars`. There are no hard-coded hex values scattered
 through component styles; if a colour needs to change, it changes in one file.
+
+## Shared style primitives
+
+Several components repeated the same handful of rules — a 1280px page gutter, a mono
+eyebrow, the filter chip, the inner-page hero band, its decorative logo watermark, the
+closing accent CTA band, the placeholder team-member card (portrait tile + caption), the
+big pull-quote with attribution. Those live once, as global classes in `Base.astro`'s
+`<style is:global>` block, prefixed `u-` (`u-container`, `u-eyebrow`, `u-chip`, `u-hero*`,
+`u-logoart`, `u-cta*`, `u-portrait`, `u-member-*`, `u-quote-*`). A component keeps a
+scoped `<style>` only for rules that are genuinely specific to it (one-off grid layouts,
+the team grid's hover lift and tag badge, a narrower hero lead, the two variable quote
+font-sizes). Deliberately un-shared: the display headings, whose `clamp()` sizes differ
+per page on purpose, and the two `.scg-stat` blocks (home vs team), which share a name but
+are different designs and never meet because scoped styles are isolated.
 
 ## Build and deploy
 

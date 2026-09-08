@@ -1,6 +1,7 @@
 ---
 import { getRelativeLocaleUrl } from 'astro:i18n';
 import { SCG } from '../lib/theme.js';
+import { base, assetBase } from '../lib/paths.js';
 
 const { locale = 'sv', site, title } = Astro.props;
 
@@ -14,11 +15,6 @@ const link = (to) => getRelativeLocaleUrl(locale, to);
 const href = (item) => (item?.href ? item.href : link(item?.to ?? '/'));
 
 // Language toggle: same page, other locale.
-const base = import.meta.env.BASE_URL.replace(/\/$/, '');
-// Trailing-slash-safe asset base, matching the page components. BASE_URL is
-// "/website" (no trailing slash), so concatenating it raw with "assets/..."
-// yields "/websiteassets/..." which 404s. base + '/' normalises that.
-const assetBase = base + '/';
 let rel = Astro.url.pathname;
 if (base && rel.startsWith(base)) rel = rel.slice(base.length);
 rel = rel.replace(/^\/(sv|en)(?=\/|$)/, '') || '/';
@@ -41,7 +37,24 @@ const { nav, cta, footer, brand } = site;
       href="https://fonts.googleapis.com/css2?family=Amatic+SC:wght@400;700&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,700&family=JetBrains+Mono:wght@400;600&display=swap"
       rel="stylesheet"
     />
-    <style is:global define:vars={{ accent: SCG.accent, bg: SCG.bg, ink: SCG.ink }}>
+    <style
+      is:global
+      define:vars={{
+        accent: SCG.accent,
+        bg: SCG.bg,
+        panel: SCG.panel,
+        panelHi: SCG.panelHi,
+        ink: SCG.ink,
+        inkDim: SCG.inkDim,
+        inkFaint: SCG.inkFaint,
+        line: SCG.line,
+        red: SCG.red,
+        green: SCG.green,
+      }}
+    >
+      /* Every design token from theme.js is emitted here once — Astro lands them
+         as inline custom properties on <html>, so they cascade into every page
+         component's scoped <style>. Components must not re-declare define:vars. */
       html, body { margin: 0; padding: 0; background: var(--bg); scroll-behavior: smooth; overflow-x: hidden; }
       body { font-family: 'DM Sans', ui-sans-serif, system-ui, sans-serif; color: var(--ink); }
       * { box-sizing: border-box; }
@@ -53,6 +66,72 @@ const { nav, cta, footer, brand } = site;
       .scg-footer-link:hover { border-bottom-color: var(--accent); }
       .scg-nav-link { transition: color .15s ease; }
       .scg-nav-link:hover { color: var(--accent); }
+
+      /* ── Shared page primitives ─────────────────────────────────────────────
+         Used across the inner-page components (CasePage, CareersPage,
+         OfferingPage, TeamPage). Kept here, global, so a change lands once. */
+
+      .scg-accent { color: var(--accent); }
+
+      /* Horizontal page gutter. Sections set their own vertical rhythm. */
+      .u-container { max-width: 1280px; margin: 0 auto; padding: 0 56px; }
+
+      /* Mono eyebrow / kicker above a heading. Callers set their own margin. */
+      .u-eyebrow { font-family: 'JetBrains Mono', ui-monospace, monospace; font-size: 12px; color: var(--accent); letter-spacing: .1em; text-transform: uppercase; }
+
+      /* Filter chip (case + team filter bars). */
+      .u-chip { font-family: 'JetBrains Mono', ui-monospace, monospace; font-size: 12px; padding: 8px 14px; border-radius: 999px; border: 1px solid var(--line); background: var(--bg); color: var(--inkDim); cursor: pointer; transition: all .15s; user-select: none; }
+      .u-chip:hover { color: var(--ink); border-color: var(--inkDim); }
+      .u-chip.active { background: var(--accent); color: var(--bg); border-color: var(--accent); font-weight: 600; }
+
+      /* Team-member card: placeholder portrait tile + caption row. Shared by the
+         home page team teaser and the full team grid; each adds its own size /
+         interaction rules on top (hover lift, tag badge, bio — team page only). */
+      .u-portrait { aspect-ratio: 4 / 5; width: 100%; border-radius: 14px; background: repeating-linear-gradient(135deg, var(--panel), var(--panel) 8px, var(--panelHi) 8px, var(--panelHi) 9px); border: 1px solid var(--line); display: flex; align-items: center; justify-content: center; font-family: 'JetBrains Mono', ui-monospace, monospace; font-size: 12px; color: var(--inkFaint); letter-spacing: .04em; }
+      .u-member-meta { margin-top: 16px; display: flex; justify-content: space-between; align-items: baseline; }
+      .u-member-name { font-family: 'Amatic SC', cursive; font-weight: 700; font-size: 34px; line-height: 1; color: var(--ink); }
+      .u-member-role { font-size: 14px; color: var(--ink); margin-top: 4px; }
+      .u-member-num { font-family: 'JetBrains Mono', ui-monospace, monospace; font-size: 11px; color: var(--inkDim); }
+      .u-member-tag { font-family: 'JetBrains Mono', ui-monospace, monospace; font-size: 11px; color: var(--inkDim); margin-top: 6px; }
+
+      /* Inner-page hero band (the home page hero is bespoke). A caller may narrow
+         the lead's max-width per page; the vertical rhythm is shared. */
+      .u-hero { padding: 144px 0 96px; border-bottom: 1px solid var(--line); position: relative; overflow: hidden; }
+      .u-hero-h1 { font-family: 'Amatic SC', cursive; font-weight: 700; font-size: clamp(96px, 13vw, 220px); line-height: .88; margin: 0; letter-spacing: -.005em; color: var(--ink); }
+      .u-hero-lead { font-size: 22px; line-height: 1.45; max-width: 720px; margin: 48px 0 0; color: var(--ink); }
+
+      /* Decorative logo watermark, top-right of a hero (careers + team). */
+      .u-logoart { position: absolute; right: 56px; top: 120px; opacity: .55; pointer-events: none; }
+      .u-logoart img { height: 220px; width: auto; }
+
+      /* Big pull-quote with attribution (home testimonial + careers quote). Each
+         caller sets its own glyph / blockquote font-size. */
+      .u-quote-glyph { font-family: 'Amatic SC', cursive; line-height: .3; color: var(--accent); margin-bottom: 20px; }
+      .u-quote-bq { font-family: 'Amatic SC', cursive; font-weight: 700; line-height: 1; margin: 0; color: var(--ink); max-width: 1100px; }
+      .u-quote-cap { margin-top: 32px; display: flex; align-items: center; gap: 12px; }
+      .u-quote-avatar { width: 44px; height: 44px; border-radius: 999px; background: var(--panelHi); border: 1px solid var(--line); }
+      .u-quote-name { font-size: 15px; font-weight: 500; color: var(--ink); }
+      .u-quote-role { font-family: 'JetBrains Mono', ui-monospace, monospace; font-size: 12px; color: var(--inkDim); }
+
+      /* Closing accent CTA band (every inner page ends with one). */
+      .u-cta { background: var(--accent); padding: 120px 0; text-align: center; }
+      .u-cta-logo { height: 120px; width: auto; margin-bottom: 24px; }
+      .u-cta-h2 { font-family: 'Amatic SC', cursive; font-weight: 700; font-size: clamp(72px, 10vw, 160px); line-height: .92; margin: 0 0 20px; color: var(--bg); }
+      .u-cta-body { font-size: 20px; line-height: 1.5; margin: 0 auto 40px; max-width: 640px; color: var(--bg); }
+      .u-cta-btn { display: inline-flex; align-items: center; gap: 10px; background: var(--bg); color: var(--ink); padding: 16px 26px; border-radius: 999px; text-decoration: none; font-size: 16px; font-weight: 600; }
+
+      @media (max-width: 960px) {
+        .u-container { padding: 0 20px; }
+        .u-cta { padding: 80px 0; }
+        .u-hero { padding: 80px 0 56px; }
+        .u-logoart { display: none; }
+      }
+      @media (max-width: 640px) {
+        .u-container { padding: 0 16px; }
+        .u-cta { padding: 64px 0; }
+        .u-cta-logo { height: 80px; }
+        .u-hero { padding: 56px 0 40px; }
+      }
     </style>
   </head>
   <body>
@@ -111,7 +190,8 @@ const { nav, cta, footer, brand } = site;
       </div>
     </footer>
 
-    <style define:vars={{ accent: SCG.accent, bg: SCG.bg, panel: SCG.panel, ink: SCG.ink, inkDim: SCG.inkDim, line: SCG.line }}>
+    <style>
+      /* Tokens cascade from the global block above (on <html>); no define:vars here. */
       .scg-nav { position: sticky; top: 0; z-index: 100; background: rgba(10,12,15,.85); backdrop-filter: blur(12px); border-bottom: 1px solid var(--line); }
       .scg-nav-inner { max-width: 1280px; margin: 0 auto; padding: 0 56px; display: flex; align-items: center; justify-content: space-between; height: 76px; position: relative; }
       .scg-brand { font-family: 'Amatic SC', cursive; font-weight: 700; font-size: 28px; line-height: 1; color: var(--ink); white-space: nowrap; text-decoration: none; }

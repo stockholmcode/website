@@ -1,23 +1,19 @@
 ---
-import { SCG } from '../lib/theme.js';
+import { assetBase } from '../lib/paths.js';
 
 const { locale = 'sv', content } = Astro.props;
 
-const page = content.erbjudanden_page;
+const page = content.offering_page;
 const offerings = content.offerings;
 const dimensions = content.dimensions;
 
-const assetBase = import.meta.env.BASE_URL.endsWith('/')
-  ? import.meta.env.BASE_URL
-  : import.meta.env.BASE_URL + '/';
-
 const deliverables = page.offeringDeliverables;
 ---
-<header class="hero">
-  <div class="container">
-    <div class="kicker">{page.hero.kicker}</div>
-    <h1>{page.hero.headlinePre}<br /><span class="accent">{page.hero.headlineAccent}</span> {page.hero.headlineMid}</h1>
-    <p class="lead">
+<header class="u-hero hero">
+  <div class="u-container">
+    <div class="u-eyebrow kicker">{page.hero.kicker}</div>
+    <h1 class="u-hero-h1">{page.hero.headlinePre}<br /><span class="accent">{page.hero.headlineAccent}</span> {page.hero.headlineMid}</h1>
+    <p class="lead u-hero-lead">
       {page.hero.lead}
       <span class="dim">{page.hero.leadDim}</span>
     </p>
@@ -26,7 +22,7 @@ const deliverables = page.offeringDeliverables;
 
 <!-- Core practice -->
 <section class="core">
-  <div class="container">
+  <div class="u-container">
     <div class="head">
       <h2>{page.core.headPre}<br />{page.core.headMid} <span class="accent">{page.core.headAccent}</span></h2>
       <p class="lead">{page.core.lead}</p>
@@ -51,7 +47,7 @@ const deliverables = page.offeringDeliverables;
 
 <!-- AI track intro -->
 <section class="track-intro">
-  <div class="container">
+  <div class="u-container">
     <div class="head">
       <div>
         <div class="kicker">{page.track.kicker}</div>
@@ -71,7 +67,7 @@ const deliverables = page.offeringDeliverables;
 
 <!-- Offerings detailed -->
 <section class="offerings">
-  <div class="container">
+  <div class="u-container">
     <div class="off-grid">
       {offerings.map((off, i) => (
         <article class:list={['off-card', { accent: i === offerings.length - 1 }]}>
@@ -105,7 +101,7 @@ const deliverables = page.offeringDeliverables;
 
 <!-- 5D framework -->
 <section class="framework">
-  <div class="container">
+  <div class="u-container">
     <div class="head">
       <h2>{page.framework.headPre}<br /><span class="accent">{page.framework.headAccent}</span></h2>
       <p class="lead">{page.framework.lead}</p>
@@ -142,7 +138,7 @@ const deliverables = page.offeringDeliverables;
 
 <!-- How to engage -->
 <section class="engage">
-  <div class="container">
+  <div class="u-container">
     <h2>{page.engage.heading}</h2>
     <div class="engage-grid">
       {page.engage.steps.map((s, i) => (
@@ -157,40 +153,24 @@ const deliverables = page.offeringDeliverables;
 </section>
 
 <!-- CTA -->
-<section class="cta">
-  <div class="container">
-    <img src={`${assetBase}assets/logo-dark.png`} alt="" class="logo" />
-    <h2>{page.cta.heading}</h2>
-    <p>{page.cta.body}</p>
-    <a class="btn" href={page.cta.buttonHref}>{page.cta.buttonLabel}</a>
+<section class="u-cta">
+  <div class="u-container">
+    <img src={`${assetBase}assets/logo-dark.png`} alt="" class="u-cta-logo" />
+    <h2 class="u-cta-h2">{page.cta.heading}</h2>
+    <p class="u-cta-body">{page.cta.body}</p>
+    <a class="u-cta-btn" href={page.cta.buttonHref}>{page.cta.buttonLabel}</a>
   </div>
 </section>
 
-<style
-  define:vars={{
-    accent: SCG.accent,
-    bg: SCG.bg,
-    panel: SCG.panel,
-    ink: SCG.ink,
-    inkDim: SCG.inkDim,
-    inkFaint: SCG.inkFaint,
-    line: SCG.line,
-    red: SCG.red,
-    green: SCG.green,
-  }}
->
-  .container { max-width: 1280px; margin: 0 auto; padding: 0 56px; }
+<style>
+  /* Tokens + .u-* / .scg-accent primitives are global (see Base.astro).
+     .accent stays local here: this file also uses `.off-card.accent` as an
+     unrelated state modifier, so a blanket rename would be error-prone. */
   .accent { color: var(--accent); }
 
-  /* Hero */
-  .hero { padding: 144px 0 96px; border-bottom: 1px solid var(--line); position: relative; overflow: hidden; }
-  .hero .kicker { font-family: 'JetBrains Mono', ui-monospace, monospace; font-size: 12px; color: var(--accent);
-    letter-spacing: .1em; text-transform: uppercase; margin-bottom: 20px; }
-  .hero h1 { font-family: 'Amatic SC', cursive; font-weight: 700;
-    font-size: clamp(96px, 13vw, 220px); line-height: .88; margin: 0;
-    letter-spacing: -.005em; color: var(--ink); }
+  /* Hero — shell / h1 / lead come from .u-hero* (Base.astro). */
+  .hero .kicker { margin-bottom: 20px; }
   .hero h1 .accent { color: var(--accent); }
-  .hero p.lead { font-size: 22px; line-height: 1.45; max-width: 720px; margin: 48px 0 0; color: var(--ink); }
   .hero p.lead .dim { color: var(--inkDim); }
 
   /* Core practice */
@@ -295,23 +275,8 @@ const deliverables = page.offeringDeliverables;
   .engage-card h3 { font-family: 'Amatic SC', cursive; font-weight: 700; font-size: 36px; line-height: .95; margin: 8px 0 12px; color: var(--ink); }
   .engage-card p { font-size: 14px; line-height: 1.6; color: var(--inkDim); margin: 0; }
 
-  /* CTA */
-  .cta { background: var(--accent); padding: 120px 0; text-align: center; }
-  .cta img.logo { height: 120px; width: auto; margin-bottom: 24px; }
-  .cta h2 { font-family: 'Amatic SC', cursive; font-weight: 700;
-    font-size: clamp(72px, 10vw, 160px); line-height: .92; margin: 0 0 20px; color: var(--bg); }
-  .cta p { font-size: 20px; line-height: 1.5; margin: 0 auto 40px; max-width: 640px; color: var(--bg); }
-  .cta .btn { display: inline-flex; align-items: center; gap: 10px;
-    background: var(--bg); color: var(--ink); padding: 16px 26px; border-radius: 999px;
-    text-decoration: none; font-size: 16px; font-weight: 600; }
-
   /* ── Responsive ─────────────────────────────────────────────────────────── */
   @media (max-width: 960px) {
-    .container { padding: 0 20px; }
-
-    /* Hero */
-    .hero { padding: 80px 0 56px; }
-
     /* Core */
     .core { padding: 72px 0; }
     .core .head { grid-template-columns: 1fr; gap: 24px; }
@@ -335,16 +300,10 @@ const deliverables = page.offeringDeliverables;
     /* Engage */
     .engage { padding: 72px 0; }
     .engage-grid { grid-template-columns: repeat(2, 1fr); gap: 24px; }
-
-    /* CTA */
-    .cta { padding: 80px 0; }
   }
 
   @media (max-width: 640px) {
-    .container { padding: 0 16px; }
-
     /* Hero */
-    .hero { padding: 56px 0 40px; }
     .hero p.lead { font-size: 17px; margin-top: 24px; }
 
     /* Core */
@@ -363,9 +322,5 @@ const deliverables = page.offeringDeliverables;
 
     /* Engage */
     .engage-grid { grid-template-columns: 1fr; }
-
-    /* CTA */
-    .cta { padding: 64px 0; }
-    .cta img.logo { height: 80px; }
   }
 </style>

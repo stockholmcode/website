@@ -1,6 +1,6 @@
 ---
 import { getRelativeLocaleUrl } from 'astro:i18n';
-import { SCG } from '../lib/theme.js';
+import { assetBase } from '../lib/paths.js';
 
 const { locale = 'sv', content } = Astro.props;
 
@@ -9,9 +9,6 @@ const members = content.team;
 const culture = content['team-culture'];
 
 const link = (to) => getRelativeLocaleUrl(locale, to);
-const assetBase = import.meta.env.BASE_URL.endsWith('/')
-  ? import.meta.env.BASE_URL
-  : import.meta.env.BASE_URL + '/';
 
 // Portrait tag badge: same priority order as the original script.
 const tagLabels = page.tagLabels;
@@ -28,23 +25,23 @@ const initialCount = page.filter.countTemplate
   .replace('{shown}', String(members.length))
   .replace('{total}', String(members.length));
 ---
-<header class="scg-team-hero">
-  <div class="scg-container">
-    <div class="scg-team-kicker mono">{page.hero.eyebrow}</div>
-    <h1 class="scg-team-h1 display">
+<header class="u-hero">
+  <div class="u-container">
+    <div class="u-eyebrow scg-team-kicker">{page.hero.eyebrow}</div>
+    <h1 class="u-hero-h1">
       {page.hero.titlePre}<br />{page.hero.titleMid}<span class="scg-accent">{page.hero.titleAccent}</span>
     </h1>
-    <p class="scg-team-lead">{page.hero.intro}</p>
-    <div class="scg-team-logoart"><img src={`${assetBase}assets/logo-light.png`} alt="" /></div>
+    <p class="u-hero-lead scg-team-lead">{page.hero.intro}</p>
+    <div class="u-logoart"><img src={`${assetBase}assets/logo-light.png`} alt="" /></div>
   </div>
 </header>
 
 <div class="scg-filters">
-  <div class="scg-container scg-filter-row">
+  <div class="u-container scg-filter-row">
     <div class="mono scg-filter-label">{page.filter.label}</div>
     <div class="scg-chips" id="chips">
       {page.filter.chips.map((c, i) => (
-        <button class:list={['scg-chip', { active: i === 0 }]} data-f={c.key}>{c.label}</button>
+        <button class:list={['u-chip', { active: i === 0 }]} data-f={c.key}>{c.label}</button>
       ))}
     </div>
     <div class="scg-count mono" id="count" data-template={page.filter.countTemplate}>{initialCount}</div>
@@ -52,22 +49,22 @@ const initialCount = page.filter.countTemplate
 </div>
 
 <section class="scg-team-grid-section">
-  <div class="scg-container">
+  <div class="u-container">
     <div class="scg-grid" id="grid">
       {members.map((m, i) => (
         <article class="scg-member" data-cat={m.cat.join(' ')}>
-          <div class="scg-portrait">
+          <div class="u-portrait scg-portrait">
             <span class="scg-portrait-tag">{badgeFor(m.cat)}</span>
             {`// porträtt · ${m.name.split(' ')[0].toLowerCase()}`}
           </div>
-          <div class="scg-member-meta">
+          <div class="u-member-meta">
             <div>
-              <div class="scg-member-name display">{m.name}</div>
-              <div class="scg-member-role">{m.role}</div>
+              <div class="u-member-name scg-member-name">{m.name}</div>
+              <div class="u-member-role">{m.role}</div>
             </div>
-            <div class="scg-member-num mono">{String(i + 1).padStart(2, '0')}</div>
+            <div class="u-member-num">{String(i + 1).padStart(2, '0')}</div>
           </div>
-          <div class="scg-member-tagline mono">{m.tag}</div>
+          <div class="u-member-tag">{m.tag}</div>
           <div class="scg-member-bio">{m.bio}</div>
           <div class="scg-member-social mono">
             {m.social.map((s) => <a href="#">{s}</a>)}
@@ -79,7 +76,7 @@ const initialCount = page.filter.countTemplate
 </section>
 
 <section class="scg-team-stats">
-  <div class="scg-container">
+  <div class="u-container">
     <div class="scg-stats-grid">
       {page.stats.items.map((s) => (
         <div class="scg-stat">
@@ -92,8 +89,8 @@ const initialCount = page.filter.countTemplate
 </section>
 
 <section class="scg-culture">
-  <div class="scg-container">
-    <div class="mono scg-culture-eyebrow">{page.culture.eyebrow}</div>
+  <div class="u-container">
+    <div class="u-eyebrow scg-culture-eyebrow">{page.culture.eyebrow}</div>
     <h2 class="scg-culture-h2 display">{page.culture.titlePre}<span class="scg-accent">{page.culture.titleAccent}</span></h2>
     <div class="scg-values">
       {culture.map((v) => (
@@ -107,17 +104,17 @@ const initialCount = page.filter.countTemplate
   </div>
 </section>
 
-<section class="scg-callout">
-  <div class="scg-container">
-    <img class="scg-callout-logo" src={`${assetBase}assets/logo-dark.png`} alt="" />
-    <h2 class="scg-callout-h2 display">{page.callout.title}</h2>
-    <p class="scg-callout-body">{page.callout.body}</p>
-    <a href={calloutHref} class="scg-callout-btn">{page.callout.cta.label}</a>
+<section class="u-cta">
+  <div class="u-container">
+    <img class="u-cta-logo" src={`${assetBase}assets/logo-dark.png`} alt="" />
+    <h2 class="u-cta-h2">{page.callout.title}</h2>
+    <p class="u-cta-body">{page.callout.body}</p>
+    <a href={calloutHref} class="u-cta-btn">{page.callout.cta.label}</a>
   </div>
 </section>
 
 <script>
-  const chips = document.querySelectorAll('.scg-chip');
+  const chips = document.querySelectorAll('.u-chip');
   const count = document.getElementById('count');
   const members = document.querySelectorAll('.scg-member');
   const total = members.length;
@@ -141,43 +138,33 @@ const initialCount = page.filter.countTemplate
   );
 </script>
 
-<style define:vars={{ accent: SCG.accent, bg: SCG.bg, panel: SCG.panel, panelHi: SCG.panelHi, ink: SCG.ink, inkDim: SCG.inkDim, inkFaint: SCG.inkFaint, line: SCG.line }}>
-  .scg-container { max-width: 1280px; margin: 0 auto; padding: 0 56px; }
+<style>
+  /* Tokens + .u-* / .scg-accent primitives are global (see Base.astro). */
   .mono { font-family: 'JetBrains Mono', ui-monospace, monospace; }
   .display { font-family: 'Amatic SC', cursive; font-weight: 700; }
-  .scg-accent { color: var(--accent); }
 
-  /* Hero */
-  .scg-team-hero { padding: 144px 0 120px; border-bottom: 1px solid var(--line); position: relative; overflow: hidden; }
-  .scg-team-kicker { font-size: 12px; color: var(--accent); letter-spacing: .1em; text-transform: uppercase; margin-bottom: 20px; }
-  .scg-team-h1 { font-size: clamp(96px, 13vw, 220px); line-height: .88; margin: 0; letter-spacing: -.005em; color: var(--ink); }
-  .scg-team-lead { font-size: 22px; line-height: 1.45; max-width: 680px; margin: 48px 0 0; color: var(--ink); }
-  .scg-team-logoart { position: absolute; right: 56px; top: 120px; opacity: .55; pointer-events: none; }
-  .scg-team-logoart img { height: 220px; width: auto; }
+  /* Hero — shell / h1 / lead / logo watermark come from .u-hero* / .u-logoart. */
+  .scg-team-kicker { margin-bottom: 20px; }
+  .scg-team-lead { max-width: 680px; }
 
   /* Filter bar */
   .scg-filters { border-bottom: 1px solid var(--line); background: var(--panel); }
   .scg-filter-row { display: flex; align-items: center; gap: 24px; padding: 20px 56px; flex-wrap: wrap; }
   .scg-filter-label { color: var(--inkDim); font-size: 12px; letter-spacing: .08em; text-transform: uppercase; }
   .scg-chips { display: flex; gap: 8px; flex-wrap: wrap; }
-  .scg-chip { font-family: 'JetBrains Mono', ui-monospace, monospace; font-size: 12px; padding: 8px 14px; border-radius: 999px; border: 1px solid var(--line); background: var(--bg); color: var(--inkDim); cursor: pointer; transition: all .15s; }
-  .scg-chip:hover { color: var(--ink); border-color: var(--inkDim); }
-  .scg-chip.active { background: var(--accent); color: var(--bg); border-color: var(--accent); font-weight: 600; }
   .scg-count { font-size: 12px; color: var(--inkDim); }
 
-  /* Team grid */
+  /* Team grid — portrait + caption come from .u-portrait / .u-member-* (Base.astro);
+     the rules below are the team page's own additions: hover lift, tag badge, the
+     larger name, plus bio and social which the home teaser doesn't have. */
   .scg-team-grid-section { padding: 96px 0; }
   .scg-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px 32px; }
   .scg-member { cursor: pointer; }
   .scg-member.scg-hidden { display: none; }
-  .scg-portrait { aspect-ratio: 4/5; width: 100%; border-radius: 14px; background: repeating-linear-gradient(135deg, var(--panel), var(--panel) 8px, var(--panelHi) 8px, var(--panelHi) 9px); border: 1px solid var(--line); display: flex; align-items: center; justify-content: center; font-family: 'JetBrains Mono', ui-monospace, monospace; font-size: 12px; color: var(--inkFaint); letter-spacing: .04em; transition: all .2s; position: relative; overflow: hidden; }
+  .scg-portrait { transition: all .2s; position: relative; overflow: hidden; }
   .scg-member:hover .scg-portrait { border-color: var(--accent); transform: translateY(-2px); }
   .scg-portrait-tag { position: absolute; top: 12px; left: 12px; background: rgba(10,12,15,.7); backdrop-filter: blur(8px); padding: 4px 10px; border-radius: 999px; font-size: 10px; color: var(--ink); border: 1px solid var(--line); }
-  .scg-member-meta { margin-top: 18px; display: flex; justify-content: space-between; align-items: baseline; }
-  .scg-member-name { font-size: 38px; line-height: 1; color: var(--ink); }
-  .scg-member-role { font-size: 14px; color: var(--ink); margin-top: 4px; }
-  .scg-member-num { font-size: 11px; color: var(--inkDim); }
-  .scg-member-tagline { font-size: 11px; color: var(--inkDim); margin-top: 6px; }
+  .scg-member-name { font-size: 38px; }
   .scg-member-bio { font-size: 13px; color: var(--inkDim); margin-top: 10px; line-height: 1.55; }
   .scg-member-social { display: flex; gap: 10px; margin-top: 12px; font-size: 11px; color: var(--accent); }
   .scg-member-social a { text-decoration: none; padding: 4px 10px; border-radius: 999px; border: 1px solid var(--line); transition: all .15s; }
@@ -194,7 +181,7 @@ const initialCount = page.filter.countTemplate
 
   /* Culture strip */
   .scg-culture { background: var(--panel); padding: 120px 0; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
-  .scg-culture-eyebrow { color: var(--accent); font-size: 12px; letter-spacing: .1em; text-transform: uppercase; margin-bottom: 16px; }
+  .scg-culture-eyebrow { margin-bottom: 16px; }
   .scg-culture-h2 { font-size: clamp(64px, 8vw, 128px); line-height: .92; margin: 0 0 56px; color: var(--ink); }
   .scg-values { display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; }
   .scg-value { border-top: 2px solid var(--line); padding-top: 24px; }
@@ -203,19 +190,9 @@ const initialCount = page.filter.countTemplate
   .scg-value-h3 { font-size: 44px; line-height: .95; margin: 12px 0; color: var(--ink); }
   .scg-value-body { font-size: 15px; line-height: 1.6; color: var(--inkDim); margin: 0; }
 
-  /* Callout / CTA */
-  .scg-callout { background: var(--accent); padding: 120px 0; text-align: center; }
-  .scg-callout-logo { height: 120px; width: auto; margin-bottom: 24px; }
-  .scg-callout-h2 { font-size: clamp(72px, 10vw, 160px); line-height: .92; margin: 0 0 20px; color: var(--bg); }
-  .scg-callout-body { font-size: 20px; line-height: 1.5; margin: 0 auto 40px; max-width: 640px; color: var(--bg); }
-  .scg-callout-btn { display: inline-flex; align-items: center; gap: 10px; background: var(--bg); color: var(--ink); padding: 16px 26px; border-radius: 999px; text-decoration: none; font-size: 16px; font-weight: 600; }
-
   /* ── Responsive ── */
   @media (max-width: 960px) {
-    .scg-container { padding: 0 20px; }
     .scg-filter-row { padding: 20px; }
-    .scg-team-hero { padding: 80px 0 56px; }
-    .scg-team-logoart { display: none; }
     .scg-team-grid-section { padding: 56px 0; }
     .scg-grid { grid-template-columns: repeat(2, 1fr); gap: 28px 20px; }
     .scg-stats-grid { grid-template-columns: repeat(2, 1fr); gap: 24px; }
@@ -224,16 +201,12 @@ const initialCount = page.filter.countTemplate
     .scg-stat:nth-child(3) { border-left: none; padding-left: 0; }
     .scg-values { grid-template-columns: 1fr 1fr; }
     .scg-culture { padding: 72px 0; }
-    .scg-callout { padding: 72px 0; }
   }
   @media (max-width: 640px) {
-    .scg-container { padding: 0 16px; }
-    .scg-team-hero { padding: 56px 0 40px; }
     .scg-grid { grid-template-columns: 1fr; }
     .scg-stats-grid { grid-template-columns: 1fr; }
     .scg-stat { border-left: none; padding-left: 0; border-top: 1px solid var(--line); padding-top: 20px; }
     .scg-stat:first-child { border-top: none; padding-top: 0; }
     .scg-values { grid-template-columns: 1fr; }
-    .scg-callout-logo { height: 80px; }
   }
 </style>

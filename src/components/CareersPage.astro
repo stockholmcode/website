@@ -1,6 +1,6 @@
 ---
 import { getRelativeLocaleUrl } from 'astro:i18n';
-import { SCG } from '../lib/theme.js';
+import { assetBase } from '../lib/paths.js';
 
 const { locale = 'sv', content } = Astro.props;
 
@@ -14,9 +14,6 @@ const process = careers.process ?? [];
 const quote = careers.quote ?? {};
 
 const link = (to) => getRelativeLocaleUrl(locale, to);
-const assetBase = import.meta.env.BASE_URL.endsWith('/')
-  ? import.meta.env.BASE_URL
-  : import.meta.env.BASE_URL + '/';
 
 const mailto = (subject) =>
   subject
@@ -25,20 +22,20 @@ const mailto = (subject) =>
 
 const pad = (i) => String(i + 1).padStart(2, '0');
 ---
-<header class="scg-c-hero">
-  <div class="scg-c-container">
-    <div class="scg-c-hero-kicker">{page.hero.kicker}</div>
-    <h1 class="scg-c-hero-h1">
+<header class="u-hero">
+  <div class="u-container">
+    <div class="u-eyebrow scg-c-hero-kicker">{page.hero.kicker}</div>
+    <h1 class="u-hero-h1">
       {page.hero.headlinePre}<br /><span class="scg-accent">{page.hero.headlineAccent}</span>
     </h1>
-    <p class="scg-c-hero-lead">{page.hero.lead}</p>
-    <div class="scg-c-logoart"><img src={`${assetBase}assets/logo-light.png`} alt="" /></div>
+    <p class="u-hero-lead scg-c-hero-lead">{page.hero.lead}</p>
+    <div class="u-logoart"><img src={`${assetBase}assets/logo-light.png`} alt="" /></div>
   </div>
 </header>
 
 <section class="scg-c-perks">
-  <div class="scg-c-container">
-    <div class="scg-c-mono-kicker">{page.perks.eyebrow}</div>
+  <div class="u-container">
+    <div class="u-eyebrow scg-c-mono-kicker">{page.perks.eyebrow}</div>
     <h2 class="scg-c-perks-h2">
       {page.perks.headlinePre}<span class="scg-accent">{page.perks.headlineAccent}</span>{page.perks.headlinePost}
     </h2>
@@ -57,10 +54,10 @@ const pad = (i) => String(i + 1).padStart(2, '0');
 </section>
 
 <section class="scg-c-roles" id="apply">
-  <div class="scg-c-container">
+  <div class="u-container">
     <div class="scg-c-roles-head">
       <div>
-        <div class="scg-c-mono-kicker">{page.roles.eyebrow}</div>
+        <div class="u-eyebrow scg-c-mono-kicker">{page.roles.eyebrow}</div>
         <h2 class="scg-c-roles-h2">
           {page.roles.headlinePre}<br />{page.roles.headlineMid}<span class="scg-accent">{page.roles.headlineAccent}</span>
         </h2>
@@ -108,8 +105,8 @@ const pad = (i) => String(i + 1).padStart(2, '0');
 </section>
 
 <section class="scg-c-process">
-  <div class="scg-c-container">
-    <div class="scg-c-mono-kicker">{page.process.eyebrow}</div>
+  <div class="u-container">
+    <div class="u-eyebrow scg-c-mono-kicker">{page.process.eyebrow}</div>
     <h2 class="scg-c-process-h2">
       {page.process.headlinePre}<span class="scg-accent">{page.process.headlineAccent}</span>
     </h2>
@@ -127,27 +124,27 @@ const pad = (i) => String(i + 1).padStart(2, '0');
 </section>
 
 <section class="scg-c-quote">
-  <div class="scg-c-container">
+  <div class="u-container">
     <figure style="margin: 0;">
-      <div class="scg-c-q">“</div>
-      <blockquote class="scg-c-quote-bq">{quote.text}</blockquote>
-      <figcaption class="scg-c-quote-cap">
-        <div class="scg-c-quote-avatar"></div>
+      <div class="u-quote-glyph scg-c-q">“</div>
+      <blockquote class="u-quote-bq scg-c-quote-bq">{quote.text}</blockquote>
+      <figcaption class="u-quote-cap">
+        <div class="u-quote-avatar"></div>
         <div>
-          <div class="scg-c-quote-name">{quote.name}</div>
-          <div class="scg-c-quote-role">{quote.role}</div>
+          <div class="u-quote-name">{quote.name}</div>
+          <div class="u-quote-role">{quote.role}</div>
         </div>
       </figcaption>
     </figure>
   </div>
 </section>
 
-<section class="scg-c-cta">
-  <div class="scg-c-container">
-    <img class="scg-c-cta-logo" src={`${assetBase}assets/logo-dark.png`} alt="" />
-    <h2 class="scg-c-cta-h2">{page.cta.headline}</h2>
-    <p class="scg-c-cta-p">{page.cta.body}</p>
-    <a class="scg-c-cta-btn" href={mailto()}>{page.cta.label}</a>
+<section class="u-cta">
+  <div class="u-container">
+    <img class="u-cta-logo" src={`${assetBase}assets/logo-dark.png`} alt="" />
+    <h2 class="u-cta-h2">{page.cta.headline}</h2>
+    <p class="u-cta-body">{page.cta.body}</p>
+    <a class="u-cta-btn" href={mailto()}>{page.cta.label}</a>
   </div>
 </section>
 
@@ -160,19 +157,14 @@ const pad = (i) => String(i + 1).padStart(2, '0');
   document.querySelector('.scg-c-role')?.classList.add('open');
 </script>
 
-<style define:vars={{ accent: SCG.accent, bg: SCG.bg, panel: SCG.panel, panelHi: SCG.panelHi, ink: SCG.ink, inkDim: SCG.inkDim, inkFaint: SCG.inkFaint, line: SCG.line }}>
-  .scg-accent { color: var(--accent); }
-  .scg-c-container { max-width: 1280px; margin: 0 auto; padding: 0 56px; }
+<style>
+  /* Tokens + .u-* / .scg-accent primitives are global (see Base.astro). */
   .scg-c-mono { font-family: 'JetBrains Mono', ui-monospace, monospace; }
-  .scg-c-mono-kicker { font-family: 'JetBrains Mono', ui-monospace, monospace; font-size: 12px; color: var(--accent); letter-spacing: .1em; text-transform: uppercase; margin-bottom: 16px; }
+  .scg-c-mono-kicker { margin-bottom: 16px; }
 
-  /* Hero */
-  .scg-c-hero { padding: 144px 0 120px; border-bottom: 1px solid var(--line); position: relative; overflow: hidden; }
-  .scg-c-hero-kicker { font-family: 'JetBrains Mono', ui-monospace, monospace; font-size: 12px; color: var(--accent); letter-spacing: .1em; text-transform: uppercase; margin-bottom: 20px; }
-  .scg-c-hero-h1 { font-family: 'Amatic SC', cursive; font-weight: 700; font-size: clamp(96px, 13vw, 220px); line-height: .88; margin: 0; color: var(--ink); }
-  .scg-c-hero-lead { font-size: 22px; line-height: 1.45; max-width: 680px; margin: 48px 0 0; color: var(--ink); }
-  .scg-c-logoart { position: absolute; right: 56px; top: 120px; opacity: .55; pointer-events: none; }
-  .scg-c-logoart img { height: 220px; }
+  /* Hero — shell / h1 / lead / logo watermark come from .u-hero* / .u-logoart. */
+  .scg-c-hero-kicker { margin-bottom: 20px; }
+  .scg-c-hero-lead { max-width: 680px; }
 
   /* Perks */
   .scg-c-perks { background: var(--panel); border-bottom: 1px solid var(--line); padding: 64px 0; }
@@ -221,27 +213,13 @@ const pad = (i) => String(i + 1).padStart(2, '0');
   .scg-c-step-p { font-size: 13px; color: var(--inkDim); line-height: 1.55; margin: 0; }
   .scg-c-step-dur { font-family: 'JetBrains Mono', ui-monospace, monospace; font-size: 11px; color: var(--inkDim); margin-top: 10px; }
 
-  /* Quote */
+  /* Quote glyph / blockquote / caption come from .u-quote-* (Base.astro). */
   .scg-c-quote { padding: 120px 0; border-bottom: 1px solid var(--line); }
-  .scg-c-quote-bq { font-family: 'Amatic SC', cursive; font-weight: 700; font-size: clamp(44px, 6vw, 96px); line-height: 1; margin: 0; color: var(--ink); max-width: 1100px; }
-  .scg-c-q { font-family: 'Amatic SC', cursive; font-size: 200px; line-height: .3; color: var(--accent); margin-bottom: 20px; }
-  .scg-c-quote-cap { margin-top: 32px; display: flex; align-items: center; gap: 12px; }
-  .scg-c-quote-avatar { width: 44px; height: 44px; border-radius: 999px; background: var(--panelHi); border: 1px solid var(--line); }
-  .scg-c-quote-name { font-size: 15px; font-weight: 500; color: var(--ink); }
-  .scg-c-quote-role { font-family: 'JetBrains Mono', ui-monospace, monospace; font-size: 12px; color: var(--inkDim); }
-
-  /* Spontaneous CTA */
-  .scg-c-cta { background: var(--accent); padding: 120px 0; text-align: center; }
-  .scg-c-cta-logo { height: 120px; margin-bottom: 24px; }
-  .scg-c-cta-h2 { font-family: 'Amatic SC', cursive; font-weight: 700; font-size: clamp(72px, 10vw, 160px); line-height: .92; margin: 0 0 20px; color: var(--bg); }
-  .scg-c-cta-p { font-size: 20px; line-height: 1.5; margin: 0 auto 40px; max-width: 640px; color: var(--bg); }
-  .scg-c-cta-btn { display: inline-flex; align-items: center; gap: 10px; background: var(--bg); color: var(--ink); padding: 16px 26px; border-radius: 999px; text-decoration: none; font-weight: 600; font-size: 16px; }
+  .scg-c-quote-bq { font-size: clamp(44px, 6vw, 96px); }
+  .scg-c-q { font-size: 200px; }
 
   /* ── Responsive ── */
   @media (max-width: 960px) {
-    .scg-c-container { padding: 0 20px; }
-    .scg-c-hero { padding: 80px 0 56px; }
-    .scg-c-logoart { display: none; }
     .scg-c-perks-grid { grid-template-columns: repeat(2, 1fr); }
     .scg-c-role-headrow { grid-template-columns: 1fr auto; gap: 12px; }
     .scg-c-role-num { display: none; }
@@ -251,14 +229,9 @@ const pad = (i) => String(i + 1).padStart(2, '0');
     .scg-c-roles { padding: 72px 0; }
     .scg-c-process { padding: 72px 0; }
     .scg-c-q { font-size: 120px; }
-    .scg-c-cta { padding: 80px 0; }
   }
   @media (max-width: 640px) {
-    .scg-c-container { padding: 0 16px; }
-    .scg-c-hero { padding: 56px 0 40px; }
     .scg-c-perks-grid { grid-template-columns: 1fr; }
     .scg-c-steps { grid-template-columns: 1fr; }
-    .scg-c-cta { padding: 64px 0; }
-    .scg-c-cta-logo { height: 80px; }
   }
 </style>

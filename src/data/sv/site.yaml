@@ -6,7 +6,7 @@ cta:
   label: Säg hej ♥
   href: "mailto:contactus@stockholmcode.se"
 nav:
-  - { label: Erbjudanden, to: /erbjudanden }
+  - { label: Erbjudanden, to: /offering }
   - { label: Case, to: /case }
   - { label: Team, to: /team }
   - { label: Karriär, to: /careers }
@@ -17,7 +17,7 @@ footer:
     - h: Sidor
       items:
         - { label: Startsida, to: / }
-        - { label: Erbjudanden, to: /erbjudanden }
+        - { label: Erbjudanden, to: /offering }
         - { label: Case, to: /case }
         - { label: Team, to: /team }
         - { label: Karriär, to: /careers }
