@@ -3,15 +3,33 @@ import { getRelativeLocaleUrl } from 'astro:i18n';
 import { SCG } from '../lib/theme.js';
 import { assetBase } from '../lib/paths.js';
 import TypedWord from './islands/TypedWord.jsx';
-import HomeSections from './HomeSections.jsx';
 
+// The whole homepage: hero + the stack of static teaser sections (logos →
+// careers). Plain Astro markup, no client JS beyond the TypedWord island —
+// hover effects that were JS handlers are CSS (see Base.astro).
 const { locale = 'sv', content } = Astro.props;
-const hero = content.homepage.hero;
+
+const hp = content.homepage;
+const hero = hp.hero;
 const stats = content.stats;
 
-const linkBase = getRelativeLocaleUrl(locale, '/');
-const heroPrimary = hero.ctaPrimary.href ?? getRelativeLocaleUrl(locale, hero.ctaPrimary.to ?? '/');
-const heroSecondary = hero.ctaSecondary.href ?? getRelativeLocaleUrl(locale, hero.ctaSecondary.to ?? '/');
+// Section chrome (eyebrows, headings, CTAs) lives in homepage.yaml; the lists
+// come from their own domain files.
+const off = hp.offerings;
+const cs = hp.cases;
+const ap = hp.approach;
+const tm = hp.team;
+const ca = hp.careers;
+const clients = content.clients ?? [];
+const cases = content.cases ?? [];
+const approach = content.approach ?? [];
+const testimonials = content.testimonials ?? [];
+const team = content.team ?? [];
+
+const link = (to) => getRelativeLocaleUrl(locale, to);
+const ctaHref = (c) => c?.href ?? link(c?.to ?? '/');
+const heroPrimary = hero.ctaPrimary.href ?? link(hero.ctaPrimary.to ?? '/');
+const heroSecondary = hero.ctaSecondary.href ?? link(hero.ctaSecondary.to ?? '/');
 ---
 <header class="scg-hero">
   <div class="scg-hero-inner">
@@ -42,18 +60,181 @@ const heroSecondary = hero.ctaSecondary.href ?? getRelativeLocaleUrl(locale, her
   </div>
 </header>
 
-<HomeSections
-  hp={content.homepage}
-  clients={content.clients}
-  cases={content.cases}
-  approach={content.approach}
-  testimonials={content.testimonials}
-  team={content.team}
-  linkBase={linkBase}
-  assetBase={assetBase}
-/>
+{/* Logos — infinite marquee (pure CSS) */}
+<section class="scg-hs-logos">
+  <div class="scg-hs-marquee-fade">
+    <div class="scg-hs-marquee">
+      {[...clients, ...clients].map((c) => (
+        <span class="scg-hs-logo">{c}<span class="scg-hs-logo-star">✦</span></span>
+      ))}
+    </div>
+  </div>
+</section>
 
-<style define:vars={{ accent: SCG.accent, bg: SCG.bg, panel: SCG.panel, ink: SCG.ink, inkDim: SCG.inkDim, line: SCG.line }}>
+{/* Offerings — core practices + AI-track teaser */}
+<section id="offering" class="scg-hs-offerings">
+  <div class="scg-hs-container">
+    <div class="scg-hs-2col">
+      <div>
+        <div class="scg-hs-eyebrow">{off.eyebrow}</div>
+        <h2 class="scg-hs-h2">{off.headline1}<br /><span class="scg-accent">{off.headline2}</span></h2>
+      </div>
+      <p class="scg-hs-lead">{off.lead}</p>
+    </div>
+
+    <div class="scg-hs-3col">
+      {off.corePractice.map((c) => (
+        <article class="scg-hs-card">
+          <div class="scg-hs-card-top">
+            <div class="scg-hs-card-num">{c.num}</div>
+            <div class="scg-hs-card-label">{off.corePracticeLabel}</div>
+          </div>
+          <h3 class="scg-hs-card-h3">{c.title}</h3>
+          <p class="scg-hs-card-body">{c.body}</p>
+          <div class="scg-hs-tags">
+            {c.tags.map((t) => <span class="scg-hs-tag">{t}</span>)}
+          </div>
+        </article>
+      ))}
+    </div>
+
+    <div class="scg-hs-aitrack">
+      <div>
+        <div class="scg-hs-aitrack-eyebrow">{off.aiTrack.eyebrow}</div>
+        <div class="scg-hs-aitrack-h">{off.aiTrack.headline}</div>
+        <p class="scg-hs-aitrack-body">{off.aiTrack.body}</p>
+      </div>
+      <a class="scg-hs-pill scg-hs-pill--accent scg-hs-pill--tight" href={ctaHref(off.aiTrack.cta)}>{off.aiTrack.cta.label}</a>
+    </div>
+
+    <div class="scg-hs-center-cta">
+      <a class="scg-hs-pill" href={ctaHref(off.allCta)}>{off.allCta.label}</a>
+    </div>
+  </div>
+</section>
+
+{/* Cases — 3 teasers */}
+<section id="case" class="scg-hs-cases">
+  <div class="scg-hs-container">
+    <div class="scg-hs-2col">
+      <div>
+        <div class="scg-hs-eyebrow">{cs.eyebrow}</div>
+        <h2 class="scg-hs-h2">{cs.headline1}<br />{cs.headline2}</h2>
+      </div>
+      <p class="scg-hs-lead scg-hs-lead--w460">{cs.lead}</p>
+    </div>
+
+    <div class="scg-hs-caserows">
+      {cases.slice(0, 3).map((c, i) => (
+        <a href={link(cs.cta.to)} class="scg-case-row scg-hs-caserow">
+          <div class="scg-hs-caserow-num">0{i + 1}</div>
+          <div>
+            <div class="scg-hs-caserow-client">{c.client}</div>
+            <div class="scg-hs-caserow-meta">{c.sector} · {c.year}</div>
+          </div>
+          <div>
+            <div class="scg-hs-caserow-outcome">{c.outcome}</div>
+            <p class="scg-hs-caserow-body">{c.body}</p>
+          </div>
+          <div class="scg-hs-caserow-metric">
+            <div class="scg-hs-caserow-metric-num">{c.metric}</div>
+            <div class="scg-hs-caserow-metric-label">{c.metricLabel}</div>
+          </div>
+          <div class="scg-hs-caserow-arrow">→</div>
+        </a>
+      ))}
+      <div class="scg-hs-caserows-foot">
+        <a class="scg-hs-pill scg-hs-pill--accent" href={link(cs.cta.to)}>{cs.cta.label}</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+{/* Approach — condensed row */}
+<section class="scg-hs-approach">
+  <div class="scg-hs-container scg-hs-container--tight">
+    <div class="scg-hs-eyebrow scg-hs-eyebrow--center">{ap.eyebrow}</div>
+    <h2 class="scg-hs-approach-h2">{ap.headlinePre}<span class="scg-accent">{ap.headlineAccent}</span>{ap.headlinePost}</h2>
+    <div class="scg-hs-4col">
+      {approach.map((a) => (
+        <div class="scg-hs-step">
+          <div class="scg-hs-step-label">{a.step}</div>
+          <div class="scg-hs-step-title">{a.title}</div>
+          <p class="scg-hs-step-body">{a.body}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+{/* Testimonials — one hero quote */}
+<section class="scg-hs-quote">
+  <div class="scg-hs-container">
+    <div class="scg-hs-eyebrow">{hp.testimonials.eyebrow}</div>
+    <figure class="scg-hs-quote-fig">
+      <div class="scg-hs-quote-glyph">{'"'}</div>
+      <blockquote class="scg-hs-quote-bq">{testimonials[0].quote}</blockquote>
+      <figcaption class="scg-hs-quote-cap">
+        <div class="scg-hs-quote-avatar"></div>
+        <div>
+          <div class="scg-hs-quote-name">{testimonials[0].name}</div>
+          <div class="scg-hs-quote-role">{testimonials[0].role}</div>
+        </div>
+      </figcaption>
+    </figure>
+  </div>
+</section>
+
+{/* Team — 3 teasers */}
+<section class="scg-hs-team">
+  <div class="scg-hs-container">
+    <div class="scg-hs-2col scg-hs-2col--team">
+      <div>
+        <div class="scg-hs-eyebrow">{tm.eyebrow}</div>
+        <h2 class="scg-hs-h2 scg-hs-h2--team">{tm.headline}</h2>
+      </div>
+      <p class="scg-hs-lead scg-hs-lead--w440">{tm.lead}</p>
+    </div>
+    <div class="scg-hs-3col scg-hs-3col--team">
+      {team.slice(0, 3).map((p, i) => (
+        <div>
+          <div class="scg-hs-portrait">{`// porträtt · ${p.name.split(' ')[0].toLowerCase()}`}</div>
+          <div class="scg-hs-member-meta">
+            <div>
+              <div class="scg-hs-member-name">{p.name}</div>
+              <div class="scg-hs-member-role">{p.role}</div>
+            </div>
+            <div class="scg-hs-member-num">0{i + 1}</div>
+          </div>
+          <div class="scg-hs-member-tag">{p.tag}</div>
+        </div>
+      ))}
+    </div>
+    <div class="scg-hs-team-foot">
+      <a class="scg-hs-pill scg-hs-pill--accent" href={link(tm.cta.to)}>{tm.cta.label}</a>
+    </div>
+  </div>
+</section>
+
+{/* Careers — closing CTA */}
+<section class="scg-hs-careers">
+  <div class="scg-hs-container scg-hs-container--center">
+    <div class="scg-hs-careers-logo">
+      <img src={`${assetBase}assets/logo-dark.png`} alt="Stockholm Code Group" />
+    </div>
+    <h2 class="scg-hs-careers-h2">{ca.headline}</h2>
+    <p class="scg-hs-careers-body">{ca.body}</p>
+    <div class="scg-hs-roles">
+      {ca.roles.map((r) => (
+        <a class="scg-hs-role" href={link(ca.cta.to)}>{r} →</a>
+      ))}
+      <a class="scg-hs-role scg-hs-role--ghost" href={link(ca.cta.to)}>{ca.cta.label}</a>
+    </div>
+  </div>
+</section>
+
+<style define:vars={{ accent: SCG.accent, bg: SCG.bg, panel: SCG.panel, panelHi: SCG.panelHi, ink: SCG.ink, inkDim: SCG.inkDim, inkFaint: SCG.inkFaint, line: SCG.line }}>
+  /* ── Hero + stats ─────────────────────────────────────────────────────── */
   .scg-accent { color: var(--accent); }
   .scg-hero { background: var(--bg); border-bottom: 1px solid var(--line); position: relative; overflow: hidden; }
   .scg-hero-inner { max-width: 1280px; margin: 0 auto; padding: 92px 56px 56px; }
@@ -71,11 +252,127 @@ const heroSecondary = hero.ctaSecondary.href ?? getRelativeLocaleUrl(locale, her
   .scg-stat-num { font-family: 'Amatic SC', cursive; font-weight: 700; font-size: 56px; line-height: 1; color: var(--accent); }
   .scg-stat-label { font-size: 12px; color: var(--inkDim); max-width: 120px; line-height: 1.4; }
 
+  /* ── Shared section primitives ───────────────────────────────────────── */
+  .scg-hs-container { max-width: 1280px; margin: 0 auto; padding: 72px 56px; }
+  .scg-hs-container--tight { padding-top: 48px; padding-bottom: 48px; }
+  .scg-hs-container--center { text-align: center; }
+  .scg-hs-eyebrow { font-family: 'JetBrains Mono', ui-monospace, monospace; font-size: 12px; color: var(--accent); letter-spacing: .1em; text-transform: uppercase; margin-bottom: 16px; }
+  .scg-hs-eyebrow--center { margin-bottom: 24px; text-align: center; }
+  .scg-hs-h2 { font-family: 'Amatic SC', cursive; font-weight: 700; font-size: clamp(64px, 8vw, 128px); line-height: .92; margin: 0; color: var(--ink); }
+  .scg-hs-h2--team { font-size: clamp(64px, 8vw, 120px); }
+  .scg-hs-lead { font-size: 18px; line-height: 1.55; margin: 0; color: var(--inkDim); max-width: 520px; }
+  .scg-hs-lead--w460 { max-width: 460px; }
+  .scg-hs-lead--w440 { max-width: 440px; }
+  .scg-hs-2col { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; margin-bottom: 56px; align-items: end; }
+  .scg-hs-2col--team { margin-bottom: 48px; }
+  .scg-hs-3col { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; margin-bottom: 56px; }
+  .scg-hs-3col--team { gap: 28px; margin-bottom: 0; }
+  .scg-hs-4col { display: grid; grid-template-columns: repeat(4, 1fr); gap: 32px; }
+  .scg-hs-center-cta { margin-top: 32px; text-align: center; }
+
+  .scg-hs-pill { font-family: 'JetBrains Mono', ui-monospace, monospace; font-size: 13px; padding: 14px 28px; border-radius: 999px; border: 1px solid var(--line); color: var(--ink); text-decoration: none; letter-spacing: .04em; display: inline-flex; align-items: center; gap: 10px; }
+  .scg-hs-pill--accent { border-color: var(--accent); color: var(--accent); }
+  .scg-hs-pill--tight { padding: 14px 22px; white-space: nowrap; }
+
+  /* ── Logos marquee ──────────────────────────────────────────────────── */
+  .scg-hs-logos { background: var(--bg); border-bottom: 1px solid var(--line); overflow: hidden; }
+  .scg-hs-marquee-fade { position: relative; padding: 40px 0; }
+  .scg-hs-marquee-fade::before, .scg-hs-marquee-fade::after { content: ''; position: absolute; top: 0; bottom: 0; width: 140px; pointer-events: none; z-index: 1; }
+  .scg-hs-marquee-fade::before { left: 0; background: linear-gradient(to right, var(--bg), transparent); }
+  .scg-hs-marquee-fade::after { right: 0; background: linear-gradient(to left, var(--bg), transparent); }
+  .scg-hs-marquee { display: flex; width: max-content; animation: scgMarquee 40s linear infinite; }
+  .scg-hs-marquee:hover { animation-play-state: paused; }
+  @keyframes scgMarquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+  .scg-hs-logo { font-family: 'Amatic SC', cursive; font-weight: 700; font-size: 40px; color: var(--ink); line-height: 1; opacity: .9; padding: 0 40px; white-space: nowrap; display: inline-flex; align-items: center; gap: 40px; }
+  .scg-hs-logo-star { color: var(--accent); font-size: 28px; opacity: .6; }
+
+  /* ── Offerings ──────────────────────────────────────────────────────── */
+  .scg-hs-offerings { background: var(--bg); }
+  .scg-hs-card { background: var(--panel); color: var(--ink); padding: 28px; border-radius: 18px; display: flex; flex-direction: column; gap: 14px; border: 1px solid var(--line); }
+  .scg-hs-card-top { display: flex; justify-content: space-between; align-items: baseline; }
+  .scg-hs-card-num { font-family: 'Amatic SC', cursive; font-weight: 700; font-size: 44px; line-height: .9; color: var(--accent); }
+  .scg-hs-card-label { font-family: 'JetBrains Mono', ui-monospace, monospace; font-size: 10px; color: var(--inkDim); letter-spacing: .08em; }
+  .scg-hs-card-h3 { font-family: 'Amatic SC', cursive; font-weight: 700; font-size: 30px; line-height: 1; margin: 0; }
+  .scg-hs-card-body { font-size: 14px; line-height: 1.55; margin: 0; flex: 1; color: var(--inkDim); }
+  .scg-hs-tags { display: flex; flex-wrap: wrap; gap: 6px; }
+  .scg-hs-tag { font-family: 'JetBrains Mono', ui-monospace, monospace; font-size: 10px; padding: 4px 8px; border-radius: 999px; border: 1px solid var(--line); color: var(--inkDim); }
+  .scg-hs-aitrack { padding: 28px 32px; border-radius: 18px; border: 1px solid var(--line); background: var(--panel); display: grid; grid-template-columns: 1fr auto; gap: 32px; align-items: center; }
+  .scg-hs-aitrack-eyebrow { font-family: 'JetBrains Mono', ui-monospace, monospace; font-size: 11px; color: var(--accent); letter-spacing: .1em; text-transform: uppercase; margin-bottom: 10px; }
+  .scg-hs-aitrack-h { font-family: 'Amatic SC', cursive; font-weight: 700; font-size: 36px; line-height: 1; color: var(--ink); margin-bottom: 14px; }
+  .scg-hs-aitrack-body { font-size: 14px; line-height: 1.55; color: var(--inkDim); margin: 0; max-width: 720px; }
+
+  /* ── Cases ──────────────────────────────────────────────────────────── */
+  .scg-hs-cases { background: var(--panel); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+  .scg-hs-caserows { display: flex; flex-direction: column; }
+  .scg-hs-caserow { display: grid; grid-template-columns: 100px 1.2fr 2fr 1fr 60px; gap: 40px; padding: 36px 0; align-items: center; border-top: 1px solid var(--line); text-decoration: none; color: inherit; }
+  .scg-hs-caserow-num { font-family: 'Amatic SC', cursive; font-weight: 700; font-size: 64px; color: var(--accent); line-height: .9; }
+  .scg-hs-caserow-client { font-family: 'Amatic SC', cursive; font-weight: 700; font-size: 48px; line-height: .95; color: var(--ink); }
+  .scg-hs-caserow-meta { font-family: 'JetBrains Mono', ui-monospace, monospace; font-size: 11px; color: var(--inkDim); letter-spacing: .06em; margin-top: 8px; }
+  .scg-hs-caserow-outcome { font-size: 18px; font-weight: 500; color: var(--ink); margin-bottom: 6px; }
+  .scg-hs-caserow-body { font-size: 14px; line-height: 1.55; color: var(--inkDim); margin: 0; max-width: 480px; }
+  .scg-hs-caserow-metric { text-align: right; }
+  .scg-hs-caserow-metric-num { font-family: 'Amatic SC', cursive; font-weight: 700; font-size: 72px; line-height: .9; color: var(--ink); }
+  .scg-hs-caserow-metric-label { font-family: 'JetBrains Mono', ui-monospace, monospace; font-size: 11px; color: var(--inkDim); letter-spacing: .06em; margin-top: 6px; }
+  .scg-hs-caserow-arrow { text-align: right; font-family: 'JetBrains Mono', ui-monospace, monospace; font-size: 22px; color: var(--accent); }
+  .scg-hs-caserows-foot { border-top: 1px solid var(--line); padding-top: 32px; margin-top: 8px; text-align: center; }
+
+  /* ── Approach ───────────────────────────────────────────────────────── */
+  .scg-hs-approach { background: var(--bg); }
+  .scg-hs-approach-h2 { font-family: 'Amatic SC', cursive; font-weight: 700; font-size: clamp(56px, 7vw, 96px); line-height: .95; margin: 0 0 56px; color: var(--ink); text-align: center; }
+  .scg-hs-step { border-top: 2px solid var(--line); padding-top: 16px; }
+  .scg-hs-step:first-child { border-top-color: var(--accent); }
+  .scg-hs-step-label { font-family: 'JetBrains Mono', ui-monospace, monospace; font-size: 11px; color: var(--accent); letter-spacing: .1em; margin-bottom: 6px; }
+  .scg-hs-step-title { font-family: 'Amatic SC', cursive; font-weight: 700; font-size: 28px; line-height: 1; color: var(--ink); margin-bottom: 8px; }
+  .scg-hs-step-body { font-size: 13px; line-height: 1.55; color: var(--inkDim); margin: 0; }
+
+  /* ── Testimonial ────────────────────────────────────────────────────── */
+  .scg-hs-quote { background: var(--panel); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+  .scg-hs-quote-fig { margin: 24px 0 0; }
+  .scg-hs-quote-glyph { font-family: 'Amatic SC', cursive; font-weight: 700; font-size: 240px; line-height: .3; color: var(--accent); margin-bottom: 20px; }
+  .scg-hs-quote-bq { font-family: 'Amatic SC', cursive; font-weight: 700; font-size: clamp(44px, 5.5vw, 88px); line-height: 1; margin: 0; color: var(--ink); max-width: 1100px; }
+  .scg-hs-quote-cap { margin-top: 32px; display: flex; align-items: center; gap: 12px; }
+  .scg-hs-quote-avatar { width: 44px; height: 44px; border-radius: 999px; background: var(--panelHi); border: 1px solid var(--line); }
+  .scg-hs-quote-name { font-size: 15px; font-weight: 500; color: var(--ink); }
+  .scg-hs-quote-role { font-family: 'JetBrains Mono', ui-monospace, monospace; font-size: 12px; color: var(--inkDim); }
+
+  /* ── Team ───────────────────────────────────────────────────────────── */
+  .scg-hs-team { background: var(--bg); }
+  .scg-hs-portrait { aspect-ratio: 4 / 5; width: 100%; border-radius: 12px; background: repeating-linear-gradient(135deg, var(--panel), var(--panel) 8px, var(--panelHi) 8px, var(--panelHi) 9px); border: 1px solid var(--line); display: flex; align-items: center; justify-content: center; font-family: 'JetBrains Mono', ui-monospace, monospace; font-size: 11px; color: var(--inkFaint); letter-spacing: .04em; }
+  .scg-hs-member-meta { margin-top: 16px; display: flex; justify-content: space-between; align-items: baseline; }
+  .scg-hs-member-name { font-family: 'Amatic SC', cursive; font-weight: 700; font-size: 34px; line-height: 1; color: var(--ink); }
+  .scg-hs-member-role { font-size: 14px; color: var(--ink); margin-top: 4px; }
+  .scg-hs-member-num { font-family: 'JetBrains Mono', ui-monospace, monospace; font-size: 11px; color: var(--inkDim); }
+  .scg-hs-member-tag { font-family: 'JetBrains Mono', ui-monospace, monospace; font-size: 11px; color: var(--inkDim); margin-top: 6px; }
+  .scg-hs-team-foot { margin-top: 56px; padding-top: 32px; border-top: 1px solid var(--line); text-align: center; }
+
+  /* ── Careers ────────────────────────────────────────────────────────── */
+  .scg-hs-careers { background: var(--accent); }
+  .scg-hs-careers-logo { display: inline-flex; }
+  .scg-hs-careers-logo img { height: 120px; width: auto; display: block; }
+  .scg-hs-careers-h2 { font-family: 'Amatic SC', cursive; font-weight: 700; font-size: clamp(72px, 10vw, 160px); line-height: .92; margin: 24px 0 20px; color: var(--bg); }
+  .scg-hs-careers-body { font-size: 20px; line-height: 1.5; margin: 0 auto 40px; max-width: 640px; color: var(--bg); }
+  .scg-hs-roles { display: inline-flex; flex-wrap: wrap; gap: 10px; justify-content: center; }
+  .scg-hs-role { background: var(--bg); color: var(--ink); padding: 14px 22px; border-radius: 999px; text-decoration: none; font-size: 14px; font-weight: 500; }
+  .scg-hs-role--ghost { background: transparent; color: var(--bg); font-weight: 600; border: 1px solid var(--bg); }
+
+  /* ── Responsive ─────────────────────────────────────────────────────── */
   @media (max-width: 960px) {
     .scg-hero-inner { padding: 64px 20px 40px; }
     .scg-stats-inner { padding: 20px; grid-template-columns: repeat(2, 1fr); gap: 16px; }
     .scg-stat { border-left: 1px solid var(--line); padding-left: 16px; }
     .scg-stat.first { border-left: none; padding-left: 0; }
+
+    .scg-hs-container { padding-left: 20px; padding-right: 20px; }
+    .scg-hs-2col { grid-template-columns: 1fr; gap: 24px; }
+    .scg-hs-3col { grid-template-columns: repeat(2, 1fr); gap: 16px; }
+    .scg-hs-4col { grid-template-columns: repeat(2, 1fr); gap: 24px; }
+    .scg-hs-aitrack { grid-template-columns: 1fr; gap: 20px; }
+    .scg-hs-caserow { grid-template-columns: 1fr; gap: 8px; padding: 24px 0; }
+    .scg-hs-caserow-num, .scg-hs-caserow-arrow { display: none; }
+    .scg-hs-caserow-metric { text-align: left; }
+    .scg-hs-quote-glyph { font-size: 120px; }
+    .scg-hs-roles { flex-direction: column; align-items: stretch; }
+    .scg-hs-roles a { text-align: center; }
   }
   @media (max-width: 640px) {
     .scg-hero-inner { padding: 48px 20px 32px; }
@@ -84,5 +381,9 @@ const heroSecondary = hero.ctaSecondary.href ?? getRelativeLocaleUrl(locale, her
     .scg-hero-ctas { margin-top: 28px; flex-direction: column; align-items: stretch; }
     .scg-hero-cta-primary, .scg-hero-cta-secondary { justify-content: center; }
     .scg-stats-inner { grid-template-columns: 1fr 1fr; }
+
+    .scg-hs-container { padding-left: 16px; padding-right: 16px; }
+    .scg-hs-3col, .scg-hs-4col { grid-template-columns: 1fr; }
+    .scg-hs-aitrack a { white-space: normal; }
   }
 </style>
