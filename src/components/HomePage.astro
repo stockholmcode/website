@@ -76,7 +76,7 @@ const heroSecondary = hero.ctaSecondary.href ?? link(hero.ctaSecondary.to ?? '/'
   <div class="scg-hs-container">
     <div class="scg-hs-2col">
       <div>
-        <div class="scg-hs-eyebrow">{off.eyebrow}</div>
+        <div class="u-eyebrow scg-hs-eyebrow">{off.eyebrow}</div>
         <h2 class="scg-hs-h2">{off.headline1}<br /><span class="scg-accent">{off.headline2}</span></h2>
       </div>
       <p class="scg-hs-lead">{off.lead}</p>
@@ -118,7 +118,7 @@ const heroSecondary = hero.ctaSecondary.href ?? link(hero.ctaSecondary.to ?? '/'
   <div class="scg-hs-container">
     <div class="scg-hs-2col">
       <div>
-        <div class="scg-hs-eyebrow">{cs.eyebrow}</div>
+        <div class="u-eyebrow scg-hs-eyebrow">{cs.eyebrow}</div>
         <h2 class="scg-hs-h2">{cs.headline1}<br />{cs.headline2}</h2>
       </div>
       <p class="scg-hs-lead scg-hs-lead--w460">{cs.lead}</p>
@@ -153,7 +153,7 @@ const heroSecondary = hero.ctaSecondary.href ?? link(hero.ctaSecondary.to ?? '/'
 {/* Approach — condensed row */}
 <section class="scg-hs-approach">
   <div class="scg-hs-container scg-hs-container--tight">
-    <div class="scg-hs-eyebrow scg-hs-eyebrow--center">{ap.eyebrow}</div>
+    <div class="u-eyebrow scg-hs-eyebrow scg-hs-eyebrow--center">{ap.eyebrow}</div>
     <h2 class="scg-hs-approach-h2">{ap.headlinePre}<span class="scg-accent">{ap.headlineAccent}</span>{ap.headlinePost}</h2>
     <div class="scg-hs-4col">
       {approach.map((a) => (
@@ -170,15 +170,15 @@ const heroSecondary = hero.ctaSecondary.href ?? link(hero.ctaSecondary.to ?? '/'
 {/* Testimonials — one hero quote */}
 <section class="scg-hs-quote">
   <div class="scg-hs-container">
-    <div class="scg-hs-eyebrow">{hp.testimonials.eyebrow}</div>
+    <div class="u-eyebrow scg-hs-eyebrow">{hp.testimonials.eyebrow}</div>
     <figure class="scg-hs-quote-fig">
-      <div class="scg-hs-quote-glyph">{'"'}</div>
-      <blockquote class="scg-hs-quote-bq">{testimonials[0].quote}</blockquote>
-      <figcaption class="scg-hs-quote-cap">
-        <div class="scg-hs-quote-avatar"></div>
+      <div class="u-quote-glyph scg-hs-quote-glyph">{'"'}</div>
+      <blockquote class="u-quote-bq scg-hs-quote-bq">{testimonials[0].quote}</blockquote>
+      <figcaption class="u-quote-cap">
+        <div class="u-quote-avatar"></div>
         <div>
-          <div class="scg-hs-quote-name">{testimonials[0].name}</div>
-          <div class="scg-hs-quote-role">{testimonials[0].role}</div>
+          <div class="u-quote-name">{testimonials[0].name}</div>
+          <div class="u-quote-role">{testimonials[0].role}</div>
         </div>
       </figcaption>
     </figure>
@@ -190,7 +190,7 @@ const heroSecondary = hero.ctaSecondary.href ?? link(hero.ctaSecondary.to ?? '/'
   <div class="scg-hs-container">
     <div class="scg-hs-2col scg-hs-2col--team">
       <div>
-        <div class="scg-hs-eyebrow">{tm.eyebrow}</div>
+        <div class="u-eyebrow scg-hs-eyebrow">{tm.eyebrow}</div>
         <h2 class="scg-hs-h2 scg-hs-h2--team">{tm.headline}</h2>
       </div>
       <p class="scg-hs-lead scg-hs-lead--w440">{tm.lead}</p>
@@ -198,15 +198,15 @@ const heroSecondary = hero.ctaSecondary.href ?? link(hero.ctaSecondary.to ?? '/'
     <div class="scg-hs-3col scg-hs-3col--team">
       {team.slice(0, 3).map((p, i) => (
         <div>
-          <div class="scg-hs-portrait">{`// porträtt · ${p.name.split(' ')[0].toLowerCase()}`}</div>
-          <div class="scg-hs-member-meta">
+          <div class="u-portrait">{`// porträtt · ${p.name.split(' ')[0].toLowerCase()}`}</div>
+          <div class="u-member-meta">
             <div>
-              <div class="scg-hs-member-name">{p.name}</div>
-              <div class="scg-hs-member-role">{p.role}</div>
+              <div class="u-member-name">{p.name}</div>
+              <div class="u-member-role">{p.role}</div>
             </div>
-            <div class="scg-hs-member-num">0{i + 1}</div>
+            <div class="u-member-num">0{i + 1}</div>
           </div>
-          <div class="scg-hs-member-tag">{p.tag}</div>
+          <div class="u-member-tag">{p.tag}</div>
         </div>
       ))}
     </div>
@@ -233,9 +233,9 @@ const heroSecondary = hero.ctaSecondary.href ?? link(hero.ctaSecondary.to ?? '/'
   </div>
 </section>
 
-<style define:vars={{ accent: SCG.accent, bg: SCG.bg, panel: SCG.panel, panelHi: SCG.panelHi, ink: SCG.ink, inkDim: SCG.inkDim, inkFaint: SCG.inkFaint, line: SCG.line }}>
+<style>
+  /* Tokens + .u-* / .scg-accent primitives are global (see Base.astro). */
   /* ── Hero + stats ─────────────────────────────────────────────────────── */
-  .scg-accent { color: var(--accent); }
   .scg-hero { background: var(--bg); border-bottom: 1px solid var(--line); position: relative; overflow: hidden; }
   .scg-hero-inner { max-width: 1280px; margin: 0 auto; padding: 92px 56px 56px; }
   .scg-hero-kicker { font-family: 'JetBrains Mono', ui-monospace, monospace; font-size: 12px; color: var(--inkDim); letter-spacing: .06em; margin-bottom: 48px; }
@@ -256,7 +256,7 @@ const heroSecondary = hero.ctaSecondary.href ?? link(hero.ctaSecondary.to ?? '/'
   .scg-hs-container { max-width: 1280px; margin: 0 auto; padding: 72px 56px; }
   .scg-hs-container--tight { padding-top: 48px; padding-bottom: 48px; }
   .scg-hs-container--center { text-align: center; }
-  .scg-hs-eyebrow { font-family: 'JetBrains Mono', ui-monospace, monospace; font-size: 12px; color: var(--accent); letter-spacing: .1em; text-transform: uppercase; margin-bottom: 16px; }
+  .scg-hs-eyebrow { margin-bottom: 16px; }
   .scg-hs-eyebrow--center { margin-bottom: 24px; text-align: center; }
   .scg-hs-h2 { font-family: 'Amatic SC', cursive; font-weight: 700; font-size: clamp(64px, 8vw, 128px); line-height: .92; margin: 0; color: var(--ink); }
   .scg-hs-h2--team { font-size: clamp(64px, 8vw, 120px); }
@@ -326,23 +326,15 @@ const heroSecondary = hero.ctaSecondary.href ?? link(hero.ctaSecondary.to ?? '/'
   .scg-hs-step-body { font-size: 13px; line-height: 1.55; color: var(--inkDim); margin: 0; }
 
   /* ── Testimonial ────────────────────────────────────────────────────── */
+  /* Quote glyph / blockquote / caption come from .u-quote-* (Base.astro). */
   .scg-hs-quote { background: var(--panel); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
   .scg-hs-quote-fig { margin: 24px 0 0; }
-  .scg-hs-quote-glyph { font-family: 'Amatic SC', cursive; font-weight: 700; font-size: 240px; line-height: .3; color: var(--accent); margin-bottom: 20px; }
-  .scg-hs-quote-bq { font-family: 'Amatic SC', cursive; font-weight: 700; font-size: clamp(44px, 5.5vw, 88px); line-height: 1; margin: 0; color: var(--ink); max-width: 1100px; }
-  .scg-hs-quote-cap { margin-top: 32px; display: flex; align-items: center; gap: 12px; }
-  .scg-hs-quote-avatar { width: 44px; height: 44px; border-radius: 999px; background: var(--panelHi); border: 1px solid var(--line); }
-  .scg-hs-quote-name { font-size: 15px; font-weight: 500; color: var(--ink); }
-  .scg-hs-quote-role { font-family: 'JetBrains Mono', ui-monospace, monospace; font-size: 12px; color: var(--inkDim); }
+  .scg-hs-quote-glyph { font-weight: 700; font-size: 240px; }
+  .scg-hs-quote-bq { font-size: clamp(44px, 5.5vw, 88px); }
 
   /* ── Team ───────────────────────────────────────────────────────────── */
+  /* Portrait + member caption come from .u-portrait / .u-member-* (Base.astro). */
   .scg-hs-team { background: var(--bg); }
-  .scg-hs-portrait { aspect-ratio: 4 / 5; width: 100%; border-radius: 12px; background: repeating-linear-gradient(135deg, var(--panel), var(--panel) 8px, var(--panelHi) 8px, var(--panelHi) 9px); border: 1px solid var(--line); display: flex; align-items: center; justify-content: center; font-family: 'JetBrains Mono', ui-monospace, monospace; font-size: 11px; color: var(--inkFaint); letter-spacing: .04em; }
-  .scg-hs-member-meta { margin-top: 16px; display: flex; justify-content: space-between; align-items: baseline; }
-  .scg-hs-member-name { font-family: 'Amatic SC', cursive; font-weight: 700; font-size: 34px; line-height: 1; color: var(--ink); }
-  .scg-hs-member-role { font-size: 14px; color: var(--ink); margin-top: 4px; }
-  .scg-hs-member-num { font-family: 'JetBrains Mono', ui-monospace, monospace; font-size: 11px; color: var(--inkDim); }
-  .scg-hs-member-tag { font-family: 'JetBrains Mono', ui-monospace, monospace; font-size: 11px; color: var(--inkDim); margin-top: 6px; }
   .scg-hs-team-foot { margin-top: 56px; padding-top: 32px; border-top: 1px solid var(--line); text-align: center; }
 
   /* ── Careers ────────────────────────────────────────────────────────── */
