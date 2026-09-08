@@ -111,6 +111,12 @@ const pad2 = (n) => String(n).padStart(2, '0');
   </div>
 </section>
 
+{/*
+  is:inline (not a plain bundled <script>) because define:vars needs to hand the
+  script translated strings from case_page.yaml. The team/careers filter scripts
+  need no server data — they read their labels from data-* attributes — so those
+  stay plain <script>.
+*/}
 <script is:inline define:vars={{ readMore: cp.readMore, readLess: cp.readLess, countSuffix: cp.countSuffix }}>
   // Filter chips — filter cases by sectorKey (data-sector). "all" shows everything.
   const chips = document.querySelectorAll('#filter-chips .chip');
