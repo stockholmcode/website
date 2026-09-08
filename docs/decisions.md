@@ -122,9 +122,11 @@ posture.
 
 Things we are taking as true without having fully settled them. Worth revisiting.
 
-- **URL slugs stay Swedish even in English** (`/en/case`, not `/en/cases`). Fine for now.
-  If English slugs are wanted for SEO or polish, that is a routing change to make before a
-  wider launch, not after.
+- **One set of route slugs, shared across locales.** The slugs are English words
+  (`/offering`, `/case`, `/team`, `/careers`) and the English routes reuse them verbatim
+  (`/en/case`, not a translated or re-pluralised `/en/cases`). Fine for now. If per-market
+  slugs are ever wanted for SEO or polish, that is a routing change to make before a wider
+  launch, not after.
 - **The audience editing content is technical enough to use Git and YAML.** True today
   (CEO plus AI). If that changes, the "no CMS" decision above is the first to reconsider.
 - **One brand, one theme.** The token setup assumes a single visual identity. A second

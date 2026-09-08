@@ -37,14 +37,14 @@ src/
 │   └── en/                #   English routes at /en/
 │       └── …              #   mirror of the five routes above
 ├── layouts/Base.astro     # shared page chrome: nav, footer, language toggle
-├── components/            # the actual page bodies (one .astro per page)
-│   ├── islands/           #   the few React pieces that need to run in the browser
-│   └── HomeSections.jsx
+├── components/            # the actual page bodies (one <Route>Page.astro per route)
+│   └── islands/           #   the few React pieces that need to run in the browser
 ├── data/
 │   ├── sv/*.yaml          # Swedish content (the source of truth)
 │   └── en/*.yaml          # English content (per-file fallback to sv)
 └── lib/
     ├── content.js         # build-time YAML loader, merges locale + fallback
+    ├── paths.js           # base-path helpers (assetBase, base)
     └── theme.js           # design tokens (colours, fonts)
 
 public/assets/             # static files copied verbatim (logo, etc.)
