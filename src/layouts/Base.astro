@@ -1,6 +1,7 @@
 ---
 import { getRelativeLocaleUrl } from 'astro:i18n';
 import { SCG } from '../lib/theme.js';
+import { base, assetBase } from '../lib/paths.js';
 
 const { locale = 'sv', site, title } = Astro.props;
 
@@ -14,11 +15,6 @@ const link = (to) => getRelativeLocaleUrl(locale, to);
 const href = (item) => (item?.href ? item.href : link(item?.to ?? '/'));
 
 // Language toggle: same page, other locale.
-const base = import.meta.env.BASE_URL.replace(/\/$/, '');
-// Trailing-slash-safe asset base, matching the page components. BASE_URL is
-// "/website" (no trailing slash), so concatenating it raw with "assets/..."
-// yields "/websiteassets/..." which 404s. base + '/' normalises that.
-const assetBase = base + '/';
 let rel = Astro.url.pathname;
 if (base && rel.startsWith(base)) rel = rel.slice(base.length);
 rel = rel.replace(/^\/(sv|en)(?=\/|$)/, '') || '/';

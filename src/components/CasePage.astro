@@ -1,6 +1,7 @@
 ---
 import { getRelativeLocaleUrl } from 'astro:i18n';
 import { SCG } from '../lib/theme.js';
+import { assetBase } from '../lib/paths.js';
 
 const { locale = 'sv', content } = Astro.props;
 
@@ -9,9 +10,6 @@ const cp = content.case_page;
 const hero = cp.hero;
 
 const link = (to) => getRelativeLocaleUrl(locale, to);
-const assetBase = import.meta.env.BASE_URL.endsWith('/')
-  ? import.meta.env.BASE_URL
-  : import.meta.env.BASE_URL + '/';
 const mailto = `mailto:${cp.cta.email}`;
 
 const pad2 = (n) => String(n).padStart(2, '0');

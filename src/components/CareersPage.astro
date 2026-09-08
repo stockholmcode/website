@@ -1,6 +1,7 @@
 ---
 import { getRelativeLocaleUrl } from 'astro:i18n';
 import { SCG } from '../lib/theme.js';
+import { assetBase } from '../lib/paths.js';
 
 const { locale = 'sv', content } = Astro.props;
 
@@ -14,9 +15,6 @@ const process = careers.process ?? [];
 const quote = careers.quote ?? {};
 
 const link = (to) => getRelativeLocaleUrl(locale, to);
-const assetBase = import.meta.env.BASE_URL.endsWith('/')
-  ? import.meta.env.BASE_URL
-  : import.meta.env.BASE_URL + '/';
 
 const mailto = (subject) =>
   subject
