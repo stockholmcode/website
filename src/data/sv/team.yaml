@@ -1,3 +1,5 @@
+# Optional per person: `photo: <file>.jpg`, where the file lives in
+# public/assets/team/ (see the README there). No photo = hatched placeholder.
 - id: 1
   name: David Looberger
   role: Senior Advisor · ex-Chief Architect SL
@@ -7,6 +9,7 @@
   bio: Chefs­arkitekt för SLs nya biljettsystem på AWS. Senior rådgivare hos SCG.
   social:
     - LinkedIn
+  photo: david.jpeg
 - id: 2
   name: Senior Software Engineer
   role: Senior Software Engineer
