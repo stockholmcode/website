@@ -7,8 +7,6 @@
   cat:
     - arch
   bio: Chefs­arkitekt för SLs nya biljettsystem på AWS. Senior rådgivare hos SCG.
-  social:
-    - LinkedIn
   photo: david.jpeg
 - id: 2
   name: Senior Software Engineer
@@ -17,8 +15,6 @@
   cat:
     - eng
   bio: Bygger och levererar produktion hos kund. Seniora kollegor, inga juniora.
-  social:
-    - LinkedIn
 - id: 3
   name: Senior Architect
   role: Senior Architect
@@ -26,8 +22,6 @@
   cat:
     - arch
   bio: Ritar system som håller — och kodar prototyperna själv.
-  social:
-    - LinkedIn
 - id: 4
   name: Senior AI Engineer
   role: Senior Software Engineer · AI
@@ -36,8 +30,6 @@
     - ai
     - eng
   bio: LLMs i produktion. Pragmatisk om AI-hype.
-  social:
-    - LinkedIn
 - id: 5
   name: Senior Data Architect
   role: Senior Architect · Data
@@ -46,8 +38,6 @@
     - data
     - arch
   bio: Kafka, event sourcing, data contracts.
-  social:
-    - LinkedIn
 - id: 6
   name: Senior Cloud Engineer
   role: Senior Software Engineer · Cloud
@@ -56,8 +46,6 @@
     - eng
     - arch
   bio: AWS & Kubernetes sedan tidig dag. Security-mindset.
-  social:
-    - LinkedIn
 - id: 7
   name: Senior Frontend Engineer
   role: Senior Software Engineer · Frontend
@@ -65,8 +53,6 @@
   cat:
     - eng
   bio: Bygger interface som är snabba och snälla.
-  social:
-    - LinkedIn
 - id: 8
   name: Senior Backend Engineer
   role: Senior Software Engineer · Backend
@@ -74,8 +60,6 @@
   cat:
     - eng
   bio: Små, tydliga tjänster. Tester på riktigt.
-  social:
-    - LinkedIn
 - id: 9
   name: Senior Platform Architect
   role: Senior Architect · Platform
@@ -83,8 +67,6 @@
   cat:
     - arch
   bio: Driver transformationer från monolit till väldefinierade tjänster.
-  social:
-    - LinkedIn
 - id: 10
   name: Senior CTO Advisor
   role: Senior Advisor
@@ -93,8 +75,6 @@
     - cto
     - arch
   bio: Stöttar CTO-team och styrelser i tekniska beslut.
-  social:
-    - LinkedIn
 - id: 11
   name: Senior Data Engineer
   role: Senior Software Engineer · Data
@@ -103,8 +83,6 @@
     - data
     - eng
   bio: Dataplattformar som teamet faktiskt vill använda.
-  social:
-    - LinkedIn
 - id: 12
   name: Senior Mobile Engineer
   role: Senior Software Engineer · Mobile
@@ -112,5 +90,3 @@
   cat:
     - eng
   bio: Native mobil utan genvägar.
-  social:
-    - LinkedIn
