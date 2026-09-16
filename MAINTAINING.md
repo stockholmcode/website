@@ -5,7 +5,7 @@ no coding background. If you can edit a text file and click a button, you can ru
 
 For how the site is built and why, see [docs/architecture.md](docs/architecture.md) and
 [docs/decisions.md](docs/decisions.md). This guide is only about day-to-day upkeep: changing
-copy, fixing a typo, updating a stat, adding a client logo.
+copy, fixing a typo, updating a stat, adding an image.
 
 ## The one thing to understand
 
@@ -121,6 +121,30 @@ again more carefully, or hand it to a developer with the error from the Actions 
 You cannot make this worse by trying. Every commit is reversible and nothing reaches visitors
 until the build is green.
 
+## Adding an image (team photo or testimonial portrait)
+
+Images live outside `src/data/`, in `public/assets/`. There are two folders you will
+touch, each with a `README.md` next to it spelling out the naming and the file format:
+
+- `public/assets/team/` for team headshots.
+- `public/assets/testimonials/` for the portrait next to a testimonial.
+
+The steps are the same for both:
+
+1. Upload the image file into the right folder, named as described in that folder's
+   `README.md` (lowercase, dashes for spaces, e.g. `david-looberger.jpg` or
+   `niklas-lager.jpg`).
+2. Point at it from the YAML, keeping the same indentation as the lines around it:
+   - **Team photo:** add a `photo: david-looberger.jpg` line to that person's block
+     in `src/data/sv/team.yaml`.
+   - **Testimonial portrait:** add an `avatar: niklas-lager.jpg` line to that
+     testimonial's block in `src/data/sv/testimonials.yaml` **and** in
+     `src/data/en/testimonials.yaml` (that page has an English copy, so both must match).
+3. Commit the changes together (the image and the YAML edit).
+
+Leaving the YAML untouched changes nothing on the site, so you can add images one at a
+time.
+
 ## Things that are not a content edit
 
 These need a developer, not this guide. They change structure or design, not just words:
@@ -145,4 +169,6 @@ The steps for adding a page or a locale are written down in
 | Add or edit a testimonial             | `testimonials.yaml` (in both)                       |
 | Update a team stat                    | `team_page.yaml` (in both)                          |
 | Add a client name                     | `src/data/sv/clients.yaml` (Swedish only)          |
+| Add a team photo                      | file in `public/assets/team/` + `sv/team.yaml`     |
+| Add a portrait to a testimonial       | file in `public/assets/testimonials/` + `testimonials.yaml` (both langs) |
 | Publish                               | commit the change; the build does the rest          |

@@ -1,9 +1,12 @@
+# Optional per quote: `avatar: <file>.jpg`, where the file lives in
+# public/assets/testimonials/ (see the README there). No avatar = plain grey circle.
 - quote: >-
     Konsulterna från Stockholm Code Group sticker verkligen ut. De bidrar med anmärkningsvärd
     teknisk expertis och seniority, och är dedikerade till att leverera effektiva och moderna
     lösningar. Deras insats har varit avgörande för Blockets framtida framgång.
   name: Niklas Lager
   role: CTO, Blocket
+  avatar: blocket.jpg
 - quote: >-
     Vi har sällan sett ett så effektivt team med så mycket domänkunskap. Teamets agility och tempo
     är enligt oss enastående.

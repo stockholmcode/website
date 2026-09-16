@@ -51,24 +51,22 @@ const initialCount = page.filter.countTemplate
 <section class="scg-team-grid-section">
   <div class="u-container">
     <div class="scg-grid" id="grid">
-      {members.map((m, i) => (
+      {members.map((m) => (
         <article class="scg-member" data-cat={m.cat.join(' ')}>
           <div class="u-portrait scg-portrait">
             <span class="scg-portrait-tag">{badgeFor(m.cat)}</span>
-            {`// porträtt · ${m.name.split(' ')[0].toLowerCase()}`}
+            {m.photo
+              ? <img class="u-portrait-img" src={`${assetBase}assets/team/${m.photo}`} alt={m.name} loading="lazy" width="400" height="500" />
+              : `// porträtt · ${m.name.split(' ')[0].toLowerCase()}`}
           </div>
           <div class="u-member-meta">
             <div>
               <div class="u-member-name scg-member-name">{m.name}</div>
               <div class="u-member-role">{m.role}</div>
             </div>
-            <div class="u-member-num">{String(i + 1).padStart(2, '0')}</div>
           </div>
           <div class="u-member-tag">{m.tag}</div>
           <div class="scg-member-bio">{m.bio}</div>
-          <div class="scg-member-social mono">
-            {m.social.map((s) => <a href="#">{s}</a>)}
-          </div>
         </article>
       ))}
     </div>
@@ -156,19 +154,15 @@ const initialCount = page.filter.countTemplate
 
   /* Team grid — portrait + caption come from .u-portrait / .u-member-* (Base.astro);
      the rules below are the team page's own additions: hover lift, tag badge, the
-     larger name, plus bio and social which the home teaser doesn't have. */
+     larger name, plus the bio the home teaser doesn't have. */
   .scg-team-grid-section { padding: 96px 0; }
   .scg-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px 32px; }
-  .scg-member { cursor: pointer; }
   .scg-member.scg-hidden { display: none; }
-  .scg-portrait { transition: all .2s; position: relative; overflow: hidden; }
+  .scg-portrait { transition: all .2s; }
   .scg-member:hover .scg-portrait { border-color: var(--accent); transform: translateY(-2px); }
-  .scg-portrait-tag { position: absolute; top: 12px; left: 12px; background: rgba(10,12,15,.7); backdrop-filter: blur(8px); padding: 4px 10px; border-radius: 999px; font-size: 10px; color: var(--ink); border: 1px solid var(--line); }
+  .scg-portrait-tag { position: absolute; z-index: 1; top: 12px; left: 12px; background: rgba(10,12,15,.7); backdrop-filter: blur(8px); padding: 4px 10px; border-radius: 999px; font-size: 10px; color: var(--ink); border: 1px solid var(--line); }
   .scg-member-name { font-size: 38px; }
   .scg-member-bio { font-size: 13px; color: var(--inkDim); margin-top: 10px; line-height: 1.55; }
-  .scg-member-social { display: flex; gap: 10px; margin-top: 12px; font-size: 11px; color: var(--accent); }
-  .scg-member-social a { text-decoration: none; padding: 4px 10px; border-radius: 999px; border: 1px solid var(--line); transition: all .15s; }
-  .scg-member-social a:hover { border-color: var(--accent); }
 
   /* Stats row */
   .scg-team-stats { padding: 80px 0; border-bottom: 1px solid var(--line); }

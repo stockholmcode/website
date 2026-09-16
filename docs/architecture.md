@@ -114,12 +114,40 @@ eyebrow, the filter chip, the inner-page hero band, its decorative logo watermar
 closing accent CTA band, the placeholder team-member card (portrait tile + caption), the
 big pull-quote with attribution. Those live once, as global classes in `Base.astro`'s
 `<style is:global>` block, prefixed `u-` (`u-container`, `u-eyebrow`, `u-chip`, `u-hero*`,
-`u-logoart`, `u-cta*`, `u-portrait`, `u-member-*`, `u-quote-*`). A component keeps a
+`u-logoart`, `u-cta*`, `u-portrait*`, `u-member-*`, `u-quote-*`). A component keeps a
 scoped `<style>` only for rules that are genuinely specific to it (one-off grid layouts,
 the team grid's hover lift and tag badge, a narrower hero lead, the two variable quote
 font-sizes). Deliberately un-shared: the display headings, whose `clamp()` sizes differ
 per page on purpose, and the two `.scg-stat` blocks (home vs team), which share a name but
 are different designs and never meet because scoped styles are isolated.
+
+## Assets
+
+Images are static files under `public/assets/`, copied to `dist/` verbatim at build
+time — Astro does not process or optimise them. Components never `import` an image;
+they build a URL string from the `assetBase` helper in `src/lib/paths.js` and
+reference it as `` `${assetBase}assets/…` ``. This is why the `base` path has to be
+prepended by hand rather than relying on a bundler.
+
+The folders, and who owns what:
+
+- `public/assets/logo-*.png` — the brand marks, referenced directly by components.
+- `public/assets/icons/` — the careers-page perk icons. `careers.yaml` stores just
+  the filename (`icon: sun.png`); `CareersPage.astro` prepends the folder.
+- `public/assets/team/` — team headshots. `team.yaml` stores an optional
+  `photo: <file>` per person; `TeamPage.astro` renders it into the portrait frame
+  and falls back to the hatched placeholder when it is absent.
+- `public/assets/testimonials/` — portraits for the homepage testimonial author.
+  `testimonials.yaml` stores an optional `avatar: <file>` per entry;
+  `HomePage.astro` renders it into the round frame and falls back to a plain grey
+  circle when it is absent.
+
+Each `assets/<kind>/` folder has a `README.md` describing the naming convention and
+the expected format for that kind. The team list is Swedish-only; `testimonials.yaml`
+exists in both locales, so an `avatar:` has to be added to both files (the `en` file
+overrides rather than patches). The pattern for a new asset kind: add
+`public/assets/<kind>/` with a `README.md`, store the filename (not a path) in the
+YAML, and have the component prepend `` `${assetBase}assets/<kind>/` ``.
 
 ## Build and deploy
 

@@ -172,10 +172,12 @@ const heroSecondary = hero.ctaSecondary.href ?? link(hero.ctaSecondary.to ?? '/'
   <div class="scg-hs-container">
     <div class="u-eyebrow scg-hs-eyebrow">{hp.testimonials.eyebrow}</div>
     <figure class="scg-hs-quote-fig">
-      <div class="u-quote-glyph scg-hs-quote-glyph">{'"'}</div>
+      <div class="u-quote-glyph scg-hs-quote-glyph" aria-hidden="true">{'"'}</div>
       <blockquote class="u-quote-bq scg-hs-quote-bq">{testimonials[0].quote}</blockquote>
       <figcaption class="u-quote-cap">
-        <div class="u-quote-avatar"></div>
+        {testimonials[0].avatar
+          ? <img class="u-quote-avatar scg-hs-quote-avatar" src={`${assetBase}assets/testimonials/${testimonials[0].avatar}`} alt={testimonials[0].name} />
+          : <div class="u-quote-avatar"></div>}
         <div>
           <div class="u-quote-name">{testimonials[0].name}</div>
           <div class="u-quote-role">{testimonials[0].role}</div>
@@ -198,7 +200,11 @@ const heroSecondary = hero.ctaSecondary.href ?? link(hero.ctaSecondary.to ?? '/'
     <div class="scg-hs-3col scg-hs-3col--team">
       {team.slice(0, 3).map((p, i) => (
         <div>
-          <div class="u-portrait">{`// porträtt · ${p.name.split(' ')[0].toLowerCase()}`}</div>
+          <div class="u-portrait">
+            {p.photo
+              ? <img class="u-portrait-img" src={`${assetBase}assets/team/${p.photo}`} alt={p.name} loading="lazy" />
+              : `// porträtt · ${p.name.split(' ')[0].toLowerCase()}`}
+          </div>
           <div class="u-member-meta">
             <div>
               <div class="u-member-name">{p.name}</div>
@@ -329,8 +335,11 @@ const heroSecondary = hero.ctaSecondary.href ?? link(hero.ctaSecondary.to ?? '/'
   /* Quote glyph / blockquote / caption come from .u-quote-* (Base.astro). */
   .scg-hs-quote { background: var(--panel); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
   .scg-hs-quote-fig { margin: 24px 0 0; }
-  .scg-hs-quote-glyph { font-weight: 700; font-size: 240px; }
+  /* The glyph is 240px of decorative type; collapsing its box to .42em and letting
+     it overflow keeps it from pushing the quote down or riding up over the eyebrow. */
+  .scg-hs-quote-glyph { font-weight: 700; font-size: 240px; line-height: 1; height: .42em; overflow: visible; margin-left: -.06em; margin-bottom: 4px; }
   .scg-hs-quote-bq { font-size: clamp(44px, 5.5vw, 88px); }
+  .scg-hs-quote-avatar { display: block; object-fit: cover; }
 
   /* ── Team ───────────────────────────────────────────────────────────── */
   /* Portrait + member caption come from .u-portrait / .u-member-* (Base.astro). */
