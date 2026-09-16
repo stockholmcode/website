@@ -105,6 +105,34 @@ import it and feed the values into scoped styles, usually through Astro's `defin
 so a token becomes a CSS custom property. There are no hard-coded hex values scattered
 through component styles; if a colour needs to change, it changes in one file.
 
+## Assets
+
+Images are static files under `public/assets/`, copied to `dist/` verbatim at build
+time — Astro does not process or optimise them. Components never `import` an image;
+they build a URL string from `import.meta.env.BASE_URL` (normalised to end in `/`)
+and reference it as `` `${assetBase}assets/…` ``. This is why the `base` path has to
+be prepended by hand rather than relying on a bundler.
+
+The folders, and who owns what:
+
+- `public/assets/logo-*.png` — the brand marks, referenced directly by components.
+- `public/assets/icons/` — the careers-page perk icons. `careers.yaml` stores just
+  the filename (`icon: sun.png`); `CareersPage.astro` prepends the folder.
+- `public/assets/team/` — team headshots. `team.yaml` stores an optional
+  `photo: <file>` per person; `TeamPage.astro` renders it into the portrait frame
+  and falls back to the hatched placeholder when it is absent.
+- `public/assets/testimonials/` — portraits for the homepage testimonial author.
+  `testimonials.yaml` stores an optional `avatar: <file>` per entry;
+  `HomeSections.jsx` renders it into the round frame and falls back to a plain grey
+  circle when it is absent.
+
+Each `assets/<kind>/` folder has a `README.md` describing the naming convention and
+the expected format for that kind. The team list is Swedish-only; `testimonials.yaml`
+exists in both locales, so an `avatar:` has to be added to both files (the `en` file
+overrides rather than patches). The pattern for a new asset kind: add
+`public/assets/<kind>/` with a `README.md`, store the filename (not a path) in the
+YAML, and have the component prepend `` `${assetBase}assets/<kind>/` ``.
+
 ## Build and deploy
 
 `.github/workflows/deploy.yml` runs on every push and pull request. The build job runs

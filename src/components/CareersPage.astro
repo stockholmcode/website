@@ -4,6 +4,8 @@ import { SCG } from '../lib/theme.js';
 
 const { locale = 'sv', content } = Astro.props;
 
+const { bg, panel, panelHi, ink, inkDim, inkFaint, line, accent } = SCG;
+
 // Structured lists from careers.yaml; hardcoded page copy from careers_page.yaml.
 const careers = content.careers;
 const page = content.careers_page;
@@ -132,7 +134,7 @@ const pad = (i) => String(i + 1).padStart(2, '0');
       <div class="scg-c-q">“</div>
       <blockquote class="scg-c-quote-bq">{quote.text}</blockquote>
       <figcaption class="scg-c-quote-cap">
-        <div class="scg-c-quote-avatar"></div>
+        <img src={`${assetBase}assets/logo-sans-text-dark.svg`} class="scg-c-quote-avatar" />
         <div>
           <div class="scg-c-quote-name">{quote.name}</div>
           <div class="scg-c-quote-role">{quote.role}</div>
