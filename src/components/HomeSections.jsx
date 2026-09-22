@@ -252,12 +252,9 @@ export default function HomeSections({
                            style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover' }} />
                     : `// porträtt · ${p.name.split(' ')[0].toLowerCase()}`}
                 </div>
-                <div style={{ marginTop: 16, display: 'flex', justifyContent: 'space-between', alignItems: 'baseline' }}>
-                  <div>
-                    <div style={{ ...wm.display, fontSize: 34, lineHeight: 1, color: ink }}>{p.name}</div>
-                    <div style={{ fontSize: 14, color: ink, marginTop: 4 }}>{p.role}</div>
-                  </div>
-                  <div style={{ ...wm.mono, fontSize: 11, color: inkDim }}>0{i + 1}</div>
+                <div style={{ marginTop: 16 }}>
+                  <div style={{ ...wm.display, fontSize: 34, lineHeight: 1, color: ink }}>{p.name}</div>
+                  <div style={{ fontSize: 14, color: ink, marginTop: 4 }}>{p.role}</div>
                 </div>
                 <div style={{ ...wm.mono, fontSize: 11, color: inkDim, marginTop: 6 }}>{p.tag}</div>
               </div>
