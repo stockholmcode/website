@@ -9,84 +9,166 @@
   bio: Chefs­arkitekt för SLs nya biljettsystem på AWS. Senior rådgivare hos SCG.
   photo: david.jpeg
 - id: 2
-  name: Senior Software Engineer
+  name: Andreas Salomonsson
   role: Senior Software Engineer
   tag: Full-stack · Distributed · 15+ år
   cat:
     - eng
   bio: Bygger och levererar produktion hos kund. Seniora kollegor, inga juniora.
+  photo: andreas.jpg
 - id: 3
-  name: Senior Architect
+  name: Axel Hjälm
   role: Senior Architect
   tag: Event-driven · DDD · 15+ år
   cat:
     - arch
   bio: Ritar system som håller — och kodar prototyperna själv.
+  photo: axel.jpg
 - id: 4
-  name: Senior AI Engineer
+  name: Björn Carlsson
   role: Senior Software Engineer · AI
   tag: LLM-system · RAG · 10+ år
   cat:
     - ai
     - eng
   bio: LLMs i produktion. Pragmatisk om AI-hype.
+  photo: bjorn.jpg
 - id: 5
-  name: Senior Data Architect
+  name: Mats Melke
   role: Senior Architect · Data
   tag: Streaming · Event-driven · 15+ år
   cat:
     - data
     - arch
   bio: Kafka, event sourcing, data contracts.
+  photo: mats.jpg
 - id: 6
-  name: Senior Cloud Engineer
+  name: Felix Blanke
   role: Senior Software Engineer · Cloud
   tag: AWS · K8s · 15+ år
   cat:
     - eng
     - arch
   bio: AWS & Kubernetes sedan tidig dag. Security-mindset.
+  photo: felix.jpg
 - id: 7
-  name: Senior Frontend Engineer
+  name: Jan Eklöf
   role: Senior Software Engineer · Frontend
   tag: React · Design systems · 12+ år
   cat:
     - eng
   bio: Bygger interface som är snabba och snälla.
 - id: 8
-  name: Senior Backend Engineer
+  name: Jorge Miró
   role: Senior Software Engineer · Backend
   tag: Go · Kotlin · 14+ år
   cat:
     - eng
   bio: Små, tydliga tjänster. Tester på riktigt.
+  photo: jorge.jpg
 - id: 9
-  name: Senior Platform Architect
+  name: Micke Hermansson
   role: Senior Architect · Platform
   tag: Microservices · Kafka · 18+ år
   cat:
     - arch
   bio: Driver transformationer från monolit till väldefinierade tjänster.
+  photo: micke.jpg
 - id: 10
-  name: Senior CTO Advisor
+  name: Patrick Zeits
   role: Senior Advisor
   tag: Scale-ups · Board · 20+ år
   cat:
     - cto
     - arch
   bio: Stöttar CTO-team och styrelser i tekniska beslut.
+  photo: patrik.jpg
 - id: 11
-  name: Senior Data Engineer
+  name: Peter Borg
   role: Senior Software Engineer · Data
   tag: Python · dbt · 12+ år
   cat:
     - data
     - eng
   bio: Dataplattformar som teamet faktiskt vill använda.
+  photo: peter.jpg
 - id: 12
-  name: Senior Mobile Engineer
+  name: Philip Sasko
   role: Senior Software Engineer · Mobile
   tag: iOS · Android · 13+ år
   cat:
     - eng
   bio: Native mobil utan genvägar.
+  photo: philip.jpg
+- id: 13
+  name: Rikard Björklind
+  role: Senior Software Engineer · Mobile
+  tag: iOS · Android · 13+ år
+  cat:
+    - eng
+  bio: Native mobil utan genvägar.
+  photo: rikard.jpg
+- id: 14
+  name: Kristoffer Johansson
+  role: Senior Software Engineer · Mobile
+  tag: iOS · Android · 13+ år
+  cat:
+    - eng
+  bio: Native mobil utan genvägar.
+  photo: kristoffer.png
+- id: 15
+  name: Robert Krogh
+  role: Senior Software Engineer · Mobile
+  tag: iOS · Android · 13+ år
+  cat:
+    - eng
+  bio: Native mobil utan genvägar.
+  photo: robert.jpg
+- id: 16
+  name: Fredrik Ronnerberg
+  role: Senior Software Engineer · Mobile
+  tag: iOS · Android · 13+ år
+  cat:
+    - eng
+  bio: Native mobil utan genvägar.
+  photo: fredrik.jpg
+- id: 17
+  name: Tommy Kvant
+  role: Senior Software Engineer · Mobile
+  tag: iOS · Android · 13+ år
+  cat:
+    - eng
+  bio: Native mobil utan genvägar.
+  photo: tommy.jpg
+- id: 18
+  name: Wahab Munir
+  role: Senior Software Engineer · Mobile
+  tag: iOS · Android · 13+ år
+  cat:
+    - eng
+  bio: Native mobil utan genvägar.
+  photo: wahab.jpg
+- id: 19
+  name: Nivin Fakih
+  role: Senior Software Engineer · Mobile
+  tag: iOS · Android · 13+ år
+  cat:
+    - eng
+  bio: Native mobil utan genvägar.
+  photo: nivin.jpg
+- id: 20
+  name: Elena Engström
+  role: Senior Software Engineer · Mobile
+  tag: iOS · Android · 13+ år
+  cat:
+    - eng
+  bio: Native mobil utan genvägar.
+  photo: elena.jpg
+- id: 21
+  name: Oskar Berger
+  role: Senior Software Engineer · Mobile
+  tag: iOS · Android · 13+ år
+  cat:
+    - eng
+  bio: Native mobil utan genvägar.
+  photo: oskar.jpg
