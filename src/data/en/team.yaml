@@ -5,7 +5,7 @@
   cat:
     - arch
   bio: Chief architect for SL's new ticketing system on AWS. Senior advisor at SCG.
-  photo: david.jpeg
+  photo: david.jpg
 - id: 2
   name: Andreas Salomonsson
   role: Senior Software Engineer
@@ -56,6 +56,7 @@
   cat:
     - eng
   bio: Builds interfaces that are fast and kind.
+  photo: jan.jpg
 - id: 8
   name: Jorge Miró
   role: Senior Software Engineer · Backend
@@ -65,13 +66,13 @@
   bio: Small, clear services. Tests for real.
   photo: jorge.jpg
 - id: 9
-  name: Micke Hermansson
+  name: Mikael Hermansson
   role: Senior Architect · Platform
   tag: Microservices · Kafka · 18+ yrs
   cat:
     - arch
   bio: Drives transformations from monolith to well-defined services.
-  photo: micke.jpg
+  photo: mikael.jpg
 - id: 10
   name: Patrick Zeits
   role: Senior Advisor
@@ -80,7 +81,7 @@
     - cto
     - arch
   bio: Supports CTO teams and boards on technical decisions.
-  photo: patrik.jpg
+  photo: patrick.jpg
 - id: 11
   name: Peter Borg
   role: Senior Software Engineer · Data
@@ -113,7 +114,7 @@
   cat:
     - eng
   bio: Native mobil utan genvägar.
-  photo: kristoffer.png
+  photo: kristoffer.jpg
 - id: 15
   name: Robert Krogh
   role: Senior Software Engineer · Mobile
