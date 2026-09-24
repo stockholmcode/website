@@ -205,26 +205,86 @@ export default function HomeSections({
         </div>
       </section>
 
-      {/* Testimonials — one hero quote */}
+      {/* Testimonials — manual carousel (prev/next + dots), driven by the vanilla
+          script in Homepage.astro; this component is build-time only and ships no
+          client JS, so behaviour lives there and binds by data-attribute. No
+          auto-advance: readers move on when ready. Slides stack in one grid cell so
+          the section keeps the height of the tallest quote and cross-fades. With no
+          JS the first slide stays visible and the nav is inert. */}
       <section style={{ background: panel, borderTop: `1px solid ${line}`, borderBottom: `1px solid ${line}` }}>
+        <style>{`
+          .scg-t-track { display: grid; }
+          .scg-t-slide {
+            grid-area: 1 / 1; margin: 0; opacity: 0; visibility: hidden;
+            pointer-events: none; transition: opacity .6s ease;
+          }
+          .scg-t-slide.is-active { opacity: 1; visibility: visible; pointer-events: auto; }
+          @media (prefers-reduced-motion: reduce) { .scg-t-slide { transition: none; } }
+          .scg-t-nav { display: flex; align-items: center; gap: 20px; margin-top: 44px; }
+          .scg-t-arrow {
+            width: 44px; height: 44px; border-radius: 999px; background: transparent;
+            border: 1px solid ${line}; color: ${ink}; font-size: 15px; cursor: pointer;
+            display: inline-flex; align-items: center; justify-content: center;
+            transition: border-color .15s ease, color .15s ease;
+          }
+          .scg-t-arrow:hover { border-color: ${accent}; color: ${accent}; }
+          .scg-t-dots { display: flex; align-items: center; gap: 9px; }
+          .scg-t-dot {
+            width: 8px; height: 8px; padding: 0; border-radius: 999px; background: transparent;
+            border: 1px solid ${line}; cursor: pointer;
+            transition: background .2s ease, border-color .2s ease, transform .2s ease;
+          }
+          .scg-t-dot:hover { border-color: ${accent}; }
+          .scg-t-dot[aria-current="true"] { background: ${accent}; border-color: ${accent}; transform: scale(1.4); }
+        `}</style>
         <div className="scg-r-container" style={{ ...wm.container, padding: `${pad}px ${gutter}px` }}>
           <div style={{ ...wm.mono, fontSize: 12, color: accent, letterSpacing: '.1em', textTransform: 'uppercase', marginBottom: 16 }}>{hp.testimonials.eyebrow}</div>
-          <figure style={{ margin: 0, marginTop: 24 }}>
-            <div className="scg-r-quote-glyph" aria-hidden="true" style={{ ...wm.display, fontSize: 240, lineHeight: 1, height: '0.42em', overflow: 'visible', color: accent, marginLeft: '-0.06em', marginBottom: 4 }}>{'"'}</div>
-            <blockquote style={{ ...wm.display, fontSize: 'clamp(44px, 5.5vw, 88px)', lineHeight: 1, margin: 0, color: ink, maxWidth: 1100 }}>
-              {testimonials[0].quote}
-            </blockquote>
-            <figcaption style={{ marginTop: 32, display: 'flex', alignItems: 'center', gap: 12 }}>
-              {testimonials[0].avatar
-                ? <img src={`${assetBase}assets/testimonials/${testimonials[0].avatar}`} alt={testimonials[0].name}
-                       style={{ width: 44, height: 44, borderRadius: 999, objectFit: 'cover', border: `1px solid ${line}`, display: 'block' }} />
-                : <div style={{ width: 44, height: 44, borderRadius: 999, background: panelHi, border: `1px solid ${line}` }} />}
-              <div>
-                <div style={{ fontSize: 15, fontWeight: 500, color: ink }}>{testimonials[0].name}</div>
-                <div style={{ ...wm.mono, fontSize: 12, color: inkDim }}>{testimonials[0].role}</div>
+          <div data-testimonials style={{ marginTop: 24 }}>
+            <div className="scg-t-track">
+              {testimonials.map((t, i) => (
+                <figure
+                  key={i}
+                  className={`scg-t-slide${i === 0 ? ' is-active' : ''}`}
+                  data-slide
+                  aria-hidden={i === 0 ? 'false' : 'true'}
+                >
+                  <div className="scg-r-quote-glyph" aria-hidden="true" style={{ ...wm.display, fontSize: 240, lineHeight: 1, height: '0.42em', overflow: 'visible', color: accent, marginLeft: '-0.06em', marginBottom: 4 }}>{'"'}</div>
+                  <blockquote style={{ ...wm.display, fontSize: 'clamp(44px, 5.5vw, 88px)', lineHeight: 1, margin: 0, color: ink, maxWidth: 1100 }}>
+                    {t.quote}
+                  </blockquote>
+                  <figcaption style={{ marginTop: 32, display: 'flex', alignItems: 'center', gap: 12 }}>
+                    {t.avatar
+                      ? <img src={`${assetBase}assets/testimonials/${t.avatar}`} alt={t.name}
+                             style={{ width: 44, height: 44, borderRadius: 999, objectFit: 'cover', border: `1px solid ${line}`, display: 'block' }} />
+                      : <div style={{ width: 44, height: 44, borderRadius: 999, background: panelHi, border: `1px solid ${line}` }} />}
+                    <div>
+                      <div style={{ fontSize: 15, fontWeight: 500, color: ink }}>{t.name}</div>
+                      {/* Anonymous sources carry no title; an empty line would pad the caption. */}
+                      {t.role && <div style={{ ...wm.mono, fontSize: 12, color: inkDim }}>{t.role}</div>}
+                    </div>
+                  </figcaption>
+                </figure>
+              ))}
+            </div>
+            {testimonials.length > 1 && (
+              <div className="scg-t-nav">
+                <button type="button" className="scg-t-arrow" data-prev aria-label={hp.testimonials.prev}>←</button>
+                <div className="scg-t-dots">
+                  {testimonials.map((_, i) => (
+                    <button
+                      key={i}
+                      type="button"
+                      className="scg-t-dot"
+                      data-dot
+                      aria-current={i === 0 ? 'true' : 'false'}
+                      aria-label={String(i + 1)}
+                    />
+                  ))}
+                </div>
+                <button type="button" className="scg-t-arrow" data-next aria-label={hp.testimonials.next}>→</button>
               </div>
-            </figcaption>
-          </figure>
+            )}
+          </div>
         </div>
       </section>
 
