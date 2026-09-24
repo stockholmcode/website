@@ -66,6 +66,21 @@ For non-developers maintaining the copy (no coding background assumed), the day-
 workflow, the YAML pitfalls to avoid, and how publishing works are in
 [`MAINTAINING.md`](MAINTAINING.md).
 
+## Careers Instagram carousel
+
+The careers page shows up to six recent posts from `@stockholm_code`. Add these
+repository Actions secrets for the scheduled GitHub Pages build:
+
+- `INSTAGRAM_ACCESS_TOKEN`: a long-lived Instagram Login token for the account with media access.
+- `INSTAGRAM_SECRET_WRITE_TOKEN`: a fine-grained GitHub token scoped to this repository with
+  **Secrets: write** permission. The build uses it to save refreshed Instagram tokens.
+
+The workflow refreshes the Instagram token about every 30 days and fetches posts daily.
+It caches both captions and downloaded images between builds. If Instagram is unavailable
+or the token expires, the last successfully fetched posts remain in the carousel. A new
+installation with no token or cache shows the Instagram profile link without post cards.
+The Instagram token is never sent to visitors' browsers or stored in the post cache.
+
 ## Design tokens
 
 Defined once in `src/lib/theme.js` and pulled into components from there.

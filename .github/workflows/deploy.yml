@@ -8,6 +8,8 @@ on:
     branches: [main]
   pull_request:
   workflow_dispatch:
+  schedule:
+    - cron: '17 6 * * *'
 
 permissions:
   contents: read
@@ -28,7 +30,23 @@ jobs:
           node-version: 20
           cache: npm
       - run: npm ci
+      - uses: actions/cache/restore@v4
+        with:
+          path: .cache/instagram
+          key: instagram-${{ github.run_id }}-${{ github.run_attempt }}
+          restore-keys: instagram-
+      - name: Update Instagram feed and token
+        if: github.event_name != 'pull_request'
+        run: node scripts/sync-instagram.mjs
+        env:
+          INSTAGRAM_ACCESS_TOKEN: ${{ secrets.INSTAGRAM_ACCESS_TOKEN }}
+          GH_TOKEN: ${{ secrets.INSTAGRAM_SECRET_WRITE_TOKEN }}
       - run: npm run build
+      - uses: actions/cache/save@v4
+        if: github.event_name != 'pull_request'
+        with:
+          path: .cache/instagram
+          key: instagram-${{ github.run_id }}-${{ github.run_attempt }}
       - uses: actions/upload-pages-artifact@v3
         with:
           path: dist
