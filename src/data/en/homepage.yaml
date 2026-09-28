@@ -51,7 +51,7 @@ cases:
   eyebrow: № 03 — Featured cases
   headline1: Stories we
   headline2: love to tell.
-  lead: "Three short ones. The full depth — architecture, stack and interviews — is on the Cases page."
+  lead: "Three short ones. The full depth — architecture and stack — is on the Cases page."
   cta: { label: "All cases →", to: /case }
 
 approach:
@@ -68,7 +68,7 @@ testimonials:
 team:
   eyebrow: № 06 — The team
   headline: Kind professionals.
-  lead: "~20 senior engineers and architects. All with 13+ years behind them. Three of them below — the whole team on the Team page."
+  lead: "~20 senior engineers and architects. All with 10+ years behind them. Three of them below — the whole team on the Team page."
   cta: { label: "The whole team & bios →", to: /team }
 
 careers:
