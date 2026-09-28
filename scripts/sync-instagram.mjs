@@ -1,4 +1,3 @@
-import { execFileSync } from 'node:child_process';
 import { mkdir, readFile, rename, writeFile, copyFile } from 'node:fs/promises';
 import { join } from 'node:path';
 
@@ -10,7 +9,7 @@ const token = process.env.INSTAGRAM_ACCESS_TOKEN;
 
 async function readCache() {
   try { return JSON.parse(await readFile(cacheFile, 'utf8')); }
-  catch { return { posts: [], refreshedAt: null }; }
+  catch { return { posts: [] }; }
 }
 
 async function saveCache(cache) {
@@ -29,33 +28,13 @@ async function instagramGet(path, params, accessToken) {
 }
 
 let cache = await readCache();
-let activeToken = token;
 
-// Refresh monthly. GitHub secrets need a separate token with repository Secrets write access.
-if (token && process.env.GH_TOKEN && process.env.GITHUB_REPOSITORY &&
-    (!cache.refreshedAt || Date.now() - Date.parse(cache.refreshedAt) > 30 * 86400_000)) {
-  try {
-    const refreshed = await instagramGet('refresh_access_token', { grant_type: 'ig_refresh_token' }, token);
-    if (!refreshed.access_token) throw new Error('Instagram returned no refreshed token');
-    execFileSync('gh', ['secret', 'set', 'INSTAGRAM_ACCESS_TOKEN', '--repo', process.env.GITHUB_REPOSITORY], {
-      input: refreshed.access_token,
-      stdio: ['pipe', 'ignore', 'pipe'],
-    });
-    activeToken = refreshed.access_token;
-    cache.refreshedAt = new Date().toISOString();
-    await saveCache(cache);
-    console.log('Instagram token refreshed and saved to GitHub Actions secrets.');
-  } catch (error) {
-    console.warn(`Instagram token refresh skipped: ${error.message}`);
-  }
-}
-
-if (activeToken) {
+if (token) {
   try {
     const { data } = await instagramGet('me/media', {
       fields: 'id,caption,media_type,media_url,thumbnail_url,permalink,timestamp',
       limit: '8',
-    }, activeToken);
+    }, token);
     const media = (data ?? []).filter((post) =>
       /^[a-zA-Z0-9_-]+$/.test(String(post.id)) && post.permalink &&
       (post.thumbnail_url || (post.media_type !== 'VIDEO' && post.media_url))
@@ -74,7 +53,7 @@ if (activeToken) {
       await writeFile(join(imageDir, imageFile), Buffer.from(await imageResponse.arrayBuffer()));
       posts.push({ id: post.id, imageFile, caption: post.caption || '', permalink: post.permalink });
     }
-    cache = { ...cache, posts };
+    cache = { posts };
     await saveCache(cache);
     console.log(`Cached ${posts.length} Instagram posts.`);
   } catch (error) {

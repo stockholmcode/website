@@ -4,7 +4,7 @@ import { mkdtemp, mkdir, readFile, writeFile, chmod } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { join, resolve } from 'node:path';
 
-test('refreshes the token and preserves downloaded posts when Instagram fails later', async () => {
+test('preserves downloaded posts when Instagram fails later', async () => {
   const cwd = process.cwd();
   const originalEnv = { ...process.env };
   const originalFetch = globalThis.fetch;
@@ -14,7 +14,6 @@ test('refreshes the token and preserves downloaded posts when Instagram fails la
   try {
     process.chdir(tempDir);
     process.env.INSTAGRAM_ACCESS_TOKEN = 'old-token';
-    delete process.env.GH_TOKEN;
     globalThis.fetch = async (url) => {
       if (String(url).includes('/me/media')) {
         return Response.json({ data: [{ id: '123', caption: 'Team lunch', media_url: 'https://example.com/image.jpg', permalink: 'https://instagram.com/p/123/' }] });
@@ -32,27 +31,42 @@ test('refreshes the token and preserves downloaded posts when Instagram fails la
     assert.deepEqual(fallback.posts, first.posts);
     assert.equal(await readFile('public/assets/instagram/123.jpg', 'utf8'), 'image bytes');
 
+  } finally {
+    process.chdir(cwd);
+    process.env = originalEnv;
+    globalThis.fetch = originalFetch;
+  }
+});
+
+test('refreshes the token and saves it as a GitHub secret', async () => {
+  const cwd = process.cwd();
+  const originalEnv = { ...process.env };
+  const originalFetch = globalThis.fetch;
+  const tempDir = await mkdtemp(join(tmpdir(), 'scg-instagram-token-'));
+  const script = `file://${resolve('scripts/refresh-instagram-token.mjs')}`;
+
+  try {
+    process.chdir(tempDir);
     await mkdir('bin');
-    await writeFile('bin/gh', '#!/bin/sh\ncat > "$FAKE_GH_OUTPUT"\n');
+    await writeFile('bin/gh', '#!/bin/sh\necho "$@" > "$FAKE_GH_OUTPUT.args"\ncat > "$FAKE_GH_OUTPUT"\n');
     await chmod('bin/gh', 0o755);
     process.env.PATH = `${join(tempDir, 'bin')}:${originalEnv.PATH}`;
+    process.env.INSTAGRAM_ACCESS_TOKEN = 'old-token';
     process.env.GH_TOKEN = 'github-token';
     process.env.GITHUB_REPOSITORY = 'owner/repo';
     process.env.FAKE_GH_OUTPUT = join(tempDir, 'saved-token');
     globalThis.fetch = async (url) => {
       const request = new URL(url);
-      if (request.pathname.includes('refresh_access_token')) return Response.json({ access_token: 'new-token', expires_in: 5184000 });
-      if (request.pathname.includes('/me/media')) {
-        assert.equal(request.searchParams.get('access_token'), 'new-token');
-        return Response.json({ data: [{ id: '124', caption: 'Another day', media_url: 'https://example.com/second.jpg', permalink: 'https://instagram.com/p/124/' }] });
-      }
-      return new Response('new image', { headers: { 'content-type': 'image/jpeg' } });
+      assert.ok(request.pathname.endsWith('/refresh_access_token'));
+      assert.equal(request.searchParams.get('access_token'), 'old-token');
+      return Response.json({ access_token: 'new-token', expires_in: 5184000 });
     };
-    await import(`${script}?third`);
+    await import(`${script}?refresh`);
     assert.equal(await readFile('saved-token', 'utf8'), 'new-token');
-    const refreshed = JSON.parse(await readFile('.cache/instagram/posts.json', 'utf8'));
-    assert.ok(refreshed.refreshedAt);
-    assert.equal(refreshed.posts[0].id, '124');
+    assert.equal((await readFile('saved-token.args', 'utf8')).trim(), 'secret set INSTAGRAM_ACCESS_TOKEN --repo owner/repo');
+
+    globalThis.fetch = async () => new Response('expired', { status: 400 });
+    await assert.rejects(import(`${script}?expired`), /returned 400/);
   } finally {
     process.chdir(cwd);
     process.env = originalEnv;

@@ -75,8 +75,11 @@ repository Actions secrets for the scheduled GitHub Pages build:
 - `INSTAGRAM_SECRET_WRITE_TOKEN`: a fine-grained GitHub token scoped to this repository with
   **Secrets: write** permission. The build uses it to save refreshed Instagram tokens.
 
-The workflow refreshes the Instagram token about every 30 days and fetches posts daily.
-It caches both captions and downloaded images between builds. If Instagram is unavailable
+The `Refresh Instagram token` workflow runs every Monday and swaps the secret for a
+refreshed token (tokens last 60 days). If that run fails, the token has expired or been
+revoked: generate a new one and set the secret again. It can also be run manually from
+the Actions tab. Once it finishes, the deploy workflow runs and fetches the latest posts
+(pushes to `main` fetch them too). Captions and downloaded images are cached between builds. If Instagram is unavailable
 or the token expires, the last successfully fetched posts remain in the carousel. A new
 installation with no token or cache shows the Instagram profile link without post cards.
 The Instagram token is never sent to visitors' browsers or stored in the post cache.
