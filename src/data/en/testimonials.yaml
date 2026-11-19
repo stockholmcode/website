@@ -8,7 +8,23 @@
   role: CTO, Blocket
   avatar: blocket.jpg
 - quote: >-
-    We have rarely seen such an effective team with so much domain knowledge. The team's agility and
-    pace are, in our view, outstanding.
+    Stockholm Code Group has provided several of the key people in this project. Throughout, their
+    consultants have had a competence level, delivery ability and quality thinking that is well
+    above the average. They are simple and pleasant to collaborate with, proactive and dare to
+    contradict if necessary.
   name: Pontus Hellgren
   role: VP Engineering, Warner Bros. Discovery
+  avatar: warner_bros.svg.webp
+- quote: >-
+    Stockholm Code Group has been a cornerstone in the development of Custellence from the very
+    beginning. It is clear that they are really passionate about technology and care about the
+    quality of their work.
+  name: Olof Bendt
+  role: CTO, Custellence
+  avatar: custellence.jpg
+# No person or title attached: this one came in as an anonymous third-party
+# assessment, so it carries only a source line (no `role`).
+- quote: >-
+    We have rarely seen such an effective team with so much domain knowledge. Team agility and
+    speed is phenomenal in our opinion.
+  name: Independent third party review

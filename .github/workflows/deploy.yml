@@ -1,13 +1,17 @@
 name: Deploy to GitHub Pages
 
 # Build runs on every push and PR (proves the site compiles).
-# Deploy happens on a push to `main` or a manual dispatch, and only takes
+# Deploy happens on a push to `main`, a manual dispatch, or after the weekly
+# Instagram token refresh (which pulls in the latest posts), and only takes
 # effect once the repo's Pages source is set to "GitHub Actions".
 on:
   push:
     branches: [main]
   pull_request:
   workflow_dispatch:
+  workflow_run:
+    workflows: [Refresh Instagram token]
+    types: [completed]
 
 permissions:
   contents: read
@@ -28,7 +32,22 @@ jobs:
           node-version: 20
           cache: npm
       - run: npm ci
+      - uses: actions/cache/restore@v4
+        with:
+          path: .cache/instagram
+          key: instagram-${{ github.run_id }}-${{ github.run_attempt }}
+          restore-keys: instagram-
+      - name: Update Instagram feed
+        if: github.event_name != 'pull_request'
+        run: node scripts/sync-instagram.mjs
+        env:
+          INSTAGRAM_ACCESS_TOKEN: ${{ secrets.INSTAGRAM_ACCESS_TOKEN }}
       - run: npm run build
+      - uses: actions/cache/save@v4
+        if: github.event_name != 'pull_request'
+        with:
+          path: .cache/instagram
+          key: instagram-${{ github.run_id }}-${{ github.run_attempt }}
       - uses: actions/upload-pages-artifact@v3
         with:
           path: dist

@@ -17,3 +17,6 @@ node_modules/
 dist/
 .cache/
 .astro/
+public/assets/instagram/
+.env
+.env.*
