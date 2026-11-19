@@ -80,6 +80,11 @@ const pad2 = (n) => String(n).padStart(2, '0');
             {c.expanded.sections.map((sec) => (
               <div class="section"><h4>{sec.h}</h4><p>{sec.body}</p></div>
             ))}
+            {c.expanded.source && (
+              <a class="source" href={c.expanded.source.href} target="_blank" rel="noopener noreferrer">
+                {c.expanded.source.label}
+              </a>
+            )}
             {c.expanded.tagline && <p class="tagline">{c.expanded.tagline}</p>}
           </div>
           <aside>
@@ -213,6 +218,7 @@ const pad2 = (n) => String(n).padStart(2, '0');
   .scg-case-cases .case .deep h4 { font-family: 'JetBrains Mono', ui-monospace, monospace; font-size: 10px; color: var(--accent); letter-spacing: .12em; text-transform: uppercase; margin: 0 0 10px; font-weight: 600; }
   .scg-case-cases .case .deep .section { margin-bottom: 24px; }
   .scg-case-cases .case .deep .section p { font-size: 15px; line-height: 1.65; color: var(--ink); margin: 0; max-width: 640px; }
+  .scg-case-cases .case .deep .source { display: inline-block; font-size: 14px; color: var(--accent); text-underline-offset: 3px; }
   .scg-case-cases .case .deep .tagline { margin-top: 24px; padding-top: 20px; border-top: 1px solid var(--line); font-size: 14px; line-height: 1.65; color: var(--inkDim); font-style: italic; max-width: 640px; }
   .scg-case-cases .case .deep aside { display: flex; flex-direction: column; gap: 20px; }
   .scg-case-cases .case .deep .stackbox { padding: 20px 22px; border: 1px solid var(--line); border-radius: 12px; }

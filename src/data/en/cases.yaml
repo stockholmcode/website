@@ -57,8 +57,8 @@
   sectorKey: public
   outcome: New ticketing system with contactless
   body: >-
-    Architecture and delivery of SL's new ticketing system — built from scratch on AWS. David Looberger
-    from SCG as chief software architect. Travel with a bank card, automatic discounts for
+    Architecture and delivery of SL's new ticketing system — built from scratch on AWS, with SCG
+    leading the software architecture. Travel with a bank card, automatic discounts for
     students/seniors, accessibility features. AWS wrote a blog post about the project.
   metric: 800k
   metricLabel: journeys / day
@@ -74,12 +74,12 @@
     - AWS
     - PCI-compliant
   year: '2023'
-  role: Chief Software Architect (David Looberger)
+  role: Chief Software Architect
   period: 2020 – 2023
   expanded:
     summary: >-
       SL's new ticketing system — contactless payment with bank cards, automatic discounts, built from
-      scratch on AWS. SCG's David Looberger as chief architect all the way.
+      scratch on AWS. SCG led the software architecture throughout.
     sections:
       - h: Background
         body: >-
@@ -89,7 +89,7 @@
           non-negotiable.
       - h: What we did
         body: >-
-          David Looberger from SCG led the architecture as chief software architect. The system was built
+          SCG led the architecture as chief software architect. The system was built
           from scratch on AWS with EMV contactless as the primary payment method — travel with your bank
           card, automatic discounts for students and seniors, accessibility features baked in from the
           start. PCI-compliant and designed to handle peak hours without compromising on performance.
@@ -98,6 +98,9 @@
           800,000 journeys per day, EMV-based contactless as standard, full PCI compliance.
           AWS wrote its own blog post about the project as a reference implementation for the public
           sector's transition to modern cloud infrastructure.
+    source:
+      label: Read the AWS blog post →
+      href: https://aws.amazon.com/blogs/publicsector/stockholm-public-transport-transforms-ticketing-system-with-aws-cloud/
     stackList:
       - AWS (EC2, RDS, KMS)
       - EMV contactless
@@ -194,58 +197,26 @@
   period: 2025 – 2026
   expanded:
     summary: >-
-      We helped Matsmart/Motatos modernise their legacy platform and enable a small team
-      to deliver above its weight class with an agentic AI way of working — the service architecture
-      redesigned and the migration run in parallel with operations, with no single cutover date.
+      Matsmart/Motatos modernised its core platform in stages while keeping orders flowing
+      across six European markets.
     sections:
       - h: Background
         body: >-
-          Matsmart/Motatos has a mission to reduce food waste by buying in and reselling
-          surplus stock, seasonal goods, products with print errors and other leftover food. During the
-          engagement the e-commerce ran in six European countries, with Sweden at 5,000–8,000 orders per
-          day and significant round-the-clock traffic on the other markets. The platform sits at the
-          centre of the operation: ERP sync, purchasing and supplier data, order handling, stock levels,
-          real-time integration with warehousing, shipping and product data for every SKU. Earlier
-          decisions that were once right — a custom-built framework, hand-maintained services, faulty
-          integrations — had started to slow the team down.
-      - h: The challenge
-        body: >-
-          The solution space was narrow: operations could not be paused, a big-bang rewrite was
-          impossible for a team of this size, and continuing to patch the in-house framework would have
-          compounded the debt. What replaced it had to come piece by piece, with no single cutover day,
-          while the team kept delivering against internal demand.
+          Matsmart/Motatos sells surplus food across six European markets, handling 5,000–8,000
+          orders a day in Sweden. Its custom framework and hand-maintained services were slowing
+          development, but the platform had to keep running throughout the migration. Order,
+          stock and warehouse integrations made a single cutover impractical.
       - h: What we did
         body: >-
-          Robert Krogh from SCG came in as architect and developer to lead the shift. A
-          lightweight architecture showed how individual services could live outside the in-house
-          framework, still be part of the whole, and require minimal setup. We moved from code-first
-          to infrastructure-first so the services became fully decoupled. Messaging flows went from
-          targeted RabbitMQ flows to managed Azure Service Bus. In parallel the team migrated from
-          Azure DevOps to GitHub, which opened the door to redoing CI/CD and IaC in the same spirit.
-      - h: Agentic AI for a small team on a large system
-        body: >-
-          We laid the groundwork for team-scaled AI use where the gains spread beyond the individual.
-          By making context explicit in the monorepo, agents could work with a broader picture than
-          earlier ways of working allowed. A custom skill pulls pipeline data via the GitHub CLI and
-          shows, in a prompt, what is deployed where, per service. Skills like this live in the repo,
-          versioned together with the code — one developer's improved way of working becomes the team's.
+          SCG redesigned the service architecture so new services could run alongside the old
+          framework. The team moved messaging to Azure Service Bus and CI/CD to GitHub Actions,
+          while adding shared AI workflows and current documentation to the repository. Versioned
+          skills gave the whole team a clearer view of deployments across services.
       - h: Result
         body: >-
-          The new architecture let the team build leaner services, maintain less code, and
-          deploy with fewer steps. Data flows could be migrated in parallel with the old solution, at
-          the team's pace, following a safe plan. The documentation became broad and current — for both
-          humans and AI. Through AI-maintained documentation, tooling and the ability to explore
-          live environments from IaC and pipelines (without data or sensitive info), the team moved into
-          a more agentic way of working, and could do meaningfully more with less.
-      - h: Adaptive reuse
-        body: >-
-          In architecture, *adaptive reuse* is the craft of giving an existing building a new function and
-          modern systems while preserving the structure and character worth keeping. The
-          Matsmart/Motatos platform got the same treatment. The domain logic, the integrations the
-          business depends on, the flows in motion: all kept. Alongside them, modern counterparts were
-          built — managed messaging next to the self-hosted bus, clean pipelines next to the
-          hand-maintained ones, lightweight services next to the in-house framework. New and
-          old ran in parallel, each new part earning its place before the old one stepped aside.
+          Leaner services and managed infrastructure reduced maintenance and deployment work.
+          Data flows could move gradually without a single cutover, and shared AI tooling helped
+          the small team work across the platform.
     stackList:
       - Azure Service Bus — managed event-driven messaging
       - GitHub Actions — CI/CD and collaboration
@@ -253,7 +224,3 @@
       - Lightweight service architecture — minimal setup per service
       - Agentic AI workflows — team-scaled, not solo
       - AI-maintained documentation
-    tagline: >-
-      Matsmart/Motatos fights waste for a living. Stockholm Code Group helped them cut it
-      from their platform too: less code, less infra to operate, less stale documentation,
-      less friction between an idea and a deploy.

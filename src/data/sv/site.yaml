@@ -13,6 +13,10 @@ nav:
 footer:
   blurb: Seniora ingenjörer i Stockholm. We bring love to software, sedan 2007.
   tagline: WE BRING LOVE
+  social:
+    - { label: LinkedIn, href: "https://www.linkedin.com/company/stockholmcode" }
+    - { label: Instagram, href: "https://www.instagram.com/stockholm_code/" }
+    - { label: Facebook, href: "https://www.facebook.com/stockholmcode" }
   columns:
     - h: Sidor
       items:

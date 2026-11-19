@@ -1,8 +1,11 @@
 ---
 import { getRelativeLocaleUrl } from 'astro:i18n';
 import { SCG } from '../lib/theme.js';
+import { getInstagramPosts } from '../lib/instagram.js';
 
 const { locale = 'sv', content } = Astro.props;
+
+const { bg, panel, panelHi, ink, inkDim, inkFaint, line, accent } = SCG;
 
 // Structured lists from careers.yaml; hardcoded page copy from careers_page.yaml.
 const careers = content.careers;
@@ -12,6 +15,7 @@ const perks = careers.perks ?? [];
 const roles = careers.roles ?? [];
 const process = careers.process ?? [];
 const quote = careers.quote ?? {};
+const instagramPosts = getInstagramPosts();
 
 const link = (to) => getRelativeLocaleUrl(locale, to);
 const assetBase = import.meta.env.BASE_URL.endsWith('/')
@@ -53,6 +57,36 @@ const pad = (i) => String(i + 1).padStart(2, '0');
         </div>
       ))}
     </div>
+  </div>
+</section>
+
+<section class="scg-c-social" aria-labelledby="scg-c-social-title">
+  <div class="scg-c-container">
+    <div class="scg-c-social-head">
+      <div>
+        <div class="scg-c-mono-kicker">{page.social.eyebrow}</div>
+        <h2 class="scg-c-social-h2" id="scg-c-social-title">{page.social.headline}</h2>
+        <p class="scg-c-social-lead">{page.social.lead}</p>
+      </div>
+      <a class="scg-c-social-profile" href="https://www.instagram.com/stockholm_code/" target="_blank" rel="noopener noreferrer">{page.social.link}</a>
+    </div>
+    {instagramPosts.length > 0 && (
+      <div class="scg-c-social-carousel">
+        <div class="scg-c-social-controls">
+          <button type="button" data-social-prev aria-label={page.social.previous}>←</button>
+          <button type="button" data-social-next aria-label={page.social.next}>→</button>
+        </div>
+        <div class="scg-c-social-track" data-social-track>
+          {instagramPosts.map((post) => (
+            <a class="scg-c-social-card" href={post.permalink} target="_blank" rel="noopener noreferrer">
+              <img src={`${assetBase}assets/instagram/${post.imageFile}`} alt={post.caption || page.social.imageAlt} loading="lazy" />
+              <p>{post.caption}</p>
+              <span>Instagram ↗</span>
+            </a>
+          ))}
+        </div>
+      </div>
+    )}
   </div>
 </section>
 
@@ -132,7 +166,7 @@ const pad = (i) => String(i + 1).padStart(2, '0');
       <div class="scg-c-q">“</div>
       <blockquote class="scg-c-quote-bq">{quote.text}</blockquote>
       <figcaption class="scg-c-quote-cap">
-        <div class="scg-c-quote-avatar"></div>
+        <img src={`${assetBase}assets/logo-sans-text-dark.svg`} class="scg-c-quote-avatar" />
         <div>
           <div class="scg-c-quote-name">{quote.name}</div>
           <div class="scg-c-quote-role">{quote.role}</div>
@@ -158,6 +192,14 @@ const pad = (i) => String(i + 1).padStart(2, '0');
     row.addEventListener('click', () => row.parentElement.classList.toggle('open'));
   });
   document.querySelector('.scg-c-role')?.classList.add('open');
+
+  const socialTrack = document.querySelector('[data-social-track]');
+  document.querySelector('[data-social-prev]')?.addEventListener('click', () => {
+    socialTrack?.scrollBy({ left: -socialTrack.clientWidth * 0.8, behavior: 'smooth' });
+  });
+  document.querySelector('[data-social-next]')?.addEventListener('click', () => {
+    socialTrack?.scrollBy({ left: socialTrack.clientWidth * 0.8, behavior: 'smooth' });
+  });
 </script>
 
 <style define:vars={{ accent: SCG.accent, bg: SCG.bg, panel: SCG.panel, panelHi: SCG.panelHi, ink: SCG.ink, inkDim: SCG.inkDim, inkFaint: SCG.inkFaint, line: SCG.line }}>
@@ -183,6 +225,21 @@ const pad = (i) => String(i + 1).padStart(2, '0');
   .scg-c-perk-icon { width: 48px; height: 48px; object-fit: contain; display: block; }
   .scg-c-perk-h3 { font-family: 'Amatic SC', cursive; font-weight: 700; font-size: 32px; line-height: .95; margin: 0; color: var(--ink); }
   .scg-c-perk-p { font-size: 13px; color: var(--inkDim); margin: 0; line-height: 1.5; }
+
+  /* Social life */
+  .scg-c-social { padding: 96px 0; border-bottom: 1px solid var(--line); }
+  .scg-c-social-head { display: flex; justify-content: space-between; align-items: end; gap: 32px; margin-bottom: 32px; }
+  .scg-c-social-h2 { font-family: 'Amatic SC', cursive; font-weight: 700; font-size: clamp(64px, 8vw, 112px); line-height: .95; margin: 0; }
+  .scg-c-social-lead { font-size: 17px; line-height: 1.5; color: var(--inkDim); max-width: 560px; margin: 16px 0 0; }
+  .scg-c-social-profile { color: var(--accent); white-space: nowrap; text-underline-offset: 4px; }
+  .scg-c-social-controls { display: flex; justify-content: end; gap: 8px; margin-bottom: 14px; }
+  .scg-c-social-controls button { width: 42px; height: 42px; border-radius: 50%; border: 1px solid var(--line); background: var(--panel); color: var(--ink); cursor: pointer; }
+  .scg-c-social-controls button:hover { border-color: var(--accent); color: var(--accent); }
+  .scg-c-social-track { display: flex; gap: 16px; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: thin; padding-bottom: 12px; }
+  .scg-c-social-card { flex: 0 0 min(310px, 80vw); scroll-snap-align: start; background: var(--panel); border: 1px solid var(--line); border-radius: 14px; overflow: hidden; color: var(--ink); text-decoration: none; }
+  .scg-c-social-card img { display: block; width: 100%; aspect-ratio: 1; object-fit: cover; }
+  .scg-c-social-card p { font-size: 14px; line-height: 1.5; margin: 16px 16px 8px; color: var(--inkDim); display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 3; overflow: hidden; }
+  .scg-c-social-card span { display: block; margin: 0 16px 16px; font-size: 12px; color: var(--accent); }
 
   /* Roles */
   .scg-c-roles { padding: 120px 0; }
@@ -243,6 +300,8 @@ const pad = (i) => String(i + 1).padStart(2, '0');
     .scg-c-hero { padding: 80px 0 56px; }
     .scg-c-logoart { display: none; }
     .scg-c-perks-grid { grid-template-columns: repeat(2, 1fr); }
+    .scg-c-social { padding: 72px 0; }
+    .scg-c-social-head { align-items: start; flex-direction: column; gap: 18px; }
     .scg-c-role-headrow { grid-template-columns: 1fr auto; gap: 12px; }
     .scg-c-role-num { display: none; }
     .scg-c-role-meta { display: none; }
@@ -257,6 +316,7 @@ const pad = (i) => String(i + 1).padStart(2, '0');
     .scg-c-container { padding: 0 16px; }
     .scg-c-hero { padding: 56px 0 40px; }
     .scg-c-perks-grid { grid-template-columns: 1fr; }
+    .scg-c-social { padding: 56px 0; }
     .scg-c-steps { grid-template-columns: 1fr; }
     .scg-c-cta { padding: 64px 0; }
     .scg-c-cta-logo { height: 80px; }
