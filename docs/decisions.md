@@ -87,6 +87,20 @@ object, not to inline them.
 dark/light, design-tool sync). A single JS object is the right size for one brand, one
 theme.
 
+The tokens are emitted once, in `Base.astro`, via a single `define:vars` on its global
+style block (Astro puts them on `<html>`, they cascade everywhere). Components used to
+each re-thread the same 6–9 tokens through their own `define:vars`; that was pure
+boilerplate and is gone. The same block now also holds the shared style primitives
+(`u-container`, `u-eyebrow`, `u-chip`, `u-hero*`, `u-logoart`, `u-cta*`, `u-portrait`,
+`u-member-*`, `u-quote-*`) that the page components were each redefining under different
+class names — the "duplicated meaning drifts" case, and it had already drifted: two pages
+carried an 8px-off mobile CTA padding, and the inner-page hero's mobile breakpoints were
+copy-pasted four times. Sharing the hero forced one small unification — its desktop
+bottom padding, which was `96px` on two pages and `120px` on the other two, is now `96px`
+everywhere (a page-level override would also win at mobile and undo the shared shrink).
+What stays component-local is the genuinely per-page stuff: one-off grids, a narrower
+hero lead, and the display headings whose `clamp()` sizes vary by design.
+
 ## Hosting on GitHub Pages via Actions
 
 GitHub Actions builds the site and publishes to Pages. Build runs on every push and PR as
@@ -122,9 +136,11 @@ posture.
 
 Things we are taking as true without having fully settled them. Worth revisiting.
 
-- **URL slugs stay Swedish even in English** (`/en/case`, not `/en/cases`). Fine for now.
-  If English slugs are wanted for SEO or polish, that is a routing change to make before a
-  wider launch, not after.
+- **One set of route slugs, shared across locales.** The slugs are English words
+  (`/offering`, `/case`, `/team`, `/careers`) and the English routes reuse them verbatim
+  (`/en/case`, not a translated or re-pluralised `/en/cases`). Fine for now. If per-market
+  slugs are ever wanted for SEO or polish, that is a routing change to make before a wider
+  launch, not after.
 - **The audience editing content is technical enough to use Git and YAML.** True today
   (CEO plus AI). If that changes, the "no CMS" decision above is the first to reconsider.
 - **One brand, one theme.** The token setup assumes a single visual identity. A second
