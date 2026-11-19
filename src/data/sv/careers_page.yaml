@@ -18,6 +18,15 @@ perks:
   headlineAccent: vardagen
   headlinePost: " bättre."
 
+social:
+  eyebrow: Livet på SCG
+  headline: "Bra jobb. Bra sällskap."
+  lead: "En inblick i människorna och stunderna som formar vardagen på Stockholm Code Group."
+  link: "Följ oss på Instagram ↗"
+  previous: Föregående inlägg
+  next: Nästa inlägg
+  imageAlt: Instagraminlägg från Stockholm Code Group
+
 roles:
   eyebrow: Öppna roller
   headlinePre: "Personer vi"
