@@ -9,7 +9,7 @@ hero:
     We build platforms, modernise architecture and carry complex deliveries across the
     line — with AI as an accelerator where it creates value.
   ctaPrimary: { label: "Start a conversation →", href: "mailto:contactus@stockholmcode.se" }
-  ctaSecondary: { label: "See offerings", to: /erbjudanden }
+  ctaSecondary: { label: "See offerings", to: /offering }
 
 offerings:
   eyebrow: № 02 — What we do
@@ -44,8 +44,8 @@ offerings:
     body: >-
       Four focused steps for when AI needs structure — not just tools. Each step stands on
       its own; start where you are.
-    cta: { label: "See the framework →", to: /erbjudanden }
-  allCta: { label: "All offerings in detail →", to: /erbjudanden }
+    cta: { label: "See the framework →", to: /offering }
+  allCta: { label: "All offerings in detail →", to: /offering }
 
 cases:
   eyebrow: № 03 — Featured cases
