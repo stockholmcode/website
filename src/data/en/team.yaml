@@ -5,86 +5,153 @@
   cat:
     - arch
   bio: Chief architect for SL's new ticketing system on AWS. Senior advisor at SCG.
-  photo: david.jpeg
+  photo: david.jpg
 - id: 2
-  name: Senior Software Engineer
+  name: Andreas Salomonsson
   role: Senior Software Engineer
   tag: Full-stack · Distributed · 15+ yrs
   cat:
     - eng
   bio: Builds and ships production at the client. Senior colleagues, no juniors.
+  photo: andreas.jpg
 - id: 3
-  name: Senior Architect
+  name: Axel Hjälm
   role: Senior Architect
   tag: Event-driven · DDD · 15+ yrs
   cat:
     - arch
   bio: Draws systems that hold up — and codes the prototypes himself.
+  photo: axel.jpg
 - id: 4
-  name: Senior AI Engineer
+  name: Björn Carlsson
   role: Senior Software Engineer · AI
   tag: LLM systems · RAG · 10+ yrs
   cat:
     - ai
     - eng
   bio: LLMs in production. Pragmatic about AI hype.
+  photo: bjorn.jpg
 - id: 5
-  name: Senior Data Architect
+  name: Mats Melke
   role: Senior Architect · Data
   tag: Streaming · Event-driven · 15+ yrs
   cat:
     - data
     - arch
   bio: Kafka, event sourcing, data contracts.
+  photo: mats.jpg
 - id: 6
-  name: Senior Cloud Engineer
+  name: Felix Blanke
   role: Senior Software Engineer · Cloud
   tag: AWS · K8s · 15+ yrs
   cat:
     - eng
     - arch
   bio: AWS & Kubernetes since the early days. Security mindset.
+  photo: felix.jpg
 - id: 7
-  name: Senior Frontend Engineer
+  name: Jan Eklöf
   role: Senior Software Engineer · Frontend
   tag: React · Design systems · 12+ yrs
   cat:
     - eng
   bio: Builds interfaces that are fast and kind.
+  photo: jan.jpg
 - id: 8
-  name: Senior Backend Engineer
+  name: Jorge Miró
   role: Senior Software Engineer · Backend
   tag: Go · Kotlin · 14+ yrs
   cat:
     - eng
   bio: Small, clear services. Tests for real.
+  photo: jorge.jpg
 - id: 9
-  name: Senior Platform Architect
+  name: Mikael Hermansson
   role: Senior Architect · Platform
   tag: Microservices · Kafka · 18+ yrs
   cat:
     - arch
   bio: Drives transformations from monolith to well-defined services.
+  photo: mikael.jpg
 - id: 10
-  name: Senior CTO Advisor
+  name: Patrick Zeits
   role: Senior Advisor
   tag: Scale-ups · Board · 20+ yrs
   cat:
     - cto
     - arch
   bio: Supports CTO teams and boards on technical decisions.
+  photo: patrick.jpg
 - id: 11
-  name: Senior Data Engineer
+  name: Peter Borg
   role: Senior Software Engineer · Data
   tag: Python · dbt · 12+ yrs
   cat:
     - data
     - eng
   bio: Data platforms the team actually wants to use.
+  photo: peter.jpg
 - id: 12
-  name: Senior Mobile Engineer
+  name: Philip Sasko
   role: Senior Software Engineer · Mobile
   tag: iOS · Android · 13+ yrs
   cat:
     - eng
   bio: Native mobile with no shortcuts.
+  photo: philip.jpg
+- id: 13
+  name: Rikard Björklind
+  role: Senior Software Engineer · Mobile
+  tag: iOS · Android · 13+ år
+  cat:
+    - eng
+  bio: Native mobil utan genvägar.
+  photo: rikard.jpg
+- id: 14
+  name: Kristoffer Johansson
+  role: Senior Software Engineer · Mobile
+  tag: iOS · Android · 13+ år
+  cat:
+    - eng
+  bio: Native mobil utan genvägar.
+  photo: kristoffer.jpg
+- id: 15
+  name: Robert Krogh
+  role: Senior Software Engineer · Mobile
+  tag: iOS · Android · 13+ år
+  cat:
+    - eng
+  bio: Native mobil utan genvägar.
+  photo: robert.jpg
+- id: 16
+  name: Fredrik Ronnerberg
+  role: Senior Software Engineer · Mobile
+  tag: iOS · Android · 13+ år
+  cat:
+    - eng
+  bio: Native mobil utan genvägar.
+  photo: fredrik.jpg
+- id: 17
+  name: Tommy Kvant
+  role: Senior Software Engineer · Mobile
+  tag: iOS · Android · 13+ år
+  cat:
+    - eng
+  bio: Native mobil utan genvägar.
+  photo: tommy.jpg
+- id: 18
+  name: Wahab Munir
+  role: Senior Software Engineer · Mobile
+  tag: iOS · Android · 13+ år
+  cat:
+    - eng
+  bio: Native mobil utan genvägar.
+  photo: wahab.jpg
+- id: 21
+  name: Oskar Berger
+  role: Senior Software Engineer · Mobile
+  tag: iOS · Android · 13+ år
+  cat:
+    - eng
+  bio: Native mobil utan genvägar.
+  photo: oskar.jpg
