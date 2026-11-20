@@ -9,13 +9,18 @@ title: Offerings
 
 hero:
   kicker: "№ 02 · Offerings"
-  headlinePre: Senior expertise.
-  headlineAccent: Sharp
-  headlineMid: deliveries.
-  lead: We build systems, teams and leadership.
-  leadDim: >-
-    Three ways to engage — plus a specialised track for organisations
-    that want to make AI more than just a tool.
+  headlinePre: Architecture to delivery.
+  headlineAccent: One team
+  headlineMid: all the way.
+  lead: >-
+    We own the software — from the first architecture decision to code in
+    production. Three ways to engage, plus an AI track for organisations
+    that want to go further.
+  nav:
+    - { label: "A · Large initiatives", to: "#initiative" }
+    - { label: "B · Staff augmentation", to: "#consulting" }
+    - { label: "C · Advisory", to: "#advisory" }
+    - { label: "AI track →", to: "#ai-track" }
 
 # Core practice section: three static ways of working together.
 core:
