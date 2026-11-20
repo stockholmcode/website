@@ -9,13 +9,18 @@ title: Erbjudanden
 
 hero:
   kicker: "№ 02 · Erbjudanden"
-  headlinePre: Senior kompetens.
-  headlineAccent: Skarpa
-  headlineMid: leveranser.
-  lead: Vi bygger system, team och ledarskap.
-  leadDim: >-
-    Tre sätt att engagera sig — plus en specialiserad track för organisationer
-    som vill göra AI till mer än bara ett verktyg.
+  headlinePre: Arkitektur till leverans.
+  headlineAccent: Samma team
+  headlineMid: hela vägen.
+  lead: >-
+    Vi tar ägarskap för mjukvaran — från första arkitekturbeslut till kod i
+    produktion. Tre sätt att engagera oss, plus en AI-track för er som vill
+    gå längre.
+  nav:
+    - { label: "A · Stora initiativ", to: "#initiative" }
+    - { label: "B · Timkonsulting", to: "#consulting" }
+    - { label: "C · Rådgivning", to: "#advisory" }
+    - { label: "AI-track →", to: "#ai-track" }
 
 # Core practice section: three static ways of working together.
 core:
